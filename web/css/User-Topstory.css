@@ -1,0 +1,342 @@
+.userHeader{
+    width: 1000px;
+    margin: 10px auto;
+}
+.userCover-wrapper{
+    position: relative;
+}
+.userCover-input{
+    display: none;
+}
+.userCover-button{
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 2;
+    color: hsla(0,0%,100%,.7);
+    border: 1px solid hsla(0,0%,100%,.24);
+    padding: 0 16px;
+    line-height: 32px;
+}
+.userCover-button:hover{
+    background: hsla(0,0%,100%,.04);
+    color: hsla(0,0%,100%,.7);
+}
+.userCover-img{
+    width: 100%;
+    height: 100%;
+}
+.userHeader-wrapper{
+    position: relative;
+}
+.userHeader-main{
+    position: relative;
+    padding: 0 20px 24px;
+    margin-left: 20px;
+}
+.userHeader-avatar{
+    position: absolute;
+    top: -57px;
+    left: 0;
+    z-index: 1;
+}
+.userAvatar{
+    border: 4px solid #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    vertical-align: top;
+    height: 160px;
+}
+.userPicture{
+    cursor: pointer;
+}
+.userPictureEditor-mask{
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    transition: all .2s ease-in;
+}
+.mask-hidden{
+    opacity: 0;
+}
+.userPictureEditor-masklInner{
+    background: #1a1a1a;
+    height: 160px;
+    width: 160px;
+    opacity: .4;
+    border-radius: 8px;
+    border: 4px solid #fff;
+}
+.userPictureEditor-masklcontent{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    color: #fff;
+    text-align: center;
+}
+.userPictureEditor-masklcontentText{
+    white-space: nowrap;
+}
+.userHeader-content{
+    padding-top: 16px;
+    padding-left: 32px;
+    border-left: 164px solid transparent;
+}
+.userHeader-contentHead{
+    margin-bottom: 16px;
+}
+.userHeader-name{
+    font-size: 26px;
+    font-weight: 600;
+}
+.userHeader-headline{
+    /*margin-left: 12px;*/
+    font-size: 18px;
+    font-weight: 500;
+    white-space: nowrap;
+}
+.userHeader-contentBody{
+    height: 52px;
+    transition: height .3s;
+}
+.userHeader-infos{
+    font-size: 14px;
+    line-height: 10px;
+}
+.userHeader-infoItem+.userHeader-infoItem{
+    margin-top: 10px;
+}
+.userHeader-iconBox{
+    width: 18px;
+    height: 18px;
+    color: #8590a6;
+    text-align: center;
+    margin-right: 8px;
+    display: inline-block;
+}
+.userHeader-dateItems{
+    font-size: 14px;
+    line-height: 1.8;
+    color: #1a1a1a;
+}
+.userHeader-dateItem{
+    display: flex;
+    margin-bottom: 18px;
+}
+.userHeader-datetitle{
+    width: 60px;
+    margin-right: 37px;
+    font-weight: 600;
+}
+.userHeader-datetext{
+
+}
+
+.userHeader-contentFooter{
+    position: relative;
+    margin-top: 10px;
+}
+.userHeader-DataUpdate{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+.userHeader-DataUpdate>button{
+    padding: 0 16px;
+    color: #0084ff;
+    border-radius: 3px;
+    border: 1px solid #0084ff;
+    line-height: 32px;
+}
+.userHeader-DataUpdate>button:hover{
+    color: #0084ff;
+    background: rgba(0,132,255,.06);
+}
+
+
+.user-main{
+    width: 1000px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+.user-mainColumn{
+    width: 694px;
+}
+.userMain .userMain-header{
+    width: 100%;
+    padding: 0;
+    border-bottom: 1px solid #F6F6F6;
+}
+.userMain-bodyTitle{
+    height: 50px;
+    line-height: 50px;
+    margin: 0 20px;
+    border-bottom: 1px solid #F6F6F6;
+    display: flex;
+    justify-content: space-between;
+}
+.userMain-bodyitems{
+    padding: 0 20px;
+}
+.list-item{
+    padding: 16px 0;
+}
+.list-item+.list-item{
+    border-top: 1px solid #F6F6F6;
+}
+.list-itemMata{
+    margin-bottom: 10px;
+    color: #8590a6;
+}
+.ActivityItem-meta{
+    display: flex;
+}
+.ActivityItem-metaTitle{
+    flex: 1 1;
+}
+.ConstantItem-meta{
+    margin-top: 10px;
+    display: block;
+}
+.AuthorInfo{
+    display: flex;
+}
+.userLink-link img{
+    height: 38px;
+    width: 38px;
+}
+.AuthorInfo-content{
+    margin-left: 14px;
+    display: block;
+}
+.AuthorInfo-head{
+    display: flex;
+    align-items: center;
+}
+.AuthorInfo-badgeText::before{
+    content: "";
+}
+.css-h5al4j{
+    margin-top: 10px;
+}
+.ContentItem-content.is-collapsed{
+    margin-top: 9px;
+}
+
+
+
+
+.user-side{
+    width: 296px;
+    color: #646464;
+}
+.CreatorEntrance-link{
+    padding: 0;
+}
+.CreatorEntrance-hint{
+    height: 56px;
+}
+.usermainCreator-CreatorEntrance{
+    padding: 0 20px 0 4px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.CreatorEntrance-img{
+    height: 40px;
+}
+.usermainCreator-CreatorEntrance .CreatorEntrance-text{
+    flex-direction: column;
+}
+.usermainCreator-CreatorEntrance .CreatorEntrance-title{
+    font-weight: 600;
+    color: #1a1a1a;
+}
+.CreatorEntrance-Message{
+    color: #999;
+    margin-top: 2px;
+    font-size: 12px;
+}
+.css-rswm4q{
+    padding: 0 20px;
+}
+.css-rswm4q .css-19mtex{
+    padding-left: 0;
+}
+
+
+.Succeed-header{
+    padding: 0 20px;
+    height: 50px;
+    line-height: 50px;
+    font-weight: 600;
+    border-bottom: 1px solid #F6F6F6;
+}
+.css-122fspz{
+    padding: 12px 0;
+}
+.css-12ofpn8{
+    padding: 6px 20px;
+    display: flex;
+    align-items: center;
+}
+.css-1pbw4sw{
+    margin-right: 8px;
+}
+.FollowshipCard-counts{
+    display: flex;
+}
+.NumderBoard-item{
+    flex: 1 1;
+    display: flex;
+    padding: 12px 0;
+}
+.NumderBoard-item:hover *{
+    color: #175199;
+}
+.NumderBoard-item+.NumderBoard-item{
+    border-left: 1px solid #ededed;
+}
+.NumderBoard-itemInner{
+    line-height: 1.6;
+    text-align: center;
+    width: 100%;
+}
+.NumderBoard-itemName{
+    font-size: 14px;
+    color: #8590a6;
+}
+.NumderBoard-itemValue{
+    color: #1a1a1a;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+
+.user-side-attentionItem{
+    display: flex;
+    justify-content: space-between;
+    padding-left: 5px;
+    border-top: 1px solid #ebebeb;
+    height: 46px;
+    align-items: center;
+    font-size: 14px;
+}
+.user-side-attentionItem:hover *{
+    color: #175199;
+}
+.user-side-attentionItemValue{
+    color: #8590a6;
+}
+.user-side-browseNum{
+    color: #8590a6;
+    padding: 16px 0 10px 5px;
+    border-top: 1px solid #ebebeb;
+    border-bottom: 1px solid #ebebeb;
+    line-height: 1.8;
+    font-size: 14px;
+    margin-bottom: 10px;
+}

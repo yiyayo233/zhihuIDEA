@@ -1,0 +1,55 @@
+var HotListNavEditBox_Html = "<div class=\"HotListNavEditBox\">\n" +
+    "                                    <div>\n" +
+    "                                        <div class=\"HotListNavEditBox-titleBox\">\n" +
+    "                                            <div>\n" +
+    "                                                <span class=\"HotListNavEditBox-title\">我的榜单</span>\n" +
+    "                                                <span class=\"HotListNavEditBox-titleHint\">拖动调整顺序</span>\n" +
+    "                                            </div>\n" +
+    "                                            <button type=\"button\" class=\"button HotListNavEditBox-titleHint-button\">收起\n" +
+    "                                                <span style=\"display: inline-flex; align-items: center;\">​<svg class=\"Zi Zi--ArrowUp HotListNav-expandButtonIcon\" width=\"10\" height=\"10\" fill=\"currentColor\" viewBox=\"0 0 24 24\"><path d=\"M12 11l-3.716 3.782a.758.758 0 0 1-1.064 0 .738.738 0 0 1 0-1.052l4.249-4.512a.758.758 0 0 1 1.064 0l4.246 4.512a.738.738 0 0 1 0 1.052.757.757 0 0 1-1.063 0L12.002 11z\" fill-rule=\"evenodd\"></path></svg></span>\n" +
+    "                                            </button>\n" +
+    "                                        </div>\n" +
+    "                                        <div class=\"HotListNavEditBox-elements\">\n" +
+    "                                            <div class=\"HotListNavEditBox-gridList\">\n" +
+    "                                                <a href=\"#\" class=\"HotListNav-item is-active\">全站</a>\n" +
+    "                                                <a href=\"#\" class=\"HotListNav-item\">视频</a>\n" +
+    "                                                <a href=\"#\" class=\"HotListNav-item\">科学</a>\n" +
+    "                                                <a href=\"#\" class=\"HotListNav-item\">数码</a>\n" +
+    "                                                <a href=\"#\" class=\"HotListNav-item\">体育</a>\n" +
+    "                                                <a href=\"#\" class=\"HotListNav-item\">时尚</a>\n" +
+    "                                                <a href=\"#\" class=\"HotListNav-item\">影视</a>\n" +
+    "                                                <a href=\"#\" class=\"HotListNav-item\">军事</a>\n" +
+    "                                                <a href=\"#\" class=\"HotListNav-item\">校园</a>\n" +
+    "                                            </div>\n" +
+    "                                        </div>\n" +
+    "                                        <div class=\"HotListNavEditBox-titleBox\">\n" +
+    "                                            <div>\n" +
+    "                                                <span class=\"HotListNavEditBox-title\">推荐榜单</span>\n" +
+    "                                                <span class=\"HotListNavEditBox-titleHint\">拖动添加至我的榜单</span>\n" +
+    "                                            </div>\n" +
+    "                                          </div>\n" +
+    "                                        <div class=\"HotListNavEditBox-elements\">\n" +
+    "                                            <div class=\"HotListNavEditBox-gridList\">\n" +
+    "                                                <a href=\"#\" class=\"HotListNav-item\">汽车</a>\n" +
+    "                                                <a href=\"#\" class=\"HotListNav-item\">国际</a>\n" +
+    "                                            </div>\n" +
+    "                                        </div>\n" +
+    "                                    </div>\n" +
+    "                                    <div class=\"HotListNavEditBox-buttons\">\n" +
+    "                                        <button type=\"button\" class=\"button\">\n" +
+    "                                            取消\n" +
+    "                                        </button>\n" +
+    "                                        <button type=\"button\" class=\"button is-active\">\n" +
+    "                                            确定\n" +
+    "                                        </button>\n" +
+    "                                    </div>\n" +
+    "                                </div>";
+
+$(function () {
+    //使用on函数为新增的元素绑定事件
+    $(document).on("click",".HotListNav>button",function () {
+        $(".HotListNav-box").prepend(HotListNavEditBox_Html);
+    }).on('click', '.HotListNavEditBox-titleHint-button', function() {
+        $(".HotListNavEditBox-titleHint-button").parent().parent().parent().remove();
+    });
+});

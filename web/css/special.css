@@ -1,0 +1,176 @@
+*{
+	padding: 0px;
+	margin: 0px;
+}
+body{
+	background: #F6F6F6;
+}
+div{
+	display: block;
+}
+svg:not(:root){
+	overflow: hidden;
+}
+a{
+	text-decoration: none;
+}
+button{
+	padding: 0;
+    font: inherit;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    -webkit-appearance: none;
+}
+.LoadingBar{
+	position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 101;
+    display: none;
+    height: 2px;
+    pointer-events: none;
+    background: #0084ff;
+    transform: translateX(-100%);
+}
+.SpecialListPage-header{
+	background-color: #FFFFFF;
+	box-shadow: 0 1px 3px 0 rgba(26,26,26,.1);
+}
+.SpecialListPage-header>div{
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+    margin: 0 auto;
+    width: 1000px;
+    height: 100px;
+}
+.SpecialListPage-header .Zi{
+	color: #0084FF;
+}
+.SpecialListPage-title{
+	margin-left: 12px;
+    font-size: 25px;
+    font-weight: 600;
+}
+.SpecialListPage-count{
+	margin-left: 24px;
+	color: #8590A6;
+	font-size: 15px;
+}
+.SpecialListPage-body{
+	width: 1000px;
+	margin: 10px auto 0;
+}
+.SpecialListPage-specialCard{
+	display: flex;
+    width: 1000px;
+    height: 188px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px 0 rgba(26,26,26,.1);
+    background-color: #fff;
+    box-sizing: border-box;
+    padding: 24px;
+    margin-top: 10px;
+}
+.SpecialListCard-banner{
+	flex-shrink: 0;
+    width: 336px;
+    height: 140px;
+    border-radius: 4px;
+    overflow: hidden;
+}
+.SpecialListCard-body{
+	-webkit-box-flex: 1;
+    flex: 1 1;
+    margin-left: 20px;
+    overflow: hidden;
+}
+.SpecialListCard-banner img{
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+.SpecialListCard-header{
+	display: flex;
+}
+.SpecialListCard-intro{
+	margin-top: 8px;
+    max-height: 42px;
+    line-height: 21px;
+    color: #444;
+    display: -webkit-box;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+.SpecialListCard-sections{
+	display: flex;
+	flex-wrap: wrap;
+	margin-top: 12px;
+	height: 24px;
+	overflow: hidden;
+}
+.SpecialListCard-infos{
+	-webkit-box-flex: 1;
+	flex: 1 1;
+	overflow: hidden;
+}
+.SpecialListCard-title{
+	display: block;
+    height: 28px;
+    line-height: 28px;
+    font-size: 20px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 600;
+}
+.SpecialListCard-relatedInfo{
+	display: flex;
+	-webkit-box-align: center;
+	align-items: center;
+    margin-top: 8px;
+    font-size: 12px;
+    height: 17px;
+    color: #999;
+}
+.SpecialListCard-relatedInfo span+span:before{
+	content: "\B7";
+	margin: 0 4px;
+}
+.SpecialListCard-followButton{
+	flex-shrink: 0;
+    margin-left: 20px;
+    width: 88px;
+    height: 34px;
+    font-size: 14px;
+    border-radius: 3px;
+    font-weight: 600;
+}
+.SpecialListCard-followButtonC{
+	background-color: rgba(0,132,255,.08);
+    color: #0084ff;
+}
+.bgc{
+	color: #999!important;
+    background-color: hsla(0,0%,60%,.08)!important;
+}
+.SpecialListCard-sections a{
+	flex-shrink: 0;
+    padding: 0 8px;
+    max-width: 580px;
+    height: 24px;
+    line-height: 24px;
+    border-radius: 5px;
+    background-color: #f6f6f6;
+    color: #8590a6;
+    font-size: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    margin-right: 10px;
+}

@@ -1,0 +1,206 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: #F6F6F6;
+    font-size: 15px;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+ul li{
+    list-style: none;
+}
+button{
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    appearance: none;
+}
+.button{
+    color: #8590a6;
+    border-radius: 3px;
+    font-size: 14px;
+}
+.button:hover{
+    color: #76839b;
+}
+input{
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    appearance: none;
+}
+
+.Header{
+    height: 52px;
+    min-width: 1023px;
+    box-shadow: 0 1px 3px rgba(26 ,26 ,26 ,.1);
+    background: #fff;
+    z-index: 10000;
+    position: relative;
+    overflow: hidden;
+}
+.is-Fixed{
+    position: fixed;
+}
+.AppHeader{
+    width: 1000px;
+    height: 52px;
+    padding: 0 16px 0 16px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+    transition: all .3s;
+}
+.AppHeader .tabs{
+    display: flex;
+    padding: 0 23px;
+}
+.Tabs-item{
+    padding: 0 16px;
+}
+.Tabs-link{
+    font-size: 15px;
+    padding: 14px 0;
+    color: #8590a6;
+}
+.Tabs-link:hover{
+    color: #444;
+}
+.Tabs-link.is-active{
+    color: #0a0d16;
+    font-weight: 600;
+    position: relative;
+}
+.Tabs-link.is-active::after{
+    content: "";
+    height: 3px;
+    background: #0084ff;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -1px;
+}
+.SearchBar{
+    display: flex;
+    align-items: center;
+}
+.SearchBar-toorlwrapper{
+    background: #f6f6f6;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    padding: 4px 0 4px 10px;
+
+}
+.SearchBar-toorlwrapper input{
+    font-size: 14px;
+    height: 24px;
+    width: 256px;
+    line-height: 24px;
+}
+.SearchBar-toorlwrapper button{
+    padding: 0 12px;
+    margin-left: 12px;
+}
+.SearchBar-tool div, .SearchBar-tool button{
+    display: flex;
+    align-items: center;
+}
+.SearchBar>.Button-blue{
+    color: #fff;
+    background: #0084ff;
+    height: 34px;
+    line-height: 34px;
+    margin-left: 16px;
+    padding: 0 14px;
+    border-radius: 3px;
+    font-size: 14px;
+}
+.AppHeader-userInfo{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1 1;
+}
+.AppHeader-userInfo .Popover{
+     margin-right: 40px;
+}
+
+
+.PageHeader{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: all .3s;
+}
+.is-shown{
+    transform: translateY(-100%);
+}
+.TopstoryPageHeader{
+    display: flex;
+    width: 1000px;
+    margin: 0 auto;
+    height: 100%;
+}
+.TopstoryPageHeader-main{
+    display: flex;
+    align-items: center;
+    flex: 1 1;
+}
+.TopstoryPageHeader-tabs{
+    padding-left: 18px;
+    height: 100%;
+    display: flex;
+}
+.TopstoryTabs-link{
+    margin: 0 22px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+.TopstoryTabs-link:hover{
+    color: #175199;
+}
+.TopstoryPageHeader-aside{
+    display: flex;
+    align-items: center;
+}
+.TopstoryPageHeader-aside label{
+    width: 216px;
+    background: #f6f6f6;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    padding: 4px 0 4px 10px;
+    display: flex;
+}
+.TopstoryPageHeader-aside label input{
+    height: 24px;
+    line-height: 24px;
+    flex: 1 1;
+}
+.TopstoryPageHeader-aside label button{
+    padding: 0 10px;
+}
+.TopstoryPageHeader-aside>button{
+    background: #0084ff;
+    color: #fff;
+    height: 34px;
+    line-height: 34px;
+    padding: 0 14px;
+    border-radius: 3px;
+    font-size: 14px;
+    margin-left: 16px;
+}

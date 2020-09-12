@@ -1,0 +1,193 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <base href="<%=basePath%>">
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+
+	<meta charset="UTF-8">
+	<title>全部专题</title>
+	<link rel="stylesheet" href="css/special.css">
+  </head>
+  
+  <body>
+	<div id="root">
+			<div>
+				<div class="LoadingBar"></div>
+				<div class="App-main">
+					<div class="SpecialListPage">
+						<div class="SpecialListPage-header">
+							<div>
+								<svg class="Zi Zi--LabelSpecial" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M7.667 3.667h11.466a1.2 1.2 0 0 1 1.2 1.2v13.066a2.4 2.4 0 0 1-2.4 2.4H6.467V4.867a1.2 1.2 0 0 1 1.2-1.2zM4.2 9.619h1.689v10.714H5.4a2.4 2.4 0 0 1-2.4-2.4V10.82a1.2 1.2 0 0 1 1.2-1.2zm5.178-2.38a.6.6 0 0 0-.6.6v.585a.6.6 0 0 0 .6.6h8.044a.6.6 0 0 0 .6-.6v-.586a.6.6 0 0 0-.6-.6H9.378zm0 3.57a.6.6 0 0 0-.6.6v.586a.6.6 0 0 0 .6.6h8.044a.6.6 0 0 0 .6-.6v-.585a.6.6 0 0 0-.6-.6H9.378zm0 3.572a.6.6 0 0 0-.6.6v.586a.6.6 0 0 0 .6.6h4.578a.6.6 0 0 0 .6-.6v-.586a.6.6 0 0 0-.6-.6H9.378z" fill-rule="evenodd"></path></svg>
+								<span class="SpecialListPage-title">全部专题</span>
+								<span class="SpecialListPage-count">共有726个专题</span>
+							</div>
+						</div>
+						<div class="SpecialListPage-body">
+							<div class>
+								<div class="SpecialListPage-specialCard">
+									<div class="SpecialListCard-banner">
+										<img src="images/special/S1.png" alt="">
+									</div>
+									<div class="SpecialListCard-body">
+										<div class="SpecialListCard-header">
+											<div class="SpecialListCard-infos">
+												<a class="SpecialListCard-title">报考大学，选一个梦开始的地方</a>
+												<div class="SpecialListCard-relatedInfo">
+													<span>2分钟前更新</span>
+													<span>234996次浏览</span>
+												</div>
+											</div>
+											<button class="SpecialListCard-followButton SpecialListCard-followButtonC">关注专题</button>
+										</div>
+										<a class="SpecialListCard-intro">挑大学选专业，这些大学和专业你都了解吗？</a>
+										<div class="SpecialListCard-sections">
+											<a>天津大学：实事求是</a>
+											<a>东南大学：止于至善</a>
+											<a>北科大学：求实鼎新</a>
+											<a>四川大学：海纳百川 有容乃大</a>
+										</div>
+									</div>
+								</div>
+								<div class="SpecialListPage-specialCard">
+									<div class="SpecialListCard-banner">
+										<img src="images/special/S2.png" alt="">
+									</div>
+									<div class="SpecialListCard-body">
+										<div class="SpecialListCard-header">
+											<div class="SpecialListCard-infos">
+												<a class="SpecialListCard-title">直击315|爆炸的生活</a>
+												<div class="SpecialListCard-relatedInfo">
+													<span>07-17更新</span>
+													<span>56,589,236次浏览</span>
+												</div>
+											</div>
+											<button class="SpecialListCard-followButton SpecialListCard-followButtonC">关注专题</button>
+										</div>
+										<a class="SpecialListCard-intro">敌敌畏养海参，汉堡偷工减料，垃圾原料制作毛巾，没完没了的变速箱故障，精装修还是[惊]装修，套路推销，插翅难逃。趣头条广告藏猫腻，嗨学费退费为何这么难？</a>
+										<div class="SpecialListCard-sections">
+											<a>全程追踪</a>
+											<a>难以下咽的[美食]</a>
+											<a>质量堪忧的[日用]</a>
+											<a>无法放心的[住行]</a>
+										</div>
+									</div>
+								</div>
+								<div class="SpecialListPage-specialCard">
+									<div class="SpecialListCard-banner">
+										<img src="images/special/S3.png" alt="">
+									</div>
+									<div class="SpecialListCard-body">
+										<div class="SpecialListCard-header">
+											<div class="SpecialListCard-infos">
+												<a class="SpecialListCard-title">嘿，电影院，我想你了！</a>
+												<div class="SpecialListCard-relatedInfo">
+													<span>11小时前更新</span>
+													<span>6,165,485次浏览</span>
+												</div>
+											</div>
+											<button class="SpecialListCard-followButton SpecialListCard-followButtonC">关注专题</button>
+										</div>
+										<a class="SpecialListCard-intro">时隔180天后，我们终于再次听到了影院开放的消息。你还记得上一次走进电影院是什么时候吗？当我们怀念电影院的时候，我们怀念的究竟是什么？</a>
+										<div class="SpecialListCard-sections">
+											<a>影像记录：我们熬过来了</a>
+											<a>走啊！去电影院看电影啊！</a>
+											<a>影迷疫情日记</a>
+											<a>现在的电影院再没有了？</a>
+										</div>
+									</div>
+								</div>
+								<div class="SpecialListPage-specialCard">
+									<div class="SpecialListCard-banner">
+										<img src="images/special/S4.png" alt="">
+									</div>
+									<div class="SpecialListCard-body">
+										<div class="SpecialListCard-header">
+											<div class="SpecialListCard-infos">
+												<a class="SpecialListCard-title">一个月下雨30天，怎样开车才安全？</a>
+												<div class="SpecialListCard-relatedInfo">
+													<span>07-15更新</span>
+													<span>702,448次浏览</span>
+												</div>
+											</div>
+											<button class="SpecialListCard-followButton SpecialListCard-followButtonC">关注专题</button>
+										</div>
+										<a class="SpecialListCard-intro">2020年除了新冠疫情还有洪水灾害，多雨水季节开车有哪些小技巧？车辆遇险应该如何自救？购买二手车又要如何识别泡水车？</a>
+										<div class="SpecialListCard-sections">
+											<a>雨天如何安全驾驶？</a>
+											<a>雨天车辆遇险如何自救？</a>
+											<a>泡水车如何走保险？</a>
+										</div>
+									</div>
+								</div>
+								<div class="SpecialListPage-specialCard">
+									<div class="SpecialListCard-banner">
+										<img src="images/special/S5.png" alt="">
+									</div>
+									<div class="SpecialListCard-body">
+										<div class="SpecialListCard-header">
+											<div class="SpecialListCard-infos">
+												<a class="SpecialListCard-title">知乎影视综视频创作者6月榜单</a>
+												<div class="SpecialListCard-relatedInfo">
+													<span>07-14更新</span>
+													<span>29,845,184次浏览</span>
+												</div>
+											</div>
+											<button class="SpecialListCard-followButton SpecialListCard-followButtonC">关注专题</button>
+										</div>
+										<a class="SpecialListCard-intro">正在努力创作影视视频的小伙伴们经过一整个 6 月的耕耘，终于也迎来了收获！感谢你们不断用影像带给大家富有创意的影视视频作品，让热爱影视的我们通过另一双眼睛，发现了不一样的世界！</a>
+										<div class="SpecialListCard-sections">
+											<a>Top榜</a>
+											<a>优质榜</a>
+											<a>潜力榜</a>
+										</div>
+									</div>
+								</div>
+								<div class="SpecialListPage-specialCard">
+									<div class="SpecialListCard-banner">
+										<img src="images/special/S6.png" alt="">
+									</div>
+									<div class="SpecialListCard-body">
+										<div class="SpecialListCard-header">
+											<div class="SpecialListCard-infos">
+												<a class="SpecialListCard-title">知乎法律·创作者荣誉名单</a>
+												<div class="SpecialListCard-relatedInfo">
+													<span>07-16更新</span>
+													<span>7,626,894次浏览</span>
+												</div>
+											</div>
+											<button class="SpecialListCard-followButton SpecialListCard-followButtonC">关注专题</button>
+										</div>
+										<a class="SpecialListCard-intro">法律领域六月的创作者榜单已正式揭晓，感谢各位知友的认真分享和创作。期待在下期的榜单中，也能看到大家更多的精彩作品。 这个夏天，就让我们用文字或镜头来表达自己，展示自己独特的风采，收获更多的关注与喜欢 ！</a>
+										<div class="SpecialListCard-sections">
+											<a>榜单说明</a>
+											<a>上榜知友1-3</a>
+											<a>上榜知友1-4</a>
+											<a>上榜知友8-12</a>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="PageBottomFooter SpecialListPage-footer"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	<script src="Scripts/jquery-3.5.1.min.js"></script>
+	<script src="Scripts/special.js"></script>
+  </body>
+</html>

@@ -1,0 +1,122 @@
+.Modal-wrapper{
+    height: 100vh;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    align-items: center;
+    z-index: 9999999999999999999999999999999;
+    /*transition: all .2s;*/
+    align-items: center;
+    justify-content: center;
+}
+.Modal-backdrop{
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,.65);
+    position: absolute;
+}
+.Modal{
+    margin: 0 auto;
+    position: relative;
+    top: 20px;
+    transition: all .3s;
+    border-radius: 3px;
+    box-shadow: 0 5px 20px rgba(26,26,26,.1);
+    max-height: calc(100vh - 48px);
+}
+.Modal--default{
+    height: calc(100vh - 48px);
+    width: 688px;
+    margin-bottom: 40px;
+}
+.Modal-inner{
+    background: #fff;
+    overflow: hidden;
+    border-radius: 3px;
+}
+.Modal--default .Modal-inner{
+    height: 100%;
+}
+.Modal-title{
+    margin-top: 40px;
+    text-align: center;
+    font-weight: 500;
+    font-size: 24px;
+}
+.Modal-content{
+    /*margin: 0 24px 32px;*/
+}
+.LinkModal-input{
+    position: relative;
+    display: flex;
+    align-items: center;
+    /*width: 108px;*/
+    height: 38px;
+    padding: 6px 12px;
+    font-size: 14px;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    box-sizing: border-box;
+    transition: background .2s,border .2s;
+    width: 100%;
+    color: #8590a6;
+}
+.Modal-closeButton{
+    position: absolute;
+    top: 8px;
+    right: -60px;
+    padding: 12px;
+}
+.Modal-closeIcon{
+    vertical-align: top;
+    fill: #fff;
+}
+.LinkModal-input+.LinkModal-input{
+    margin-top: 10px;
+}
+.LinkModal-input .Input{
+    outline: none;
+    border: 0;
+    margin-left: 5px;
+    height: 24px;
+    line-height: 24px;
+}
+.ModalButtonGroup{
+    margin-top: 48px;
+    display: flex;
+    justify-content: space-between;
+}
+/* .button {
+    display: inline-block;
+    padding: 0 16px;
+    font-size: 14px;
+    line-height: 32px;
+    color: #8590a6;
+    text-align: center;
+    cursor: pointer;
+    background: none;
+    border: 1px solid;
+    border-radius: 3px;
+} */
+.ModalButtonGroup>button{
+    flex: 1 1;
+    max-width: 168px;
+    outline: none;
+}
+.Button--blue{
+    background: #0084ff;
+    color: #fff;
+    border-color: #0084ff;
+}
+.Button--blue:hover{
+    border-color: #0077e6;
+    background: #0077e6;
+}
+.Button--grey:hover{
+    background-color: rgba(133,144,166,.06);
+}

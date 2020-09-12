@@ -1,0 +1,33 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+ul li {
+    list-style: none;
+}
+.AnalyticsChart-tooltip{
+    padding: 24px;
+    min-width: 210px;
+    box-shadow:  0 5px 20px 0 rgba(68,68,68,.1);
+    border: 1px solid #ebebeb;
+    background: rgba(255,255,255,.05);
+    backdrop-filter: saturate(180%) blur(20px);
+;
+}
+.AnalyticsChart-tooltipHeader{
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 24px;
+}
+.AnalyticsChart-tooltipLineItem{
+    font-size: 10px;
+    display: flex;
+    justify-content: space-between;
+}
+.AnalyticsChart-tooltipLineItem+.AnalyticsChart-tooltipLineItem{
+    padding-top: 12px;
+
+}
+.AnalyticsChart-tooltipLineItem--title{
+}

@@ -1,0 +1,530 @@
+body{
+	background-color: #f6f6f6;
+	line-height: 1.6;
+}
+
+.AllDiv{
+	width: 1000px;
+	margin: 0 auto;
+	display: flex;
+
+}
+.leftDiv{
+	display: flex;
+	padding: 20px;
+	justify-content: space-between;
+}
+.left1{
+	position: relative;
+}
+.left1::after{
+	content: " ";
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background: rgba(0,0,0,.03);
+}
+.left1>img{
+	border-radius: 3px;
+}
+.left1>span{
+	position: absolute;
+	font-weight: 600;
+	font-size: 10px;
+	bottom: 0;
+	right: 0;
+}
+.left1 img,.left2{
+	/*margin: 20px 20px;*/
+
+}
+.left2_1{
+	display: flex;
+	justify-content: space-between;
+}
+.left2>span>svg:hover{
+
+	cursor: pointer;
+}
+.flDiv{
+	display: flex;
+}
+.flDiv>div{
+	padding: 2px 8px;
+    margin: 10px 10px 10px 0;
+    border-radius: 4px;
+    background-color: #f6f6f6;
+    font-size: 14px;
+    color: #9fadc7;
+}
+.left2>p:first-of-type,.sp{
+	color: #999;
+}
+.divLast{
+    display: flex;
+    align-items: flex-end;
+    vertical-align: bottom;
+    margin-top: 70px;
+}
+.divLast>span{
+	width: 250px;
+    line-height: 20px;
+    font-size: 20px;
+    color: #0084ff;
+}
+.divLast>button{
+	padding: 0;
+}
+.divLast>button:first-of-type{
+	 margin-right: 16px;
+	 background: #e6f2ff;
+	 color: #0084FF;
+}
+.divLast>button:first-of-type:hover{
+	background: aliceblue;
+}
+.divLast>button:last-of-type:hover{
+	background: royalblue;
+}
+.divLast>button{
+   background-color: #0084ff;
+   outline: none;
+	border: 0;
+    color: #fff;
+    line-height: 35px;
+    padding: 0 20px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.threeDiv{
+	color: #9fadc7;
+	border-top: 1px solid #F6F6F6;
+	line-height: 20px;
+	padding: 15px 20px;
+	display: flex;
+	align-items: center;
+}
+.threeDiv>span{
+	cursor: pointer;
+}
+.threeDiv>span:hover{
+	color: #8590a6;
+}
+.threeDiv>span+span{
+	margin-left: 20px;
+}
+.threeDiv>span{
+	display: flex;
+	align-items: center;
+}
+.threeDiv>span>svg{
+	margin-right: 6px;
+}
+.kDiv{
+	background: #f6f6f6;
+	height: 10px;
+}
+.left2Div{
+	padding-bottom: 15px;
+}
+.left2Div> ul{
+	list-style: none;
+	border-bottom: 1px solid #f6f6f6;
+	height: 54px;
+	display: flex;
+	align-items: center;
+}
+.left2Div>ul>li{
+	line-height: 20px;
+	margin: 0 10px;
+	height: 100%;
+	/* line-height: 100%; */
+	display: flex;
+	align-items: center;
+}
+.left2Div>ul>li.is-active{
+	position: relative;
+}
+.left2Div>ul>li.is-active:after{
+	content: "";
+	height: 3px;
+	background: #0084ff;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+.contentDiv{
+	padding:0  20px;
+	margin-bottom: 12px;
+}
+.contentDiv>p:first-child{
+	font-style: italic;
+	color: grey;
+}
+.contentDiv>p:first-child>svg{
+	position: relative;
+    top: -12px;
+}
+.pDiv,.leftLastDiv{
+	border-bottom: 1px solid #D8D8D8;
+}
+.zDiv{
+	border-top: 1px solid #F6F6F6;
+	margin: 10px 0;
+	line-height: 34px ;
+}
+.zDiv strong{
+    display: inline-block;
+    width: 130px;
+}
+.showDiv,.hideDiv{
+	display: none;
+}
+.chaDiv,.hideDiv{
+	color:#0084ff;
+	border-top: 1px solid #F6F6F6;
+	text-align: center;
+	padding: 15px 0;
+	cursor: pointer;
+
+}
+.plDiv,.pfDiv,.leftLastDiv{
+	padding: 0 20px;
+	height: 50px;
+	line-height: 50px;
+	border: 0;
+}
+.leftLastDiv{
+	display: flex;
+	justify-content: space-between;
+}
+.leftLastDiv-header{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+.leftLastDiv-header>h2{
+	font-size: 17px;
+	font-weight: 500;
+}
+.leftLastDiv-header>a{
+	color: #8590a6;
+	display: flex;
+	align-items: center;
+	font-size: 13px;
+}
+.leftLastDiv-header>a>svg{
+	fill: #999;
+	margin-left: 5px;
+}
+.plDiv p:first-of-type{
+	font-size: 17px;
+
+}
+.plDiv p:first-of-type>a{
+	float: right;
+	color: #999;
+    display: flex;
+    text-decoration: none;
+    font-size: 14px;
+}
+.plDiv p:first-of-type>a>svg{
+	margin-left: 6px;
+    fill: #999;
+}
+.pfDiv{
+	display: flex;
+    align-items: center;
+    height: 54px;
+}
+.pfDiv>div:first-child{
+    font-size: 45px;
+    line-height: 54px;
+    height: 54px;
+    color: #444;
+}
+.pfDiv>div:nth-child(2){
+    margin-left: 12px;
+    color: #999;
+}
+.pfDiv>div:nth-child(2)>div{
+	height: 25px;
+	position: relative;
+	top: -10px;
+}
+.pfDiv .jDiv{
+	font-size: 12px;
+    line-height: 12px;
+    height: 12px;
+    margin-top: -8px;
+    color: #999;
+}
+
+.plRight{
+    flex: 1 1;
+    height: 54px;
+    margin-left: 100px;
+    padding-left: 20px;
+    border-left: 1px solid #f6f6f6;
+
+}
+.plRight>.pl{
+	line-height: 1;
+    display: flex;
+    align-items: center;
+    height: 18px;
+    font-size: 12px;
+    color: #999;
+}
+
+.plRight>.pl>span:first-child{
+	ont-size: 12px;
+    color: #999;
+}
+.plRight>.pl>span:last-of-type{
+	width: 26px;
+    margin-left: 8px;
+}
+.progressBar{
+	flex: 1 1;
+    margin-left: 8px;
+    color: #fa0;
+    background-color: #ebebeb;
+}
+.ProgressBar-bar{
+
+    border-radius: 3px;
+    background: currentColor;
+}
+.pjDiv{
+	padding: 0 20px;
+}
+.contentDiv2{
+	padding: 20px 0px;
+}
+.contentDiv2>div{
+	border-top: 1px solid #ebebeb;
+	padding: 20px 0;
+}
+.contentDiv2 img{
+	border-radius: 50%;
+    width: 36px;
+    height: 36px;
+}
+.contentDiv2 .right{
+	margin-left: 8px;
+
+}
+.contentDiv2 .right{
+	display: inline-block;
+
+    margin-bottom: 1px;
+}
+.contentDiv2 .right>div>svg{
+    line-height: 9px;
+    display: block;
+    height: 9px;
+}
+.pDiv{
+	border: 0;
+	font-size: 14px;
+}
+.s{
+	cursor: pointer;
+}
+.pDiv .s span{
+	color: #999;
+}
+/*.show{
+
+	display: none;
+}*/
+.laDiv{
+	color: #999;
+	margin-left: 40px;
+	font-size: 13px;
+	margin-top: 5px;
+}
+
+.ulDiv{
+    padding-top: 10px;
+	margin: 0 10px;
+   	font-size: 14px;
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.PubBook-RelativeListItem{
+	display: flex;
+	width: 100px;
+	flex-direction: column;
+	margin: 10px 10px 20px;
+}
+.PubBook-RelativeListItem--image{
+	width: 100px;
+	height: 133px;
+	border-radius: 5px;
+	position: relative;
+}
+.PubBook-RelativeListItem--image::after{
+	position: absolute;
+	top: 0;
+	left: 0;
+	content: "";
+	background: rgba(0,0,0,.02);
+	width: 100%;
+	height: 100%;
+	border-radius: 5px;
+}
+.PubBook-RelativeListItem--image img {
+	width: 100px;
+	height: 133px;
+	border-radius: 5px;
+}
+.PubBook-RelativeListItem-title{
+	max-height: 2.86em;
+	line-height: 1.43em;
+	overflow: hidden;
+	margin-top: 8px;
+	margin-bottom: 5px;
+}
+.PubBook-RelativeListItem-authors{
+	color: grey;
+	margin-bottom: 7px;
+}
+.PubBook-RelativeListItem-promotion{
+	color: #ff9607;
+}
+.ul1{
+	position: relative;
+	top:-20px;
+}
+.ul2{
+	position: relative;
+	top:-40px;
+}
+
+.rightDiv{
+	/*float: right;
+    margin-top: -318px;
+    !*position: relative;
+    left: 310px;*!
+    width:296px;
+    position: fixed;
+    left: 1180px;*/
+}
+/*.fixedDiv{
+	position: fixed;
+	width:296px;
+}*/
+.rightDiv>img{
+	cursor: pointer;
+}
+.divsvg{
+	box-shadow: 0 1px 3px 0 rgba(0,34,77,.05);
+	background: #FFFFFF;
+}
+.hrDiv{
+	border-bottom: 1px solid #EDF8F2;
+    width: 240px;
+    margin-left: 59px;
+
+}
+.divTop,.divBottom{
+
+    display: flex;
+    align-items: center;
+    height: 30px;
+    padding: 10px 20px 10px 0;
+    margin: 0 0 0 20px;
+    color:#999999;
+    cursor: pointer;
+}
+.divsvg svg{
+    margin-right: 24px;
+}
+.divp{
+	/*margin-top: -25px;*/
+	margin-bottom: 10px;
+}
+.divp>h5{
+	font-size: 15px;
+	padding: 0 20px;
+	border-bottom: 1px solid #F6F6F6;
+	height: 50px;
+	line-height: 50px;
+}
+.divBs{
+	padding: 20px 0;
+}
+.divBottom>img {
+	border-radius: 4px;
+	margin-right: 10px;
+}
+.divImg{
+	display: flex;
+	font-size: 14px;
+	margin-right: 15px;
+}
+.divImg>img{
+	border-radius: 4px;
+	margin-right: 10px;
+}
+.divImg>div>p:first-child{
+
+}
+.divImg>div>p:last-child{
+	margin-top: 8px;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	line-height: 1.71em;
+	max-height: 5.13em;
+	overflow: hidden;
+}
+.backDiv{
+	display: inline-block;
+    width: 88px;
+    height: 34px;
+    margin-left: 30px;
+    border-radius: 3px;
+    text-align: center;
+    line-height: 34px;
+    background: #f6f6f6;
+
+}
+.firstRight{
+	float: left;
+
+}
+.rightDivLast{
+	font-size: 15px;
+
+    display: flex;
+    align-items: center;
+    height: 75px;
+    padding: 0 20px;
+    color: #646464;
+}
+.footDiv{
+	padding-top:10px;
+	color:#808080;
+	font-size: 13px;
+	padding-right: 50px;
+}
+.boxMain{
+	min-width: 690px;
+	margin-right: 10px;
+}
+.PubBook-RelativeListItem.Card-section{
+	padding: 16px 20px;
+	margin: 0;
+	display: flex;
+	width: auto;
+	justify-content: space-between;
+	flex-direction: unset;
+}

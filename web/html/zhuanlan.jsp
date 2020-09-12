@@ -1,0 +1,195 @@
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <base href="<%=basePath%>">
+    
+    <title>My JSP 'zhuanlan.jsp' starting page</title>
+    
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<!--
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	-->
+	<meta charset="UTF-8">
+	<title>知乎 - 知乎专栏 - 随心写作，自由表达</title>
+	<link rel="stylesheet" href="css/zhuanlanl.css">
+	<link rel="stylesheet" href="css/special.css">
+  </head>
+  
+	<body class="LightGreyBg-body">
+		<div id="root">
+			<div class="App">
+				<div class="LoadingBar"></div>
+				<div class="App-main">
+					<div class="ColumnHome">
+						<div class="ColumnPageHeader-Wrapper">
+							<div>
+								<div class="Sticky ColumnPageHeader is-fixd">
+									<div class="ColumnPageHeader-content">
+										<a href="//www.zhihu.com">
+											<svg viewBox="0 0 200 91" fill="#0084FF" width="64" height="30"><path d="M53.29 80.035l7.32.002 2.41 8.24 13.128-8.24h15.477v-67.98H53.29v67.978zm7.79-60.598h22.756v53.22h-8.73l-8.718 5.473-1.587-5.46-3.72-.012v-53.22zM46.818 43.162h-16.35c.545-8.467.687-16.12.687-22.955h15.987s.615-7.05-2.68-6.97H16.807c1.09-4.1 2.46-8.332 4.1-12.708 0 0-7.523 0-10.085 6.74-1.06 2.78-4.128 13.48-9.592 24.41 1.84-.2 7.927-.37 11.512-6.94.66-1.84.785-2.08 1.605-4.54h9.02c0 3.28-.374 20.9-.526 22.95H6.51c-3.67 0-4.863 7.38-4.863 7.38H22.14C20.765 66.11 13.385 79.24 0 89.62c6.403 1.828 12.784-.29 15.937-3.094 0 0 7.182-6.53 11.12-21.64L43.92 85.18s2.473-8.402-.388-12.496c-2.37-2.788-8.768-10.33-11.496-13.064l-4.57 3.627c1.363-4.368 2.183-8.61 2.46-12.71H49.19s-.027-7.38-2.372-7.38zm128.752-.502c6.51-8.013 14.054-18.302 14.054-18.302s-5.827-4.625-8.556-1.27c-1.874 2.548-11.51 15.063-11.51 15.063l6.012 4.51zm-46.903-18.462c-2.814-2.577-8.096.667-8.096.667s12.35 17.2 12.85 17.953l6.08-4.29s-8.02-11.752-10.83-14.33zM199.99 46.5c-6.18 0-40.908.292-40.953.292v-31.56c1.503 0 3.882-.124 7.14-.376 12.773-.753 21.914-1.25 27.427-1.504 0 0 3.817-8.496-.185-10.45-.96-.37-7.24 1.43-7.24 1.43s-51.63 5.153-72.61 5.64c.5 2.756 2.38 5.336 4.93 6.11 4.16 1.087 7.09.53 15.36.277 7.76-.5 13.65-.76 17.66-.76v31.19h-41.71s.88 6.97 7.97 7.14h33.73v22.16c0 4.364-3.498 6.87-7.65 6.6-4.4.034-8.15-.36-13.027-.566.623 1.24 1.977 4.496 6.035 6.824 3.087 1.502 5.054 2.053 8.13 2.053 9.237 0 14.27-5.4 14.027-14.16V53.93h38.235c3.026 0 2.72-7.432 2.72-7.432z" fill-rule="evenodd"></path></svg>
+										</a>
+										<div class="ColumnPageHeader-Button">
+											<button type="button" class="Button ColumnPageHeader-WriteButton Button--blue">
+												<svg class="Zi Zi--EditSurround" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M18.453 7.992l-1.833-1.65.964-.978a1.223 1.223 0 0 1 1.73-.012l.005.006a1.24 1.24 0 0 1 .007 1.748l-.873.886zm-1.178 1.194l-5.578 5.66-1.935.697a.393.393 0 0 1-.504-.504l.697-1.935 5.488-5.567 1.832 1.65zM7.58 5.848l5.654.006-1.539 1.991-3.666.012A1.02 1.02 0 0 0 7 8.868v7.993c0 .558.46 1.01 1.029 1.01l7.941-.01c.568 0 1.03-.453 1.03-1.012v-4.061l2-1.442v6.002c0 1.397-1.2 2.501-2.62 2.501H7.574C6.153 19.85 5 18.717 5 17.32V8.35c0-1.397 1.16-2.502 2.58-2.502z"></path></svg>
+												写文章
+											</button>
+											<div class="Popover">
+												<button title="更多" type="button" id="Popover1-toggle" aria-haspopup="true" aria-expanded="false" aria-owns="Popover1-content" class="Button ColumnPageHeader-MenuToggler Button--plain"><svg class="Zi Zi--Dots" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M5 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill-rule="evenodd"></path></svg></button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="ColumnHomeTop">
+							<h1 class="ColumnHomeTop-logo">知乎专栏</h1>
+							<h2 class="ColumnHomeTop-subTitle">随心写作，自由表达</h2>
+							<button target="_blank" to="/write" type="button" class="Button ColumnHomeTop-writeButton Button--grey">开始写文章</button>
+							<button type="button" class="Button ColumnHomeTop-requestButton Button--plain Button--green">
+								申请开通专栏&nbsp;>
+								<span style="display: inline-flex;align-items: center;"></span>
+							</button>
+						</div>
+						<div class="ColumnHomeRecommendation">
+							<h3 class="ColumnHomeTitle">
+								<div class="ColumnHomeTitle-text">专栏  · 发现</div>
+								<div class="ColumnHomeTitle-line"></div>
+							</h3>
+							<div class="ColumnHomeRecommendation-cardContainer">
+								<a class="ColumnHomeColumnCard ColumnHomeRecommendation-Card" target="_blank">
+									<img class="Avatar Avatar--medium Avatar--round ColumnHomeColumnCard-Avatar" width="48" height="48" src="images/zhuanlan/zltx1.jpg" alt="头像专栏" />
+									<div class="ColumnHomeColumnCard-info">
+										<div class="ColumnHomeColumnCard-title">美国高中留学</div>
+										<div class="ColumnHomeColumnCard-description">
+											留学美国网成立10余年，自成立以来一直秉承“诚信、高效和负责”是理念，以实现每个学生和家庭的理想为宗旨，已经成功帮助数千名学生申请到理想的学校，作为中国留学服务行业的领航者，我们用专业和热诚服务于每一个学生、每一个家庭！在帮孩子申请过程中，我们不仅帮孩子申请到了理想的梦校，更为重要的是，我们见证了每一个孩子在申请中获得的收获与成长，每一位找到我们的学生和家长，我们都会用专业和敬业来回馈家长的信任! 实现每个家庭的梦想是我们最大的愿望！ 联系方式：13910531929,15011066813，官方微信13910531929和liumeinet2014！
+										</div>
+									</div>
+									<div class="ColumnHomeColumnCard-meta">595人关注|438篇文章</div>
+									<button type="button" class="Button ColumnHomeColumnCard-followButton Button--green">进入专栏</button>
+								</a>
+								<a class="ColumnHomeColumnCard ColumnHomeRecommendation-Card" target="_blank">
+									<img class="Avatar Avatar--medium Avatar--round ColumnHomeColumnCard-Avatar" width="48" height="48" src="images/zhuanlan/zlp5.jpg" alt="头像专栏" />
+									<div class="ColumnHomeColumnCard-info">
+										<div class="ColumnHomeColumnCard-title">抽屉电影</div>
+										<div class="ColumnHomeColumnCard-description">
+											它没有灵魂
+										</div>
+									</div>
+									<div class="ColumnHomeColumnCard-meta">3,324人关注|1,038篇文章</div>
+									<button type="button" class="Button ColumnHomeColumnCard-followButton Button--green">进入专栏</button>
+								</a>
+								<a class="ColumnHomeColumnCard ColumnHomeRecommendation-Card" target="_blank">
+									<img class="Avatar Avatar--medium Avatar--round ColumnHomeColumnCard-Avatar" width="48" height="48" src="images/zhuanlan/zltx2.jpg" alt="头像专栏" />
+									<div class="ColumnHomeColumnCard-info">
+										<div class="ColumnHomeColumnCard-title">包晓贝的世界</div>
+										<div class="ColumnHomeColumnCard-description">
+											属于我的小小世界
+										</div>
+									</div>
+									<div class="ColumnHomeColumnCard-meta">14,648人关注|87篇文章</div>
+									<button type="button" class="Button ColumnHomeColumnCard-followButton Button--green">进入专栏</button>
+								</a>
+								<a class="ColumnHomeColumnCard ColumnHomeRecommendation-Card" target="_blank">
+									<img class="Avatar Avatar--medium Avatar--round ColumnHomeColumnCard-Avatar" width="48" height="48" src="images/zhuanlan/zltx3.jpg" alt="头像专栏" />
+									<div class="ColumnHomeColumnCard-info">
+										<div class="ColumnHomeColumnCard-title">诡案1891</div>
+										<div class="ColumnHomeColumnCard-description">
+											原创悬疑惊悚短篇+连载小说，公众号《绛衣》，求关注
+										</div>
+									</div>
+									<div class="ColumnHomeColumnCard-meta">3,175人关注|39篇文章</div>
+									<button type="button" class="Button ColumnHomeColumnCard-followButton Button--green">进入专栏</button>
+								</a>
+								<a class="ColumnHomeColumnCard ColumnHomeRecommendation-Card" target="_blank">
+									<img class="Avatar Avatar--medium Avatar--round ColumnHomeColumnCard-Avatar" width="48" height="48" src="images/zhuanlan/zltx5.jpg" alt="头像专栏" />
+									<div class="ColumnHomeColumnCard-info">
+										<div class="ColumnHomeColumnCard-title">交易法门</div>
+										<div class="ColumnHomeColumnCard-description">
+											入群请加助理微信：zhuliqiqi7
+										</div>
+									</div>
+									<div class="ColumnHomeColumnCard-meta">11,155人关注|346篇文章</div>
+									<button type="button" class="Button ColumnHomeColumnCard-followButton Button--green">进入专栏</button>
+								</a>
+								<a class="ColumnHomeColumnCard ColumnHomeRecommendation-Card" target="_blank">
+									<img class="Avatar Avatar--medium Avatar--round ColumnHomeColumnCard-Avatar" width="48" height="48" src="images/zhuanlan/zltx6.jpg" alt="头像专栏" />
+									<div class="ColumnHomeColumnCard-info">
+										<div class="ColumnHomeColumnCard-title">黄磊的期货人生</div>
+										<div class="ColumnHomeColumnCard-description">
+										微信公众号bjwylb无与磊比的交易室
+										</div>
+									</div>
+									<div class="ColumnHomeColumnCard-meta">1,568人关注|1，058篇文章</div>
+									<button type="button" class="Button ColumnHomeColumnCard-followButton Button--green">进入专栏</button>
+								</a>
+								<a class="ColumnHomeColumnCard ColumnHomeRecommendation-Card" target="_blank">
+									<img class="Avatar Avatar--medium Avatar--round ColumnHomeColumnCard-Avatar" width="48" height="48" src="images/zhuanlan/zltx7.jpg" alt="头像专栏" />
+									<div class="ColumnHomeColumnCard-info">
+										<div class="ColumnHomeColumnCard-title">星月菩提</div>
+										<div class="ColumnHomeColumnCard-description">
+										提供星月菩提子盘经验星月菩提价格及配饰玩偶
+										</div>
+									</div>
+									<div class="ColumnHomeColumnCard-meta">268人关注|158篇文章</div>
+									<button type="button" class="Button ColumnHomeColumnCard-followButton Button--green">进入专栏</button>
+								</a>
+								<a class="ColumnHomeColumnCard ColumnHomeRecommendation-Card" target="_blank">
+									<img class="Avatar Avatar--medium Avatar--round ColumnHomeColumnCard-Avatar" width="48" height="48" src="images/zhuanlan/zltx8.jpg" alt="头像专栏" />
+									<div class="ColumnHomeColumnCard-info">
+										<div class="ColumnHomeColumnCard-title">摇摆电影</div>
+										<div class="ColumnHomeColumnCard-description">
+										私人的，纯粹的，关于电影的爱
+										</div>
+									</div>
+									<div class="ColumnHomeColumnCard-meta">1,268人关注|258篇文章</div>
+									<button type="button" class="Button ColumnHomeColumnCard-followButton Button--green">进入专栏</button>
+								</a>
+							</div>
+							<button type="button" class="Button ColumnHomeRecommendation-refreshButton Button--grey Button--withIcon Button--withLabel">
+								<span style="display:inline-flex;align-items:center;">​<svg class="Zi Zi--Refresh Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M20 12.878C20 17.358 16.411 21 12 21s-8-3.643-8-8.122c0-4.044 3.032-7.51 6.954-8.038.034-1.185.012-1.049.012-1.049-.013-.728.461-1.003 1.057-.615l3.311 2.158c.598.39.596 1.026 0 1.418l-3.31 2.181c-.598.393-1.08.12-1.079-.606 0 0 .006-.606-.003-1.157-2.689.51-4.675 2.9-4.675 5.708 0 3.21 2.572 5.822 5.733 5.822 3.163 0 5.733-2.612 5.733-5.822 0-.633.51-1.148 1.134-1.148.625 0 1.133.515 1.133 1.148" fill-rule="evenodd"></path></svg></span>
+								换一换
+							</button>
+						</div>
+						<div class="ColumnHomeBottom ColumnHome-HomeButtom">
+							<h3 class="ColumnHomeBottom-title">在知乎创作</h3>
+							<button type="button" class="Button ColumnHomeBottom-requesButton">申请专栏</button>
+							<footer class="ColumnHomeBottom-footer">
+								<span>©2020知乎·</span>
+								<a target="_blank" rel="noreferrer noopener">知乎专栏</a>
+								<span>·</span>
+								<a target="_blank" rel="noreferrer noopener">圆桌</a>
+								<span>·</span>
+								<a target="_blank" rel="noreferrer noopener">发现</a>
+								<span>·</span>
+								<a target="_blank" rel="noreferrer noopener">移动应用</a>
+								<span>·</span>
+								<a target="_blank" rel="noreferrer noopener">使用机构账号登录</a>
+								<span>·</span>
+								<a target="_blank" rel="noreferrer noopener">联系我们</a>
+								<span>·</span>
+								<a target="_blank" rel="noreferrer noopener">来知乎工作</a>
+								<br />
+								<a target="_blank" rel="noreferrer noopener">京ICP证******号</a>
+								<span>·</span>
+								<a target="_blank" rel="noreferrer noopener">京ICP备********-*</a>
+								<span>·</span>
+								<a target="_blank" rel="noreferrer noopener">出版物经营许可证</a>
+							</footer>
+						</div>
+					</div>
+				</div>
+				<div class="CornerButtons"></div>
+			</div>
+		</div>
+  </body>
+</html>

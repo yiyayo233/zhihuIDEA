@@ -1,0 +1,157 @@
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	background-color: #f6f6f6;
+
+}
+button{
+	outline: none;
+}
+.AllDiv header{
+	height: 235px;
+	background-color: white;
+}
+.AllDiv .firstDiv{
+	width: 690px;
+	margin: 0 auto;
+
+
+}
+.AllDiv .firstDiv h1{
+	padding-top: 30px;
+	line-height: 20px;
+}
+.AllDiv .firstDiv img{
+	position: relative;
+	left:380px;
+	bottom: 160px;
+	width: 124px;
+	height: 124px;
+
+}
+.titleP{
+	padding: 15px 0 5px;
+}
+.AllDiv .firstDiv p,.AllDiv .firstDiv div{
+	margin-top: 10px;
+}
+.AllDiv .firstDiv div{
+	display: flex;
+}
+.AllDiv .firstDiv div div:first-of-type{
+	background-color: #0084ff;
+	border-radius: 4px;
+	margin-right: 16px;
+	color:#FFFFFF;
+	width:70px;
+	line-height: 35px;
+    margin-top: 100px;
+    position: relative;
+    top: -100px;
+    padding-left: 18px;
+    font-size: 14px;
+    cursor: pointer;
+}
+.AllDiv .firstDiv div div:last-of-type{
+	border: 1px solid #0084ff;
+	color:#0084ff;
+	border-radius: 4px;
+	width: 35px;
+    height: 35px;
+    margin-top: -1px;
+    padding-top: 10px;
+    padding: 0 22px;
+    line-height: 35px;
+    cursor: pointer;
+
+}
+.AllDiv .firstDiv div span{
+	color: #C8C8C8;
+    margin-left: -105px;
+    padding-top: 7px;
+    cursor: pointer;
+}
+.AllDiv .firstDiv div span>svg{
+	padding-right: 5px;
+}
+.AllDiv .firstDiv p:nth-of-type(2)>a, .AllDiv .firstDiv p:nth-of-type(3)>a{
+	color:#C8C8C8;
+	text-decoration: none;
+}
+
+/*.addClass{
+	background-color: blue;
+}*/
+section{
+	background-color: white;
+	width: 720px;
+	margin: 20px auto;
+	padding: 0 20px;
+	padding-bottom: 50px;
+}
+section>h4{
+	padding: 13px 0px;
+	margin-bottom: 5px;
+}
+section>div{
+	border-top: 1px solid #D8D8D8;
+
+}
+section>div img{
+		width: 30px;
+	height: 30px;
+
+	border-radius:20px;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+section>div>div>span:nth-of-type(1){
+	font-weight: bold;
+	margin-right: 2px;
+}
+section>div>div>span:nth-of-type(2){
+	color:#D8D8D8;
+}
+section .oneDiv svg{
+	margin-right: 10px;
+	vertical-align: middle;
+}
+
+.fiveDiv>button+button{
+	margin-left: 10px;
+}
+.fiveDiv>.bt--Button02~button{
+	margin-left: 20px;
+}
+.b01{
+	    color: #0084ff;
+    background: rgba(0,132,255,.1);
+    width:100px;
+    line-height: 30px;
+
+}
+.bt--button01{
+
+    text-align: center;
+    margin: 1px 0px;
+    border-radius: 5px;
+    border:0px;
+
+    cursor: pointer;
+}
+.bt--Button02{
+
+    width: 30px;
+}
+.bt-Button03{
+	    color: #8590a6;
+    background: none;
+}
+.BigDiv>h4,section .oneDiv>p{
+	padding: 20px 0;
+}
+.BigDiv>h4,.oneDiv>img,.oneDiv>span{
+	cursor: pointer;
+}

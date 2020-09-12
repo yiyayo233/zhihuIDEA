@@ -1,0 +1,14 @@
+$(function(){
+	//点击关注专题变成已关注
+	$(".SpecialListCard-followButton").click(function(){
+		if($(this).attr("class").indexOf("change")==-1){
+			$(this).text("已关注");
+			$(this).removeClass("SpecialListCard-followButtonC").addClass("bgc");
+			$(this).addClass("change");
+		}else{
+			$(this).text("关注专题");
+			$(this).addClass("SpecialListCard-followButtonC").removeClass("bgc");
+			$(this).removeClass("change");
+		}
+	})
+})

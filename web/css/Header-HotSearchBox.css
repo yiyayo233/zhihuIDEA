@@ -1,0 +1,32 @@
+.HotHotSearchBox{
+    width: 395px;
+    background: #ffffff;
+    padding: 6px 0 8px 0;
+    border: 1px solid #ebebeb;
+    border-radius: 4px;
+    box-shadow: 0 5px 20px rgba(26,26,26,.1);
+    z-index: 9999999999999999;
+}
+.HotHotSearchItem{
+    /*display: flex;*/
+}
+.HotHotSearchBox-title{
+    color: #8590a6;
+    font-size: 14px;
+    border-bottom: 1px solid #ebebeb;
+    margin: 0 16px;
+    padding: 7px 0;
+}
+.HotHotSearchItem-lick{
+    padding: 6px 16px;
+    display: flex;
+    height: 23px;
+    font-size: 14px;
+    align-items: center;
+}
+.HotHotSearchItem-lick:hover{
+    background: #F6F6F6;
+}
+.HotHotSearchItem-lick>svg{
+    margin-left: 5px;
+}

@@ -1,0 +1,252 @@
+
+body{
+	background-color: #f6f6f6;
+	
+}
+.QuestionWaiting{
+	display: flex;
+	margin: 10px auto;
+	width: 1000px;
+}
+#AllDiv{
+	background-color: white;
+	/*height: 2300px;*/
+	width: 694px;
+	margin-right: 10px;
+	overflow: hidden;
+}
+#AllDiv #headDiv{
+	position: fixed;
+	top: 60px;
+	width: 694px;
+	background: #fff;
+	border-bottom: 1px solid #ebebeb;
+	z-index: 1;
+}
+.headDiv-Topper{
+	width: 694px;
+	height: 20px;
+	background: #F6F6F6;
+	position: absolute;
+	top: -20px;
+}
+.headDiv-types{
+	height: 69px;
+	display: flex;
+	align-items: center;
+	padding: 0 10px;
+}
+.headDiv-types a{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	
+}
+.headDiv-types a div{
+	background: rgba(133,144,166,.12);
+	color: #8590a6;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0 10px;
+	padding: 0 12px;
+	border-radius: 16px;
+	height: 32px;
+	font-size: 14px;
+}
+.headDiv-types div:hover{
+	background: rgba(0,132,255,.08);
+	box-shadow: 0 6px 10px rgba(0,132,255,.06);
+}
+.headDiv-types a div.QuestionType--active{
+	color: #0084ff;
+	background: rgba(0,132,255,.08);
+	box-shadow: 0 6px 10px rgba(0,132,255,.06);
+}
+.headDiv-types a div svg{
+	margin-right: 3px;
+}
+
+
+#AllDiv #headDiv hr{
+	border: #c8c8c8 1px solid;
+	width: 1000px;
+	
+}
+#AllDiv #bigDiv{
+	margin-top: 69px;
+	padding: 0 20px;
+}
+#AllDiv .twoDiv{
+	padding: 16px 20px 16px 0;
+	margin-top:20px;
+	
+}
+
+#AllDiv .twoDiv h3{
+	margin-top:20px;
+}
+/*#AllDiv #twoDiv h3+span>svg{
+	display: inline;
+}
+
+#AllDiv #twoDiv h3+span:hover{
+	display: none;
+}*/
+#AllDiv .twoDiv h3>a{
+	color:black;
+	text-decoration: none;
+}
+#AllDiv .twoDiv h3>a:hover{
+	color:blue;
+}
+#AllDiv .twoDiv .div1{
+	border: 2px solid dodgerblue;
+	width:80px;
+	line-height: 30px;
+	border-radius: 5px;
+	padding-left: 10px;
+	font-size: 14px;
+	float:left;
+	color:dodgerblue;
+}
+
+#AllDiv .twoDiv p{
+	display: inline;
+	
+}
+#AllDiv .twoDiv .div2{
+	margin-left: 40px;
+	
+	display: inline-block;
+}
+#AllDiv .twoDiv .Zi2{
+	padding-top:10px;
+	
+}
+#AllDiv .twoDiv h3+span{
+	display: inline-block;
+	float:right;
+	margin-top:-40px;
+}
+#AllDiv .twoDiv .div2+span{
+	float:right;
+	padding-top: 8px;
+}
+
+#AllDiv .twoDiv .div2>span{
+	margin-top: -5px;
+}
+/*#AllDiv #twoDiv .div2,#AllDiv #twoDiv .div2+span{
+	color:#C8C8C8;
+}*/
+#AllDiv .twoDiv .div2  .Zi3{
+	vertical-align: bottom;
+}
+#AllDiv .twoDiv .div2 a,#AllDiv #twoDiv .Zi2{
+	color:#C8C8C8;
+	text-decoration: none;
+	
+}
+
+.twoDiv>span :first-child{
+	display: none;
+}
+.twoDiv:hover>span :first-child{
+	display: block;
+}
+.sp1 {
+	position: relative;
+	top:-25px;
+}
+
+
+
+/*#AllDiv #bigDiv .twoDiv span svg+div{
+	display: none;
+	width:80px;
+	line-height: 30px;
+	
+	padding-left: 20px;
+	
+	
+	position: relative;
+	top:-50px;
+	background-color: red;
+}
+
+#AllDiv #bigDiv .twoDiv span svg:hover+div{
+	display: block;
+}*/
+
+
+/*问题item*/
+.QuestionItem{
+	position: relative;
+	padding: 16px 20px 16px 0;
+}
+.QuestionItem+.QuestionItem{
+	border-top: 1px solid #F6F6F6;
+}
+.QuestionItem-head{
+	margin-bottom: 10px;
+	color: #8590a6;
+	display: flex;
+	align-items: center;
+}
+.QuestionItem-head--icon{
+	width: 16px;
+	margin-right: 8px;
+}
+.QuestionItem-title{
+	font-weight: 600;
+	font-size: 18px;
+	color: #1A1A1A;
+	line-height: 1.6;
+}
+.QuestionItem-title>a:hover{
+	color: #175199;
+}
+
+.QuestionItem-content{
+	display: flex;
+	margin-top: 16px;
+}
+.QuestionItem-footer--writeAnswerButton{
+	background: #0084ff;
+	color: #fff;
+	font-size: 14px;
+	width: 96px;
+	height: 28px;
+	line-height: 26px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.QuestionItem-footer--writeAnswerButton:hover{
+	color: #fff;
+	background: #0f88eb;
+}
+.ContentItem-statusBox{
+	margin-left: 16px;
+	display: flex;
+	align-items: center;
+}
+.ContentItem-status>.ContentItem-statusItem:last-child::before{
+	content: "\B7";
+	margin: 0 5px;
+}
+.ContentItem-status{
+	color: #8590a6;
+	font-size: 14px;
+}
+.QuestionItem-ignoreButton{
+	visibility: hidden;
+	position: absolute;
+	top: 16px;
+	right: 0;
+}
+
+
+
+

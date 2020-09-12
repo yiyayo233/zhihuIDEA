@@ -1,0 +1,333 @@
+.AnalyticsWork{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+}
+.AnalyticsWork-TabsBox{
+    height: 50px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #F6F6F6;
+}
+.Tabs{
+    display: flex;
+}
+.AnalyticsWork-TabsBox .Tabs-link{
+    font-size: 16px;
+}
+.AnalyticsWork-dataUpdateHint{
+    position: absolute;
+    top: 0;
+    right: 20px;
+    color: #999;
+    font-size: 12px;
+    line-height: 50px;
+    display: flex;
+}
+.AnalyticsWork-TooltipHelpIcon{
+    margin-left: 5px;
+}
+.AnalyticsWork-entityPage{
+    padding: 20px;
+}
+.AnalyticsWork-countBox{
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+}
+.AnalyticsCount{
+    background: #fff;
+    border: 1px solid #ededed;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+    padding: 20px 24px 16px;
+}
+.AnalyticsWork-countBox .AnalyticsCount{
+    box-sizing: border-box;
+    width: 250px;
+    margin: 0 15px 15px 0;
+}
+.AnalyticsCount-title{
+    font-size: 14px;
+    color: #999;
+    line-height: 20px;
+    display: flex;
+}
+.AnalyticsCount-subtitle{
+    font-size: 12px;
+}
+.AnalyticsCount-content{
+    display: flex;
+    margin-top: 8px;
+    align-items: center;
+}
+.AnalyticsCount-number{
+    font-size: 26px;
+    line-height: 40px;
+    margin-right: 8px;
+    max-width: 100%;
+    overflow: auto;
+}
+.AnalyticsCount-number-origin{
+    font-size: 12px;
+    display: flex;
+}
+.AnalyticsCount-number-originTitle{
+    color: #999999;
+}
+.AnalyticsCount-number-originNumber{
+    font-weight: 600;
+    margin-left: 5px;
+}
+.AnalyticsCount-number-originNumber--up{
+    color: #0084ff;
+}
+.AnalyticsCount-number-originNumber--down {
+    color: #FF3366;
+}
+.CreatorSection{
+    border: 1px solid #ebebeb;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px 0 rgba(26,26,26,.1);
+}
+.CreatorSection-header{
+    border-bottom: 1px solid #ebebeb;
+}
+.AnalyticsWork-detailCountMenu{
+    display: flex;
+    border-bottom: 1px solid #ebebeb;
+}
+.CreatorSectionItem{
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    margin: 15px 0;
+    line-height: 30px;
+
+}
+.CreatorSectionItem.is-active{
+    font-weight: 600;
+}
+.CreatorSectionItem--clickable{
+    cursor: pointer;
+}
+.CreatorSectionItem--name{
+    position: relative;
+}
+.CreatorSectionItem.is-active>.CreatorSectionItem--name:before{
+    content: "";
+    background: #0084ff;
+    height: 3px;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -16px;
+}
+.CreatorSectionItem-TooltipIconContainer{
+    color: #999999;
+    margin-left: 5px;
+}
+.AnalyticsDetailRangPicker{
+    padding: 13px 24px;
+}
+.AnalyticsDetailRangPicker-dateButton{
+    padding: 0 16px;
+    font-size: 14px;
+    line-height: 32px;
+    color: #8590a6;
+    text-align: center;
+    border: 1px solid ;
+    margin-right: 16px;
+}
+.AnalyticsDetailRangPicker-dateButton{
+    border-color: #ebebeb;
+}
+.AnalyticsDetailRangPicker-dateButton:hover{
+    border-color: #8590a6;
+}
+.AnalyticsDetailRangPicker-dateButton.is-active{
+    border-color: #0084ff;
+}
+.AnalyticsWork-detailCountBodyHeader{
+    padding: 0 24px;
+    height: 60px;
+    color: #646464;
+    display: flex;
+    align-items: center;
+}
+.AnalyticsWork-detailCountBodyHeaderTitle{
+    flex: 1 1;
+}
+.AnalyticsWork-detailCountBodyHeaderTool{
+    color: #8590a6;
+}
+.CreatorTable{
+    font-size: 14px;
+}
+.CreatorTable-table{
+    width: 100%;
+    border-bottom: 1px solid #ebebeb;
+}
+.CreatorTable-tableRow{
+    line-height: 48px;
+    height: 48px;
+}
+.CreatorTable-tableRow-odd{
+    background: #F6F6F6;
+}
+.CreatorTable-tableHead{
+    color: #8590a6;
+    font-size: 14px;
+    font-weight: 400;
+    text-align: left;
+}
+.CreatorTable-tableHead:first-child{
+    padding-left: 24px;
+}
+.CreatorTable-tableHead:not(:first-child){
+    text-align: right;
+}
+.CreatorTable-tableHead:not(:first-child) {
+    cursor: pointer;
+}
+.CreatorTable-tableHead:last-child{
+    padding-right: 24px;
+    cursor: inherit;
+}
+.CreatorSorter-icon{
+    fill: #d3d3d3;
+}
+.CreatorSorter-icon--ascend path:first-child{
+    fill: #0084ff;
+}
+.CreatorSorter-icon--descend path:last-child{
+    fill: #0084ff;
+}
+.CreatorTable-tableDate{
+    box-sizing: border-box;
+}
+.CreatorTable-tableDate:first-child{
+    padding-left: 24px;
+}
+.CreatorTable-tableDate:not(:first-child){
+    text-align: right;
+    padding-right: 14px;
+}
+.CreatorTable-tableDate:last-child{
+    padding-right: 24px;
+}
+.AnalyticsWork-titleColumn{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 150px;
+    box-sizing: border-box;
+}
+.AnalyticsWork-detailExpand{
+    margin-right: -10px;
+}
+
+.AnalyticsWork-detailExpand{
+    color: #0084ff;
+    cursor: pointer;
+}
+.AnalyticsWork-detailExpand .Zi{
+    color: #d3d3d3;
+}
+.Creator-entityLink{
+    color: #175199;
+}
+.Creator-internalLink:hover{
+    color: #3a76d0;
+}
+.CreatorPagination{
+    padding: 10px 24px;
+    display: flex;
+    justify-content: flex-end;
+}
+.button.CreatorPagination-Button{
+    padding: 0 11px;
+}
+.CreatorPagination-Button{
+    border: 1px solid #8590a6;
+    height: 34px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.CreatorPagination-Button--disabled{
+    opacity: .5;
+}
+.CreatorPagination-lastButton>span{
+    transform: rotate(-90deg);
+}
+.CreatorPagination-nextButton>span{
+    transform: rotate(90deg);
+}
+.CreatorPagination-pageNumber{
+    color: #8590a6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 20px;
+}
+.CreatorPagination-Input{
+    padding: 4px 10px;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    margin: 0 10px;
+    box-sizing: border-box;
+    transition: all .2s;
+}
+.CreatorPagination-Input:focus{
+    background: #fff;
+    border: 1px solid #8590a6;
+
+}
+.CreatorPagination-Input>input{
+    overflow: hidden;
+}
+.CreatorPagination-Button.CreatorPagination-Button--skip{
+    padding: 0 20px;
+}
+
+/*œÍœ∏∑÷ŒˆÕ≥º∆Õº*/
+.AnalyticsWork-expandRowBox{
+    border-top: 1px solid #ebebeb;
+    padding-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.AnalyticsWork-DateLimitSelector{
+    margin: 30px 14px;
+    display: flex;
+    margin-bottom: 0;
+}
+.Creator-ButtonGroupButton{
+    border: 1px solid #ebebeb;
+    color: #8590a6;
+    font-size: 14px;
+    line-height: 24px;
+    width: 140px;
+}
+.Creator-ButtonGroupButton:first-child{
+    border-radius: 2px 0 0 2px ;
+}
+.Creator-ButtonGroupButton:last-child{
+    border-radius: 0 2px 2px 0 ;
+}
+.ButtonGroupButton-select{
+    color: #fff;
+    background: #8590a6;
+    border-color: #8590a6;
+}
+.Creator-ButtonGroupButton+.Creator-ButtonGroupButton{
+    margin-left: -1px;
+}
+.AnalyticsWork-expandRowChart{
+    width: 100%;
+}

@@ -1,0 +1,49 @@
+function f(windowheight, scrollTop) {
+    /**
+     * 获取页面高度，固定侧栏
+     */
+    if (windowheight > 925){
+        if(scrollTop > 350){
+            $(".Sticky").addClass("is-Fixed").css({"top":"-316px"});
+        }else {
+            $(".Sticky").removeClass("is-Fixed");
+        }
+    }else if(windowheight > 690){
+        if(scrollTop > 550){
+            $(".Sticky").addClass("is-Fixed").css({"top":"-499px"});
+        }else {
+            $(".Sticky").removeClass("is-Fixed");
+        }
+    }else {
+        if(scrollTop > 850){
+            $(".Sticky").addClass("is-Fixed").css({"top":"-805px"});
+        }else {
+            $(".Sticky").removeClass("is-Fixed");
+        }
+    }
+}
+
+$(function () {
+    $(".Topstory-sidebar-categoryItem .button").hover(function () {
+        $(this).children(".Topstory-sidebar-categoryTitle").removeClass(
+            "Topstory-sidebar-categoryTitle-Color");
+    },function () {
+        $(this).children(".Topstory-sidebar-categoryTitle").addClass(
+            "Topstory-sidebar-categoryTitle-Color");
+    });
+});
+$(window).scroll(
+    function () {
+        var scrollTop = $(this).scrollTop();
+        var windowheight = $(this).height();
+
+        f(windowheight,scrollTop);
+    }
+).resize(
+    function () {
+        var scrollTop = $(this).scrollTop();
+        var windowheight = $(this).height();
+
+        f(windowheight,scrollTop);
+    }
+);

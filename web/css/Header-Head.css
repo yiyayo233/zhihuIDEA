@@ -1,0 +1,398 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body{
+    background: #F6F6F6;
+    font-size: 15px;
+    height: 19999px;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+ul li{
+    list-style: none;
+}
+button{
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    appearance: none;
+}
+.button{
+    color: #8590a6;
+    border-radius: 3px;
+    font-size: 14px;
+}
+.button:hover{
+    color: #76839b;
+}
+input{
+    padding: 0;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+    background: none;
+    border: none;
+    outline: none;
+    appearance: none;
+}
+
+.Header{
+    height: 52px;
+    min-width: 1023px;
+    box-shadow: 0 1px 3px rgba(26 ,26 ,26 ,.1);
+    background: #fff;
+    z-index: 999999999999999999999999;
+    position: relative;
+    overflow: hidden;
+}
+.is-Fixed{
+    position: fixed;
+}
+.Button-zi{
+    margin-right: 4px;
+}
+/*°å¿é*/
+.Card{
+    background: #fff;
+    border-radius: 2px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(26,26,26,.1);
+}
+.Card-header{
+    padding: 0 20px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #F6F6F6;
+}
+.Card-headertext{
+    font-weight: 600;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.Card-body{
+    padding: 20px;
+}
+
+/*inputºÐ×Ó*/
+.Input-wrapper{
+    width: 180px;
+    height: 34px;
+    display: flex;
+    align-items: center;
+    padding: 4px 10px;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    transition: all .2s;
+}
+.Input-wrapper.is-Focus{
+    border: 1px solid #8590a6;
+    background: #fff;
+}
+
+
+.AppHeader{
+    width: 1000px;
+    height: 52px;
+    padding: 0 16px 0 16px;
+    display: flex;
+    align-items: center;
+    margin: 0 auto;
+    position: relative;
+    transition: all .3s;
+}
+.AppHeader .tabs{
+    display: flex;
+    padding: 0 23px;
+}
+.Tabs-item{
+    padding: 0 16px;
+}
+.Tabs-link{
+    font-size: 15px;
+    padding: 14px 0;
+    color: #8590a6;
+}
+.Tabs-link:hover{
+    color: #444;
+}
+.Tabs-link.is-active{
+    color: #0a0d16;
+    font-weight: 600;
+    position: relative;
+}
+.Tabs-link.is-active::after{
+    content: "";
+    height: 3px;
+    background: #0084ff;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: -1px;
+}
+.SearchBar{
+    display: flex;
+    align-items: center;
+}
+/*.SearchBar-toorlwrapper{
+    background: #f6f6f6;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    padding: 4px 0 4px 10px;
+}*/
+.SearchBar-toorlwrapper input{
+    font-size: 14px;
+    height: 24px;
+    width: 256px;
+    line-height: 24px;
+    transition: all .3s;
+}
+.SearchBar-toorlwrapper button{
+    padding: 0 12px;
+    margin-left: 12px;
+}
+.SearchBar-tool div, .SearchBar-tool button{
+    display: flex;
+    align-items: center;
+    height: 34px;
+    border-radius: 0 3px 3px 0;
+    border-color: #0084ff;
+    margin-right: -1px;
+}
+.SearchBar-toorlwrapper.Input-wrapper{
+    max-height: 34px;
+    width: auto;
+    padding-right: 0;
+    background: #f6f6f6;
+    box-sizing: border-box;
+}
+.SearchBar-toorlwrapper.Input-wrapper.is-Focus{
+    background: #fff;
+    z-index: 1;
+}
+.SearchBar-toorlwrapper.Input-wrapper.is-Focus input{
+    width: 330px;
+}
+.SearchBar>.Button-blue{
+    color: #fff;
+    background: #0084ff;
+    height: 34px;
+    line-height: 34px;
+    margin-left: 16px;
+    padding: 0 14px;
+    border-radius: 3px;
+    font-size: 14px;
+    transition: all .3s;
+}
+.AppHeader-userInfo{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex: 1 1;
+}
+.AppHeader-userInfo .Popover{
+     margin-right: 40px;
+}
+
+
+.PageHeader{
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: all .3s;
+}
+.is-shown{
+    transform: translateY(-100%);
+}
+
+/*Í·Ìõ*/
+.TopstoryPageHeader{
+    display: flex;
+    width: 1000px;
+    margin: 0 auto;
+    height: 100%;
+}
+.TopstoryPageHeader-main{
+    display: flex;
+    align-items: center;
+    flex: 1 1;
+}
+.TopstoryPageHeader-tabs{
+    padding-left: 18px;
+    height: 100%;
+    display: flex;
+}
+.TopstoryTabs-link{
+    margin: 0 22px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+.TopstoryTabs-link:hover{
+    color: #175199;
+}
+.TopstoryPageHeader-aside{
+    display: flex;
+    align-items: center;
+}
+.TopstoryPageHeader-aside label{
+    width: 216px;
+    background: #f6f6f6;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    padding: 4px 0 4px 10px;
+    display: flex;
+}
+.TopstoryPageHeader-aside label input{
+    height: 24px;
+    line-height: 24px;
+    flex: 1 1;
+}
+.TopstoryPageHeader-aside label button{
+    padding: 0 10px;
+}
+.TopstoryPageHeader-aside>button{
+    background: #0084ff;
+    color: #fff;
+    height: 34px;
+    line-height: 34px;
+    padding: 0 14px;
+    border-radius: 3px;
+    font-size: 14px;
+    margin-left: 16px;
+}
+
+/*user*/
+.userMain-header{
+    width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+}
+.userMain-avatar{
+
+}
+.Avatar{
+    border-radius: 2px;
+}
+.userMain-tabs{
+    display: flex;
+    flex: 1 1;
+}
+.userMain-tabs .Tabs-item{
+    padding: 0 12px;
+    display: flex;
+
+}
+.userMain-tabs .Tabs-item .Tabs-link{
+    color: #1a1a1a;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+}
+.Tabs-link.is-active{
+    font-weight: 600;
+}
+.userMain-tabs .Tabs-item .Tabs-link.is-active::after{
+    bottom: 1px;
+}
+.Tabs-meta{
+    margin-left: 6px;
+    color: #999;
+    font-weight: 400;
+}
+.userMain-menuButton{
+    color: #1a1a1a;
+    font-size: 16px;
+}
+.userMain-button{
+    display: flex;
+}
+.userMain-button button{
+    line-height: 32px;
+    padding: 0 16px;
+    border-radius: 3px;
+    font-size: 14px;
+    color: #0084ff;
+    border: 1px solid #0084ff;
+}
+
+/*question*/
+.QuestionHeader-content{
+    width: 1000px;
+    height: 100%;
+    margin: 0 auto;
+    display: flex;
+    padding: 0 16px;
+    align-items: center;
+    justify-content: space-between;
+}
+.QuestionHeader-main{
+    padding-left: 20px;
+    width: 694px;
+}
+.QuestionHeader-title{
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 23px;
+    color: #1a1a1a;
+}
+.PageHeader .QuestionHeader-title{
+    margin: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    cursor: pointer;
+}
+.QuestionHeader-side{
+    padding-right: 20px;
+}
+.QuestionButtonGroup{
+    margin: 0 -8px;
+    min-width: 223px;
+}
+.QuestionButtonGroup .button{
+    padding: 0 16px;
+    margin: 0 8px;
+    background: #fff;
+    border: 1px solid #0084ff;
+    border-radius: 3px;
+    line-height: 32px;
+}
+.button--blue{
+    color: #0084ff;
+    background: #0084ff;
+}
+.button--primary.button--blue{
+    color: #fff;
+    background: #0084ff;
+}
+.button.button--blue:hover{
+    background: rgba(0,123,255,.06);
+    color: #0084ff;
+}
+.button--primary.button--blue:hover{
+    background: #0077e6;
+    border: 1px solid #0077e6;
+    color: #FFF;
+}
+.button--grey{
+    color: #8590a6;
+    border-color: #8590a6;
+}
+.button.button--grey:hover{
+    background: rgba(133,144,166,.06);;
+    color: #8590a6;
+}
