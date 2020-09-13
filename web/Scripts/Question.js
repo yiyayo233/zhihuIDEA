@@ -19,15 +19,30 @@ function GoodQuestionAction_Btn_click(button) {
     $(button).attr("data-question-approveNum",num);
 }
 
-function answerAdd(button) {
 
-}
-
+/**
+ * 添加回答
+ * @param button
+ */
 function addAnswer(button) {
-
+    var uid = $(button).attr("data-user-id");
+    var text = $(button).parents(".AnswerForm-footer").prev().html();
+    var questionId = $(button).attr("data-querstion-id");
+    addAnswerAjax(uid,text);
 }
 
-function addAnswerAjax(id) {
+function addAnswerAjax(uId,text) {
+    $.ajax({
+        url:"answer",
+        data:{
+            "uId":uId,
+            "text":text,
+            "questionId":questionId,
+        },
+        dataType:"JSON",
+        success:function () {
 
+        }
+    })
 }
 

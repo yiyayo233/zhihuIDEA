@@ -137,7 +137,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <button data-question-id="${Question.id}" type="button" class="button button--primary button--blue">
                                 关注问题
                             </button>
-                            <button data-question-id="${Question.id}" type="button" class="button button--blue">
+                            <button data-question-id="${Question.id}" type="button" class="button button--blue" onclick="answerAdd(this)">
                                 <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Edit QuestionButton-icon" fill="currentColor" viewBox="0 0 24 24" width="16" height="16"><path d="M4.076 16.966a4.19 4.19 0 0 1 1.05-1.76l8.568-8.569a.524.524 0 0 1 .741 0l2.928 2.927a.524.524 0 0 1 0 .74l-8.568 8.57c-.49.49-1.096.852-1.761 1.051l-3.528 1.058a.394.394 0 0 1-.49-.488l1.06-3.53zM20.558 4.83c.59.59.59 1.546 0 2.136l-1.693 1.692a.503.503 0 0 1-.712 0l-2.812-2.812a.504.504 0 0 1 0-.712l1.693-1.693a1.51 1.51 0 0 1 2.135 0l1.389 1.389z"></path></svg></span>
                                 写回答
                             </button>
@@ -407,7 +407,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             <div class="AnswerForm-footer">
                                                 <div class="AnswerForm-footerContent AnswerForm-container">
                                                     <div class="AnswerForm-footerRight">
-                                                        <button type="button" class="button AnswerForm-submit">提交回答</button>
+                                                        <button type="button" data-user-id="<%=uId%>" data-querstion-id="${Question.id}" class="button button--primary button--blue AnswerForm-submit" onclick="addAnswer(this)">提交回答</button>
                                                     </div>
                                                 </div>
                                             </div>

@@ -61,6 +61,18 @@
             <servlet-name>QuestionServlet</servlet-name>
             <url-pattern>/question</url-pattern>
         </servlet-mapping>
+        <!-- 回答 -->
+        <servlet>
+            <description>This is the description of my J2EE component</description>
+            <display-name>This is the display name of my J2EE component</display-name>
+            <servlet-name>AnswerServlet</servlet-name>
+            <servlet-class>zhihu.servlet.AnswerServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+
+            <servlet-name>AnswerServlet</servlet-name>
+            <url-pattern>/answer</url-pattern>
+        </servlet-mapping>
 
         <welcome-file-list>
             <welcome-file>html/header.jsp</welcome-file>
