@@ -16,7 +16,8 @@ public class SuperDao extends BaseDao{
      * @return
      */
     public int addSuper(String tableName, String id1, String id2) {
-        return execUpdate("insert ? values( ? , ? )",tableName,  id1, id2);
+        System.err.println("insert "+ tableName +" values( '"+ id1 +"' , '"+ id2 +"' )");
+        return execUpdate("insert "+ tableName +" values( ? , ? )",  id1, id2);
     }
 
     /**

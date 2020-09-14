@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="../node_modules/react/umd/react.development.js"></script>
+    <script src="../node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="../node_modules/babel-standalone/babel.min.js"></script>
+    
+</head>
+<body>
+    <div id="domReact"></div>
+    <script type="text/babel">
+    // react列表渲染 map()
+        let arre=["吃饭","睡觉","打豆豆"];
+
+        let myDom = arre.map((item,index)=>{    //map方法，渲染数据
+            return (<p key={index}>{item}</p>)  //key 值必须加上
+        })
+        //通过for来渲染
+        function name() {
+            let newarre=[];
+            for (const key in arre) {
+                newarre.push(<p key={key}>{arre[key]}</p>);
+            }
+            return newarre;
+        }
+        
+        
+
+
+        ReactDOM.render(name(),document.getElementById("domReact"));
+    </script>
+</body>
+</html>

@@ -137,7 +137,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <button data-question-id="${Question.id}" type="button" class="button button--primary button--blue">
                                 关注问题
                             </button>
-                            <button data-question-id="${Question.id}" type="button" class="button button--blue" onclick="answerAdd(this)">
+                            <button data-question-id="${Question.id}" type="button" onclick="showAddAnswer(this)" class="button button--blue" >
                                 <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Edit QuestionButton-icon" fill="currentColor" viewBox="0 0 24 24" width="16" height="16"><path d="M4.076 16.966a4.19 4.19 0 0 1 1.05-1.76l8.568-8.569a.524.524 0 0 1 .741 0l2.928 2.927a.524.524 0 0 1 0 .74l-8.568 8.57c-.49.49-1.096.852-1.761 1.051l-3.528 1.058a.394.394 0 0 1-.49-.488l1.06-3.53zM20.558 4.83c.59.59.59 1.546 0 2.136l-1.693 1.692a.503.503 0 0 1-.712 0l-2.812-2.812a.504.504 0 0 1 0-.712l1.693-1.693a1.51 1.51 0 0 1 2.135 0l1.389 1.389z"></path></svg></span>
                                 写回答
                             </button>
@@ -256,7 +256,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <button data-question-id="${Question.id}" type="button" class="button button--primary button--blue">
                                     关注问题
                                 </button>
-                                <button data-question-id="${Question.id}" type="button" class="button button--blue" onclick=""> <%-- todo 写回答--%>
+                                <button data-question-id="${Question.id}" type="button" class="button button--blue" onclick="showAddAnswer(this)">
                                     <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Edit QuestionButton-icon" fill="currentColor" viewBox="0 0 24 24" width="16" height="16"><path d="M4.076 16.966a4.19 4.19 0 0 1 1.05-1.76l8.568-8.569a.524.524 0 0 1 .741 0l2.928 2.927a.524.524 0 0 1 0 .74l-8.568 8.57c-.49.49-1.096.852-1.761 1.051l-3.528 1.058a.394.394 0 0 1-.49-.488l1.06-3.53zM20.558 4.83c.59.59.59 1.546 0 2.136l-1.693 1.692a.503.503 0 0 1-.712 0l-2.812-2.812a.504.504 0 0 1 0-.712l1.693-1.693a1.51 1.51 0 0 1 2.135 0l1.389 1.389z"></path></svg></span>
                                     写回答
                                 </button>
@@ -297,7 +297,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="Question-main">
                 <div class="Question-mainColum">
                     <div>
-                        <div class="QuestionAnswers-statusWrapper">
+                        <div class="QuestionAnswers-statusWrapper" style="display: none">
                             <div class="Card QuestionAnswers-answerAdd">
                                 <div class="AnswerAdd">
                                     <div class="AnswerAdd-header">
@@ -321,87 +321,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <div class="Editable">
                                             <div class="Editable-toolbar Sticky">
                                                 <div class="Editable-toolbar-controls">
-                                                    <button aria-label="粗体" data-tooltip="粗体 (Ctrl+B)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--FormatBold" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M9 17.025V13h4.418c1.19 0 2.415.562 2.415 2.012s-1.608 2.013-2.9 2.013H9zM9 7h4.336c1 0 1.814.888 1.814 2 0 .89-.814 2-1.814 2H9V7zm8.192 1.899a3.893 3.893 0 0 0-3.888-3.889S9.334 5 8.167 5C7 5 7 6.167 7 6.167v11.666C7 19 8.167 19 8.167 19l5.572.01c2.333 0 4.231-1.86 4.231-4.148a4.122 4.122 0 0 0-1.77-3.372 3.873 3.873 0 0 0 .992-2.591z" fill-rule="evenodd"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button aria-label="斜体" data-tooltip="斜体 (Ctrl+I)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--FormatItalic" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M15.751 5h-5.502a.751.751 0 0 0-.749.75c0 .417.336.75.749.75H12l-2 11H8.249a.751.751 0 0 0-.749.75c0 .417.336.75.749.75h5.502a.751.751 0 0 0 .749-.75.748.748 0 0 0-.749-.75H12l2-11h1.751a.751.751 0 0 0 .749-.75.748.748 0 0 0-.749-.75" fill-rule="evenodd"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <span class="Editable-toolbar-separator"></span>
-                                                    <button aria-label="一级标题" data-tooltip="一级标题 (Ctrl+Alt+1)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--FormatHeader" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M7 6.007C7 5.45 7.444 5 8 5c.552 0 1 .45 1 1.007v11.986C9 18.55 8.556 19 8 19c-.552 0-1-.45-1-1.007V6.007zm8 0C15 5.45 15.444 5 16 5c.552 0 1 .45 1 1.007v11.986C17 18.55 16.556 19 16 19c-.552 0-1-.45-1-1.007V6.007zM9 11h6v2H9v-2z" fill-rule="evenodd"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button aria-label="引用块" data-tooltip="引用块 (Ctrl+Shift+U)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--FormatBlockquote" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M17.975 12.209c.504.454.822 1.05.952 1.792.061.35.055.715-.022 1.096-.075.379-.209.718-.4 1.018-.465.73-1.155 1.175-2.07 1.337-.874.153-1.684-.06-2.432-.638a3.6 3.6 0 0 1-.916-1.043 3.92 3.92 0 0 1-.506-1.336c-.172-.98-.03-2.026.425-3.142.455-1.116 1.155-2.118 2.1-3.007.8-.757 1.456-1.182 1.97-1.273a.72.72 0 0 1 .544.104.656.656 0 0 1 .286.452c.054.31-.095.601-.45.877-.856.67-1.455 1.27-1.796 1.798-.323.513-.467.873-.43 1.079.034.196.21.287.524.274l.191-.001.249-.029a2.436 2.436 0 0 1 1.781.642zm-7.51 0c.504.454.821 1.05.951 1.792.062.35.056.715-.02 1.096-.077.379-.21.718-.401 1.018-.465.73-1.155 1.175-2.07 1.337-.874.153-1.684-.06-2.432-.638a3.6 3.6 0 0 1-.916-1.043 3.92 3.92 0 0 1-.506-1.336c-.172-.98-.03-2.026.424-3.142.455-1.116 1.156-2.118 2.101-3.007.8-.757 1.456-1.182 1.97-1.273a.72.72 0 0 1 .544.104.656.656 0 0 1 .285.452c.055.31-.094.601-.45.877-.855.67-1.454 1.27-1.796 1.798-.322.513-.466.873-.43 1.079.034.196.21.287.525.274l.191-.001.248-.029a2.436 2.436 0 0 1 1.782.642z" fill-rule="evenodd"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button aria-label="代码块" data-tooltip="代码块 (Ctrl+Alt+C)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--FormatCode" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M19.718 11.559a.961.961 0 0 1 .007 1.352l-2.201 2.033-1.319 1.219a.937.937 0 0 1-1.33-.005.961.961 0 0 1-.001-1.345l2.813-2.576-2.804-2.568a.96.96 0 0 1-.008-1.352.963.963 0 0 1 1.337 0l2.475 2.289 1.031.953zm-7.462-5.567a1.001 1.001 0 0 1 1.16-.818c.544.096.907.616.81 1.165l-2.082 11.804a1.001 1.001 0 0 1-1.16.818 1.003 1.003 0 0 1-.81-1.165l2.082-11.804zM9.123 8.316a.96.96 0 0 1 0 1.345l-2.812 2.575 2.806 2.569a.962.962 0 0 1 .006 1.35.935.935 0 0 1-1.337 0l-2.093-1.934-1.412-1.305a.961.961 0 0 1-.007-1.352l2.833-2.62.685-.634c.345-.35.976-.354 1.331.006z" fill-rule="evenodd"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button aria-label="有序列表" data-tooltip="有序列表 (Ctrl+Shift+7)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--InsertOrderedList" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M9 6.5c0-.552.456-1 .995-1h8.01c.55 0 .995.444.995 1 0 .552-.456 1-.995 1h-8.01A.995.995 0 0 1 9 6.5zM5.884 7.893v-2.09h-.643L5.402 5h1.285v2.893h-.803zm.898 3.83l-.393.395h.862v.733H5v-.482l1.057-.892c.371-.312.461-.434.463-.566.003-.202-.135-.368-.396-.368-.289 0-.418.206-.418.43H5c0-.642.482-1.073 1.125-1.073s1.125.457 1.125.945c0 .307-.106.516-.468.877zM9 11.5c0-.552.456-1 .995-1h8.01c.55 0 .995.444.995 1 0 .552-.456 1-.995 1h-8.01a.995.995 0 0 1-.995-1zm0 5c0-.552.456-1 .995-1h8.01c.55 0 .995.444.995 1 0 .552-.456 1-.995 1h-8.01a.995.995 0 0 1-.995-1zm-1.759.624c0 .14-.025.27-.076.388a.902.902 0 0 1-.217.309 1.017 1.017 0 0 1-.336.205c-.13.05-.275.074-.437.074-.166 0-.32-.027-.462-.08a1.166 1.166 0 0 1-.367-.217 1.062 1.062 0 0 1-.246-.318.914.914 0 0 1-.1-.38v-.055h.765v.054a.343.343 0 0 0 .367.352c.117 0 .207-.03.27-.09.062-.06.093-.152.093-.277 0-.117-.039-.206-.117-.268a.506.506 0 0 0-.32-.091h-.14v-.516h.144c.117 0 .205-.03.264-.09a.31.31 0 0 0 .087-.226.27.27 0 0 0-.087-.209.332.332 0 0 0-.233-.08c-.107 0-.185.027-.236.08a.275.275 0 0 0-.076.197v.055h-.695v-.055a.915.915 0 0 1 .295-.644c.178-.161.436-.242.775-.242.14 0 .27.021.39.064s.224.102.312.176a.802.802 0 0 1 .207.262c.05.1.075.206.075.318 0 .258-.116.46-.348.605v.008a.625.625 0 0 1 .193.119.777.777 0 0 1 .256.572z" fill-rule="evenodd"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button aria-label="无序列表" data-tooltip="无序列表 (Ctrl+Shift+8)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--InsertUnorderedList" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M9 7c0-.552.456-1 .995-1h8.01c.55 0 .995.444.995 1 0 .552-.456 1-.995 1h-8.01A.995.995 0 0 1 9 7zM6 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm3-6c0-.552.456-1 .995-1h8.01c.55 0 .995.444.995 1 0 .552-.456 1-.995 1h-8.01A.995.995 0 0 1 9 12zm0 5c0-.552.456-1 .995-1h8.01c.55 0 .995.444.995 1 0 .552-.456 1-.995 1h-8.01A.995.995 0 0 1 9 17z" fill-rule="evenodd"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <span class="Editable-toolbar-separator"></span>
-                                                    <button aria-label="插入注释" data-tooltip="插入注释 (Ctrl+Shift+9)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--InsertReference" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M8 3.25v1.5a.25.25 0 0 1-.25.25h-2.5a.25.25 0 0 0-.25.25v13.5c0 .138.112.25.25.25h2.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h3.75a.25.25 0 0 1 .25.25zM20 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-3.75a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25h2.5a.25.25 0 0 0 .25-.25V5.25a.25.25 0 0 0-.25-.25h-2.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25H20zm-7.25 4a.25.25 0 0 1 .243.193L13 7.25v9.5a.25.25 0 0 1-.193.243L12.75 17h-1.5a.25.25 0 0 1-.243-.193L11 16.75v-7.5a.25.25 0 0 0-.193-.243L10.75 9H9.32a.25.25 0 0 1-.25-.253l.008-.058.375-1.5a.25.25 0 0 1 .176-.18L9.695 7h3.055z" fill-rule="evenodd"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button aria-label="插入链接" data-tooltip="插入链接 (Ctrl+K)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M13.414 4.222a4.5 4.5 0 1 1 6.364 6.364l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005a2.5 2.5 0 1 0-3.536-3.536l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005zm-6.187 6.187a.5.5 0 0 1 .638-.058l.07.058.706.707a.5.5 0 0 1 .058.638l-.058.07-3.005 3.004a2.5 2.5 0 0 0 3.405 3.658l.13-.122 3.006-3.005a.5.5 0 0 1 .638-.058l.069.058.707.707a.5.5 0 0 1 .058.638l-.058.069-3.005 3.005a4.5 4.5 0 0 1-6.524-6.196l.16-.168 3.005-3.005zm8.132-3.182a.25.25 0 0 1 .353 0l1.061 1.06a.25.25 0 0 1 0 .354l-8.132 8.132a.25.25 0 0 1-.353 0l-1.061-1.06a.25.25 0 0 1 0-.354l8.132-8.132z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button aria-label="上传图片" data-tooltip="上传图片" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--Image" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M3.75 4.002L20.078 4c.669 0 .911.07 1.156.2.244.131.436.323.567.567.13.245.2.487.2 1.156v12.154c0 .669-.07.911-.2 1.156-.131.244-.323.436-.567.567-.245.13-.487.2-1.156.2H3.923c-.669 0-.911-.07-1.156-.2a1.363 1.363 0 0 1-.567-.567c-.118-.223-.187-.443-.198-.984L2 5.923c0-.669.07-.911.2-1.156.131-.244.323-.436.567-.567.223-.118.443-.187.984-.198zM19.68 6H4.32c-.111 0-.151.012-.192.033a.227.227 0 0 0-.095.095.27.27 0 0 0-.03.121L4 6.32v11.36c0 .111.012.151.033.192.022.04.054.073.095.095a.27.27 0 0 0 .121.03L4.32 18h15.36c.111 0 .151-.012.192-.033a.227.227 0 0 0 .095-.095.27.27 0 0 0 .03-.121L20 17.68V6.32c0-.111-.012-.151-.033-.192a.227.227 0 0 0-.095-.095.27.27 0 0 0-.121-.03L19.68 6zm-5.176 2.18a.25.25 0 0 1 .088.09l4.195 7.356a.25.25 0 0 1-.217.374H5.44a.25.25 0 0 1-.216-.378l3.235-5.447a.25.25 0 0 1 .426-.006l1.899 2.99a.25.25 0 0 0 .425-.005l2.952-4.89a.25.25 0 0 1 .343-.084z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button aria-label="插入视频" data-tooltip="插入视频" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--InsertVideo" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M3.75 4.002L20.078 4c.669 0 .911.07 1.156.2.244.131.436.323.567.567.13.245.2.487.2 1.156v12.154c0 .669-.07.911-.2 1.156-.131.244-.323.436-.567.567-.245.13-.487.2-1.156.2H3.923c-.669 0-.911-.07-1.156-.2a1.363 1.363 0 0 1-.567-.567c-.118-.223-.187-.443-.198-.984L2 5.923c0-.669.07-.911.2-1.156.131-.244.323-.436.567-.567.223-.118.443-.187.984-.198zM19.68 6H4.32c-.111 0-.151.012-.192.033a.227.227 0 0 0-.095.095.27.27 0 0 0-.03.121L4 6.32v11.36c0 .111.012.151.033.192.022.04.054.073.095.095a.27.27 0 0 0 .121.03L4.32 18h15.36c.111 0 .151-.012.192-.033a.227.227 0 0 0 .095-.095.27.27 0 0 0 .03-.121L20 17.68V6.32c0-.111-.012-.151-.033-.192a.227.227 0 0 0-.095-.095.27.27 0 0 0-.121-.03L19.68 6zM9.584 8.657a.5.5 0 0 1 .614-.182l.08.043 4.598 3.066a.5.5 0 0 1 .07.775l-.07.057-4.599 3.066a.5.5 0 0 1-.769-.326l-.008-.09V8.934a.5.5 0 0 1 .084-.277z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button aria-label="插入公式" data-tooltip="插入公式 (Ctrl+Shift+E)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--InsertFormula" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M18.57 19.862l.75-1.5a.25.25 0 0 0-.225-.362H9.104a.25.25 0 0 1-.177-.427l5.88-5.88a.25.25 0 0 0-.014-.369L9.02 6.441A.25.25 0 0 1 9.182 6h8.568a.25.25 0 0 0 .25-.25v-1.5a.25.25 0 0 0-.25-.25h-13a.25.25 0 0 0-.25.25v.141c0 .07.029.136.08.183l7.237 6.755a.25.25 0 0 1 .012.354l-7.261 7.745a.25.25 0 0 0-.068.17v.152c0 .138.112.25.25.25h13.595a.25.25 0 0 0 .224-.138z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button aria-label="插入分割线" data-tooltip="插入分割线 (Ctrl+Shift+S)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--InsertDivider" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M20.75 17a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25H3.25a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25h17.5zm-13-6a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-4.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25h4.5zm6 0a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-3.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25h3.5zm7 0a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-4.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25h4.5zm0-6a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25H3.25A.25.25 0 0 1 3 6.75v-1.5A.25.25 0 0 1 3.25 5h17.5z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <span class="Editable-toolbar-separator"></span>
-                                                    <button aria-label="清除格式" data-tooltip="清除格式 (Ctrl+\)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--FormatClear" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M20.309 20.309a.25.25 0 0 1 0 .353l-1.061 1.06a.25.25 0 0 1-.354 0l-7.299-7.299L11 18h1.75a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-5.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25H9l.881-5.29-4.73-4.73a.25.25 0 0 1-.13-.129L2.277 5.106a.25.25 0 0 1 0-.354l1.06-1.06a.25.25 0 0 1 .301-.041l.053.04L20.31 20.31zM18.75 4a.25.25 0 0 1 .25.25v3.5a.25.25 0 0 1-.25.25h-1.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 0-.25-.25H13l-.597 3.575-1.714-1.714L11 6H8.826l-2-2H18.75z"></path>
-                                                        </svg>
-                                                    </button>
-                                                    <button aria-label="上传附件" data-tooltip="上传附件" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
-                                                        <svg class="Zi Zi--Folder" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                            <path d="M9.586 3a1 1 0 0 1 .707.293l1.414 1.414a1 1 0 0 0 .707.293H21a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h6.586zM4 11v6.75c0 .138.112.25.25.25h15.5a.25.25 0 0 0 .25-.25V11H4zm0-2h16V7.25a.25.25 0 0 0-.25-.25h-8.164a1 1 0 0 1-.707-.293L9.464 5.293A1 1 0 0 0 8.757 5H4.25a.25.25 0 0 0-.25.25V9z"></path>
-                                                        </svg>
-                                                    </button>
+
                                                 </div>
                                             </div>
-                                            <div class="Editable-content" style="min-height: 118px">
+                                            <div class="ztext Editable-content" id="editor" style="min-height: 118px">
 
                                             </div>
                                             <div class="AnswerForm-footer">
@@ -1076,14 +999,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </div>
     </main>
 
-    <script src="Scripts/jquery-3.5.1.min.js"></script>
-    <script src="Scripts/Modal.js"></script>
-    <script src="Scripts/comments.js"></script>
-    <script src="Scripts/Header-Head.js"></script>
-    <script src="Scripts/Header-TopstoryRecommend.js"></script>
-    <script src="Scripts/SideBar.js"></script>
-    <script src="Scripts/initComment.js"></script>
-    <script src="Scripts/Question.js"></script>
+<script src="Scripts/jquery-3.5.1.min.js"></script>
+<script src="Scripts/wangEditor.min.js"></script>
+<script src="Scripts/Modal.js"></script>
+<script src="Scripts/comments.js"></script>
+<script src="Scripts/Header-Head.js"></script>
+<script src="Scripts/Header-TopstoryRecommend.js"></script>
+<script src="Scripts/SideBar.js"></script>
+<script src="Scripts/initComment.js"></script>
+<script src="Scripts/Question.js"></script>
+<script src="Scripts/wangEditorJs.js"></script>
+
 </body>
 
 <div>
@@ -1657,4 +1583,165 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </div>
       </div>
   </div>
+<div>
+      <div>
+          <div>
+              <div class="Modal-wrapper">
+                  <div class="Modal-backdrop"></div>
+                  <div class="Modal Modal--large">
+                      <div class="Modal-inner">
+                          <div class="Modal-content">
+                              <form class="Ask-form" novalidate="">
+                                  <div>
+                                      <div class="Ask-items">
+                                          <div class="Ask-item Ask-titleWrapper">
+                                              <img class="Avatar Avatar--medium css-1etdczd" width="40" height="40" src="images/user/<%=uChatHead%>">
+                                              <div class="Ask-title">
+                                                  <div class="AskTitle">
+                                                      <div>
+                                                          <div class="Popover">
+                                                              <label class="AskTitle-input Input-wrapper Input-wrapper--spread Input-wrapper--multiline Input-wrapper--large">
+                                                                  <textarea required="" rows="1" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" id="Popover40-toggle" aria-haspopup="true" aria-owns="Popover40-content" class="Input" placeholder="写下你的问题，准确地描述问题更容易得到解答" style="font-size: 18px;"></textarea>
+                                                              </label>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                                  <div style="text-align: right; min-height: 1.67em;">
+                                                      <span class="AskFieldTip"></span>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="Ask-item">
+                                              <div class="AskDetail">
+                                                  <div class="AskDetail-inputWrapper">
+                                                      <div class="InputLike AskDetail-input Editable">
+                                                          <label class="AskTitle-input Input-wrapper Input-wrapper--spread Input-wrapper--multiline Input-wrapper--large">
+                                                              <textarea required="" rows="1" autocomplete="off" role="combobox" aria-expanded="false" aria-autocomplete="list" id="Popover40-toggle" aria-haspopup="true" aria-owns="Popover40-content" class="Input" placeholder="输入问题背景、条件等详细信息（选填）" style="font-size: 13px;min-height: 78px;"></textarea>
+                                                          </label>
+                                                          <input multiple="" type="file" accept="image/jpg,image/jpeg,image/png,image/gif" style="display: none;">
+                                                          <div>
+
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="Ask-item">
+                                              <div class="TagInputAlias TopicInputAlias-tagInput">
+                                                  <div class="Tag Tag--removable">
+                                                      <span class="Tag-content">
+                                                          <a target="_blank" rel="noopener noreferrer" href="//www.zhihu.com/topic/19550429">电影</a>
+                                                      </span>
+                                          <button type="button" class="Tag-remove"><svg class="Zi Zi--Close" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M13.486 12l5.208-5.207a1.048 1.048 0 0 0-.006-1.483 1.046 1.046 0 0 0-1.482-.005L12 10.514 6.793 5.305a1.048 1.048 0 0 0-1.483.005 1.046 1.046 0 0 0-.005 1.483L10.514 12l-5.208 5.207a1.048 1.048 0 0 0 .006 1.483 1.046 1.046 0 0 0 1.482.005L12 13.486l5.207 5.208a1.048 1.048 0 0 0 1.483-.006 1.046 1.046 0 0 0 .005-1.482L13.486 12z" fill-rule="evenodd"></path></svg></button>
+                                                  </div>
+                                                  <button type="button" class="button TopicInputAlias-placeholderButton button--plain button--blue button--withIcon button--withLabel"><span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Plus Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M13.491 10.488s-.012-5.387 0-5.998c-.037-1.987-3.035-1.987-2.997 0-.038 1.912 0 5.998 0 5.998H4.499c-1.999.01-1.999 3.009 0 3.009s5.995-.01 5.995-.01v5.999c0 2.019 3.006 2.019 2.997 0-.01-2.019 0-5.998 0-5.998s3.996.009 6.004.009c2.008 0 2.008-3-.01-3.009h-5.994z" fill-rule="evenodd"></path></svg></span>添加话题（1/5）</button>
+                                              </div>
+                                          </div>
+                                      </div>
+                                  </div>
+                                  <div class="Ask-footer">
+                                      <%--<div>
+                                          <div class="AskOptions">
+                                              <label for="anonymous-checkbox" class="AskOptions-label">
+                                                  <input id="anonymous-checkbox" class="AskOptions-checkbox" type="checkbox">
+                                                  匿名提问
+                                              </label>
+                                          </div>
+                                      </div>--%>
+                                      <div class="Ask-footer-buttonWrapper">
+                                          <button type="button" class="button button--primary button--blue" onclick="addQuestion(this)">发布问题</button>
+                                      </div>
+                                  </div>
+                              </form>
+                          </div>
+                      </div>
+                      <button class="button Modal-closeButton" type="button">
+                          <svg class="Zi Zi--Close Modal-closeIcon" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M13.486 12l5.208-5.207a1.048 1.048 0 0 0-.006-1.483 1.046 1.046 0 0 0-1.482-.005L12 10.514 6.793 5.305a1.048 1.048 0 0 0-1.483.005 1.046 1.046 0 0 0-.005 1.483L10.514 12l-5.208 5.207a1.048 1.048 0 0 0 .006 1.483 1.046 1.046 0 0 0 1.482.005L12 13.486l5.207 5.208a1.048 1.048 0 0 0 1.483-.006 1.046 1.046 0 0 0 .005-1.482L13.486 12z" fill-rule="evenodd"></path></svg>
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
 </html>
+
+
+<%--<button aria-label="粗体" data-tooltip="粗体 (Ctrl+B)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--FormatBold" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M9 17.025V13h4.418c1.19 0 2.415.562 2.415 2.012s-1.608 2.013-2.9 2.013H9zM9 7h4.336c1 0 1.814.888 1.814 2 0 .89-.814 2-1.814 2H9V7zm8.192 1.899a3.893 3.893 0 0 0-3.888-3.889S9.334 5 8.167 5C7 5 7 6.167 7 6.167v11.666C7 19 8.167 19 8.167 19l5.572.01c2.333 0 4.231-1.86 4.231-4.148a4.122 4.122 0 0 0-1.77-3.372 3.873 3.873 0 0 0 .992-2.591z" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <button aria-label="斜体" data-tooltip="斜体 (Ctrl+I)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--FormatItalic" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M15.751 5h-5.502a.751.751 0 0 0-.749.75c0 .417.336.75.749.75H12l-2 11H8.249a.751.751 0 0 0-.749.75c0 .417.336.75.749.75h5.502a.751.751 0 0 0 .749-.75.748.748 0 0 0-.749-.75H12l2-11h1.751a.751.751 0 0 0 .749-.75.748.748 0 0 0-.749-.75" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <span class="Editable-toolbar-separator"></span>
+                                                    <button aria-label="一级标题" data-tooltip="一级标题 (Ctrl+Alt+1)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--FormatHeader" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M7 6.007C7 5.45 7.444 5 8 5c.552 0 1 .45 1 1.007v11.986C9 18.55 8.556 19 8 19c-.552 0-1-.45-1-1.007V6.007zm8 0C15 5.45 15.444 5 16 5c.552 0 1 .45 1 1.007v11.986C17 18.55 16.556 19 16 19c-.552 0-1-.45-1-1.007V6.007zM9 11h6v2H9v-2z" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <button aria-label="引用块" data-tooltip="引用块 (Ctrl+Shift+U)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--FormatBlockquote" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M17.975 12.209c.504.454.822 1.05.952 1.792.061.35.055.715-.022 1.096-.075.379-.209.718-.4 1.018-.465.73-1.155 1.175-2.07 1.337-.874.153-1.684-.06-2.432-.638a3.6 3.6 0 0 1-.916-1.043 3.92 3.92 0 0 1-.506-1.336c-.172-.98-.03-2.026.425-3.142.455-1.116 1.155-2.118 2.1-3.007.8-.757 1.456-1.182 1.97-1.273a.72.72 0 0 1 .544.104.656.656 0 0 1 .286.452c.054.31-.095.601-.45.877-.856.67-1.455 1.27-1.796 1.798-.323.513-.467.873-.43 1.079.034.196.21.287.524.274l.191-.001.249-.029a2.436 2.436 0 0 1 1.781.642zm-7.51 0c.504.454.821 1.05.951 1.792.062.35.056.715-.02 1.096-.077.379-.21.718-.401 1.018-.465.73-1.155 1.175-2.07 1.337-.874.153-1.684-.06-2.432-.638a3.6 3.6 0 0 1-.916-1.043 3.92 3.92 0 0 1-.506-1.336c-.172-.98-.03-2.026.424-3.142.455-1.116 1.156-2.118 2.101-3.007.8-.757 1.456-1.182 1.97-1.273a.72.72 0 0 1 .544.104.656.656 0 0 1 .285.452c.055.31-.094.601-.45.877-.855.67-1.454 1.27-1.796 1.798-.322.513-.466.873-.43 1.079.034.196.21.287.525.274l.191-.001.248-.029a2.436 2.436 0 0 1 1.782.642z" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <button aria-label="代码块" data-tooltip="代码块 (Ctrl+Alt+C)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--FormatCode" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M19.718 11.559a.961.961 0 0 1 .007 1.352l-2.201 2.033-1.319 1.219a.937.937 0 0 1-1.33-.005.961.961 0 0 1-.001-1.345l2.813-2.576-2.804-2.568a.96.96 0 0 1-.008-1.352.963.963 0 0 1 1.337 0l2.475 2.289 1.031.953zm-7.462-5.567a1.001 1.001 0 0 1 1.16-.818c.544.096.907.616.81 1.165l-2.082 11.804a1.001 1.001 0 0 1-1.16.818 1.003 1.003 0 0 1-.81-1.165l2.082-11.804zM9.123 8.316a.96.96 0 0 1 0 1.345l-2.812 2.575 2.806 2.569a.962.962 0 0 1 .006 1.35.935.935 0 0 1-1.337 0l-2.093-1.934-1.412-1.305a.961.961 0 0 1-.007-1.352l2.833-2.62.685-.634c.345-.35.976-.354 1.331.006z" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <button aria-label="有序列表" data-tooltip="有序列表 (Ctrl+Shift+7)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--InsertOrderedList" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M9 6.5c0-.552.456-1 .995-1h8.01c.55 0 .995.444.995 1 0 .552-.456 1-.995 1h-8.01A.995.995 0 0 1 9 6.5zM5.884 7.893v-2.09h-.643L5.402 5h1.285v2.893h-.803zm.898 3.83l-.393.395h.862v.733H5v-.482l1.057-.892c.371-.312.461-.434.463-.566.003-.202-.135-.368-.396-.368-.289 0-.418.206-.418.43H5c0-.642.482-1.073 1.125-1.073s1.125.457 1.125.945c0 .307-.106.516-.468.877zM9 11.5c0-.552.456-1 .995-1h8.01c.55 0 .995.444.995 1 0 .552-.456 1-.995 1h-8.01a.995.995 0 0 1-.995-1zm0 5c0-.552.456-1 .995-1h8.01c.55 0 .995.444.995 1 0 .552-.456 1-.995 1h-8.01a.995.995 0 0 1-.995-1zm-1.759.624c0 .14-.025.27-.076.388a.902.902 0 0 1-.217.309 1.017 1.017 0 0 1-.336.205c-.13.05-.275.074-.437.074-.166 0-.32-.027-.462-.08a1.166 1.166 0 0 1-.367-.217 1.062 1.062 0 0 1-.246-.318.914.914 0 0 1-.1-.38v-.055h.765v.054a.343.343 0 0 0 .367.352c.117 0 .207-.03.27-.09.062-.06.093-.152.093-.277 0-.117-.039-.206-.117-.268a.506.506 0 0 0-.32-.091h-.14v-.516h.144c.117 0 .205-.03.264-.09a.31.31 0 0 0 .087-.226.27.27 0 0 0-.087-.209.332.332 0 0 0-.233-.08c-.107 0-.185.027-.236.08a.275.275 0 0 0-.076.197v.055h-.695v-.055a.915.915 0 0 1 .295-.644c.178-.161.436-.242.775-.242.14 0 .27.021.39.064s.224.102.312.176a.802.802 0 0 1 .207.262c.05.1.075.206.075.318 0 .258-.116.46-.348.605v.008a.625.625 0 0 1 .193.119.777.777 0 0 1 .256.572z" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <button aria-label="无序列表" data-tooltip="无序列表 (Ctrl+Shift+8)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--InsertUnorderedList" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M9 7c0-.552.456-1 .995-1h8.01c.55 0 .995.444.995 1 0 .552-.456 1-.995 1h-8.01A.995.995 0 0 1 9 7zM6 8a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm0 5a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm3-6c0-.552.456-1 .995-1h8.01c.55 0 .995.444.995 1 0 .552-.456 1-.995 1h-8.01A.995.995 0 0 1 9 12zm0 5c0-.552.456-1 .995-1h8.01c.55 0 .995.444.995 1 0 .552-.456 1-.995 1h-8.01A.995.995 0 0 1 9 17z" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <span class="Editable-toolbar-separator"></span>
+                                                    <button aria-label="插入注释" data-tooltip="插入注释 (Ctrl+Shift+9)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--InsertReference" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M8 3.25v1.5a.25.25 0 0 1-.25.25h-2.5a.25.25 0 0 0-.25.25v13.5c0 .138.112.25.25.25h2.5a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h3.75a.25.25 0 0 1 .25.25zM20 3a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1h-3.75a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25h2.5a.25.25 0 0 0 .25-.25V5.25a.25.25 0 0 0-.25-.25h-2.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25H20zm-7.25 4a.25.25 0 0 1 .243.193L13 7.25v9.5a.25.25 0 0 1-.193.243L12.75 17h-1.5a.25.25 0 0 1-.243-.193L11 16.75v-7.5a.25.25 0 0 0-.193-.243L10.75 9H9.32a.25.25 0 0 1-.25-.253l.008-.058.375-1.5a.25.25 0 0 1 .176-.18L9.695 7h3.055z" fill-rule="evenodd"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <button aria-label="插入链接" data-tooltip="插入链接 (Ctrl+K)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M13.414 4.222a4.5 4.5 0 1 1 6.364 6.364l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005a2.5 2.5 0 1 0-3.536-3.536l-3.005 3.005a.5.5 0 0 1-.707 0l-.707-.707a.5.5 0 0 1 0-.707l3.005-3.005zm-6.187 6.187a.5.5 0 0 1 .638-.058l.07.058.706.707a.5.5 0 0 1 .058.638l-.058.07-3.005 3.004a2.5 2.5 0 0 0 3.405 3.658l.13-.122 3.006-3.005a.5.5 0 0 1 .638-.058l.069.058.707.707a.5.5 0 0 1 .058.638l-.058.069-3.005 3.005a4.5 4.5 0 0 1-6.524-6.196l.16-.168 3.005-3.005zm8.132-3.182a.25.25 0 0 1 .353 0l1.061 1.06a.25.25 0 0 1 0 .354l-8.132 8.132a.25.25 0 0 1-.353 0l-1.061-1.06a.25.25 0 0 1 0-.354l8.132-8.132z"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <button aria-label="上传图片" data-tooltip="上传图片" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--Image" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M3.75 4.002L20.078 4c.669 0 .911.07 1.156.2.244.131.436.323.567.567.13.245.2.487.2 1.156v12.154c0 .669-.07.911-.2 1.156-.131.244-.323.436-.567.567-.245.13-.487.2-1.156.2H3.923c-.669 0-.911-.07-1.156-.2a1.363 1.363 0 0 1-.567-.567c-.118-.223-.187-.443-.198-.984L2 5.923c0-.669.07-.911.2-1.156.131-.244.323-.436.567-.567.223-.118.443-.187.984-.198zM19.68 6H4.32c-.111 0-.151.012-.192.033a.227.227 0 0 0-.095.095.27.27 0 0 0-.03.121L4 6.32v11.36c0 .111.012.151.033.192.022.04.054.073.095.095a.27.27 0 0 0 .121.03L4.32 18h15.36c.111 0 .151-.012.192-.033a.227.227 0 0 0 .095-.095.27.27 0 0 0 .03-.121L20 17.68V6.32c0-.111-.012-.151-.033-.192a.227.227 0 0 0-.095-.095.27.27 0 0 0-.121-.03L19.68 6zm-5.176 2.18a.25.25 0 0 1 .088.09l4.195 7.356a.25.25 0 0 1-.217.374H5.44a.25.25 0 0 1-.216-.378l3.235-5.447a.25.25 0 0 1 .426-.006l1.899 2.99a.25.25 0 0 0 .425-.005l2.952-4.89a.25.25 0 0 1 .343-.084z"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <button aria-label="插入视频" data-tooltip="插入视频" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--InsertVideo" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M3.75 4.002L20.078 4c.669 0 .911.07 1.156.2.244.131.436.323.567.567.13.245.2.487.2 1.156v12.154c0 .669-.07.911-.2 1.156-.131.244-.323.436-.567.567-.245.13-.487.2-1.156.2H3.923c-.669 0-.911-.07-1.156-.2a1.363 1.363 0 0 1-.567-.567c-.118-.223-.187-.443-.198-.984L2 5.923c0-.669.07-.911.2-1.156.131-.244.323-.436.567-.567.223-.118.443-.187.984-.198zM19.68 6H4.32c-.111 0-.151.012-.192.033a.227.227 0 0 0-.095.095.27.27 0 0 0-.03.121L4 6.32v11.36c0 .111.012.151.033.192.022.04.054.073.095.095a.27.27 0 0 0 .121.03L4.32 18h15.36c.111 0 .151-.012.192-.033a.227.227 0 0 0 .095-.095.27.27 0 0 0 .03-.121L20 17.68V6.32c0-.111-.012-.151-.033-.192a.227.227 0 0 0-.095-.095.27.27 0 0 0-.121-.03L19.68 6zM9.584 8.657a.5.5 0 0 1 .614-.182l.08.043 4.598 3.066a.5.5 0 0 1 .07.775l-.07.057-4.599 3.066a.5.5 0 0 1-.769-.326l-.008-.09V8.934a.5.5 0 0 1 .084-.277z"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <button aria-label="插入公式" data-tooltip="插入公式 (Ctrl+Shift+E)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--InsertFormula" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M18.57 19.862l.75-1.5a.25.25 0 0 0-.225-.362H9.104a.25.25 0 0 1-.177-.427l5.88-5.88a.25.25 0 0 0-.014-.369L9.02 6.441A.25.25 0 0 1 9.182 6h8.568a.25.25 0 0 0 .25-.25v-1.5a.25.25 0 0 0-.25-.25h-13a.25.25 0 0 0-.25.25v.141c0 .07.029.136.08.183l7.237 6.755a.25.25 0 0 1 .012.354l-7.261 7.745a.25.25 0 0 0-.068.17v.152c0 .138.112.25.25.25h13.595a.25.25 0 0 0 .224-.138z"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <button aria-label="插入分割线" data-tooltip="插入分割线 (Ctrl+Shift+S)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--InsertDivider" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M20.75 17a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25H3.25a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25h17.5zm-13-6a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-4.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25h4.5zm6 0a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-3.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25h3.5zm7 0a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-4.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25h4.5zm0-6a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25H3.25A.25.25 0 0 1 3 6.75v-1.5A.25.25 0 0 1 3.25 5h17.5z"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <span class="Editable-toolbar-separator"></span>
+                                                    <button aria-label="清除格式" data-tooltip="清除格式 (Ctrl+\)" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--FormatClear" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M20.309 20.309a.25.25 0 0 1 0 .353l-1.061 1.06a.25.25 0 0 1-.354 0l-7.299-7.299L11 18h1.75a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25h-5.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 1 .25-.25H9l.881-5.29-4.73-4.73a.25.25 0 0 1-.13-.129L2.277 5.106a.25.25 0 0 1 0-.354l1.06-1.06a.25.25 0 0 1 .301-.041l.053.04L20.31 20.31zM18.75 4a.25.25 0 0 1 .25.25v3.5a.25.25 0 0 1-.25.25h-1.5a.25.25 0 0 1-.25-.25v-1.5a.25.25 0 0 0-.25-.25H13l-.597 3.575-1.714-1.714L11 6H8.826l-2-2H18.75z"></path>
+                                                        </svg>
+                                                    </button>
+                                                    <button aria-label="上传附件" data-tooltip="上传附件" data-tooltip-position="bottom" data-tooltip-will-hide-on-click="true" type="button" class="Button Editable-control Button--plain">
+                                                        <svg class="Zi Zi--Folder" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                            <path d="M9.586 3a1 1 0 0 1 .707.293l1.414 1.414a1 1 0 0 0 .707.293H21a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h6.586zM4 11v6.75c0 .138.112.25.25.25h15.5a.25.25 0 0 0 .25-.25V11H4zm0-2h16V7.25a.25.25 0 0 0-.25-.25h-8.164a1 1 0 0 1-.707-.293L9.464 5.293A1 1 0 0 0 8.757 5H4.25a.25.25 0 0 0-.25.25V9z"></path>
+                                                        </svg>
+                                                    </button>--%>

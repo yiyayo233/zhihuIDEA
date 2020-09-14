@@ -376,9 +376,9 @@ function addComments(button){
     ZbuttonHtml = $(button).html();
     $(button).html(buttonHtml).addClass("is-active");
     // 还要 渲染 评论框
-    $(".Modal-wrapper").css({"display": "flex"});
-    $(".Modal-wrapper").animate({"opacity": "1"},300,function () {
-        $(".Modal").animate({"top":"20px"},20,function () {
+    $(".Modal-wrapper").eq(0).css({"display": "flex"});
+    $(".Modal-wrapper").eq(0).animate({"opacity": "1"},300,function () {
+        $(".Modal").eq(0).animate({"top":"20px"},20,function () {
 
         })
     })

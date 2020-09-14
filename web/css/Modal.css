@@ -33,6 +33,9 @@
     width: 688px;
     margin-bottom: 40px;
 }
+.Modal--large {
+    width: 536px;
+}
 .Modal-inner{
     background: #fff;
     overflow: hidden;
@@ -119,4 +122,163 @@
 }
 .Button--grey:hover{
     background-color: rgba(133,144,166,.06);
+}
+
+
+/* Ã·Œ øÚ */
+.Ask-form {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1;
+    flex: 1 1;
+    padding: 0 24px 32px;
+    margin-top: 24px;
+    line-height: 1.7;
+    opacity: 1;
+}
+.Ask-item{
+    -ms-flex-negative: 0;
+    flex-shrink: 0;
+    margin-bottom: 16px;
+    overflow: hidden;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.Ask-titleWrapper{
+    display: block;
+}
+.Ask-title{
+    width: 100%;
+}
+.Popover .AskTitle-input{
+    margin-top: 6px;
+}
+.Avatar--medium {
+    border-radius: 3px;
+    float: left;
+    margin-top: 3px;
+    margin-right: 16px;
+}
+.AskTitle-input{
+    max-height: 48px;
+    font-size: 18px;
+    padding: 0!important;
+    border: none;
+    outline: none;
+}
+.Input-wrapper.Input-wrapper--spread {
+    width: 100%;
+}
+.AskTitle{
+    position: relative;
+    font-size: 18px;
+}
+.Avatar {
+    background: #fff;
+    border-radius: 2px;
+}
+.AskDetail {
+    min-height: 112px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+.InputLike {
+    padding: 4px 10px;
+    background: #fff;
+    border: 1px solid #ebebeb;
+    border-radius: 3px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-transition: background .2s,border .2s;
+    transition: background .2s,border .2s;
+}
+.InputLike .Input-wrapper{
+    height: auto;
+    max-height: max-content;
+}
+.InputLike.AskDetail-input{
+    padding: 6px 10px;
+}
+.Tag {
+    position: relative;
+    display: inline-block;
+    height: 30px;
+    padding: 0 12px;
+    font-size: 14px;
+    line-height: 30px;
+    vertical-align: top;
+    border-radius: 100px;
+    background: rgba(0,132,255,.1);
+    color: #0084ff;
+}
+.TagInputAlias .Tag {
+    margin: 0 8px 0 0;
+}
+.Tag--removable {
+    padding-right: 28px;
+}
+.Tag-remove {
+    position: absolute;
+    top: 0;
+    right: 10px;
+    bottom: 0;
+    margin-top: auto;
+    margin-bottom: auto;
+    cursor: pointer;
+    padding: 0;
+    background: none;
+    border: none;
+    color: inherit;
+}
+.Tag-remove .Zi {
+     display: block;
+ }
+.Button--withIcon.Button--link, .Button--withIcon.Button--plain {
+    padding: 0;
+}
+.TagInputAlias{
+    display: flex;
+}
+.TopicInputAlias-placeholderButton {
+    background: none !important;
+    color: #0084ff !important;
+    border: 0;
+}
+.AskFieldTip{
+    color: #f1403c;
+    font-size: 15px;
+}
+.Ask-footer-buttonWrapper{
+    display: flex;
+    justify-content: flex-end;
+}
+.Ask-footer-buttonWrapper .button{
+    padding: 0 16px;
+    margin: 0 8px;
+    border: 1px solid #0084ff;
+    border-radius: 3px;
+    line-height: 32px;
+}
+.Input {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1;
+    flex: 1 1;
+    padding: 0;
+    overflow: hidden;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    background: transparent;
+    border: none;
+    resize: none;
+    outline: none;
 }

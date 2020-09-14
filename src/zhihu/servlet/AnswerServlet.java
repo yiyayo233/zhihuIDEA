@@ -34,7 +34,7 @@ public class AnswerServlet extends HttpServlet {
     public void addAnswer(HttpServletRequest request, HttpServletResponse response, PrintWriter out){
         ProduceRandomNumder ProduceRandomNumder = new ProduceRandomNumder();
         String randomNumder = ProduceRandomNumder.randomNumder(8);
-        String answerID = "hd" + randomNumder;
+        String answerID = request.getParameter("answerId");
         String UserId = request.getParameter("uId");
         String editTime = ProduceDatetime.Datetime();
         String commentId = "pl" + randomNumder;

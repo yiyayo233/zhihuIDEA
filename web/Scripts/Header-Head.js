@@ -108,6 +108,10 @@ $(function() {
         Header_HotSearchBox_IsFocus(1);
     });
 
+    $(document).on("click",".SearchBar .Button-blue",function () {
+        AddQuestion(this);
+    });
+
 });
 
 /**
@@ -133,5 +137,93 @@ function updateApproveNum(a,tableName,id) {
         "tableName": tableName,
         "id": id
     }, function () {
+    })
+}
+
+/**
+ * 获取日期时间
+ * @returns {string}
+ * @constructor
+ */
+function CurentTime()
+{
+    var now = new Date();
+
+    var year = now.getFullYear();       //年
+    var month = now.getMonth() + 1;     //月
+    var day = now.getDate();            //日
+
+    var hh = now.getHours();            //时
+    var mm = now.getMinutes();          //分
+
+    var clock = year + "-";
+
+    if(month < 10)
+        clock += "0";
+
+    clock += month + "-";
+
+    if(day < 10)
+        clock += "0";
+
+    clock += day + " ";
+
+    if(hh < 10)
+        clock += "0";
+
+    clock += hh + ":";
+    if (mm < 10) clock += '0';
+    clock += mm;
+    return(clock);
+}
+
+/**
+ * 显示提问框
+ */
+function AddQuestion(button) {
+    $(".Modal-wrapper").eq(1).css({"display": "flex"});
+    $(".Modal-wrapper").eq(1).animate({"opacity": "1"},300,function () {
+        $(".Modal").eq(1).animate({"top":"20px"},20,function () {
+
+        })
+    })
+}
+
+/**
+ * 添加问题
+ * @param uId
+ * @param title
+ * @param text
+ */
+function addQuestion(button){
+    var uid = $("#user").attr("data-user-id");
+    var title = $(button).parents(".Ask-footer").prev().find(".Popover textarea").val();
+    var text = $(button).parents(".Ask-footer").prev().find(".InputLike.AskDetail-input textarea").val();
+    if (title.length <= 0){
+        $(".AskFieldTip").text("请输入问题");
+    }else {
+        addQuestionajax(uid,title,text);
+    }
+}
+
+/**
+ * 添加问题Ajax
+ * @param uId
+ * @param title
+ * @param text
+ */
+function addQuestionajax(uId,title,text){
+    $.ajax({
+        url: "question",
+        data: {
+            "a": "addQuestion",
+            "uId": uId,
+            "title": title,
+            "text": text,
+        },
+        dataType: "JSON",
+        success: function () {
+
+        }
     })
 }

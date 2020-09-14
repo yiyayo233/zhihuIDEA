@@ -1,5 +1,7 @@
 package zhihu.servlet;
 
+import zhihu.common.ProduceDatetime;
+import zhihu.common.ProduceRandomNumder;
 import zhihu.dao.SuperDao;
 import zhihu.entity.*;
 import zhihu.service.*;
@@ -21,13 +23,27 @@ public class QuestionServlet extends HttpServlet {
         response.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charter=utf-8");
         PrintWriter out = response.getWriter();
-        IntoQuestion(request,response,out);
+        String a = "info";
+        a = request.getParameter("a");
+        if (a==null || a.equals("info")){
+            IntoQuestion(request,response,out);
+        }else if(a.equals("addQuestion")){
+            addQuestion(request,response,out);
+        }
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
     }
 
+    /**
+     * 初始化问题页面
+     * @param request
+     * @param response
+     * @param out
+     * @throws ServletException
+     * @throws IOException
+     */
     public void IntoQuestion(HttpServletRequest request, HttpServletResponse response, PrintWriter out) throws ServletException, IOException {
         System.out.println("question");
         String questionId = request.getParameter("questionId");
@@ -86,6 +102,31 @@ public class QuestionServlet extends HttpServlet {
         request.setAttribute("CommentNum", CommentNum);
 
         request.getRequestDispatcher("html/question.jsp").forward(request,response);
+
+    }
+
+    /**
+     * 添加问题
+     * @param request
+     * @param response
+     * @param out
+     * @throws ServletException
+     * @throws IOException
+     */
+    public void addQuestion(HttpServletRequest request, HttpServletResponse response, PrintWriter out) throws ServletException, IOException {
+        QuestionService QuestionService = new QuestionService();
+
+        ProduceRandomNumder ProduceRandomNumder = new ProduceRandomNumder();
+        String randomNumder = ProduceRandomNumder.randomNumder(8);
+        String questionID = "wt" + randomNumder;
+        String UserId = request.getParameter("uId");
+        String questionTitle = request.getParameter("title");
+        String questionIntro = request.getParameter("text");
+        String commentId = "pl" + randomNumder;
+        String publishTime = ProduceDatetime.Datetime();
+
+        int result = QuestionService.addQuestion(questionID,UserId,questionTitle,questionIntro,0,0,0,commentId,publishTime);
+        System.out.println(result+"-----QuestionService.addQuestion");
 
     }
 }
