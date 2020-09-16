@@ -17,12 +17,19 @@ function Toggle_IsShown(scrollTop, scrollTopNum) {
     }
 }
 
+/**
+ * 获取html的名字
+ * @returns {string}
+ * @constructor
+ */
 function RethtmlName(){
     /*return window.location.pathname.substring(window.location.pathname.lastIndexOf("/",window.location.pathname.lastIndexOf("/")-1) + 1, window.location.pathname.lastIndexOf("/"));*/
     var htmlurl = window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1,window.location.pathname.lastIndexOf("."));
     if (htmlurl === "/zhihuIDEA_war_exploded/"){
-        // todo 获取页面地址有误
         htmlurl = window.location.pathname.substring(window.location.pathname.lastIndexOf("/")+1);
+    }
+    if (htmlurl === ""){
+        htmlurl = "qwer";
     }
     return htmlurl;
 }
@@ -213,6 +220,29 @@ function addQuestion(button){
  * @param text
  */
 function addQuestionajax(uId,title,text){
+    $.ajax({
+        url: "question",
+        data: {
+            "a": "addQuestion",
+            "uId": uId,
+            "title": title,
+            "text": text,
+        },
+        dataType: "JSON",
+        success: function () {
+
+        }
+    })
+}
+
+/**
+ * 添加或删除动态
+ * @param addOrDel
+ * @param uid
+ * @param byBynamicId
+ * @param BynamicType
+ */
+function addOrDelBynamic(addOrDel,uid,byBynamicId,BynamicType) {
     $.ajax({
         url: "question",
         data: {

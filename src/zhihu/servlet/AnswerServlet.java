@@ -1,7 +1,9 @@
 package zhihu.servlet;
 
+import com.google.gson.Gson;
 import zhihu.common.ProduceDatetime;
 import zhihu.common.ProduceRandomNumder;
+import zhihu.entity.AnswerEntity;
 import zhihu.service.AnswerSercice;
 import zhihu.service.SuperService;
 
@@ -24,8 +26,12 @@ public class AnswerServlet extends HttpServlet {
         String a = request.getParameter("a");
         if ("addAnswer".equals(a)) {
             addAnswer(request, response, out);
+        }else if ("answerItem".equals(a)) {
+            selectAnswerItem(request, response, out);
         }
     }
+
+
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         doPost(request, response);
@@ -51,5 +57,16 @@ public class AnswerServlet extends HttpServlet {
         System.out.println(result+"-----superService.addSuper");
 
 
+    }
+
+    private void selectAnswerItem(HttpServletRequest request, HttpServletResponse response, PrintWriter out) {
+        String answerId= request.getParameter("answerId");
+        AnswerSercice AnswerSercice = new AnswerSercice();
+        AnswerEntity answerEntity = AnswerSercice.selectAnseerItem(answerId);
+
+        Gson gson = new Gson();
+        String json = gson.toJson(answerEntity);
+        System.out.println(json);
+        out.println(json);
     }
 }

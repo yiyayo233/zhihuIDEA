@@ -46,4 +46,6 @@ $(function () {
     });
 
     AuthorInfo_head_hi();
+
+    $(".text").html($(".text").html().replace(/<.*?>/ig,""));
 });

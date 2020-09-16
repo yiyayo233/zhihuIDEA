@@ -115,6 +115,8 @@
 .ContentItem-more{
     margin-left: 4px;
     color: #175199;
+    display: flex;
+    align-items: center;
 }
 .ContentItem-actions{
     padding: 10px 20px;

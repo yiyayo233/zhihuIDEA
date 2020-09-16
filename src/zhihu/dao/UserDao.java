@@ -106,6 +106,11 @@ public class UserDao extends BaseDao{
 
 	}
 
+	/**
+	 * 查询用户及简介
+	 * @param id
+	 * @return
+	 */
 	public UserEntity selecUserPersonalItem(String id){
 		StringBuffer StringBuffer = new StringBuffer("SELECT u.`userID`,u.`userName`,u.`chatHead`,p.`introduce` FROM USER AS u INNER JOIN `personaldata` AS p ON u.`userID` = p.`userID`");
 		if (!id.equals("")) {
@@ -125,4 +130,29 @@ public class UserDao extends BaseDao{
 		}
 		return null;
 	}
+
+	/**
+	 * 查询用户及详细信息
+	 * @param id
+	 * @return
+	 */
+    public UserEntity selecUserAndPersonaldItem(String id) {
+		StringBuffer StringBuffer = new StringBuffer("SELECT * FROM USER AS u INNER JOIN `personaldata` AS p ON u.`userID` = p.`userID`");
+		if (!id.equals("")) {
+			StringBuffer.append(" where u.`UserID` = '"+ id +"'");
+		}
+
+		System.err.println(StringBuffer.toString());
+		resultSet = query(StringBuffer.toString());
+		try {
+			while (resultSet.next()){
+				return new UserEntity(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getString(8),resultSet.getString(9),resultSet.getString(10),resultSet.getString(11),resultSet.getString(12),resultSet.getString(13),resultSet.getString(14),resultSet.getString(15),resultSet.getString(16));
+			}
+		}catch (SQLException e){
+
+		}finally {
+			closeAll();
+		}
+		return null;
+    }
 }

@@ -1,4 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -16,20 +18,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	
+      <%
+          Cookie[] Cookies = request.getCookies();
+          String uId = "";
+          String uName = "";
+          String uChatHead ="";
+          boolean f = false;
+
+          for (Cookie cookie: Cookies) {
+              if (cookie.getName().equals("uId")){
+                  uId = cookie.getValue();
+                  f = true;
+              }else if (cookie.getName().equals("uName")){
+                  uName = cookie.getValue();
+                  f = true;
+              }else if(cookie.getName().equals("uChatHead")||cookie.getName().equals("user")){
+                  uChatHead = cookie.getValue();
+                  f = true;
+              }
+          }
+          if (!f) {
+              response.sendRedirect("html/signin.jsp");
+              return;
+          }else {
+              System.out.println("jsp    uId:"+uId+"\tuName:"+uName+"\tuChatHead:"+uChatHead);
+          }
+      %>
     <meta charset="UTF-8">
-    <title>咿呀哟 - 知乎</title>
+    <title><%=uName%> - 知乎</title>
     <link rel="icon" href="images/favicon.ico">
     <link href="css/Header-Head.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/SideBar.css">
     <link rel="stylesheet" href="css/Header-Topstory.css">
     <link rel="stylesheet" href="css/Footer.css">
+    <link rel="stylesheet" href="css/Modal.css">
+    <link rel="stylesheet" href="css/comments.css">
 
     <link href="css/User-Topstory.css" rel="stylesheet" type="text/css">
 	
   </head>
+
   <body>
-    <header class="Header">
+  <input id="user" type="hidden" data-user-id="<%=uId%>" data-user-name="<%=uName%>" data-user-ChatHead="<%=uChatHead%>">
+  <header class="Header">
         <div class="AppHeader">
             <a href="Header.html">
                 <svg viewBox="0 0 200 91" fill="#0084FF" width="64" height="30">
@@ -52,12 +83,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="SearchBar-toorlwrapper">
                     <form class="SearchBar-tool">
                         <div>
-                            <label>
-                                <input type="text" >
+                            <label class="Input-wrapper SearchBar-toorlwrapper">
+                                <input type="text" placeholder="搜索你感兴趣的内容...">
+                                <button class="button " type="button">
+                                    <svg class="Zi Zi--Search SearchBar-searchIcon" fill="currentColor" viewBox="0 0 24 24" width="18" height="18" data-darkreader-inline-fill="" style="--darkreader-inline-fill:currentColor;"><path d="M17.068 15.58a8.377 8.377 0 0 0 1.774-5.159 8.421 8.421 0 1 0-8.42 8.421 8.38 8.38 0 0 0 5.158-1.774l3.879 3.88c.957.573 2.131-.464 1.488-1.49l-3.879-3.878zm-6.647 1.157a6.323 6.323 0 0 1-6.316-6.316 6.323 6.323 0 0 1 6.316-6.316 6.323 6.323 0 0 1 6.316 6.316 6.323 6.323 0 0 1-6.316 6.316z" fill-rule="evenodd"></path></svg>
+                                </button>
                             </label>
-                            <button class="button " type="button">
-                                <svg class="Zi Zi--Search SearchBar-searchIcon" fill="currentColor" viewBox="0 0 24 24" width="18" height="18"><path d="M17.068 15.58a8.377 8.377 0 0 0 1.774-5.159 8.421 8.421 0 1 0-8.42 8.421 8.38 8.38 0 0 0 5.158-1.774l3.879 3.88c.957.573 2.131-.464 1.488-1.49l-3.879-3.878zm-6.647 1.157a6.323 6.323 0 0 1-6.316-6.316 6.323 6.323 0 0 1 6.316-6.316 6.323 6.323 0 0 1 6.316 6.316 6.323 6.323 0 0 1-6.316 6.316z" fill-rule="evenodd"></path></svg>
-                            </button>
                         </div>
                     </form>
                 </div>
@@ -89,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
                 <div class="AppHeader-profile">
                     <button class="button">
-                        <img src="images/touxiang/6d6f2275d27e12ddf9deac2fd47a511344c9125d.png" alt="" height="30" width="30"/>
+                        <img src="images/user/${userEntity.chatHead}" alt="" height="30" width="30"/>
                     </button>
                 </div>
             </div>
@@ -98,7 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="PageHeader">
                 <div class="userMain-header">
                     <div class="userMain-avatar">
-                        <img class="Avatar" width="38" height="38" src="images/touxiang/6d6f2275d27e12ddf9deac2fd47a511344c9125d.png" alt="">
+                        <img class="Avatar" width="38" height="38" src="images/user/${userEntity.chatHead}" alt="">
                     </div>
                     <ul class="Tabs-items userMain-tabs">
                         <li class="Tabs-item">
@@ -164,14 +195,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </button>
                         </div>
                         <div class="userCover">
-                            <img class="userCover-img" src="images/user/v2-2a6b7437fa7fcfc7d917c85cad05e24b_r%20(1).jpg" alt="">
+                            <c:choose>
+                                <c:when test="${userEntity.personalExperience == ''}">    <!--如果 -->
+                                    <img class="userCover-img" src="images/user/v2-2a6b7437fa7fcfc7d917c85cad05e24b_r%20(1).jpg" alt="">
+                                </c:when>
+                                <c:otherwise>  <!--否则 -->
+                                    <img class="userCover-img" src="images/user/${userEntity.personalExperience}" alt="">
+                                </c:otherwise>
+                            </c:choose>
                         </div>
                     </div>
                     <div class="userHeader-wrapper">
                         <div class="userHeader-main">
                             <div class="userHeader-avatar">
                                 <div class="userAvatar">
-                                    <img width="160" height="160" src="images/touxiang/6d6f2275d27e12ddf9deac2fd47a511344c9125d.png" alt="">
+                                    <img width="160" height="160" src="images/user/${userEntity.chatHead}" alt="">
                                 </div>
                                 <label class="userPicture" for="">
                                     <input class="userCover-input" type="file" accept="image/png,image/jpeg"/>
@@ -187,21 +225,37 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             <div class="userHeader-content">
                                 <div class="userHeader-contentHead">
                                     <h1 class="userHeader-title">
-                                        <span class="userHeader-name">咿呀哟</span>
-                                        <span class="userHeader-headline">永远相信美好的事情即将发生</span>
+                                        <span class="userHeader-name">${userEntity.name}</span>
+                                        <span class="userHeader-headline">${userEntity.introduce}</span>
                                     </h1>
                                 </div>
                                 <div class="userHeader-contentBody">
                                     <div class="userHeader-infos">
-                                        <div class="userHeader-infoItem">
-                                            <div class="userHeader-iconBox"><span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Company" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M17 6.998h3.018c1.098 0 1.975.89 1.982 2.002v10a1.993 1.993 0 0 1-1.987 2H3.98A1.983 1.983 0 0 1 2 19l.009-10.003c0-1.11.873-1.999 1.971-1.999L7 7V5c.016-1.111.822-2 2-2h6c.98 0 1.86.889 2 2v1.998zM9 7h6V5.5s0-.5-.5-.5h-5c-.504 0-.5.5-.5.5V7z" fill-rule="evenodd"></path></svg></span></div>
-                                            计算机软件
-                                        </div>
-                                        <div class="userHeader-infoItem">
-                                            <div class="userHeader-iconBox">
-                                                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Male" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M8.025 15.641a3.5 3.5 0 1 1 4.95-4.95 3.5 3.5 0 0 1-4.95 4.95zm10.122-9.369a.759.759 0 0 0-.753-.753L13.322 5a.738.738 0 0 0-.744.744.757.757 0 0 0 .751.752l2.127.313c-.95.954-1.832 1.83-1.832 1.83a5.502 5.502 0 0 0-7.013 8.416 5.5 5.5 0 0 0 8.415-7.016l1.842-1.819.303 2.116a.758.758 0 0 0 .752.753.738.738 0 0 0 .744-.744l-.52-4.073z" fill-rule="evenodd"></path></svg></span>
+                                        <c:if test="${userEntity.industry != ''}">
+                                            <div class="userHeader-infoItem">
+                                                <div class="userHeader-iconBox"><span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Company" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M17 6.998h3.018c1.098 0 1.975.89 1.982 2.002v10a1.993 1.993 0 0 1-1.987 2H3.98A1.983 1.983 0 0 1 2 19l.009-10.003c0-1.11.873-1.999 1.971-1.999L7 7V5c.016-1.111.822-2 2-2h6c.98 0 1.86.889 2 2v1.998zM9 7h6V5.5s0-.5-.5-.5h-5c-.504 0-.5.5-.5.5V7z" fill-rule="evenodd"></path></svg></span></div>
+                                                ${userEntity.industry}
                                             </div>
-                                        </div>
+                                        </c:if>
+
+                                        <c:choose>
+                                            <c:when test="${userEntity.sex == '男'}">    <!--如果 -->
+                                                <div class="userHeader-infoItem">
+                                                    <div class="userHeader-iconBox">
+                                                        <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Male" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M8.025 15.641a3.5 3.5 0 1 1 4.95-4.95 3.5 3.5 0 0 1-4.95 4.95zm10.122-9.369a.759.759 0 0 0-.753-.753L13.322 5a.738.738 0 0 0-.744.744.757.757 0 0 0 .751.752l2.127.313c-.95.954-1.832 1.83-1.832 1.83a5.502 5.502 0 0 0-7.013 8.416 5.5 5.5 0 0 0 8.415-7.016l1.842-1.819.303 2.116a.758.758 0 0 0 .752.753.738.738 0 0 0 .744-.744l-.52-4.073z" fill-rule="evenodd"></path></svg></span>
+                                                    </div>
+                                                </div>
+                                            </c:when>
+                                            <c:otherwise>  <!--否则 -->
+                                                <div class="userHeader-infoItem">
+                                                    <div class="userHeader-iconBox">
+                                                        <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Female" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M12 4a5.5 5.5 0 0 0-1.015 10.907c-.003.702.011 1.087.011 1.087H9C7.667 16 7.667 18 9 18s1.996-.006 1.996-.006v1c0 1.346 2.004 1.346 1.998 0-.006-1.346 0-1 0-1s.664.006 2.003.006 1.339-2-.006-2.006h-1.996s-.003-.548-.003-1.083A5.501 5.501 0 0 0 12 4zM8.25 9.55a3.75 3.75 0 1 1 7.5 0 3.75 3.75 0 0 1-7.5 0z" fill-rule="evenodd"></path></svg></span>
+                                                    </div>
+                                                </div>
+                                            </c:otherwise>
+                                        </c:choose>
+
+
                                     </div>
                                 </div>
                                 <div class="userHeader-contentFooter">
@@ -224,38 +278,43 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="userMain-header">
                             <ul class="Tabs-items userMain-tabs">
                                 <li class="Tabs-item">
-                                    <a class="Tabs-link is-active" href="#">
+                                    <a class="Tabs-link is-active" href="people">
                                         动态
                                     </a>
                                 </li>
                                 <li class="Tabs-item">
-                                    <a class="Tabs-link" href="#">
+                                    <a class="Tabs-link" href="people/answers">
                                         回答<span class="Tabs-meta">6</span>
                                     </a>
                                 </li>
                                 <li class="Tabs-item">
-                                    <a class="Tabs-link" href="#">
+                                    <a class="Tabs-link" href="people/zvideos">
                                         视频<span class="Tabs-meta">0</span>
                                     </a>
                                 </li>
                                 <li class="Tabs-item">
-                                    <a class="Tabs-link" href="#">
+                                    <a class="Tabs-link" href="people/asks">
                                         问题<span class="Tabs-meta">0</span>
                                     </a>
                                 </li>
                                 <li class="Tabs-item">
-                                    <a class="Tabs-link" href="#">
+                                    <a class="Tabs-link" href="people/posts">
                                         文章<span class="Tabs-meta">1</span>
                                     </a>
                                 </li>
                                 <li class="Tabs-item">
-                                    <a class="Tabs-link" href="#">
+                                    <a class="Tabs-link" href="people/columns">
                                         专栏<span class="Tabs-meta">0</span>
                                     </a>
                                 </li>
                                 <li class="Tabs-item">
-                                    <a class="Tabs-link" href="#">
+                                    <a class="Tabs-link" href="people/pins">
                                         想法<span class="Tabs-meta">0</span>
+                                    </a>
+                                </li>
+                                <li class="Tabs-item">
+                                    <a class="Tabs-link" href="people/following">
+                                        关注<span class="Tabs-meta">0</span>
                                     </a>
                                 </li>
                                 <li class="Tabs-item">
@@ -275,109 +334,145 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="userMain-bodyOptions"></div>
                             </div>
                             <div class="userMain-bodyitems">
-                                <div class="list-item">
-                                    <div class="list-itemMata">
-                                        <div class="ActivityItem-meta">
-                                            <span class="ActivityItem-metaTitle">添加了问题</span>
-                                            <span>07-23</span>
-                                        </div>
-                                    </div>
-                                    <div class="ConstantItem">
-                                        <h2 class="ContentItem-title">
-                                            <a href="#">选择大学是 专业＞城市＞学校 吗？</a>
-                                        </h2>
-                                    </div>
-                                </div>
-                                <div class="list-item">
-                                    <div class="list-itemMata">
-                                        <div class="ActivityItem-meta">
-                                            <span class="ActivityItem-metaTitle">赞同了回答</span>
-                                            <span>07-22</span>
-                                        </div>
-                                    </div>
-                                    <div class="ConstantItem">
-                                        <h2 class="ContentItem-title">
-                                            <a href="#">对电话销售需要礼貌回复吗？</a>
-                                        </h2>
-                                        <div class="ConstantItem-meta">
-                                            <div class="AuthorInfo">
-                                                <div class="userLink">
-                                                    <a href="#" class="userLink-link">
-                                                        <img src="images/touxiang/v2-c9df8ce90f8fdd4b402c22cb041e0cce_xs.jpg" alt="">
-                                                    </a>
+                                <c:forEach var="bynamicContainerEntity" items="${bynamicContainerEntityList}">
+                                    <c:choose>
+                                        <c:when test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'wt'}">
+                                            <div class="list-item">
+                                                <div class="list-itemMata">
+                                                    <div class="ActivityItem-meta">
+                                                        <c:choose>
+                                                            <c:when test="${bynamicContainerEntity.bynamicEntity.bynamicType == 'gz'}">
+                                                                <span class="ActivityItem-metaTitle">关注了问题</span>
+                                                            </c:when>
+                                                            <c:otherwise>
+                                                                <c:if test="${bynamicContainerEntity.bynamicEntity.bynamicType == 'fb'}">
+                                                                    <span class="ActivityItem-metaTitle">发布了问题</span>
+                                                                </c:if>
+                                                            </c:otherwise>
+                                                        </c:choose>
+                                                        <span>${fn:substring(bynamicContainerEntity.bynamicEntity.bynamicTime, 0, 10)}</span>
+                                                    </div>
                                                 </div>
-                                                <div class="AuthorInfo-content">
-                                                    <div class="AuthorInfo-head">
-                                                    <span class="AuthorInfo-name">
-                                                        <div class="Popover">
-                                                            <a href="#">
-                                                                Justin Lee
-                                                            </a>
+                                                <div class="ConstantItem">
+                                                    <h2 class="ContentItem-title">
+                                                        <a target="_blank" href="question?questionId=${bynamicContainerEntity.questionEntity.id}">${bynamicContainerEntity.questionEntity.questionTitle}</a>
+                                                    </h2>
+                                                </div>
+                                            </div>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <c:if test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'hd'}">
+                                                <div class="list-item">
+                                                    <div class="list-itemMata">
+                                                        <div class="ActivityItem-meta">
+                                                            <c:choose>
+                                                                <c:when test="${bynamicContainerEntity.bynamicEntity.bynamicType == 'fb'}">
+                                                                    <span class="ActivityItem-metaTitle">发布了回答</span>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <c:if test="${bynamicContainerEntity.bynamicEntity.bynamicType == 'zt'}">
+                                                                        <span class="ActivityItem-metaTitle">赞同了回答</span>
+                                                                    </c:if>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                            <span>${fn:substring(bynamicContainerEntity.bynamicEntity.bynamicTime, 0, 10)}</span>
                                                         </div>
-                                                    </span>
                                                     </div>
-                                                    <div class="AuthorInfo-badge">
-                                                        <div class="AuthorInfo-badgeText">公众号：1、政经纵论；2、浮世逆旅</div>
+                                                    <div class="ConstantItem">
+                                                        <h2 class="ContentItem-title">
+                                                            <a target="_blank" href="question?questionId=${bynamicContainerEntity.headerPage.questionEntity.id}">${bynamicContainerEntity.headerPage.questionEntity.questionTitle}</a>
+                                                        </h2>
+                                                        <div class="ConstantItem-meta">
+                                                            <div class="AuthorInfo">
+                                                                <div class="userLink">
+                                                                    <a target="_blank" href="people?userId=${bynamicContainerEntity.headerPage.userEntity.id}" class="userLink-link">
+                                                                        <img src="images/user/${bynamicContainerEntity.headerPage.userEntity.chatHead}" alt="">
+                                                                    </a>
+                                                                </div>
+                                                                <div class="AuthorInfo-content">
+                                                                    <div class="AuthorInfo-head">
+                                                                        <span class="AuthorInfo-name">
+                                                                            <div class="Popover">
+                                                                                <a target="_blank" href="people?userId=${bynamicContainerEntity.headerPage.userEntity.id}">
+                                                                                    ${bynamicContainerEntity.headerPage.userEntity.name}
+                                                                                </a>
+                                                                            </div>
+                                                                        </span>
+                                                                    </div>
+                                                                    <div class="AuthorInfo-badge">
+                                                                        <div class="AuthorInfo-badgeText">${bynamicContainerEntity.headerPage.userEntity.introduce}</div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="css-h5al4j">
+                                                                <span>
+                                                                    <span class="Voters">
+                                                                        <button type="button" class="button">
+                                                                            ${bynamicContainerEntity.headerPage.answerEntity.approveNum} 人赞同了该回答
+                                                                        </button>
+                                                                    </span>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div data-answer-id="${bynamicContainerEntity.headerPage.answerEntity.id}" data-user-id="${bynamicContainerEntity.headerPage.userEntity.id}" class="ContentItem-content is-collapsed">
+                                                            <div class="ContentItem-content-inner">
+                                                                <span class="text">${bynamicContainerEntity.headerPage.answerEntity.answerContent}</span>
+                                                            <button type="button" class="button ContentItem-more">
+                                                                阅读全文
+                                                                <span style="display: inline-flex;align-items: center;">
+                                                                    <svg class="Zi Zi--ArrowDown ContentItem-arrowIcon" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                                                                        <path d="M12 13L8.285 9.218a.758.758 0 0 0-1.064 0 .738.738 0 0 0 0 1.052l4.249 4.512a.758.758 0 0 0 1.064 0l4.246-4.512a.738.738 0 0 0 0-1.052.757.757 0 0 0-1.063 0L12.002 13z" fill-rule="evenodd"></path>
+                                                                    </svg>
+                                                                </span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="ContentItem-actions">
+                                                            <span>
+                                                                <c:choose>
+                                                                    <c:when test="${bynamicContainerEntity.bynamicEntity.bynamicType == 'zt'}">
+                                                                        <button data-answer-id="${bynamicContainerEntity.headerPage.answerEntity.id}" class="button VoteButton VoteButton--up is-active ">
+                                                                    <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--TriangleUp VoteButton-TriangleUp" fill="currentColor" viewBox="0 0 24 24" width="10" height="10"><path d="M2 18.242c0-.326.088-.532.237-.896l7.98-13.203C10.572 3.57 11.086 3 12 3c.915 0 1.429.571 1.784 1.143l7.98 13.203c.15.364.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H3.955c-1.08 0-1.955-.517-1.955-1.9z" fill-rule="evenodd"></path></svg></span>赞同 ${bynamicContainerEntity.headerPage.answerEntity.approveNum}</button>
+                                                                    </c:when>
+                                                                    <c:otherwise>
+                                                                        <button data-answer-id="${bynamicContainerEntity.headerPage.answerEntity.id}" class="button VoteButton VoteButton--up">
+                                                                    <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--TriangleUp VoteButton-TriangleUp" fill="currentColor" viewBox="0 0 24 24" width="10" height="10"><path d="M2 18.242c0-.326.088-.532.237-.896l7.98-13.203C10.572 3.57 11.086 3 12 3c.915 0 1.429.571 1.784 1.143l7.98 13.203c.15.364.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H3.955c-1.08 0-1.955-.517-1.955-1.9z" fill-rule="evenodd"></path></svg></span>赞同 ${bynamicContainerEntity.headerPage.answerEntity.approveNum}</button>
+                                                                    </c:otherwise>
+                                                                </c:choose>
+                                                                <button data-answer-id="${bynamicContainerEntity.headerPage.answerEntity.id}" class="button VoteButton VoteButton--down">
+                                                                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--TriangleDown" fill="currentColor" viewBox="0 0 24 24" width="10" height="10"><path d="M20.044 3H3.956C2.876 3 2 3.517 2 4.9c0 .326.087.533.236.896L10.216 19c.355.571.87 1.143 1.784 1.143s1.429-.572 1.784-1.143l7.98-13.204c.149-.363.236-.57.236-.896 0-1.386-.876-1.9-1.956-1.9z" fill-rule="evenodd"></path></svg></span></button>
+                                                            </span>
+                                                            <button data-answer-id="${bynamicContainerEntity.headerPage.answerEntity.id}" type="button" class="button ContentItem-action">
+                                                                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Comment Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M10.241 19.313a.97.97 0 0 0-.77.2 7.908 7.908 0 0 1-3.772 1.482.409.409 0 0 1-.38-.637 5.825 5.825 0 0 0 1.11-2.237.605.605 0 0 0-.227-.59A7.935 7.935 0 0 1 3 11.25C3 6.7 7.03 3 12 3s9 3.7 9 8.25-4.373 9.108-10.759 8.063z" fill-rule="evenodd"></path></svg></span>
+                                                                ${bynamicContainerEntity.headerPage.commentNum} 条评论
+                                                            </button>
+                                                            <div class="ContentItem-action">
+                                                                <button data-answer-id="${bynamicContainerEntity.headerPage.answerEntity.id}" type="button" class="button">
+                                                                    <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Share Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M2.931 7.89c-1.067.24-1.275 1.669-.318 2.207l5.277 2.908 8.168-4.776c.25-.127.477.198.273.39L9.05 14.66l.927 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.242c.584-.892-.212-2.029-1.234-1.796L2.93 7.89z" fill-rule="evenodd"></path></svg></span>
+                                                                    分享
+                                                                </button>
+                                                            </div>
+                                                            <button data-answer-id="${bynamicContainerEntity.headerPage.answerEntity.id}" type="button" class="button ContentItem-action">
+                                                                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Star Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M5.515 19.64l.918-5.355-3.89-3.792c-.926-.902-.639-1.784.64-1.97L8.56 7.74l2.404-4.871c.572-1.16 1.5-1.16 2.072 0L15.44 7.74l5.377.782c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.219 1.274-.532 1.82-1.676 1.218L12 18.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z" fill-rule="evenodd"></path></svg></span>
+                                                                收藏
+                                                            </button>
+                                                            <button data-answer-id="${bynamicContainerEntity.headerPage.answerEntity.id}" type="button" class="button ContentItem-action">
+                                                                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Heart Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M2 8.437C2 5.505 4.294 3.094 7.207 3 9.243 3 11.092 4.19 12 6c.823-1.758 2.649-3 4.651-3C19.545 3 22 5.507 22 8.432 22 16.24 13.842 21 12 21 10.158 21 2 16.24 2 8.437z" fill-rule="evenodd"></path></svg></span>
+                                                                喜欢
+                                                            </button>
+                                                            <div class="ContentItem-action">
+                                                                <button type="button" class="button">
+                                                                    <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Dots Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M5 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill-rule="evenodd"></path></svg></span>
+                                                                </button>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                            <div class="css-h5al4j">
-                                                <span>
-                                                    <span class="Voters">
-                                                        <button type="button" class="button">
-                                                            12,053 人也赞同了该回答
-                                                        </button>
-                                                    </span>
-                                                </span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="ContentItem-content is-collapsed">
-                                        <div class="ContentItem-content-inner">
-                                            <span class="text">问过做电话销售的人，他们公司80人，20个电销，每人每天有100个电话指标。 100个看起来不算多，是因为他们公司要求高，被人接起来的才记入指标，如果电话没打通，你需要根据实际情况在系统里点击“未接通”或“号码错误”按钮，号码错了会有专人去核实，未接通这个号码之后还会换个时间跳出来，让他再次打。 打通的100个号码，大概有…</span>
-                                            <button type="button" class="button ContentItem-more">
-                                                阅读全文
-                                                <span style="display: inline-flex;align-items: center;">
-                                                    ​
-                                                    <svg class="Zi Zi--ArrowDown ContentItem-arrowIcon" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
-                                                        <path d="M12 13L8.285 9.218a.758.758 0 0 0-1.064 0 .738.738 0 0 0 0 1.052l4.249 4.512a.758.758 0 0 0 1.064 0l4.246-4.512a.738.738 0 0 0 0-1.052.757.757 0 0 0-1.063 0L12.002 13z" fill-rule="evenodd"></path>
-                                                    </svg>
-                                                </span>
-                                            </button>
-                                        </div>
-                                        <div class="ContentItem-actions">
-                                        <span>
-                                            <button class="button VoteButton">
-                                                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--TriangleUp VoteButton-TriangleUp" fill="currentColor" viewBox="0 0 24 24" width="10" height="10"><path d="M2 18.242c0-.326.088-.532.237-.896l7.98-13.203C10.572 3.57 11.086 3 12 3c.915 0 1.429.571 1.784 1.143l7.98 13.203c.15.364.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H3.955c-1.08 0-1.955-.517-1.955-1.9z" fill-rule="evenodd"></path></svg></span>赞同</button>
-                                            <button class="button VoteButton">
-                                            <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--TriangleDown" fill="currentColor" viewBox="0 0 24 24" width="10" height="10"><path d="M20.044 3H3.956C2.876 3 2 3.517 2 4.9c0 .326.087.533.236.896L10.216 19c.355.571.87 1.143 1.784 1.143s1.429-.572 1.784-1.143l7.98-13.204c.149-.363.236-.57.236-.896 0-1.386-.876-1.9-1.956-1.9z" fill-rule="evenodd"></path></svg></span></button>
-                                        </span>
-                                            <button type="button" class="button ContentItem-action">
-                                                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Comment Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M10.241 19.313a.97.97 0 0 0-.77.2 7.908 7.908 0 0 1-3.772 1.482.409.409 0 0 1-.38-.637 5.825 5.825 0 0 0 1.11-2.237.605.605 0 0 0-.227-.59A7.935 7.935 0 0 1 3 11.25C3 6.7 7.03 3 12 3s9 3.7 9 8.25-4.373 9.108-10.759 8.063z" fill-rule="evenodd"></path></svg></span>
-                                                4 条评论
-                                            </button>
-                                            <div class="ContentItem-action">
-                                                <button type="button" class="button">
-                                                    <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Share Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M2.931 7.89c-1.067.24-1.275 1.669-.318 2.207l5.277 2.908 8.168-4.776c.25-.127.477.198.273.39L9.05 14.66l.927 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.242c.584-.892-.212-2.029-1.234-1.796L2.93 7.89z" fill-rule="evenodd"></path></svg></span>
-                                                    分享
-                                                </button>
-                                            </div>
-                                            <button type="button" class="button ContentItem-action">
-                                                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Star Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M5.515 19.64l.918-5.355-3.89-3.792c-.926-.902-.639-1.784.64-1.97L8.56 7.74l2.404-4.871c.572-1.16 1.5-1.16 2.072 0L15.44 7.74l5.377.782c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.219 1.274-.532 1.82-1.676 1.218L12 18.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z" fill-rule="evenodd"></path></svg></span>
-                                                收藏
-                                            </button>
-                                            <button type="button" class="button ContentItem-action">
-                                                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Heart Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M2 8.437C2 5.505 4.294 3.094 7.207 3 9.243 3 11.092 4.19 12 6c.823-1.758 2.649-3 4.651-3C19.545 3 22 5.507 22 8.432 22 16.24 13.842 21 12 21 10.158 21 2 16.24 2 8.437z" fill-rule="evenodd"></path></svg></span>
-                                                喜欢
-                                            </button>
-                                            <div class="ContentItem-action">
-                                                <button type="button" class="button">
-                                                    <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Dots Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M5 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill-rule="evenodd"></path></svg></span>
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+                                            </c:if>
+                                        </c:otherwise>
+                                    </c:choose>
+                                </c:forEach>
+
                             </div>
                         </div>
                     </div>
@@ -543,13 +638,746 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
         </div>
     </main>
-
-
-
     <script src="Scripts/jquery-3.5.1.min.js"></script>
+    <script src="Scripts/Modal.js"></script>
+    <script src="Scripts/comments.js"></script>
     <script src="Scripts/Header-Head.js"></script>
     <script src="Scripts/Header-TopstoryRecommend.js"></script>
     <script src="Scripts/User.js"></script>
+    <script src="Scripts/initComment.js"></script>
+    <div>
+      <div>
+          <div>
+              <div class="Modal-wrapper">
+                  <div class="Modal-backdrop"></div>
+                  <div class="Modal Modal--default">
+                      <div class="Modal-inner">
+                          <div class="Modal-content">
+                              <div class="Comments-container">
+                                  <div class="Comments Comments-withEditor">
+                                      <div class="Topbar CommentTopbar">
+                                          <div class="Topbar-title">
+                                              33 条评论
+                                          </div>
+                                          <div class="Topbar-options">
+                                              <button class="button" type="button  Button--plain">
+                                                  <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Switch Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M13.004 7V4.232c0-.405.35-.733.781-.733.183 0 .36.06.501.17l6.437 5.033c.331.26.376.722.1 1.033a.803.803 0 0 1-.601.264H2.75a.75.75 0 0 1-.75-.75V7.75A.75.75 0 0 1 2.75 7h10.254zm-1.997 9.999v2.768c0 .405-.35.733-.782.733a.814.814 0 0 1-.5-.17l-6.437-5.034a.702.702 0 0 1-.1-1.032.803.803 0 0 1 .6-.264H21.25a.75.75 0 0 1 .75.75v1.499a.75.75 0 0 1-.75.75H11.007z" fill-rule="evenodd"></path></svg></span>
+                                                  切换为时间排序
+                                              </button>
+                                          </div>
+                                      </div>
+                                      <div class="CommentList">
+                                          <ul class="NestComment">
+                                              <li class="NestComment-rootComment">
+                                                  <div class="CommentItem">
+                                                      <div>
+                                                          <div class="CommentItem-meta">
+                                                            <span class="UserLink CommentItem-avatar">
+                                                                <a href="#" class="UserLink-link">
+                                                                    <img width="24" height="24" src="images/user/v2-418b708f7ce6d2e2b21aed85c52c3dcb_xs.jpg" alt="">
+                                                                </a>
+                                                            </span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-time">
+                                                                08-08
+                                                            </span>
+                                                          </div>
+                                                          <div class="CommentTiem-metaSibling">
+                                                              <div class="CommentRichText CommentItem-content">
+                                                                  <div class="ztext">
+                                                                      <p>其他语言都在讨论业务逻辑了，C++还在讨论语法。</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="CommentItem-footer">
+                                                                  <button class="button button--likeBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      5
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Reply" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z" fill-rule="evenodd"></path></svg></span>
+                                                                      回复
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="transform: rotate(180deg); margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      踩
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Report" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M19.947 3.129c-.633.136-3.927.639-5.697.385-3.133-.45-4.776-2.54-9.949-.888-.997.413-1.277 1.038-1.277 2.019L3 20.808c0 .3.101.54.304.718a.97.97 0 0 0 .73.304c.275 0 .519-.102.73-.304.202-.179.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V3.964c0-.599-.42-.972-1.053-.835z" fill-rule="evenodd"></path></svg></span>
+                                                                      举报
+                                                                  </button>
+                                                              </div>
 
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </li>
+                                              <li class="NestComment-child">
+                                                  <div class="CommentItem">
+                                                      <div>
+                                                          <div class="CommentItem-meta">
+                                                            <span class="UserLink CommentItem-avatar">
+                                                                <a href="#" class="UserLink-link">
+                                                                    <img width="24" height="24" src="images/user/v2-418b708f7ce6d2e2b21aed85c52c3dcb_xs.jpg" alt="">
+                                                                </a>
+                                                            </span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-reply">回复</span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-time">
+                                                                08-08
+                                                            </span>
+                                                          </div>
+                                                          <div class="CommentTiem-metaSibling">
+                                                              <div class="CommentRichText CommentItem-content">
+                                                                  <div class="ztext">
+                                                                      <p>其他语言都在讨论业务逻辑了，C++还在讨论语法。</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="CommentItem-footer">
+                                                                  <button class="button button--likeBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      5
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Reply" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z" fill-rule="evenodd"></path></svg></span>
+                                                                      回复
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="transform: rotate(180deg); margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      踩
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Report" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M19.947 3.129c-.633.136-3.927.639-5.697.385-3.133-.45-4.776-2.54-9.949-.888-.997.413-1.277 1.038-1.277 2.019L3 20.808c0 .3.101.54.304.718a.97.97 0 0 0 .73.304c.275 0 .519-.102.73-.304.202-.179.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V3.964c0-.599-.42-.972-1.053-.835z" fill-rule="evenodd"></path></svg></span>
+                                                                      举报
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </li>
+                                              <li class="NestComment-child">
+                                                  <div class="CommentItem">
+                                                      <div>
+                                                          <div class="CommentItem-meta">
+                                                            <span class="UserLink CommentItem-avatar">
+                                                                <a href="#" class="UserLink-link">
+                                                                    <img width="24" height="24" src="images/user/v2-418b708f7ce6d2e2b21aed85c52c3dcb_xs.jpg" alt="">
+                                                                </a>
+                                                            </span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-reply">回复</span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-time">
+                                                                08-08
+                                                            </span>
+                                                          </div>
+                                                          <div class="CommentTiem-metaSibling">
+                                                              <div class="CommentRichText CommentItem-content">
+                                                                  <div class="ztext">
+                                                                      <p>其他语言都在讨论业务逻辑了，C++还在讨论语法。</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="CommentItem-footer">
+                                                                  <button class="button button--likeBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      5
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Reply" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z" fill-rule="evenodd"></path></svg></span>
+                                                                      回复
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="transform: rotate(180deg); margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      踩
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Report" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M19.947 3.129c-.633.136-3.927.639-5.697.385-3.133-.45-4.776-2.54-9.949-.888-.997.413-1.277 1.038-1.277 2.019L3 20.808c0 .3.101.54.304.718a.97.97 0 0 0 .73.304c.275 0 .519-.102.73-.304.202-.179.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V3.964c0-.599-.42-.972-1.053-.835z" fill-rule="evenodd"></path></svg></span>
+                                                                      举报
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </li>
+                                              <li class="NestComment-child">
+                                                  <div class="CommentItem">
+                                                      <div>
+                                                          <div class="CommentItem-meta">
+                                                            <span class="UserLink CommentItem-avatar">
+                                                                <a href="#" class="UserLink-link">
+                                                                    <img width="24" height="24" src="images/user/v2-418b708f7ce6d2e2b21aed85c52c3dcb_xs.jpg" alt="">
+                                                                </a>
+                                                            </span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-reply">回复</span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-time">
+                                                                08-08
+                                                            </span>
+                                                          </div>
+                                                          <div class="CommentTiem-metaSibling">
+                                                              <div class="CommentRichText CommentItem-content">
+                                                                  <div class="ztext">
+                                                                      <p>其他语言都在讨论业务逻辑了，C++还在讨论语法。</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="CommentItem-footer">
+                                                                  <button class="button button--likeBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      5
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Reply" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z" fill-rule="evenodd"></path></svg></span>
+                                                                      回复
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="transform: rotate(180deg); margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      踩
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Report" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M19.947 3.129c-.633.136-3.927.639-5.697.385-3.133-.45-4.776-2.54-9.949-.888-.997.413-1.277 1.038-1.277 2.019L3 20.808c0 .3.101.54.304.718a.97.97 0 0 0 .73.304c.275 0 .519-.102.73-.304.202-.179.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V3.964c0-.599-.42-.972-1.053-.835z" fill-rule="evenodd"></path></svg></span>
+                                                                      举报
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </li>
+                                              <li class="NestComment-child">
+                                                  <div class="CommentItem">
+                                                      <div>
+                                                          <div class="CommentItem-meta">
+                                                            <span class="UserLink CommentItem-avatar">
+                                                                <a href="#" class="UserLink-link">
+                                                                    <img width="24" height="24" src="images/user/v2-418b708f7ce6d2e2b21aed85c52c3dcb_xs.jpg" alt="">
+                                                                </a>
+                                                            </span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-reply">回复</span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-time">
+                                                                08-08
+                                                            </span>
+                                                          </div>
+                                                          <div class="CommentTiem-metaSibling">
+                                                              <div class="CommentRichText CommentItem-content">
+                                                                  <div class="ztext">
+                                                                      <p>其他语言都在讨论业务逻辑了，C++还在讨论语法。</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="CommentItem-footer">
+                                                                  <button class="button button--likeBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      5
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Reply" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z" fill-rule="evenodd"></path></svg></span>
+                                                                      回复
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="transform: rotate(180deg); margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      踩
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Report" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M19.947 3.129c-.633.136-3.927.639-5.697.385-3.133-.45-4.776-2.54-9.949-.888-.997.413-1.277 1.038-1.277 2.019L3 20.808c0 .3.101.54.304.718a.97.97 0 0 0 .73.304c.275 0 .519-.102.73-.304.202-.179.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V3.964c0-.599-.42-.972-1.053-.835z" fill-rule="evenodd"></path></svg></span>
+                                                                      举报
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </li>
+                                              <li class="NestComment-child">
+                                                  <div class="CommentItem">
+                                                      <div>
+                                                          <div class="CommentItem-meta">
+                                                            <span class="UserLink CommentItem-avatar">
+                                                                <a href="#" class="UserLink-link">
+                                                                    <img width="24" height="24" src="images/user/v2-418b708f7ce6d2e2b21aed85c52c3dcb_xs.jpg" alt="">
+                                                                </a>
+                                                            </span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-reply">回复</span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-time">
+                                                                08-08
+                                                            </span>
+                                                          </div>
+                                                          <div class="CommentTiem-metaSibling">
+                                                              <div class="CommentRichText CommentItem-content">
+                                                                  <div class="ztext">
+                                                                      <p>其他语言都在讨论业务逻辑了，C++还在讨论语法。</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="CommentItem-footer">
+                                                                  <button class="button button--likeBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      5
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Reply" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z" fill-rule="evenodd"></path></svg></span>
+                                                                      回复
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="transform: rotate(180deg); margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      踩
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Report" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M19.947 3.129c-.633.136-3.927.639-5.697.385-3.133-.45-4.776-2.54-9.949-.888-.997.413-1.277 1.038-1.277 2.019L3 20.808c0 .3.101.54.304.718a.97.97 0 0 0 .73.304c.275 0 .519-.102.73-.304.202-.179.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V3.964c0-.599-.42-.972-1.053-.835z" fill-rule="evenodd"></path></svg></span>
+                                                                      举报
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </li>
+                                          </ul>
+                                          <ul class="NestComment">
+                                              <li class="NestComment-rootComment">
+                                                  <div class="CommentItem">
+                                                      <div>
+                                                          <div class="CommentItem-meta">
+                                                            <span class="UserLink CommentItem-avatar">
+                                                                <a href="#" class="UserLink-link">
+                                                                    <img width="24" height="24" src="images/user/v2-418b708f7ce6d2e2b21aed85c52c3dcb_xs.jpg" alt="">
+                                                                </a>
+                                                            </span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-time">
+                                                                08-08
+                                                            </span>
+                                                          </div>
+                                                          <div class="CommentTiem-metaSibling">
+                                                              <div class="CommentRichText CommentItem-content">
+                                                                  <div class="ztext">
+                                                                      <p>其他语言都在讨论业务逻辑了，C++还在讨论语法。</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="CommentItem-footer">
+                                                                  <button class="button button--likeBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      5
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Reply" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z" fill-rule="evenodd"></path></svg></span>
+                                                                      回复
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="transform: rotate(180deg); margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      踩
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Report" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M19.947 3.129c-.633.136-3.927.639-5.697.385-3.133-.45-4.776-2.54-9.949-.888-.997.413-1.277 1.038-1.277 2.019L3 20.808c0 .3.101.54.304.718a.97.97 0 0 0 .73.304c.275 0 .519-.102.73-.304.202-.179.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V3.964c0-.599-.42-.972-1.053-.835z" fill-rule="evenodd"></path></svg></span>
+                                                                      举报
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </li>
+                                              <li class="NestComment-child">
+                                                  <div class="CommentItem">
+                                                      <div>
+                                                          <div class="CommentItem-meta">
+                                                            <span class="UserLink CommentItem-avatar">
+                                                                <a href="#" class="UserLink-link">
+                                                                    <img width="24" height="24" src="images/user/v2-418b708f7ce6d2e2b21aed85c52c3dcb_xs.jpg" alt="">
+                                                                </a>
+                                                            </span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-reply">回复</span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-time">
+                                                                08-08
+                                                            </span>
+                                                          </div>
+                                                          <div class="CommentTiem-metaSibling">
+                                                              <div class="CommentRichText CommentItem-content">
+                                                                  <div class="ztext">
+                                                                      <p>其他语言都在讨论业务逻辑了，C++还在讨论语法。</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="CommentItem-footer">
+                                                                  <button class="button button--likeBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      5
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Reply" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z" fill-rule="evenodd"></path></svg></span>
+                                                                      回复
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="transform: rotate(180deg); margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      踩
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Report" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M19.947 3.129c-.633.136-3.927.639-5.697.385-3.133-.45-4.776-2.54-9.949-.888-.997.413-1.277 1.038-1.277 2.019L3 20.808c0 .3.101.54.304.718a.97.97 0 0 0 .73.304c.275 0 .519-.102.73-.304.202-.179.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V3.964c0-.599-.42-.972-1.053-.835z" fill-rule="evenodd"></path></svg></span>
+                                                                      举报
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </li>
+                                              <li class="NestComment-child">
+                                                  <div class="CommentItem">
+                                                      <div>
+                                                          <div class="CommentItem-meta">
+                                                            <span class="UserLink CommentItem-avatar">
+                                                                <a href="#" class="UserLink-link">
+                                                                    <img width="24" height="24" src="images/user/v2-418b708f7ce6d2e2b21aed85c52c3dcb_xs.jpg" alt="">
+                                                                </a>
+                                                            </span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-reply">回复</span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-time">
+                                                                08-08
+                                                            </span>
+                                                          </div>
+                                                          <div class="CommentTiem-metaSibling">
+                                                              <div class="CommentRichText CommentItem-content">
+                                                                  <div class="ztext">
+                                                                      <p>其他语言都在讨论业务逻辑了，C++还在讨论语法。</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="CommentItem-footer">
+                                                                  <button class="button button--likeBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      5
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Reply" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z" fill-rule="evenodd"></path></svg></span>
+                                                                      回复
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="transform: rotate(180deg); margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      踩
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Report" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M19.947 3.129c-.633.136-3.927.639-5.697.385-3.133-.45-4.776-2.54-9.949-.888-.997.413-1.277 1.038-1.277 2.019L3 20.808c0 .3.101.54.304.718a.97.97 0 0 0 .73.304c.275 0 .519-.102.73-.304.202-.179.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V3.964c0-.599-.42-.972-1.053-.835z" fill-rule="evenodd"></path></svg></span>
+                                                                      举报
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </li>
+                                          </ul>
+                                          <ul class="NestComment">
+                                              <li class="NestComment-rootComment">
+                                                  <div class="CommentItem">
+                                                      <div>
+                                                          <div class="CommentItem-meta">
+                                                            <span class="UserLink CommentItem-avatar">
+                                                                <a href="#" class="UserLink-link">
+                                                                    <img width="24" height="24" src="images/user/v2-418b708f7ce6d2e2b21aed85c52c3dcb_xs.jpg" alt="">
+                                                                </a>
+                                                            </span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-time">
+                                                                08-08
+                                                            </span>
+                                                          </div>
+                                                          <div class="CommentTiem-metaSibling">
+                                                              <div class="CommentRichText CommentItem-content">
+                                                                  <div class="ztext">
+                                                                      <p>其他语言都在讨论业务逻辑了，C++还在讨论语法。</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="CommentItem-footer">
+                                                                  <button class="button button--likeBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      5
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Reply" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z" fill-rule="evenodd"></path></svg></span>
+                                                                      回复
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="transform: rotate(180deg); margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      踩
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Report" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M19.947 3.129c-.633.136-3.927.639-5.697.385-3.133-.45-4.776-2.54-9.949-.888-.997.413-1.277 1.038-1.277 2.019L3 20.808c0 .3.101.54.304.718a.97.97 0 0 0 .73.304c.275 0 .519-.102.73-.304.202-.179.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V3.964c0-.599-.42-.972-1.053-.835z" fill-rule="evenodd"></path></svg></span>
+                                                                      举报
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </li>
+                                              <li class="NestComment-child">
+                                                  <div class="CommentItem">
+                                                      <div>
+                                                          <div class="CommentItem-meta">
+                                                            <span class="UserLink CommentItem-avatar">
+                                                                <a href="#" class="UserLink-link">
+                                                                    <img width="24" height="24" src="images/user/v2-418b708f7ce6d2e2b21aed85c52c3dcb_xs.jpg" alt="">
+                                                                </a>
+                                                            </span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-reply">回复</span>
+                                                              <span class="UserLink">
+                                                                <a class="UserLink-link" href="#">崔贝</a>
+                                                            </span>
+                                                              <span class="CommentItem-time">
+                                                                08-08
+                                                            </span>
+                                                          </div>
+                                                          <div class="CommentTiem-metaSibling">
+                                                              <div class="CommentRichText CommentItem-content">
+                                                                  <div class="ztext">
+                                                                      <p>其他语言都在讨论业务逻辑了，C++还在讨论语法。</p>
+                                                                  </div>
+                                                              </div>
+                                                              <div class="CommentItem-footer">
+                                                                  <button class="button button--likeBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      5
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Reply" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z" fill-rule="evenodd"></path></svg></span>
+                                                                      回复
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="transform: rotate(180deg); margin-right: 5px;"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                                      踩
+                                                                  </button>
+                                                                  <button class="button button--hoverBtn" type="button">
+                                                                      <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Report" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M19.947 3.129c-.633.136-3.927.639-5.697.385-3.133-.45-4.776-2.54-9.949-.888-.997.413-1.277 1.038-1.277 2.019L3 20.808c0 .3.101.54.304.718a.97.97 0 0 0 .73.304c.275 0 .519-.102.73-.304.202-.179.304-.418.304-.718v-6.58c4.533-1.235 8.047.668 8.562.864 2.343.893 5.542.008 6.774-.657.397-.178.596-.474.596-.887V3.964c0-.599-.42-.972-1.053-.835z" fill-rule="evenodd"></path></svg></span>
+                                                                      举报
+                                                                  </button>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </li>
+                                          </ul>
+                                      </div>
+                                      <div>
+                                          <div class="Commens-footer CommentItem-normal">
+                                              <div class="CommentEditor-inputWrap">
+                                                  <div class="InputLike CommentEditor-input Editable">
+                                                      <div class="CommentEditor-input-content Editable-content ztext">
+                                                          <input type="text" placeholder="写下你的评论...">
+                                                      </div>
+                                                  </div>
+                                                  <div></div>
+                                              </div>
+                                              <button class="button CommentEditor-singleButton" type="button">发布</button>
+                                          </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                      <button class="button Modal-closeButton" type="button">
+                          <svg class="Zi Zi--Close Modal-closeIcon" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M13.486 12l5.208-5.207a1.048 1.048 0 0 0-.006-1.483 1.046 1.046 0 0 0-1.482-.005L12 10.514 6.793 5.305a1.048 1.048 0 0 0-1.483.005 1.046 1.046 0 0 0-.005 1.483L10.514 12l-5.208 5.207a1.048 1.048 0 0 0 .006 1.483 1.046 1.046 0 0 0 1.482.005L12 13.486l5.207 5.208a1.048 1.048 0 0 0 1.483-.006 1.046 1.046 0 0 0 .005-1.482L13.486 12z" fill-rule="evenodd"></path></svg>
+                      </button>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
 </body>
 </html>
+
+<%--<div class="list-item">
+        <div class="list-itemMata">
+            <div class="ActivityItem-meta">
+                <c:choose>
+                    <c:when test="${bynamicContainerEntity.bynamicEntity.bynamicType == 'gz'}">
+                        <c:choose>
+                            <c:when test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'wt'}">
+                                <span class="ActivityItem-metaTitle">关注了问题</span>
+                            </c:when>
+                            <c:otherwise>  <!--否则 -->
+                                <c:if test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'zl'}">
+                                    <span class="ActivityItem-metaTitle">关注了专栏</span>
+                                </c:if>
+                                <c:if test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'ht'}">
+                                    <span class="ActivityItem-metaTitle">关注了话题</span>
+                                </c:if>
+                                <c:if test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'sc'}">
+                                    <span class="ActivityItem-metaTitle">关注了收藏</span>
+                                </c:if>
+                            </c:otherwise>
+                        </c:choose>
+                    </c:when>
+                    <c:otherwise>
+                        <c:if test="${bynamicContainerEntity.bynamicEntity.bynamicType == 'fb'}">
+                            <c:when test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'wt'}">
+                                <span class="ActivityItem-metaTitle">发布了问题</span>
+                            </c:when>
+                            <c:otherwise>
+                                <c:if test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'hd'}">
+                                    <span class="ActivityItem-metaTitle">发布了回答</span>
+                                </c:if>
+                                <c:if test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'sp'}">
+                                    <span class="ActivityItem-metaTitle">发布了视频</span>
+                                </c:if>
+                                <c:if test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'wz'}">
+                                    <span class="ActivityItem-metaTitle">发布了文章</span>
+                                </c:if>
+                                <c:if test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'xf'}">
+                                    <span class="ActivityItem-metaTitle">发布了想法</span>
+                                </c:if>
+                            </c:otherwise>
+                        </c:if>
+                        <c:if test="${bynamicContainerEntity.bynamicEntity.bynamicType == 'zt'}">
+                            <c:when test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'wt'}">
+                                <span class="ActivityItem-metaTitle">赞同了问题</span>
+                            </c:when>
+                            <c:otherwise>
+                                <c:if test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'hd'}">
+                                    <span class="ActivityItem-metaTitle">赞同了回答</span>
+                                </c:if>
+                                <c:if test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'sp'}">
+                                    <span class="ActivityItem-metaTitle">赞同了视频</span>
+                                </c:if>
+                                <c:if test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'wz'}">
+                                    <span class="ActivityItem-metaTitle">赞同了文章</span>
+                                </c:if>
+                                <c:if test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'xf'}">
+                                    <span class="ActivityItem-metaTitle">赞同了想法</span>
+                                </c:if>
+                            </c:otherwise>
+                        </c:if>
+                    </c:otherwise>
+                </c:choose>
+                <span>${fn:substring(bynamicContainerEntity.bynamicEntity.bynamicTime, 0, 10)}</span>
+            </div>
+        </div>
+        <div class="ConstantItem">
+            <h2 class="ContentItem-title">
+                <a href="#">选择大学是 专业＞城市＞学校 吗？</a>
+            </h2>
+        </div>
+    </div>--%>
+<%--<div class="list-item">
+    <div class="list-itemMata">
+        <div class="ActivityItem-meta">
+            <span class="ActivityItem-metaTitle">赞同了回答</span>
+            <span>07-22</span>
+        </div>
+    </div>
+    <div class="ConstantItem">
+        <h2 class="ContentItem-title">
+            <a href="#">对电话销售需要礼貌回复吗？</a>
+        </h2>
+        <div class="ConstantItem-meta">
+            <div class="AuthorInfo">
+                <div class="userLink">
+                    <a href="#" class="userLink-link">
+                        <img src="images/touxiang/v2-c9df8ce90f8fdd4b402c22cb041e0cce_xs.jpg" alt="">
+                    </a>
+                </div>
+                <div class="AuthorInfo-content">
+                    <div class="AuthorInfo-head">
+                    <span class="AuthorInfo-name">
+                        <div class="Popover">
+                            <a href="#">
+                                Justin Lee
+                            </a>
+                        </div>
+                    </span>
+                    </div>
+                    <div class="AuthorInfo-badge">
+                        <div class="AuthorInfo-badgeText">公众号：1、政经纵论；2、浮世逆旅</div>
+                    </div>
+                </div>
+            </div>
+            <div class="css-h5al4j">
+                <span>
+                    <span class="Voters">
+                        <button type="button" class="button">
+                            12,053 人也赞同了该回答
+                        </button>
+                    </span>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="ContentItem-content is-collapsed">
+        <div class="ContentItem-content-inner">
+            <span class="text">问过做电话销售的人，他们公司80人，20个电销，每人每天有100个电话指标。 100个看起来不算多，是因为他们公司要求高，被人接起来的才记入指标，如果电话没打通，你需要根据实际情况在系统里点击“未接通”或“号码错误”按钮，号码错了会有专人去核实，未接通这个号码之后还会换个时间跳出来，让他再次打。 打通的100个号码，大概有…</span>
+            <button type="button" class="button ContentItem-more">
+                阅读全文
+                <span style="display: inline-flex;align-items: center;">
+                    ​
+                    <svg class="Zi Zi--ArrowDown ContentItem-arrowIcon" fill="currentColor" viewBox="0 0 24 24" width="24" height="24">
+                        <path d="M12 13L8.285 9.218a.758.758 0 0 0-1.064 0 .738.738 0 0 0 0 1.052l4.249 4.512a.758.758 0 0 0 1.064 0l4.246-4.512a.738.738 0 0 0 0-1.052.757.757 0 0 0-1.063 0L12.002 13z" fill-rule="evenodd"></path>
+                    </svg>
+                </span>
+            </button>
+        </div>
+        <div class="ContentItem-actions">
+        <span>
+            <button class="button VoteButton">
+                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--TriangleUp VoteButton-TriangleUp" fill="currentColor" viewBox="0 0 24 24" width="10" height="10"><path d="M2 18.242c0-.326.088-.532.237-.896l7.98-13.203C10.572 3.57 11.086 3 12 3c.915 0 1.429.571 1.784 1.143l7.98 13.203c.15.364.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H3.955c-1.08 0-1.955-.517-1.955-1.9z" fill-rule="evenodd"></path></svg></span>赞同</button>
+            <button class="button VoteButton">
+            <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--TriangleDown" fill="currentColor" viewBox="0 0 24 24" width="10" height="10"><path d="M20.044 3H3.956C2.876 3 2 3.517 2 4.9c0 .326.087.533.236.896L10.216 19c.355.571.87 1.143 1.784 1.143s1.429-.572 1.784-1.143l7.98-13.204c.149-.363.236-.57.236-.896 0-1.386-.876-1.9-1.956-1.9z" fill-rule="evenodd"></path></svg></span></button>
+        </span>
+            <button type="button" class="button ContentItem-action">
+                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Comment Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M10.241 19.313a.97.97 0 0 0-.77.2 7.908 7.908 0 0 1-3.772 1.482.409.409 0 0 1-.38-.637 5.825 5.825 0 0 0 1.11-2.237.605.605 0 0 0-.227-.59A7.935 7.935 0 0 1 3 11.25C3 6.7 7.03 3 12 3s9 3.7 9 8.25-4.373 9.108-10.759 8.063z" fill-rule="evenodd"></path></svg></span>
+                4 条评论
+            </button>
+            <div class="ContentItem-action">
+                <button type="button" class="button">
+                    <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Share Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M2.931 7.89c-1.067.24-1.275 1.669-.318 2.207l5.277 2.908 8.168-4.776c.25-.127.477.198.273.39L9.05 14.66l.927 5.953c.18 1.084 1.593 1.376 2.182.456l9.644-15.242c.584-.892-.212-2.029-1.234-1.796L2.93 7.89z" fill-rule="evenodd"></path></svg></span>
+                    分享
+                </button>
+            </div>
+            <button type="button" class="button ContentItem-action">
+                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Star Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M5.515 19.64l.918-5.355-3.89-3.792c-.926-.902-.639-1.784.64-1.97L8.56 7.74l2.404-4.871c.572-1.16 1.5-1.16 2.072 0L15.44 7.74l5.377.782c1.28.186 1.566 1.068.64 1.97l-3.89 3.793.918 5.354c.219 1.274-.532 1.82-1.676 1.218L12 18.33l-4.808 2.528c-1.145.602-1.896.056-1.677-1.218z" fill-rule="evenodd"></path></svg></span>
+                收藏
+            </button>
+            <button type="button" class="button ContentItem-action">
+                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Heart Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M2 8.437C2 5.505 4.294 3.094 7.207 3 9.243 3 11.092 4.19 12 6c.823-1.758 2.649-3 4.651-3C19.545 3 22 5.507 22 8.432 22 16.24 13.842 21 12 21 10.158 21 2 16.24 2 8.437z" fill-rule="evenodd"></path></svg></span>
+                喜欢
+            </button>
+            <div class="ContentItem-action">
+                <button type="button" class="button">
+                    <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Dots Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M5 14a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm7 0a2 2 0 1 1 0-4 2 2 0 0 1 0 4z" fill-rule="evenodd"></path></svg></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>--%>

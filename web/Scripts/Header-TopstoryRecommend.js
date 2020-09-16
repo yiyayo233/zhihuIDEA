@@ -152,6 +152,11 @@ var CollapsdButton = "<button type=\"button\" class=\"button Button--plain\">\n"
  * 保存文章收起内容
  */
 var ContentItem_content_inner;
+/**
+ * 保存文章收起菜单
+ */
+var ContentItem_actions;
+
 
 /**
  * 主页展开
@@ -159,59 +164,79 @@ var ContentItem_content_inner;
  */
 function ContentItem_content_inner_link(){
     $(document).on("click",".ContentItem-content-inner,.ContentItem-content-cover",function () {
-        // alert(this);
-        /*if ($(this).attr("class").indexOf("ContentItem-more") !== -1){
-            var parent = $(this).parent().parent();
-            console.log(parent);
-            ContentItemScroll(parent);
-            $(this).parent().parent().removeClass("is-collapsed").html(ContentItem_content_Html).before(ConstantItem_meta_html);
-            Topi = 1;
-        }else if ($(this).attr("class").indexOf("ContentItem-content-inner") !== -1 || $(this).attr("class").indexOf("ContentItem-content-cover") !== -1){
-            if (Topi == 0){
-                var parent = $(this).parent();
-                console.log(parent);
-                ContentItemScroll(parent);
-                $(this).parent().removeClass("is-collapsed").html(ContentItem_content_Html).before(ConstantItem_meta_html);
-            }
-        }*/
+
         var actions = $(this).siblings(".ContentItem-actions").html();
-        if ($(this).attr("class").indexOf("ContentItem-content-inner") !== -1 || $(this).attr("class").indexOf("ContentItem-content-cover") !== -1){
+        ContentItem_content_inner = $(this).parent().html();
+        ContentItem_actions = $(this).parent().find(".ContentItem-actions").html();
+        if (RethtmlName().indexOf("qwer") != -1){
+            if ($(this).attr("class").indexOf("ContentItem-content-inner") !== -1 || $(this).attr("class").indexOf("ContentItem-content-cover") !== -1) {
+                var parent = $(this).parent().parent().parent();
+                ContentItemScroll(parent);
+                // $(this).parent().removeClass("is-collapsed").html(ContentItem_content_Html(actions)).before(ConstantItem_meta_html);
+                var index;
+                var item = $(this).parents(".TopstoryItem").index();
+                $(".ContentItem-content-inner").each(function (i, obj) {
+                    console.log($(item == i));
+                    if (item == i) {
+                        index = i;
+                    }
+                })
+
+                var industry;
+                var id = $(this).parent().attr("data-user-id");
+                $.ajax({
+                    url: "header",
+                    type: "post",
+                    async: false,
+                    data: {"a": "userIndustry", "id": id},
+                    dataType: "json",
+                    success: function (result) {
+                        console.info(result);
+                        //TODO 获取对象的值
+                        industry = result.industry;
+                    }
+                });
+                $(this).parent().removeClass("is-collapsed").html(ContentItem_content_Html(
+                    actions,
+                    questionItems[index].answerEntity.answerContent,
+                    questionItems[index].answerEntity.approveNum,
+                    questionItems[index].answerEntity.editTime)
+                ).before(ConstantItem_meta_html(questionItems[index].userEntity.id, questionItems[index].userEntity.name, questionItems[index].userEntity.chatHead, industry));
+            }
+        }else if (RethtmlName().indexOf("people") !== -1){
             var parent = $(this).parent().parent().parent();
             ContentItemScroll(parent);
-            // $(this).parent().removeClass("is-collapsed").html(ContentItem_content_Html(actions)).before(ConstantItem_meta_html);
-            var index ;
-            var item = $(this).parents(".TopstoryItem").index();
-            $(".ContentItem-content-inner").each(function (i,obj) {
-                console.log($(item==i));
-                if (item==i){
-                    index = i;
-                }
-            })
-
-
-            var industry;
-            var id = $(this).parent().attr("data-user-id");
-            $.ajax({url:"header",
-                type:"post",
-                async:false,
-                data:{"a":"userIndustry","id":id},
-                dataType:"json",
-                success:function (result) {
+            var button = $(this);
+            var id = $(button).parent().attr("data-answer-id");
+            $.ajax({
+                url: "answer",
+                type: "post",
+                data: {"a": "answerItem", "answerId": id},
+                dataType: "json",
+                success: function (result) {
                     console.info(result);
-                    //TODO 获取对象的值
-                    industry = result.industry;
+                    var editTime = result.editTime;
+                    editTime = editTime.substring(0,editTime.indexOf(" "));
+                    var html = '<div class="ConstantItem-inner">\n' +
+                        '                                        <span class="ztext">\n' +
+                        '                                               '+result.answerContent+'\n' +
+                        '                                        </span>\n' +
+                        '                                    </div>' +
+                        '                                    <div>\n' +
+                        '                                        <div class="ConstantItem-time">\n' +
+                        '                                            <a href="#"><span>编辑于 '+ editTime +'</span></a>\n' +
+                        '                                        </div>\n' +
+                        '                                    </div>' +
+                    '                                        <div>\n' +
+                    '                                        <div class="ContentItem-actions is-Fixed">\n';
+                    html = html + actions + CollapsdButton;
+                    html = html + '                                        </div>\n' +
+                        '                                    </div>';
+                    $(button).parent().removeClass("is-collapsed").html(html);
                 }
-            })
-
-            $(this).parent().removeClass("is-collapsed").html(ContentItem_content_Html(
-                actions,
-                questionItems[index].answerEntity.answerContent,
-                questionItems[index].answerEntity.approveNum,
-                questionItems[index].answerEntity.editTime)
-            ).before(ConstantItem_meta_html(questionItems[index].userEntity.id,questionItems[index].userEntity.name,questionItems[index].userEntity.chatHead,industry));
-
+            });
         }
-    })
+    });
 }
 
 /**
@@ -222,20 +247,24 @@ function ContentItem_content_inner_link(){
 function Button_plain_link (button) {
     console.log("Button_plain_link");
     var actions = $(button).parent().html().substr(0,$(button).parent().html().indexOf("<button type=\"button\" class=\"button Button--plain\">"));
-    var index;
-    var ContentItem_content = $(button).parents(".TopstoryItem");
-    var num=$(ContentItem_content).index();
+    if (RethtmlName().indexOf("qwer") != -1){
+        var index;
+        var ContentItem_content = $(button).parents(".TopstoryItem");
+        var num=$(ContentItem_content).index();
 
-    $(".ContentItem-content").each(function (i,obj) {
-        if (num==i){
-            index = i;
-            console.log(index)
-        }
-    })
+        $(".ContentItem-content").each(function (i,obj) {
+            if (num==i){
+                index = i;
+                console.log(index)
+            }
+        })
 
-
-$(button).parent().parent().parent().addClass("is-collapsed").html(ContentItem_content__is_collapsed_Html(actions,questionItems[index].answerEntity.answerContent)).parent().find(".ConstantItem-meta").remove();
-}
+        $(button).parent().parent().parent().addClass("is-collapsed").html(ContentItem_content__is_collapsed_Html(actions,questionItems[index].answerEntity.answerContent)).parent().find(".ConstantItem-meta").remove();
+    }else if(RethtmlName().indexOf("people") !== -1){
+        $(button).parents(".ContentItem-content").addClass("is-collapsed").html(ContentItem_content_inner);
+        $(button).parents(".ContentItem-content").find(".ContentItem-actions").html(actions);
+    }
+    }
 
 /**
  * 按钮菜单 浮动
@@ -312,7 +341,8 @@ function questionCollapse(button){
  */
 function getNumdrer(button) {
     var numTextarr = $(button).text().split(' ');
-    var number = numTextarr[1];
+    var index = numTextarr.length;
+    var number = numTextarr[numTextarr.length-1];
     if (number.indexOf(',') !== -1){
         number = number.split(',').join('');
     }
@@ -337,6 +367,7 @@ function VoteButtom_IsActive(button){
 
             updateApproveNum("+","answer",id);
             //todo 动态表添加动态
+
         }else {
             $(button).removeClass("is-active");
             text = text + "赞同 " + (getNumdrer(button)-1);
@@ -361,8 +392,6 @@ function VoteButtom_IsActive(button){
     }
 
 }
-
-
 
 var ZbuttonHtml = '';
 
@@ -390,7 +419,7 @@ $(function () {
     $(document).on("click",".ContentItem-actions .Button--plain",function (){
         var htmlname = RethtmlName();
         console.log(htmlname);
-        if ("people" === htmlname || "html" === htmlname || "" === htmlname){
+        if ("people" === htmlname || "html" === htmlname || "qwer" === htmlname){
             Button_plain_link(this);
         }else if ("question" === htmlname || "answer" === htmlname){
             question_isCollapsed(this);

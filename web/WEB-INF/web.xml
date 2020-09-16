@@ -73,6 +73,30 @@
             <servlet-name>AnswerServlet</servlet-name>
             <url-pattern>/answer</url-pattern>
         </servlet-mapping>
+        <!-- 用户(动态) -->
+        <servlet>
+            <description>This is the description of my J2EE component</description>
+            <display-name>This is the display name of my J2EE component</display-name>
+            <servlet-name>PeopleServlet</servlet-name>
+            <servlet-class>zhihu.servlet.PeopleServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+
+            <servlet-name>PeopleServlet</servlet-name>
+            <url-pattern>/people</url-pattern>
+        </servlet-mapping>
+        <!-- 动态 -->
+        <servlet>
+            <description>This is the description of my J2EE component</description>
+            <display-name>This is the display name of my J2EE component</display-name>
+            <servlet-name>BynamicServlet</servlet-name>
+            <servlet-class>zhihu.servlet.BynamicServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+
+            <servlet-name>BynamicServlet</servlet-name>
+            <url-pattern>/bynamic</url-pattern>
+        </servlet-mapping>
 
         <welcome-file-list>
             <welcome-file>html/header.jsp</welcome-file>

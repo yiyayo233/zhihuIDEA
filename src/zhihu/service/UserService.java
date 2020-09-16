@@ -20,4 +20,8 @@ public class UserService {
 	public UserEntity selecUserPersonalItem(String id){
 		return userDao.selecUserPersonalItem(id);
 	}
+
+    public UserEntity selecUserAndPersonaldItem(String id) {
+		return userDao.selecUserAndPersonaldItem(id);
+    }
 }
