@@ -38,4 +38,28 @@ public class BynamicDao extends BaseDao{
         return bynamicEntities;
     }
 
+    /**
+     * Ìí¼Ó¶¯Ì¬
+     * @param id
+     * @param userId
+     * @param byBynamicId
+     * @param bynamicTiem
+     * @param bynamicType
+     * @return
+     */
+    public int addBynamic(String id,String userId,String byBynamicId,String bynamicTiem,String bynamicType){
+        return execUpdate("INSERT bynamic values(? ,? ,? ,? ,?)", id, userId, byBynamicId, bynamicTiem, bynamicType);
+    }
+
+    /**
+     * É¾³ý¶¯Ì¬
+     * @param userId
+     * @param byBynamicId
+     * @param bynamicType
+     * @return
+     */
+    public int deleteBynamic(String userId,String byBynamicId,String bynamicType){
+        return execUpdate("DELETE FROM bynamic WHERE userId = ? AND byBynamicID = ? AND bynamicType = ?", userId, byBynamicId, bynamicType);
+    }
+
 }

@@ -73,3 +73,4 @@ $(document).on("mousemove",".FollowButton.up",function(){
     $(this).text("已关注");
 
 })
+

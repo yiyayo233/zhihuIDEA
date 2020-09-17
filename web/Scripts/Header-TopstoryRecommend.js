@@ -355,6 +355,7 @@ function getNumdrer(button) {
  * @constructor
  */
 function VoteButtom_IsActive(button){
+    var uId = $("#user").attr("data-user-id");
     var id = $(button).attr("data-answer-id");
     var text = "<span style=\"display: inline-flex; align-items: center;\">​<svg class=\"Zi Zi--TriangleUp VoteButton-TriangleUp\" fill=\"currentColor\" viewBox=\"0 0 24 24\" width=\"10\" height=\"10\"><path d=\"M2 18.242c0-.326.088-.532.237-.896l7.98-13.203C10.572 3.57 11.086 3 12 3c.915 0 1.429.571 1.784 1.143l7.98 13.203c.15.364.236.57.236.896 0 1.386-.875 1.9-1.955 1.9H3.955c-1.08 0-1.955-.517-1.955-1.9z\" fill-rule=\"evenodd\"></path></svg></span>";
     if ($(button).attr("class").indexOf("VoteButton--up") !== -1){
@@ -367,11 +368,12 @@ function VoteButtom_IsActive(button){
 
             updateApproveNum("+","answer",id);
             //todo 动态表添加动态
-
+            addOrDelBynamic("add",uId,id,"zt");
         }else {
             $(button).removeClass("is-active");
             text = text + "赞同 " + (getNumdrer(button)-1);
             updateApproveNum("-","answer",id);
+            addOrDelBynamic("del",uId,id,"zt");
         }
         $(button).html(text);
     }else {
@@ -385,9 +387,11 @@ function VoteButtom_IsActive(button){
         if ($(button).attr("class").indexOf("is-active") === -1){
             $(button).addClass("is-active");
             updateApproveNum("-","answer",id);
+            addOrDelBynamic("del",uId,id,"zt");
         }else {
             $(button).removeClass("is-active");
             updateApproveNum("+","answer",id);
+            addOrDelBynamic("add",uId,id,"zt");
         }
     }
 

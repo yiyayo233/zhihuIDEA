@@ -134,7 +134,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="QuestionHeader-side">
                         <div class="QuestionButtonGroup">
-                            <button data-question-id="${Question.id}" type="button" class="button button--primary button--blue">
+                            <button data-question-id="${Question.id}" type="button" class="button button--primary button--blue" onclick="followQuestion(this)">
                                 关注问题
                             </button>
                             <button data-question-id="${Question.id}" type="button" onclick="showAddAnswer(this)" class="button button--blue" >
@@ -253,7 +253,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="QuestionHerder-footer-inner">
                         <div class="QuestionHerder-main QuestionHerder-footer-main">
                             <div class="QuestionButtonGroup">
-                                <button data-question-id="${Question.id}" type="button" class="button button--primary button--blue">
+                                <button data-question-id="${Question.id}" type="button" class="button button--primary button--blue" onclick="followQuestion(this)">
                                     关注问题
                                 </button>
                                 <button data-question-id="${Question.id}" type="button" class="button button--blue" onclick="showAddAnswer(this)">
@@ -394,416 +394,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                     <div class="ConstantItem-inner">
                                                         <span class="ztext">
                                                             ${questionPageItem.answerEntity.answerContent}
-                                                            <%--<div class="ztext-cover">
-                                                                <img class="ztext-cover-content" src="images/Topstory/v2-8f954b2da3ee0df2b200b11ee8ce6908_hd.jpg" alt="">
-                                                            </div>
-                                                            <div class="ztext-content">
-                                                                <blockquote>
-                                                                长文预警，全文4500字左右，阅读5分钟，建议赞了再收藏之后慢慢看~
-                                                                <br>史上最全夸张了，争取最全~！
-                                                                <br>以下建议均根据个人体验而提，如有其他建议和想法，欢迎大家在评论区留言讨论！
-                                                                </blockquote>
-
-                                                                <h2><b><i><说在前面></i></b></h2>
-                                                                <p><b><i>2020款iPad Pro横空出世，Apple放出豪言：“你的下一台电脑，何必是电脑？！”</i></b></p>
-
-                                                                <p><b><i>究竟是什么，让Apple有这样的底气口出狂言？那当然是 iPadOS ！</i></b></p>
-                                                                <p><b><i>它是为 iPad 量身打造的操作系统，只为尽显 iPad 本色！</i></b></p>
-                                                                <p><b><i>它让宽大的多点触控显示屏、超快性能、多款强大 app 都能发挥到淋漓尽致。</i></b></p>
-                                                                <p><b><i>现在更支持触控板，为 iPad 打开了崭新的互动体验。</i></b></p>
-
-                                                                <h2><b><i><目录></i></b></h2>
-                                                                <p><b><i>一、主屏幕设置</i></b></p>
-                                                                <p><b><i>二、侧拉和分屏浏览（视频演示）</i></b></p>
-                                                                <p><b><i>三、iPad OS触控板支持</i></b></p>
-                                                                <p><b><i>四、配件建议：Care、Apple pencil等</i></b></p>
-                                                                <p><b><i>五、软件赠送及推荐（600多款正版软件）</i></b></p>
-                                                                <p><b><i>六、选购建议（11寸or12.9寸）</i></b></p>
-
-                                                                <hr>
-
-                                                                <h2>一、主屏幕设置</h2>
-                                                                <figure class="ztext-img">
-                                                                    <img class="ztext-img-content" src="images/Topstory/v2-c87c9392978a43d163f0c1a0fc961797_720w.jpg" alt="">
-                                                                </figure>
-                                                                <blockquote>
-                                                                    <i>6.20更：很多朋友都想要这张壁纸，私聊我噢，给你发原图~</i>
-                                                                </blockquote>
-
-                                                                <h2>推荐固定的小组件软件</h2>
-                                                                <ul><li><b>1 MY WEATHER</b></li></ul>
-                                                                <p>界面简洁颜值高，系统自带的也不错</p>
-                                                                <ul><li><b>2 系统日历</b></li></ul>
-                                                                <p>有助于规划日程</p>
-                                                                <ul><li><b>3 电池小组件</b></li></ul>
-                                                                <p>得先连接一个蓝牙设备才能显示在小组件内才能显示</p>
-                                                                <figure class="ztext-img">
-                                                                    <img class="ztext-img-content" src="images/Topstory/v2-914860533e19a72642082a42f410ad30_720w.jpg" alt="">
-                                                                </figure>
-                                                                <ul><li><b>4 SYS BOX</b></li></ul>
-                                                                <p>显示<b>常用软件</b>，<b>磁盘容量</b>，<b>内存占用</b>和<b>常用应用</b>，最重要的是能<b>显示网速</b>！这个只要1元，买不了吃亏，买不了上当。</p>
-                                                                <figure class="ztext-img">
-                                                                    <img class="ztext-img-content" src="images/Topstory/v2-975ba499889814f2c6f64e4b2e4d4094_720w.jpg" alt="">
-                                                                </figure>
-
-                                                                <hr>
-
-                                                                <h2>二、侧拉和分屏</h2>
-                                                                <h2>2.1 侧拉</h2>
-                                                                <h2>2.2 分屏浏览</h2>
-                                                                <figure class="ztext-img">
-                                                                    <img class="ztext-img-content" src="images/Topstory/v2-8dab19b9e4a0868c6dadf33dff85bca1_720w.jpg" alt="">
-                                                                </figure>
-                                                                <P>侧拉功能，让你常用的各款 App 随时待命</P>
-                                                                <P>你可以将同一个 app 在多个空间窗口中打开</P>
-                                                                <P>然后只需在程序坞中轻点某个 app 图标，即可查看所有打开了这个 app 的空间窗口</P>
-                                                                <P><b>以下是本人亲自动手制作的演示视频，欢迎点赞！</b></P>
-                                                                <p><b>视频也放在了B站，后期会有其他的更新也会更新在B站，欢迎三连关注</b></p>
-                                                                <a class="LinkCard" href="#">
-                                                                    <span class="LinkCard-backdrop" style="background-image:url(images/Topstory/v2-5d31206092fcfe4b728b30d0f9d86066_180x120.jpg)"></span>
-                                                                    <span class="LinkCard-content">
-                                                                        <span class="LinkCard-text">
-                                                                            <span class="LinkCard-title">
-                                                                                你真的会用iPad的分屏侧拉吗？？？_哔哩哔哩 (゜-゜)つロ 干杯~-bilibili
-                                                                            </span>
-                                                                            <span class="LinkCard-meta">
-                                                                                <span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd"></path></svg></span>
-                                                                                www.bilibili.com
-                                                                            </span>
-                                                                        </span>
-                                                                        <span class="LinkCard-imageCell LinkCard-image--horizontal">
-                                                                            <img src="images/Topstory/v2-5d31206092fcfe4b728b30d0f9d86066_180x120.jpg" alt="">
-                                                                        </span>
-                                                                    </span>
-                                                                </a>
-
-                                                                <div class="VideoLinkCard">
-                                                                    <div class="VideoLinkCard-video">
-                                                                        <video class="VideoLinkCard-video-content" src="images/Topstory/video/e227e69c-b535-11ea-a76a-3aa14924a230.mp4" controls="controls"></video>
-                                                                    </div>
-                                                                    <a href="#" class="VideoLinkCard-link">
-                                                                        <div class="VideoLinkCard-title">
-                                                                            iPadOS分屏侧拉视频演示
-                                                                        </div>
-                                                                        <div class="VideoLinkCard-author">
-                                                                            <img src="images/touxiang/v2-ab950b3059d10127384525299dfc0216_xs.jpg" alt="">
-                                                                            <div>Bravos里奥的视频</div>
-                                                                            <div>&nbsp;·&nbsp;6169 播放</div>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-
-                                                                <h2>2.3 文本编辑新手势</h2>
-                                                                <ul>
-                                                                    <li>现在除触控手势以外，还可以使用触控板或鼠标来进行操控。</li>
-                                                                    <li>三指向左轻扫撤销操作；</li>
-                                                                    <li>把光标精准拖放到想要的位置；</li>
-                                                                    <li>用手指在一段文本上拖动，快速选中这个段落；</li>
-                                                                    <li>轻点两下选中一个词，三下选中一句话，四下选中一整段。</li>
-                                                                </ul>
-
-                                                                <hr>
-
-                                                                <h2>三、iPad OS 触控板支持</h2>
-                                                                <p>现在除触控手势以外，还可以使用触控板或鼠标来进行操控。</p>
-                                                                <p>这个是iPad Pro迈向生产力的关键一步，但是一个能买入门级iPad价格的键盘是否真的值得呢？下文配件的选购中有个人的一点建议。</p>
-                                                                <figure class="ztext-img">
-                                                                    <img class="ztext-img-content" src="images/Topstory/v2-eb381e8628d97884b6ebfccc25b3983c_720w.jpg" alt="">
-                                                                </figure>
-                                                                <h2>3.1 光标</h2>
-                                                                <p>随内容自动调整光标可根据按钮、app 图标和文本等内容灵活变化形态，个人体验感觉还不错，这个小点点有点点可爱。</p>
-                                                                <h2>3.2 触控板</h2>
-                                                                <ul><li><b>轻扫切换APP</b></li></ul>
-                                                                <p>使用三指左右轻扫，即可在APP之间切换</p>
-                                                                <ul><li><b>APP切换器</b></li></ul>
-                                                                <p>三指向上轻扫并停住，可显示APP切换器</p>
-                                                                <ul><li><b>返回主屏幕</b></li></ul>
-                                                                <p>三指向上扫，即可从iPadOS的任意位置回到主屏幕</p>
-                                                                <ul><li><b>滚动</b></li></ul>
-                                                                <p>双指在触控板或单指在妙控鼠标上轻扫，可快速浏览网页和文档</p>
-                                                                <ul><li><b>点按右键</b></li></ul>
-                                                                <p>双指点按触控板或点按鼠标右键可调出上下文菜单</p>
-
-                                                                <hr>
-
-                                                                <h2>四、配件建议：Care、Apple pencil、保护壳、膜、键盘、鼠标</h2>
-
-                                                                <h2>4.1 Apple Care+（以下简称AC+）</h2>
-                                                                <p>在直营店工作的朋友极力推荐买，原因有以下几点：</p>
-                                                                <ul>
-                                                                    <li>原因1：还是那个原因，iPad 容易弯；</li>
-                                                                    <li>原因2：AC+不仅保iPad，还有配件，例如Apple pencil和妙控键盘；</li>
-                                                                    <li>原因3：维修费用昂贵，有了AC+花300多就可以换新；</li>
-                                                                    <li>原因4：AC+可以退，按天计费。</li>
-                                                                </ul>
-                                                                <blockquote>
-                                                                    不太推荐大家买了AC+，两年快到了自己搞一搞破坏去换个全新的官换，不过合理利用规则也是可以的。个人看法仅供参考，电子产品是个玄学，在你手里面两年没坏说明质量还不错，换个官换就说不定了，毕竟近年来苹果的品控不如以前（这个是偶然看到一个大哥在某个回答中提到，观点比较一致所以在此提出，他就是一个朋友用了两年换了官换，后面出问题继续更换了两次才好的）。还有AirPods Pro推荐大家买AC+，因为电池两年肯定是80%健康度以下的，只能换新，这个还不错。
-                                                                </blockquote>
-
-                                                                <h2>4.2 Apple pencil</h2>
-                                                                <ul><li><b>1 工具切换</b></li></ul>
-                                                                <p>如果使用Goodnotes和Notability做笔记的话，选择在当前工具和橡皮擦之间切换能大大提高效率！</p>
-                                                                <ul><li><b>2 截屏</b></li></ul>
-                                                                <p>使用Apple pencil 从屏幕角落往中间拉就能实现截屏操作</p>
-                                                                <p>官方展示的视频如下，还有其他操作，我之前。</p>
-                                                                <div class="VideoLinkCard">
-                                                                    <div class="VideoLinkCard-video">
-                                                                        <video class="VideoLinkCard-video-content" src="images/Topstory/video/83c54734-9f28-11ea-ad8f-46eb7a410147.mp4" controls="controls"></video>
-                                                                    </div>
-                                                                    <a href="#" class="VideoLinkCard-link">
-                                                                        <div class="VideoLinkCard-title">
-                                                                            iPad OS
-                                                                        </div>
-                                                                        <div class="VideoLinkCard-author">
-                                                                            <img src="images/touxiang/v2-ab950b3059d10127384525299dfc0216_xs.jpg" alt="">
-                                                                            <div>Bravos里奥的视频</div>
-                                                                            <div>&nbsp;·&nbsp;1975 播放</div>
-                                                                        </div>
-                                                                    </a>
-                                                                </div>
-
-                                                                <h2>4.2 壳</h2>
-                                                                <ul><li><b>建议1：买硬壳</b></li></ul>
-                                                                <p>不要买软壳，iPad特别容易弯这个弯过的都知道；</p>
-                                                                <ul><li><b>建议2：买能包住四周的</b></li></ul>
-                                                                <p>像官网的smart cover保护不了四周，容易产生划痕。</p>
-
-                                                                <h2>4.3 膜</h2>
-                                                                <ul><li><b>建议1：不是特别推荐类纸膜。</b></li></ul>
-                                                                <p>除非你对书写体验有极强的要求，贴上类纸膜真的是暴殄天物，浪费了世界上最优秀的一块Magic玻璃；</p>
-                                                                <blockquote>
-                                                                    <b><i>6.15更：</i></b>
-                                                                    <i>评论区有画师说，任何一个画师都不会同意这个观点。这个就是看你自己更注重哪方面了，是牺牲屏幕观感还是手绘的舒适体验，这个自己可以试试。</i>
-                                                                </blockquote>
-                                                                <ul><li><b>建议2：推荐钢化膜。</b></li></ul>
-                                                                <p>强迫症不能接受屏幕有划痕，钢化膜不怎么影响屏幕观感；</p>
-                                                                <ul><li><b>建议3：推荐笔尖套。</b></li></ul>
-                                                                <p>这个可以提升书写体验，而且白菜价；</p>
-                                                                <ul><li><b>建议4：裸奔体验最佳。</b></li></ul>
-                                                                <p>前提是，你买了AC+，能接受屏幕有细微的划痕。</p>
-                                                                <p>总结一句话，电子产品是用来消费的，不是用来供着的，裸奔的手感和屏幕的观感都是最佳的，如果不考虑以后出二手或者对细微划痕不在意，裸奔吧，这才是个人体验科技的极致！</p>
-
-                                                                <h2>4.5 妙控键盘</h2>
-                                                                <ul><li><b>建议1：考虑清楚是否需要；</b></li></ul>
-                                                                <blockquote>
-                                                                    如果你不是重度iPad办公使用者，做的只是一些基础的文稿编辑类的工作，妙控键盘对你来说意义不大，妙控键盘虽然是iPad转向生产力的重要一步，但是高昂的价格是否对得起它的实际价值，这个目前看来还是不成正比的，所以你的下一台电脑，还得是电脑；
-                                                                </blockquote>
-                                                                <ul><li><b>建议2：12.9寸买，11寸不买；</b></li></ul>
-                                                                <blockquote>
-                                                                    12.9寸的iPad Pro更面向专业人士，根据朋友的体验来看，11寸的妙控键盘的触控板还是太小了，而且键盘布局更为紧凑，12.9的稍微大些操作更便捷；
-                                                                </blockquote>
-                                                                <ul><li><b>建议3：蓝牙键盘+妙控板2。</b></li></ul>
-                                                                <blockquote>
-                                                                    乔大大说了，iPad的定位是介于iPhone和Mac之间。个人买iPad主要是看中可以手持并且屏幕比iPhone大，可以写写画画触摸抱着玩儿，所以任何约束于iPad的配件个人都不是很认同。如果办公，更推荐的是配一个无线蓝牙鼠标，比如众多朋友在用的罗技K380和妙控板2，总价大概1000。不用约束iPad，而且触控板面积大，使用过Mac的触控板就知道有多强大了，这2件还可以搭配其他的使用，比如，当我的Mac外接显示屏的时候也能用上。罗技K380主要是小巧便携，在办公室长久使用的话还是推荐其他的键盘。另外不推荐手小的朋友买罗技的Master 2s和3s系列，太大了握持感不太好。
-                                                                </blockquote>
-                                                                <ul><li><b>建议4：官网购买体验14天</b></li></ul>
-                                                                <blockquote>
-                                                                    建议通过官网购买，自己体验14天再做决定，不满意了还可以退。
-                                                                </blockquote>
-
-                                                                <h2>4.6 外接显示屏</h2>
-                                                                <p>iPad Pro改成了C接口，可以外接显示屏，太香了！</p>
-                                                                <p>
-                                                                    本人自用MacBook Pro13寸，iPad Pro11寸。iPad Pro 11寸抱着看视频或者记笔记，大小刚刚好，带出去方便。MacBook讲真自己用的时候还是感觉小了点，但是更在意的是便携并且没有16寸那么强的性能需求，但是，如果你买16寸仅仅是为了追求大屏幕，外接显示屏不香么？<b>6寸再大也只有16寸</b>，这里27寸4k显示屏推荐几个。
-                                                                </p>
-                                                                <p><b>b>几点建议：</b></p>
-                                                                <ul><li><b>建议1：分辨率4k以上；</b></li></ul>
-                                                                <p>2k字体会发虚，影响观感，iPad和Mac都是</p>
-                                                                <ul><li><b>建议2：预算充足买有type-C接口的；</b></li></ul>
-                                                                <p>这样就不需要转接线；</p>
-                                                                <ul><li><b>建议3：预算充足买可以反向充电的；</b></li></ul>
-                                                                <p>Mac低配和iPad接口分别是2个和1个，当然也够用，能够一根线连接显示屏并充电留出一个备用当然更好；</p>
-                                                                <ul><li><b>建议4：理性消费。</b></li></ul>
-                                                                <p>显示屏倒差不差，个人用的AOC那款已经感觉很舒服了，性价比高。</p>
-                                                                <p>以下推荐一般都是微边框，支持旋转升降壁挂，色准也不错，所以这些特点不赘述。</p>
-
-                                                                <p><b>推荐1：DELL U2720QM 价格：4199（随时变动，后同）</b></p>
-                                                                <p>2020年3月新款，原U2718Q的升级版27寸<br>接口为type-C ，支持90W供电</p>
-                                                                <a class="LinkCard" href="#">
-                                                                    <span class="LinkCard-content">
-                                                                        <span class="LinkCard-text">
-                                                                            <span class="LinkCard-title">戴尔（DELL）27英寸4K超清 IPS Type-C 90W反向充电 HDR400 旋转升降 四边微边框 电脑显示器 U2720QM
-                                                                            </span>
-                                                                            <span class="LinkCard-meta">
-                                                                                <span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd"></path></svg></span>
-                                                                                item.m.jd.com
-                                                                            </span>
-                                                                        </span>
-                                                                        <span class="LinkCard-imageCell">
-                                                                            <div>
-                                                                                <svg class="Zi Zi--Browser" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M11.991 3C7.023 3 3 7.032 3 12s4.023 9 8.991 9C16.968 21 21 16.968 21 12s-4.032-9-9.009-9zm6.237 5.4h-2.655a14.084 14.084 0 0 0-1.242-3.204A7.227 7.227 0 0 1 18.228 8.4zM12 4.836A12.678 12.678 0 0 1 13.719 8.4h-3.438A12.678 12.678 0 0 1 12 4.836zM5.034 13.8A7.418 7.418 0 0 1 4.8 12c0-.621.09-1.224.234-1.8h3.042A14.864 14.864 0 0 0 7.95 12c0 .612.054 1.206.126 1.8H5.034zm.738 1.8h2.655a14.084 14.084 0 0 0 1.242 3.204A7.188 7.188 0 0 1 5.772 15.6zm2.655-7.2H5.772a7.188 7.188 0 0 1 3.897-3.204c-.54.999-.954 2.079-1.242 3.204zM12 19.164a12.678 12.678 0 0 1-1.719-3.564h3.438A12.678 12.678 0 0 1 12 19.164zm2.106-5.364H9.894A13.242 13.242 0 0 1 9.75 12c0-.612.063-1.215.144-1.8h4.212c.081.585.144 1.188.144 1.8 0 .612-.063 1.206-.144 1.8zm.225 5.004c.54-.999.954-2.079 1.242-3.204h2.655a7.227 7.227 0 0 1-3.897 3.204zm1.593-5.004c.072-.594.126-1.188.126-1.8 0-.612-.054-1.206-.126-1.8h3.042c.144.576.234 1.179.234 1.8s-.09 1.224-.234 1.8h-3.042z"></path></svg>
-                                                                            </div>
-                                                                        </span>
-                                                                    </span>
-                                                                </a>
-
-                                                                <p><b>推荐2：LG 27UL850-W 价格：3099</b></p>
-                                                                <p>内置音箱，自带USB Type-C接口，同时传输4k画质和MacBook供电，60W</p>
-                                                                <a class="LinkCard" href="#">
-                                                                    <span class="LinkCard-content">
-                                                                        <span class="LinkCard-text">
-                                                                            <span class="LinkCard-title">LG 27英寸 UHD 4K超高清 HDR400 Type-C可60W反向充电 微边 IPS 内置音箱 适用PS4 设计师 显示器 27UL850-W</span>
-                                                                            <span class="LinkCard-meta">
-                                                                                <span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd"></path></svg></span>
-                                                                                item.m.jd.com
-                                                                            </span>
-                                                                        </span>
-                                                                        <span class="LinkCard-imageCell">
-                                                                            <div>
-                                                                                <svg class="Zi Zi--Browser" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M11.991 3C7.023 3 3 7.032 3 12s4.023 9 8.991 9C16.968 21 21 16.968 21 12s-4.032-9-9.009-9zm6.237 5.4h-2.655a14.084 14.084 0 0 0-1.242-3.204A7.227 7.227 0 0 1 18.228 8.4zM12 4.836A12.678 12.678 0 0 1 13.719 8.4h-3.438A12.678 12.678 0 0 1 12 4.836zM5.034 13.8A7.418 7.418 0 0 1 4.8 12c0-.621.09-1.224.234-1.8h3.042A14.864 14.864 0 0 0 7.95 12c0 .612.054 1.206.126 1.8H5.034zm.738 1.8h2.655a14.084 14.084 0 0 0 1.242 3.204A7.188 7.188 0 0 1 5.772 15.6zm2.655-7.2H5.772a7.188 7.188 0 0 1 3.897-3.204c-.54.999-.954 2.079-1.242 3.204zM12 19.164a12.678 12.678 0 0 1-1.719-3.564h3.438A12.678 12.678 0 0 1 12 19.164zm2.106-5.364H9.894A13.242 13.242 0 0 1 9.75 12c0-.612.063-1.215.144-1.8h4.212c.081.585.144 1.188.144 1.8 0 .612-.063 1.206-.144 1.8zm.225 5.004c.54-.999.954-2.079 1.242-3.204h2.655a7.227 7.227 0 0 1-3.897 3.204zm1.593-5.004c.072-.594.126-1.188.126-1.8 0-.612-.054-1.206-.126-1.8h3.042c.144.576.234 1.179.234 1.8s-.09 1.224-.234 1.8h-3.042z"></path></svg>
-                                                                            </div>
-                                                                        </span>
-                                                                    </span>
-                                                                </a>
-
-                                                                <p><b>推荐3：AOC U2790PC 价格：1999</b></p>
-                                                                <p>性价比很高</p>
-                                                                <a class="LinkCard" href="#">
-                                                                    <span class="LinkCard-content">
-                                                                        <span class="LinkCard-text">
-                                                                            <span class="LinkCard-title">AOC 27英寸 4K高清 升级HDR Type-C接口 IPS微框 99%sRGB 电脑办公 低蓝光旋转升降PS4液晶显示器 U2790PC</span>
-                                                                            <span class="LinkCard-meta">
-                                                                                <span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd"></path></svg></span>
-                                                                                item.m.jd.com
-                                                                            </span>
-                                                                        </span>
-                                                                        <span class="LinkCard-imageCell">
-                                                                            <div>
-                                                                                <svg class="Zi Zi--Browser" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M11.991 3C7.023 3 3 7.032 3 12s4.023 9 8.991 9C16.968 21 21 16.968 21 12s-4.032-9-9.009-9zm6.237 5.4h-2.655a14.084 14.084 0 0 0-1.242-3.204A7.227 7.227 0 0 1 18.228 8.4zM12 4.836A12.678 12.678 0 0 1 13.719 8.4h-3.438A12.678 12.678 0 0 1 12 4.836zM5.034 13.8A7.418 7.418 0 0 1 4.8 12c0-.621.09-1.224.234-1.8h3.042A14.864 14.864 0 0 0 7.95 12c0 .612.054 1.206.126 1.8H5.034zm.738 1.8h2.655a14.084 14.084 0 0 0 1.242 3.204A7.188 7.188 0 0 1 5.772 15.6zm2.655-7.2H5.772a7.188 7.188 0 0 1 3.897-3.204c-.54.999-.954 2.079-1.242 3.204zM12 19.164a12.678 12.678 0 0 1-1.719-3.564h3.438A12.678 12.678 0 0 1 12 19.164zm2.106-5.364H9.894A13.242 13.242 0 0 1 9.75 12c0-.612.063-1.215.144-1.8h4.212c.081.585.144 1.188.144 1.8 0 .612-.063 1.206-.144 1.8zm.225 5.004c.54-.999.954-2.079 1.242-3.204h2.655a7.227 7.227 0 0 1-3.897 3.204zm1.593-5.004c.072-.594.126-1.188.126-1.8 0-.612-.054-1.206-.126-1.8h3.042c.144.576.234 1.179.234 1.8s-.09 1.224-.234 1.8h-3.042z"></path></svg>
-                                                                            </div>
-                                                                        </span>
-                                                                    </span>
-                                                                </a>
-                                                                <p>预算不足或不需要Type-c，推荐下面这款，并配合转接线</p>
-
-                                                                <p><b>推荐4：AOC U2790PQU 价格：1799</b></p>
-                                                                <a class="LinkCard" href="#">
-                                                                    <span class="LinkCard-content">
-                                                                        <span class="LinkCard-text">
-                                                                            <span class="LinkCard-title">
-                                                                                AOC 27英寸 4K高清 IPS广视角 微框 99% sRGB 商用办公节能 低蓝光不闪旋转升降PS4液晶显示器 U2790PQU
-                                                                            </span>
-                                                                            <span class="LinkCard-meta">
-                                                                                <span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd"></path></svg></span>
-                                                                                item.m.jd.com
-                                                                            </span>
-                                                                        </span>
-                                                                        <span class="LinkCard-imageCell">
-                                                                            <div>
-                                                                                <svg class="Zi Zi--Browser" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M11.991 3C7.023 3 3 7.032 3 12s4.023 9 8.991 9C16.968 21 21 16.968 21 12s-4.032-9-9.009-9zm6.237 5.4h-2.655a14.084 14.084 0 0 0-1.242-3.204A7.227 7.227 0 0 1 18.228 8.4zM12 4.836A12.678 12.678 0 0 1 13.719 8.4h-3.438A12.678 12.678 0 0 1 12 4.836zM5.034 13.8A7.418 7.418 0 0 1 4.8 12c0-.621.09-1.224.234-1.8h3.042A14.864 14.864 0 0 0 7.95 12c0 .612.054 1.206.126 1.8H5.034zm.738 1.8h2.655a14.084 14.084 0 0 0 1.242 3.204A7.188 7.188 0 0 1 5.772 15.6zm2.655-7.2H5.772a7.188 7.188 0 0 1 3.897-3.204c-.54.999-.954 2.079-1.242 3.204zM12 19.164a12.678 12.678 0 0 1-1.719-3.564h3.438A12.678 12.678 0 0 1 12 19.164zm2.106-5.364H9.894A13.242 13.242 0 0 1 9.75 12c0-.612.063-1.215.144-1.8h4.212c.081.585.144 1.188.144 1.8 0 .612-.063 1.206-.144 1.8zm.225 5.004c.54-.999.954-2.079 1.242-3.204h2.655a7.227 7.227 0 0 1-3.897 3.204zm1.593-5.004c.072-.594.126-1.188.126-1.8 0-.612-.054-1.206-.126-1.8h3.042c.144.576.234 1.179.234 1.8s-.09 1.224-.234 1.8h-3.042z"></path></svg>
-                                                                            </div>
-                                                                        </span>
-                                                                    </span>
-                                                                </a>
-                                                                <p>只比上面的少了200，还是买上面的吧。</p>
-                                                                <p>此处放一张MacBook Pro和iPad Pro外接显示屏的图。解放双眼，极度舒适！</p>
-                                                                <p>iPad目前对显示屏全面显示的支持还有待完善，期待iPadOS后面能解决这个问题</p>
-                                                                <figure>
-                                                                    <img class="ztext-img-content" src="images/Topstory/v2-c0c4cbc9c6c46c65a6d852bb4b0d9e0e_720w.jpg" alt="">
-                                                                </figure>
-                                                                <figure>
-                                                                    <img class="ztext-img-content" src="images/Topstory/v2-9c5244c4ef5290f02265f87c25052382_720w.jpg" alt="">
-                                                                </figure>
-
-                                                                <hr>
-
-                                                                <h2>五、软件赠送与推荐（总价值5000）</h2>
-                                                                <h2>5.1 软件赠送</h2>
-                                                                <p>iPad app 600多款正版软件：工作效率类、笔记类和绘画类等。</p>
-                                                                <p>适用于各种类型的iPad。</p>
-                                                                <p>Goodnotes5，Notability，Procreate，Lumafusion，Marginnote，Anki等等。</p>
-                                                                <h2>送给大家！！！</h2>
-                                                                <p>PS：建议笔记类的大家自己下载体验过后自己购买正版，以防自己的笔记丢失。</p>
-                                                                <p>消息太多，晚点都会统一发给大家！</p>
-
-                                                                <h2>5.2 软件推荐</h2>
-                                                                <p>软件知乎很多朋友都有推，常用的就先不说了</p>
-                                                                <p>更多的推荐请收藏</p>
-                                                                <a class="LinkCard" href="#">
-                                                                    <span class="LinkCard-backdrop" style="background-image:url(images/Topstory/v2-826b0e91f4a28255e21eb663ac1484e0_ipico.jpg)"></span>
-                                                                    <span class="LinkCard-content">
-                                                                        <span class="LinkCard-text">
-                                                                            <span class="LinkCard-title">
-                                                                                https://zhuanlan.zhihu.com/p/151811038
-                                                                            </span>
-                                                                            <span class="LinkCard-meta">
-                                                                                <span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd"></path></svg></span>
-                                                                                zhuanlan.zhihu.com
-                                                                            </span>
-                                                                        </span>
-                                                                        <span class="LinkCard-imageCell">
-                                                                            <img src="images/Topstory/v2-826b0e91f4a28255e21eb663ac1484e0_ipico.jpg" alt="">
-                                                                        </span>
-                                                                    </span>
-                                                                </a>
-                                                                <ul><li><b>1 Goodnotes和Notability</b></li></ul>
-                                                                <p>二者选其一，录音功能需求的选Notability。</p>
-                                                                <p>个人购买的Goodnotes，原因很简单，因为APP更美观。</p>
-                                                                <ul><li><b>2 模糊HQ</b></li></ul>
-                                                                <p>可以将壁纸图片进行任意模糊处理，这样的好处，就是突出了APP视图，个人感觉还是很舒服的，下图有模糊前后的对比图。</p>
-                                                                <figure>
-                                                                    <img class="ztext-img-content" src="images/Topstory/v2-bd8daa2673ceee73d9e67395b7929304_720w.jpg" alt="">
-                                                                </figure>
-                                                                <figure>
-                                                                    <img class="ztext-img-content" src="images/Topstory/v2-8f954b2da3ee0df2b200b11ee8ce6908_720w.jpg" alt="">
-                                                                </figure>
-                                                                <figure>
-                                                                    <img class="ztext-img-content" src="images/Topstory/v2-539bdd97d7db367630e8bec593c3755e_720w.jpg" alt="">
-                                                                </figure>
-
-                                                                <hr>
-
-                                                                <h2>六、选购建议</h2>
-
-                                                                <h2>问题1：你真的需要一个iPad Pro么？</h2>
-                                                                <p>作为一个果粉，必须得说苹果的东西确实体验很好，作为一个不称职的果粉，也必须得说，苹果营销的魔力真的是丧心病狂，相信大家已经感受到了，看了铺天盖地的苹果广告，媒体宣传微博热搜，朋友圈好友晒图，即使你不太需要，还是心心念念，即使一个月工资只有几千，还是想买Pro。最近刚好在看《乔布斯传》，这股庞大的侵蚀你心得力量根植于苹果公司的文化，在这里劝大家控制好自己的大脑，理性消费，疫情过后，发现还是多挣钱存钱还是很有必要的。</p>
-                                                                <p>没有iPad Pro，你也是后浪……</p>
-                                                                <p>买之前，问问自己是否真的需要它，毕竟价格不低，而且对于大多数人来说，购买iPad Pro说实在的其实有点浪费，高性能都不一定用得上。之前有一个iPad Air2，用了大概4年，依旧很流畅，但是平时学习工作就顾不上了，放在那儿吃灰也挺久，19年二手转了。当然，iPad Pro的颜值，Face ID的加成，四扬声器和120hz的屏幕确实让人垂涎三尺，也对得起Pro这个。另外还有Air 3、17年的Pro（二手平台）可以尝试，体验也不差。<b>最最最重要的就是，如果你妄图用它替代PC办公，还是放弃吧！你的下一台电脑，还得是电脑！</b></p>
-                                                                <p>如果你还在纠结，看看这篇文章。</p>
-                                                                <a class="LinkCard" href="#">
-                                                                    <span class="LinkCard-backdrop" style="background-image:url(images/Topstory/zhihu-card-default_ipico.jpg)"></span>
-                                                                    <span class="LinkCard-content">
-                                                                        <span class="LinkCard-text">
-                                                                            <span class="LinkCard-title">消费主义是如何通过伪造文化来欺骗年轻人的？
-                                                                            </span>
-                                                                            <span class="LinkCard-meta">
-                                                                                <span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd"></path></svg></span>
-                                                                                www.zhihu.com
-                                                                            </span>
-                                                                        </span>
-                                                                        <span class="LinkCard-imageCell">
-                                                                            <img src="images/Topstory/zhihu-card-default_ipico.jpg" alt="">
-                                                                        </span>
-                                                                    </span>
-                                                                </a>
-
-                                                                <h2>问题2：12.9寸 or 11寸?</h2>
-                                                                <p>选购建议大家也给了很多，我也看了很多，在此个人不太建议无脑选12.9寸。大屏幕是挺爽，但是还是那句话，12.9寸再大也只有12.9寸。最重要的还是自己需求，是否更注重便携小巧，个人比较推荐11寸，用钟亦凡的话来说就是，省出来的1000多买排骨！</p>
-                                                                <p>简而言之，有绘画需求，重度依靠iPad学习办公的选12.9寸，追求便携，轻度办公（主要是码字）选11寸。最好的还是去直营店体验一下，自己做决定，这个极其依赖于个人体验，如人饮水冷暖自知。</p>
-                                                                <blockquote>
-                                                                    <i>6.15更：文章反复强调的一点就是自己体验，因为每个人的感受是不同的，所以我的建议也只能是建议，最后做决定的还是你，就像评论区有位朋友原打算买11寸，看了文章以后去直营店体验过后转而买了12.9寸。</i>
-                                                                </blockquote>
-
-                                                                <h2>问题3：蜂窝版 or WiFi版</h2>
-                                                                <p>仅代表个人观点，有的翻车只是个概率事件。</p>
-                                                                <p>现在有一个消费观念，也是自己在不断强化的是，买产品并不只是产品本身，还有其带的服务，在你经济允许的情况下。</p>
-                                                                <ul><li><b>最推荐的是：官网或者直营店</b></li></ul>
-                                                                <p><b>没有翻车的风险。</b>首先官网产品的质量肯定是众多平台中最靠谱的。因为即使质量有问题，14天内可以无理由退换，而且这个政策，适合冲动消费的人群，当十来天以后发现Pro也不过如此，体验过了还可以全额退款。当然，官网买就是原价，或者教育优惠也能省一些，能免息就免息，免息分期算一算其实便宜不少了。官网还有一个就是可以买到官网翻新iPad，官网翻新其实和全新的差不多，不过款式不多，一般都是蜂窝版，但是性价比还不错，所以预算有限，可以考虑，都买翻新了，就别去其他地方折腾了。</p>
-                                                                <ul><li><b>其次推荐：京东自营or授权经销商</b></li></ul>
-                                                                <p>虽说不是亲生的，官方授权的经销商品质还是很有保证的，只是激活后不能退货。</p>
-                                                                <ul><li><b>最后推荐：没有推荐</b></li></ul>
-                                                                <p>几大千都花了，为了省几百去某夕夕，冒着翻车的风险，个人认为不值得。</p>
-                                                                <p>有朋友翻过车，iPhone和iPad都有过，所以，还是多花点钱买个放心吧！</p>
-
-                                                                <hr>
-
-                                                                <p>大家想了解的都可以在评论区提一下！</p>
-                                                                <p>感谢支持，您的点赞和关注是我创作的最大动力！</p>
-                                                                <figure>
-                                                                    <img src="images/Topstory/v2-2eda93e55f25b0e29088069092ded63c_720w.jpg" alt="">
-                                                                </figure>
-                                                                <p></p>
-                                                            </div>--%>
                                                         </span>
                                                     </div>
                                                     <div>
@@ -1745,3 +1335,413 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                             <path d="M9.586 3a1 1 0 0 1 .707.293l1.414 1.414a1 1 0 0 0 .707.293H21a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h6.586zM4 11v6.75c0 .138.112.25.25.25h15.5a.25.25 0 0 0 .25-.25V11H4zm0-2h16V7.25a.25.25 0 0 0-.25-.25h-8.164a1 1 0 0 1-.707-.293L9.464 5.293A1 1 0 0 0 8.757 5H4.25a.25.25 0 0 0-.25.25V9z"></path>
                                                         </svg>
                                                     </button>--%>
+<%--<div class="ztext-cover">
+    <img class="ztext-cover-content" src="images/Topstory/v2-8f954b2da3ee0df2b200b11ee8ce6908_hd.jpg" alt="">
+</div>
+<div class="ztext-content">
+    <blockquote>
+    长文预警，全文4500字左右，阅读5分钟，建议赞了再收藏之后慢慢看~
+    <br>史上最全夸张了，争取最全~！
+    <br>以下建议均根据个人体验而提，如有其他建议和想法，欢迎大家在评论区留言讨论！
+    </blockquote>
+
+    <h2><b><i><说在前面></i></b></h2>
+    <p><b><i>2020款iPad Pro横空出世，Apple放出豪言：“你的下一台电脑，何必是电脑？！”</i></b></p>
+
+    <p><b><i>究竟是什么，让Apple有这样的底气口出狂言？那当然是 iPadOS ！</i></b></p>
+    <p><b><i>它是为 iPad 量身打造的操作系统，只为尽显 iPad 本色！</i></b></p>
+    <p><b><i>它让宽大的多点触控显示屏、超快性能、多款强大 app 都能发挥到淋漓尽致。</i></b></p>
+    <p><b><i>现在更支持触控板，为 iPad 打开了崭新的互动体验。</i></b></p>
+
+    <h2><b><i><目录></i></b></h2>
+    <p><b><i>一、主屏幕设置</i></b></p>
+    <p><b><i>二、侧拉和分屏浏览（视频演示）</i></b></p>
+    <p><b><i>三、iPad OS触控板支持</i></b></p>
+    <p><b><i>四、配件建议：Care、Apple pencil等</i></b></p>
+    <p><b><i>五、软件赠送及推荐（600多款正版软件）</i></b></p>
+    <p><b><i>六、选购建议（11寸or12.9寸）</i></b></p>
+
+    <hr>
+
+    <h2>一、主屏幕设置</h2>
+    <figure class="ztext-img">
+        <img class="ztext-img-content" src="images/Topstory/v2-c87c9392978a43d163f0c1a0fc961797_720w.jpg" alt="">
+    </figure>
+    <blockquote>
+        <i>6.20更：很多朋友都想要这张壁纸，私聊我噢，给你发原图~</i>
+    </blockquote>
+
+    <h2>推荐固定的小组件软件</h2>
+    <ul><li><b>1 MY WEATHER</b></li></ul>
+    <p>界面简洁颜值高，系统自带的也不错</p>
+    <ul><li><b>2 系统日历</b></li></ul>
+    <p>有助于规划日程</p>
+    <ul><li><b>3 电池小组件</b></li></ul>
+    <p>得先连接一个蓝牙设备才能显示在小组件内才能显示</p>
+    <figure class="ztext-img">
+        <img class="ztext-img-content" src="images/Topstory/v2-914860533e19a72642082a42f410ad30_720w.jpg" alt="">
+    </figure>
+    <ul><li><b>4 SYS BOX</b></li></ul>
+    <p>显示<b>常用软件</b>，<b>磁盘容量</b>，<b>内存占用</b>和<b>常用应用</b>，最重要的是能<b>显示网速</b>！这个只要1元，买不了吃亏，买不了上当。</p>
+    <figure class="ztext-img">
+        <img class="ztext-img-content" src="images/Topstory/v2-975ba499889814f2c6f64e4b2e4d4094_720w.jpg" alt="">
+    </figure>
+
+    <hr>
+
+    <h2>二、侧拉和分屏</h2>
+    <h2>2.1 侧拉</h2>
+    <h2>2.2 分屏浏览</h2>
+    <figure class="ztext-img">
+        <img class="ztext-img-content" src="images/Topstory/v2-8dab19b9e4a0868c6dadf33dff85bca1_720w.jpg" alt="">
+    </figure>
+    <P>侧拉功能，让你常用的各款 App 随时待命</P>
+    <P>你可以将同一个 app 在多个空间窗口中打开</P>
+    <P>然后只需在程序坞中轻点某个 app 图标，即可查看所有打开了这个 app 的空间窗口</P>
+    <P><b>以下是本人亲自动手制作的演示视频，欢迎点赞！</b></P>
+    <p><b>视频也放在了B站，后期会有其他的更新也会更新在B站，欢迎三连关注</b></p>
+    <a class="LinkCard" href="#">
+        <span class="LinkCard-backdrop" style="background-image:url(images/Topstory/v2-5d31206092fcfe4b728b30d0f9d86066_180x120.jpg)"></span>
+        <span class="LinkCard-content">
+            <span class="LinkCard-text">
+                <span class="LinkCard-title">
+                    你真的会用iPad的分屏侧拉吗？？？_哔哩哔哩 (゜-゜)つロ 干杯~-bilibili
+                </span>
+                <span class="LinkCard-meta">
+                    <span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd"></path></svg></span>
+                    www.bilibili.com
+                </span>
+            </span>
+            <span class="LinkCard-imageCell LinkCard-image--horizontal">
+                <img src="images/Topstory/v2-5d31206092fcfe4b728b30d0f9d86066_180x120.jpg" alt="">
+            </span>
+        </span>
+    </a>
+
+    <div class="VideoLinkCard">
+        <div class="VideoLinkCard-video">
+            <video class="VideoLinkCard-video-content" src="images/Topstory/video/e227e69c-b535-11ea-a76a-3aa14924a230.mp4" controls="controls"></video>
+        </div>
+        <a href="#" class="VideoLinkCard-link">
+            <div class="VideoLinkCard-title">
+                iPadOS分屏侧拉视频演示
+            </div>
+            <div class="VideoLinkCard-author">
+                <img src="images/touxiang/v2-ab950b3059d10127384525299dfc0216_xs.jpg" alt="">
+                <div>Bravos里奥的视频</div>
+                <div>&nbsp;·&nbsp;6169 播放</div>
+            </div>
+        </a>
+    </div>
+
+    <h2>2.3 文本编辑新手势</h2>
+    <ul>
+        <li>现在除触控手势以外，还可以使用触控板或鼠标来进行操控。</li>
+        <li>三指向左轻扫撤销操作；</li>
+        <li>把光标精准拖放到想要的位置；</li>
+        <li>用手指在一段文本上拖动，快速选中这个段落；</li>
+        <li>轻点两下选中一个词，三下选中一句话，四下选中一整段。</li>
+    </ul>
+
+    <hr>
+
+    <h2>三、iPad OS 触控板支持</h2>
+    <p>现在除触控手势以外，还可以使用触控板或鼠标来进行操控。</p>
+    <p>这个是iPad Pro迈向生产力的关键一步，但是一个能买入门级iPad价格的键盘是否真的值得呢？下文配件的选购中有个人的一点建议。</p>
+    <figure class="ztext-img">
+        <img class="ztext-img-content" src="images/Topstory/v2-eb381e8628d97884b6ebfccc25b3983c_720w.jpg" alt="">
+    </figure>
+    <h2>3.1 光标</h2>
+    <p>随内容自动调整光标可根据按钮、app 图标和文本等内容灵活变化形态，个人体验感觉还不错，这个小点点有点点可爱。</p>
+    <h2>3.2 触控板</h2>
+    <ul><li><b>轻扫切换APP</b></li></ul>
+    <p>使用三指左右轻扫，即可在APP之间切换</p>
+    <ul><li><b>APP切换器</b></li></ul>
+    <p>三指向上轻扫并停住，可显示APP切换器</p>
+    <ul><li><b>返回主屏幕</b></li></ul>
+    <p>三指向上扫，即可从iPadOS的任意位置回到主屏幕</p>
+    <ul><li><b>滚动</b></li></ul>
+    <p>双指在触控板或单指在妙控鼠标上轻扫，可快速浏览网页和文档</p>
+    <ul><li><b>点按右键</b></li></ul>
+    <p>双指点按触控板或点按鼠标右键可调出上下文菜单</p>
+
+    <hr>
+
+    <h2>四、配件建议：Care、Apple pencil、保护壳、膜、键盘、鼠标</h2>
+
+    <h2>4.1 Apple Care+（以下简称AC+）</h2>
+    <p>在直营店工作的朋友极力推荐买，原因有以下几点：</p>
+    <ul>
+        <li>原因1：还是那个原因，iPad 容易弯；</li>
+        <li>原因2：AC+不仅保iPad，还有配件，例如Apple pencil和妙控键盘；</li>
+        <li>原因3：维修费用昂贵，有了AC+花300多就可以换新；</li>
+        <li>原因4：AC+可以退，按天计费。</li>
+    </ul>
+    <blockquote>
+        不太推荐大家买了AC+，两年快到了自己搞一搞破坏去换个全新的官换，不过合理利用规则也是可以的。个人看法仅供参考，电子产品是个玄学，在你手里面两年没坏说明质量还不错，换个官换就说不定了，毕竟近年来苹果的品控不如以前（这个是偶然看到一个大哥在某个回答中提到，观点比较一致所以在此提出，他就是一个朋友用了两年换了官换，后面出问题继续更换了两次才好的）。还有AirPods Pro推荐大家买AC+，因为电池两年肯定是80%健康度以下的，只能换新，这个还不错。
+    </blockquote>
+
+    <h2>4.2 Apple pencil</h2>
+    <ul><li><b>1 工具切换</b></li></ul>
+    <p>如果使用Goodnotes和Notability做笔记的话，选择在当前工具和橡皮擦之间切换能大大提高效率！</p>
+    <ul><li><b>2 截屏</b></li></ul>
+    <p>使用Apple pencil 从屏幕角落往中间拉就能实现截屏操作</p>
+    <p>官方展示的视频如下，还有其他操作，我之前。</p>
+    <div class="VideoLinkCard">
+        <div class="VideoLinkCard-video">
+            <video class="VideoLinkCard-video-content" src="images/Topstory/video/83c54734-9f28-11ea-ad8f-46eb7a410147.mp4" controls="controls"></video>
+        </div>
+        <a href="#" class="VideoLinkCard-link">
+            <div class="VideoLinkCard-title">
+                iPad OS
+            </div>
+            <div class="VideoLinkCard-author">
+                <img src="images/touxiang/v2-ab950b3059d10127384525299dfc0216_xs.jpg" alt="">
+                <div>Bravos里奥的视频</div>
+                <div>&nbsp;·&nbsp;1975 播放</div>
+            </div>
+        </a>
+    </div>
+
+    <h2>4.2 壳</h2>
+    <ul><li><b>建议1：买硬壳</b></li></ul>
+    <p>不要买软壳，iPad特别容易弯这个弯过的都知道；</p>
+    <ul><li><b>建议2：买能包住四周的</b></li></ul>
+    <p>像官网的smart cover保护不了四周，容易产生划痕。</p>
+
+    <h2>4.3 膜</h2>
+    <ul><li><b>建议1：不是特别推荐类纸膜。</b></li></ul>
+    <p>除非你对书写体验有极强的要求，贴上类纸膜真的是暴殄天物，浪费了世界上最优秀的一块Magic玻璃；</p>
+    <blockquote>
+        <b><i>6.15更：</i></b>
+        <i>评论区有画师说，任何一个画师都不会同意这个观点。这个就是看你自己更注重哪方面了，是牺牲屏幕观感还是手绘的舒适体验，这个自己可以试试。</i>
+    </blockquote>
+    <ul><li><b>建议2：推荐钢化膜。</b></li></ul>
+    <p>强迫症不能接受屏幕有划痕，钢化膜不怎么影响屏幕观感；</p>
+    <ul><li><b>建议3：推荐笔尖套。</b></li></ul>
+    <p>这个可以提升书写体验，而且白菜价；</p>
+    <ul><li><b>建议4：裸奔体验最佳。</b></li></ul>
+    <p>前提是，你买了AC+，能接受屏幕有细微的划痕。</p>
+    <p>总结一句话，电子产品是用来消费的，不是用来供着的，裸奔的手感和屏幕的观感都是最佳的，如果不考虑以后出二手或者对细微划痕不在意，裸奔吧，这才是个人体验科技的极致！</p>
+
+    <h2>4.5 妙控键盘</h2>
+    <ul><li><b>建议1：考虑清楚是否需要；</b></li></ul>
+    <blockquote>
+        如果你不是重度iPad办公使用者，做的只是一些基础的文稿编辑类的工作，妙控键盘对你来说意义不大，妙控键盘虽然是iPad转向生产力的重要一步，但是高昂的价格是否对得起它的实际价值，这个目前看来还是不成正比的，所以你的下一台电脑，还得是电脑；
+    </blockquote>
+    <ul><li><b>建议2：12.9寸买，11寸不买；</b></li></ul>
+    <blockquote>
+        12.9寸的iPad Pro更面向专业人士，根据朋友的体验来看，11寸的妙控键盘的触控板还是太小了，而且键盘布局更为紧凑，12.9的稍微大些操作更便捷；
+    </blockquote>
+    <ul><li><b>建议3：蓝牙键盘+妙控板2。</b></li></ul>
+    <blockquote>
+        乔大大说了，iPad的定位是介于iPhone和Mac之间。个人买iPad主要是看中可以手持并且屏幕比iPhone大，可以写写画画触摸抱着玩儿，所以任何约束于iPad的配件个人都不是很认同。如果办公，更推荐的是配一个无线蓝牙鼠标，比如众多朋友在用的罗技K380和妙控板2，总价大概1000。不用约束iPad，而且触控板面积大，使用过Mac的触控板就知道有多强大了，这2件还可以搭配其他的使用，比如，当我的Mac外接显示屏的时候也能用上。罗技K380主要是小巧便携，在办公室长久使用的话还是推荐其他的键盘。另外不推荐手小的朋友买罗技的Master 2s和3s系列，太大了握持感不太好。
+    </blockquote>
+    <ul><li><b>建议4：官网购买体验14天</b></li></ul>
+    <blockquote>
+        建议通过官网购买，自己体验14天再做决定，不满意了还可以退。
+    </blockquote>
+
+    <h2>4.6 外接显示屏</h2>
+    <p>iPad Pro改成了C接口，可以外接显示屏，太香了！</p>
+    <p>
+        本人自用MacBook Pro13寸，iPad Pro11寸。iPad Pro 11寸抱着看视频或者记笔记，大小刚刚好，带出去方便。MacBook讲真自己用的时候还是感觉小了点，但是更在意的是便携并且没有16寸那么强的性能需求，但是，如果你买16寸仅仅是为了追求大屏幕，外接显示屏不香么？<b>6寸再大也只有16寸</b>，这里27寸4k显示屏推荐几个。
+    </p>
+    <p><b>b>几点建议：</b></p>
+    <ul><li><b>建议1：分辨率4k以上；</b></li></ul>
+    <p>2k字体会发虚，影响观感，iPad和Mac都是</p>
+    <ul><li><b>建议2：预算充足买有type-C接口的；</b></li></ul>
+    <p>这样就不需要转接线；</p>
+    <ul><li><b>建议3：预算充足买可以反向充电的；</b></li></ul>
+    <p>Mac低配和iPad接口分别是2个和1个，当然也够用，能够一根线连接显示屏并充电留出一个备用当然更好；</p>
+    <ul><li><b>建议4：理性消费。</b></li></ul>
+    <p>显示屏倒差不差，个人用的AOC那款已经感觉很舒服了，性价比高。</p>
+    <p>以下推荐一般都是微边框，支持旋转升降壁挂，色准也不错，所以这些特点不赘述。</p>
+
+    <p><b>推荐1：DELL U2720QM 价格：4199（随时变动，后同）</b></p>
+    <p>2020年3月新款，原U2718Q的升级版27寸<br>接口为type-C ，支持90W供电</p>
+    <a class="LinkCard" href="#">
+        <span class="LinkCard-content">
+            <span class="LinkCard-text">
+                <span class="LinkCard-title">戴尔（DELL）27英寸4K超清 IPS Type-C 90W反向充电 HDR400 旋转升降 四边微边框 电脑显示器 U2720QM
+                </span>
+                <span class="LinkCard-meta">
+                    <span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd"></path></svg></span>
+                    item.m.jd.com
+                </span>
+            </span>
+            <span class="LinkCard-imageCell">
+                <div>
+                    <svg class="Zi Zi--Browser" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M11.991 3C7.023 3 3 7.032 3 12s4.023 9 8.991 9C16.968 21 21 16.968 21 12s-4.032-9-9.009-9zm6.237 5.4h-2.655a14.084 14.084 0 0 0-1.242-3.204A7.227 7.227 0 0 1 18.228 8.4zM12 4.836A12.678 12.678 0 0 1 13.719 8.4h-3.438A12.678 12.678 0 0 1 12 4.836zM5.034 13.8A7.418 7.418 0 0 1 4.8 12c0-.621.09-1.224.234-1.8h3.042A14.864 14.864 0 0 0 7.95 12c0 .612.054 1.206.126 1.8H5.034zm.738 1.8h2.655a14.084 14.084 0 0 0 1.242 3.204A7.188 7.188 0 0 1 5.772 15.6zm2.655-7.2H5.772a7.188 7.188 0 0 1 3.897-3.204c-.54.999-.954 2.079-1.242 3.204zM12 19.164a12.678 12.678 0 0 1-1.719-3.564h3.438A12.678 12.678 0 0 1 12 19.164zm2.106-5.364H9.894A13.242 13.242 0 0 1 9.75 12c0-.612.063-1.215.144-1.8h4.212c.081.585.144 1.188.144 1.8 0 .612-.063 1.206-.144 1.8zm.225 5.004c.54-.999.954-2.079 1.242-3.204h2.655a7.227 7.227 0 0 1-3.897 3.204zm1.593-5.004c.072-.594.126-1.188.126-1.8 0-.612-.054-1.206-.126-1.8h3.042c.144.576.234 1.179.234 1.8s-.09 1.224-.234 1.8h-3.042z"></path></svg>
+                </div>
+            </span>
+        </span>
+    </a>
+
+    <p><b>推荐2：LG 27UL850-W 价格：3099</b></p>
+    <p>内置音箱，自带USB Type-C接口，同时传输4k画质和MacBook供电，60W</p>
+    <a class="LinkCard" href="#">
+        <span class="LinkCard-content">
+            <span class="LinkCard-text">
+                <span class="LinkCard-title">LG 27英寸 UHD 4K超高清 HDR400 Type-C可60W反向充电 微边 IPS 内置音箱 适用PS4 设计师 显示器 27UL850-W</span>
+                <span class="LinkCard-meta">
+                    <span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd"></path></svg></span>
+                    item.m.jd.com
+                </span>
+            </span>
+            <span class="LinkCard-imageCell">
+                <div>
+                    <svg class="Zi Zi--Browser" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M11.991 3C7.023 3 3 7.032 3 12s4.023 9 8.991 9C16.968 21 21 16.968 21 12s-4.032-9-9.009-9zm6.237 5.4h-2.655a14.084 14.084 0 0 0-1.242-3.204A7.227 7.227 0 0 1 18.228 8.4zM12 4.836A12.678 12.678 0 0 1 13.719 8.4h-3.438A12.678 12.678 0 0 1 12 4.836zM5.034 13.8A7.418 7.418 0 0 1 4.8 12c0-.621.09-1.224.234-1.8h3.042A14.864 14.864 0 0 0 7.95 12c0 .612.054 1.206.126 1.8H5.034zm.738 1.8h2.655a14.084 14.084 0 0 0 1.242 3.204A7.188 7.188 0 0 1 5.772 15.6zm2.655-7.2H5.772a7.188 7.188 0 0 1 3.897-3.204c-.54.999-.954 2.079-1.242 3.204zM12 19.164a12.678 12.678 0 0 1-1.719-3.564h3.438A12.678 12.678 0 0 1 12 19.164zm2.106-5.364H9.894A13.242 13.242 0 0 1 9.75 12c0-.612.063-1.215.144-1.8h4.212c.081.585.144 1.188.144 1.8 0 .612-.063 1.206-.144 1.8zm.225 5.004c.54-.999.954-2.079 1.242-3.204h2.655a7.227 7.227 0 0 1-3.897 3.204zm1.593-5.004c.072-.594.126-1.188.126-1.8 0-.612-.054-1.206-.126-1.8h3.042c.144.576.234 1.179.234 1.8s-.09 1.224-.234 1.8h-3.042z"></path></svg>
+                </div>
+            </span>
+        </span>
+    </a>
+
+    <p><b>推荐3：AOC U2790PC 价格：1999</b></p>
+    <p>性价比很高</p>
+    <a class="LinkCard" href="#">
+        <span class="LinkCard-content">
+            <span class="LinkCard-text">
+                <span class="LinkCard-title">AOC 27英寸 4K高清 升级HDR Type-C接口 IPS微框 99%sRGB 电脑办公 低蓝光旋转升降PS4液晶显示器 U2790PC</span>
+                <span class="LinkCard-meta">
+                    <span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd"></path></svg></span>
+                    item.m.jd.com
+                </span>
+            </span>
+            <span class="LinkCard-imageCell">
+                <div>
+                    <svg class="Zi Zi--Browser" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M11.991 3C7.023 3 3 7.032 3 12s4.023 9 8.991 9C16.968 21 21 16.968 21 12s-4.032-9-9.009-9zm6.237 5.4h-2.655a14.084 14.084 0 0 0-1.242-3.204A7.227 7.227 0 0 1 18.228 8.4zM12 4.836A12.678 12.678 0 0 1 13.719 8.4h-3.438A12.678 12.678 0 0 1 12 4.836zM5.034 13.8A7.418 7.418 0 0 1 4.8 12c0-.621.09-1.224.234-1.8h3.042A14.864 14.864 0 0 0 7.95 12c0 .612.054 1.206.126 1.8H5.034zm.738 1.8h2.655a14.084 14.084 0 0 0 1.242 3.204A7.188 7.188 0 0 1 5.772 15.6zm2.655-7.2H5.772a7.188 7.188 0 0 1 3.897-3.204c-.54.999-.954 2.079-1.242 3.204zM12 19.164a12.678 12.678 0 0 1-1.719-3.564h3.438A12.678 12.678 0 0 1 12 19.164zm2.106-5.364H9.894A13.242 13.242 0 0 1 9.75 12c0-.612.063-1.215.144-1.8h4.212c.081.585.144 1.188.144 1.8 0 .612-.063 1.206-.144 1.8zm.225 5.004c.54-.999.954-2.079 1.242-3.204h2.655a7.227 7.227 0 0 1-3.897 3.204zm1.593-5.004c.072-.594.126-1.188.126-1.8 0-.612-.054-1.206-.126-1.8h3.042c.144.576.234 1.179.234 1.8s-.09 1.224-.234 1.8h-3.042z"></path></svg>
+                </div>
+            </span>
+        </span>
+    </a>
+    <p>预算不足或不需要Type-c，推荐下面这款，并配合转接线</p>
+
+    <p><b>推荐4：AOC U2790PQU 价格：1799</b></p>
+    <a class="LinkCard" href="#">
+        <span class="LinkCard-content">
+            <span class="LinkCard-text">
+                <span class="LinkCard-title">
+                    AOC 27英寸 4K高清 IPS广视角 微框 99% sRGB 商用办公节能 低蓝光不闪旋转升降PS4液晶显示器 U2790PQU
+                </span>
+                <span class="LinkCard-meta">
+                    <span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd"></path></svg></span>
+                    item.m.jd.com
+                </span>
+            </span>
+            <span class="LinkCard-imageCell">
+                <div>
+                    <svg class="Zi Zi--Browser" fill="currentColor" viewBox="0 0 24 24" width="32" height="32"><path d="M11.991 3C7.023 3 3 7.032 3 12s4.023 9 8.991 9C16.968 21 21 16.968 21 12s-4.032-9-9.009-9zm6.237 5.4h-2.655a14.084 14.084 0 0 0-1.242-3.204A7.227 7.227 0 0 1 18.228 8.4zM12 4.836A12.678 12.678 0 0 1 13.719 8.4h-3.438A12.678 12.678 0 0 1 12 4.836zM5.034 13.8A7.418 7.418 0 0 1 4.8 12c0-.621.09-1.224.234-1.8h3.042A14.864 14.864 0 0 0 7.95 12c0 .612.054 1.206.126 1.8H5.034zm.738 1.8h2.655a14.084 14.084 0 0 0 1.242 3.204A7.188 7.188 0 0 1 5.772 15.6zm2.655-7.2H5.772a7.188 7.188 0 0 1 3.897-3.204c-.54.999-.954 2.079-1.242 3.204zM12 19.164a12.678 12.678 0 0 1-1.719-3.564h3.438A12.678 12.678 0 0 1 12 19.164zm2.106-5.364H9.894A13.242 13.242 0 0 1 9.75 12c0-.612.063-1.215.144-1.8h4.212c.081.585.144 1.188.144 1.8 0 .612-.063 1.206-.144 1.8zm.225 5.004c.54-.999.954-2.079 1.242-3.204h2.655a7.227 7.227 0 0 1-3.897 3.204zm1.593-5.004c.072-.594.126-1.188.126-1.8 0-.612-.054-1.206-.126-1.8h3.042c.144.576.234 1.179.234 1.8s-.09 1.224-.234 1.8h-3.042z"></path></svg>
+                </div>
+            </span>
+        </span>
+    </a>
+    <p>只比上面的少了200，还是买上面的吧。</p>
+    <p>此处放一张MacBook Pro和iPad Pro外接显示屏的图。解放双眼，极度舒适！</p>
+    <p>iPad目前对显示屏全面显示的支持还有待完善，期待iPadOS后面能解决这个问题</p>
+    <figure>
+        <img class="ztext-img-content" src="images/Topstory/v2-c0c4cbc9c6c46c65a6d852bb4b0d9e0e_720w.jpg" alt="">
+    </figure>
+    <figure>
+        <img class="ztext-img-content" src="images/Topstory/v2-9c5244c4ef5290f02265f87c25052382_720w.jpg" alt="">
+    </figure>
+
+    <hr>
+
+    <h2>五、软件赠送与推荐（总价值5000）</h2>
+    <h2>5.1 软件赠送</h2>
+    <p>iPad app 600多款正版软件：工作效率类、笔记类和绘画类等。</p>
+    <p>适用于各种类型的iPad。</p>
+    <p>Goodnotes5，Notability，Procreate，Lumafusion，Marginnote，Anki等等。</p>
+    <h2>送给大家！！！</h2>
+    <p>PS：建议笔记类的大家自己下载体验过后自己购买正版，以防自己的笔记丢失。</p>
+    <p>消息太多，晚点都会统一发给大家！</p>
+
+    <h2>5.2 软件推荐</h2>
+    <p>软件知乎很多朋友都有推，常用的就先不说了</p>
+    <p>更多的推荐请收藏</p>
+    <a class="LinkCard" href="#">
+        <span class="LinkCard-backdrop" style="background-image:url(images/Topstory/v2-826b0e91f4a28255e21eb663ac1484e0_ipico.jpg)"></span>
+        <span class="LinkCard-content">
+            <span class="LinkCard-text">
+                <span class="LinkCard-title">
+                    https://zhuanlan.zhihu.com/p/151811038
+                </span>
+                <span class="LinkCard-meta">
+                    <span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd"></path></svg></span>
+                    zhuanlan.zhihu.com
+                </span>
+            </span>
+            <span class="LinkCard-imageCell">
+                <img src="images/Topstory/v2-826b0e91f4a28255e21eb663ac1484e0_ipico.jpg" alt="">
+            </span>
+        </span>
+    </a>
+    <ul><li><b>1 Goodnotes和Notability</b></li></ul>
+    <p>二者选其一，录音功能需求的选Notability。</p>
+    <p>个人购买的Goodnotes，原因很简单，因为APP更美观。</p>
+    <ul><li><b>2 模糊HQ</b></li></ul>
+    <p>可以将壁纸图片进行任意模糊处理，这样的好处，就是突出了APP视图，个人感觉还是很舒服的，下图有模糊前后的对比图。</p>
+    <figure>
+        <img class="ztext-img-content" src="images/Topstory/v2-bd8daa2673ceee73d9e67395b7929304_720w.jpg" alt="">
+    </figure>
+    <figure>
+        <img class="ztext-img-content" src="images/Topstory/v2-8f954b2da3ee0df2b200b11ee8ce6908_720w.jpg" alt="">
+    </figure>
+    <figure>
+        <img class="ztext-img-content" src="images/Topstory/v2-539bdd97d7db367630e8bec593c3755e_720w.jpg" alt="">
+    </figure>
+
+    <hr>
+
+    <h2>六、选购建议</h2>
+
+    <h2>问题1：你真的需要一个iPad Pro么？</h2>
+    <p>作为一个果粉，必须得说苹果的东西确实体验很好，作为一个不称职的果粉，也必须得说，苹果营销的魔力真的是丧心病狂，相信大家已经感受到了，看了铺天盖地的苹果广告，媒体宣传微博热搜，朋友圈好友晒图，即使你不太需要，还是心心念念，即使一个月工资只有几千，还是想买Pro。最近刚好在看《乔布斯传》，这股庞大的侵蚀你心得力量根植于苹果公司的文化，在这里劝大家控制好自己的大脑，理性消费，疫情过后，发现还是多挣钱存钱还是很有必要的。</p>
+    <p>没有iPad Pro，你也是后浪……</p>
+    <p>买之前，问问自己是否真的需要它，毕竟价格不低，而且对于大多数人来说，购买iPad Pro说实在的其实有点浪费，高性能都不一定用得上。之前有一个iPad Air2，用了大概4年，依旧很流畅，但是平时学习工作就顾不上了，放在那儿吃灰也挺久，19年二手转了。当然，iPad Pro的颜值，Face ID的加成，四扬声器和120hz的屏幕确实让人垂涎三尺，也对得起Pro这个。另外还有Air 3、17年的Pro（二手平台）可以尝试，体验也不差。<b>最最最重要的就是，如果你妄图用它替代PC办公，还是放弃吧！你的下一台电脑，还得是电脑！</b></p>
+    <p>如果你还在纠结，看看这篇文章。</p>
+    <a class="LinkCard" href="#">
+        <span class="LinkCard-backdrop" style="background-image:url(images/Topstory/zhihu-card-default_ipico.jpg)"></span>
+        <span class="LinkCard-content">
+            <span class="LinkCard-text">
+                <span class="LinkCard-title">消费主义是如何通过伪造文化来欺骗年轻人的？
+                </span>
+                <span class="LinkCard-meta">
+                    <span style="display:inline-flex;align-items:center">​<svg class="Zi Zi--InsertLink" fill="currentColor" viewBox="0 0 24 24" width="17" height="17"><path d="M6.77 17.23c-.905-.904-.94-2.333-.08-3.193l3.059-3.06-1.192-1.19-3.059 3.058c-1.489 1.489-1.427 3.954.138 5.519s4.03 1.627 5.519.138l3.059-3.059-1.192-1.192-3.059 3.06c-.86.86-2.289.824-3.193-.08zm3.016-8.673l1.192 1.192 3.059-3.06c.86-.86 2.289-.824 3.193.08.905.905.94 2.334.08 3.194l-3.059 3.06 1.192 1.19 3.059-3.058c1.489-1.489 1.427-3.954-.138-5.519s-4.03-1.627-5.519-.138L9.786 8.557zm-1.023 6.68c.33.33.863.343 1.177.029l5.34-5.34c.314-.314.3-.846-.03-1.176-.33-.33-.862-.344-1.176-.03l-5.34 5.34c-.314.314-.3.846.03 1.177z" fill-rule="evenodd"></path></svg></span>
+                    www.zhihu.com
+                </span>
+            </span>
+            <span class="LinkCard-imageCell">
+                <img src="images/Topstory/zhihu-card-default_ipico.jpg" alt="">
+            </span>
+        </span>
+    </a>
+
+    <h2>问题2：12.9寸 or 11寸?</h2>
+    <p>选购建议大家也给了很多，我也看了很多，在此个人不太建议无脑选12.9寸。大屏幕是挺爽，但是还是那句话，12.9寸再大也只有12.9寸。最重要的还是自己需求，是否更注重便携小巧，个人比较推荐11寸，用钟亦凡的话来说就是，省出来的1000多买排骨！</p>
+    <p>简而言之，有绘画需求，重度依靠iPad学习办公的选12.9寸，追求便携，轻度办公（主要是码字）选11寸。最好的还是去直营店体验一下，自己做决定，这个极其依赖于个人体验，如人饮水冷暖自知。</p>
+    <blockquote>
+        <i>6.15更：文章反复强调的一点就是自己体验，因为每个人的感受是不同的，所以我的建议也只能是建议，最后做决定的还是你，就像评论区有位朋友原打算买11寸，看了文章以后去直营店体验过后转而买了12.9寸。</i>
+    </blockquote>
+
+    <h2>问题3：蜂窝版 or WiFi版</h2>
+    <p>仅代表个人观点，有的翻车只是个概率事件。</p>
+    <p>现在有一个消费观念，也是自己在不断强化的是，买产品并不只是产品本身，还有其带的服务，在你经济允许的情况下。</p>
+    <ul><li><b>最推荐的是：官网或者直营店</b></li></ul>
+    <p><b>没有翻车的风险。</b>首先官网产品的质量肯定是众多平台中最靠谱的。因为即使质量有问题，14天内可以无理由退换，而且这个政策，适合冲动消费的人群，当十来天以后发现Pro也不过如此，体验过了还可以全额退款。当然，官网买就是原价，或者教育优惠也能省一些，能免息就免息，免息分期算一算其实便宜不少了。官网还有一个就是可以买到官网翻新iPad，官网翻新其实和全新的差不多，不过款式不多，一般都是蜂窝版，但是性价比还不错，所以预算有限，可以考虑，都买翻新了，就别去其他地方折腾了。</p>
+    <ul><li><b>其次推荐：京东自营or授权经销商</b></li></ul>
+    <p>虽说不是亲生的，官方授权的经销商品质还是很有保证的，只是激活后不能退货。</p>
+    <ul><li><b>最后推荐：没有推荐</b></li></ul>
+    <p>几大千都花了，为了省几百去某夕夕，冒着翻车的风险，个人认为不值得。</p>
+    <p>有朋友翻过车，iPhone和iPad都有过，所以，还是多花点钱买个放心吧！</p>
+
+    <hr>
+
+    <p>大家想了解的都可以在评论区提一下！</p>
+    <p>感谢支持，您的点赞和关注是我创作的最大动力！</p>
+    <figure>
+        <img src="images/Topstory/v2-2eda93e55f25b0e29088069092ded63c_720w.jpg" alt="">
+    </figure>
+    <p></p>
+</div>--%>

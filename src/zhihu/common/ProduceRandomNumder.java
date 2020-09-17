@@ -1,7 +1,7 @@
 package zhihu.common;
 
 public class ProduceRandomNumder {
-	public String randomNumder(String type,int places) {
+	public static String randomNumder(String type,int places) {
 		String num = "";
 		for (int i = 0; i < places; i++) {
 			num = num + "9";

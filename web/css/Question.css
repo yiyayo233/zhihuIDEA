@@ -177,6 +177,16 @@
     border-radius: 3px;
     margin-right: 20px;
 }
+.button.button--primary.button--blue.is-active{
+    color: #fff;
+    background: #8590a6;
+    border: 1px solid #8590a6;
+    min-width: 90px;
+}
+.button.button--primary.button--blue.is-active:hover{
+    border-color: #76839b;
+    background-color: #76839b;
+}
 .GoodQuestionAction-Btn{
     margin: 0 20px 0 1px;
 }

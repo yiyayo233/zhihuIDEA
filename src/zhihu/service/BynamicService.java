@@ -10,4 +10,12 @@ public class BynamicService {
     public List<BynamicEntity> selectPeople(String id){
         return BynamicDao.selectPeople(id);
     }
+
+    public int addBynamic(String id,String userId,String byBynamicId,String bynamicTiem,String bynamicType){
+        return BynamicDao.addBynamic(id, userId, byBynamicId, bynamicTiem, bynamicType);
+    }
+
+    public int deleteBynamic(String userId,String byBynamicId,String bynamicType){
+        return BynamicDao.deleteBynamic(userId, byBynamicId, bynamicType);
+    }
 }

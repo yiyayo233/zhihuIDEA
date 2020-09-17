@@ -242,14 +242,14 @@ function addQuestionajax(uId,title,text){
  * @param byBynamicId
  * @param BynamicType
  */
-function addOrDelBynamic(addOrDel,uid,byBynamicId,BynamicType) {
+function addOrDelBynamic(addOrDel,uId,byBynamicId,BynamicType) {
     $.ajax({
-        url: "question",
+        url: "bynamic",
         data: {
-            "a": "addQuestion",
+            "a": addOrDel,
             "uId": uId,
-            "title": title,
-            "text": text,
+            "byBynamicId": byBynamicId,
+            "BynamicType": BynamicType,
         },
         dataType: "JSON",
         success: function () {
