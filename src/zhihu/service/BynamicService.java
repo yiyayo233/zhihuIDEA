@@ -18,4 +18,8 @@ public class BynamicService {
     public int deleteBynamic(String userId,String byBynamicId,String bynamicType){
         return BynamicDao.deleteBynamic(userId, byBynamicId, bynamicType);
     }
+
+    public List<BynamicEntity> selectBynamic(String userId,String byBynamicId,String bynamicType){
+        return BynamicDao.selectBynamic(userId, byBynamicId, bynamicType);
+    }
 }

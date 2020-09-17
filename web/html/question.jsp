@@ -134,9 +134,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </div>
                     <div class="QuestionHeader-side">
                         <div class="QuestionButtonGroup">
-                            <button data-question-id="${Question.id}" type="button" class="button button--primary button--blue" onclick="followQuestion(this)">
-                                关注问题
-                            </button>
+                            <c:choose>
+                                <c:when test="${isFollowQuestion=='1'}">
+                                    <button data-question-id="${Question.id}" type="button" class="button button--primary button--blue is-active" onclick="followQuestion(this)">
+                                        已关注
+                                    </button>
+                                </c:when>
+                                <c:otherwise>
+                                    <button data-question-id="${Question.id}" type="button" class="button button--primary button--blue" onclick="followQuestion(this)">
+                                        关注问题
+                                    </button>
+                                </c:otherwise>
+                            </c:choose>
                             <button data-question-id="${Question.id}" type="button" onclick="showAddAnswer(this)" class="button button--blue" >
                                 <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Edit QuestionButton-icon" fill="currentColor" viewBox="0 0 24 24" width="16" height="16"><path d="M4.076 16.966a4.19 4.19 0 0 1 1.05-1.76l8.568-8.569a.524.524 0 0 1 .741 0l2.928 2.927a.524.524 0 0 1 0 .74l-8.568 8.57c-.49.49-1.096.852-1.761 1.051l-3.528 1.058a.394.394 0 0 1-.49-.488l1.06-3.53zM20.558 4.83c.59.59.59 1.546 0 2.136l-1.693 1.692a.503.503 0 0 1-.712 0l-2.812-2.812a.504.504 0 0 1 0-.712l1.693-1.693a1.51 1.51 0 0 1 2.135 0l1.389 1.389z"></path></svg></span>
                                 写回答
@@ -253,9 +262,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     <div class="QuestionHerder-footer-inner">
                         <div class="QuestionHerder-main QuestionHerder-footer-main">
                             <div class="QuestionButtonGroup">
-                                <button data-question-id="${Question.id}" type="button" class="button button--primary button--blue" onclick="followQuestion(this)">
-                                    关注问题
-                                </button>
+                                <c:choose>
+                                    <c:when test="${isFollowQuestion == '1'}">
+                                        <button data-question-id="${Question.id}" type="button" class="button button--primary button--blue is-active" onclick="followQuestion(this)">
+                                            已关注
+                                        </button>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <button data-question-id="${Question.id}" type="button" class="button button--primary button--blue" onclick="followQuestion(this)">
+                                            关注问题
+                                        </button>
+                                    </c:otherwise>
+                                </c:choose>
                                 <button data-question-id="${Question.id}" type="button" class="button button--blue" onclick="showAddAnswer(this)">
                                     <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Edit QuestionButton-icon" fill="currentColor" viewBox="0 0 24 24" width="16" height="16"><path d="M4.076 16.966a4.19 4.19 0 0 1 1.05-1.76l8.568-8.569a.524.524 0 0 1 .741 0l2.928 2.927a.524.524 0 0 1 0 .74l-8.568 8.57c-.49.49-1.096.852-1.761 1.051l-3.528 1.058a.394.394 0 0 1-.49-.488l1.06-3.53zM20.558 4.83c.59.59.59 1.546 0 2.136l-1.693 1.692a.503.503 0 0 1-.712 0l-2.812-2.812a.504.504 0 0 1 0-.712l1.693-1.693a1.51 1.51 0 0 1 2.135 0l1.389 1.389z"></path></svg></span>
                                     写回答
@@ -267,10 +285,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     邀请回答
                                 </button>
                                 <div class="GoodQuestionAction">
-                                    <button data-question-approveNum="${Question.approveNum}" data-question-id="${Question.id}" type="button" class="button GoodQuestionAction-Btn" onclick="GoodQuestionAction_Btn_click(this)">
-                                        <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
-                                        好问题 ${Question.approveNum}
-                                    </button>
+                                    <c:choose>
+                                        <c:when test="${isApproveQuestion == '1'}">
+                                            <button data-question-approveNum="${Question.approveNum}" data-question-id="${Question.id}" type="button" class="button GoodQuestionAction-Btn is-active" onclick="GoodQuestionAction_Btn_click(this)">
+                                                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                好问题 ${Question.approveNum}
+                                            </button>
+                                        </c:when>
+                                        <c:otherwise>
+                                            <button data-question-approveNum="${Question.approveNum}" data-question-id="${Question.id}" type="button" class="button GoodQuestionAction-Btn" onclick="GoodQuestionAction_Btn_click(this)">
+                                                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Like Button-zi" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M14.445 9h5.387s2.997.154 1.95 3.669c-.168.51-2.346 6.911-2.346 6.911s-.763 1.416-2.86 1.416H8.989c-1.498 0-2.005-.896-1.989-2v-7.998c0-.987.336-2.032 1.114-2.639 4.45-3.773 3.436-4.597 4.45-5.83.985-1.13 3.2-.5 3.037 2.362C15.201 7.397 14.445 9 14.445 9zM3 9h2a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V10a1 1 0 0 1 1-1z" fill-rule="evenodd"></path></svg></span>
+                                                好问题 ${Question.approveNum}
+                                            </button>
+                                        </c:otherwise>
+                                    </c:choose>
                                 </div>
                                 <div class="QuestionHeader-Comment">
                                     <button data-answer-id="${Question.id}" type="button" class="button" onclick="addComments(this)">

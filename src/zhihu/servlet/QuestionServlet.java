@@ -2,12 +2,14 @@ package zhihu.servlet;
 
 import zhihu.common.ProduceDatetime;
 import zhihu.common.ProduceRandomNumder;
+import zhihu.dao.BynamicDao;
 import zhihu.dao.SuperDao;
 import zhihu.entity.*;
 import zhihu.service.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,6 +47,32 @@ public class QuestionServlet extends HttpServlet {
      * @throws IOException
      */
     public void IntoQuestion(HttpServletRequest request, HttpServletResponse response, PrintWriter out) throws ServletException, IOException {
+
+        Cookie[] Cookies = request.getCookies();
+        String uId = "";
+        String uName = "";
+        String uChatHead ="";
+        boolean f = false;
+
+        for (Cookie cookie: Cookies) {
+            if (cookie.getName().equals("uId")){
+                uId = cookie.getValue();
+                f = true;
+            }else if (cookie.getName().equals("uName")){
+                uName = cookie.getValue();
+                f = true;
+            }else if(cookie.getName().equals("uChatHead")||cookie.getName().equals("user")){
+                uChatHead = cookie.getValue();
+                f = true;
+            }
+        }
+        if (!f) {
+            response.sendRedirect("html/signin.jsp");
+            return;
+        }else {
+            System.out.println("jsp    uId:"+uId+"\tuName:"+uName+"\tuChatHead:"+uChatHead);
+        }
+
         System.out.println("question");
         String questionId = request.getParameter("questionId");
         String answerId = request.getParameter("answerId");
@@ -83,10 +111,22 @@ public class QuestionServlet extends HttpServlet {
                 questionPageList.add(new QuestionPage(answerEntity,userEntity,CommentNum));
             }
         }
-
-
         request.setAttribute("questionPageList", questionPageList);
-        //todo 话题、用户没加
+
+        BynamicService bynamicService = new BynamicService();
+        List<BynamicEntity> bynamicEntityList = bynamicService.selectBynamic(uId,questionId,"gz");
+        int qwe = 0;
+        if (bynamicEntityList.size() > 0){
+            qwe = 1;
+        }
+        request.setAttribute("isFollowQuestion", qwe);
+        bynamicEntityList = bynamicService.selectBynamic(uId,questionId,"zt");
+        qwe = 0;
+        if (bynamicEntityList.size() > 0){
+            qwe = 1;
+        }
+        request.setAttribute("isApproveQuestion", qwe);
+        //todo 话题没加
 
         int CommentNum = 0;
         CommentService CommentService = new CommentService();
