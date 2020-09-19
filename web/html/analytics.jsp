@@ -4,7 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML>
 <html>
   <head>
     <base href="<%=basePath%>">
@@ -132,7 +132,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <span class="CreatorSide-Icon"><svg class="Zi Zi--Creator" fill="currentColor" viewBox="0 0 24 24" width="18" height="18"><path d="M15.075 15.388l-3.024 3.024a4.041 4.041 0 0 0-1.014 1.697l-.26.868C7.844 20.986 4.91 21 2 21c.026-3.325 0-3.304.59-3.956 1.237-1.368 6.251-.68 6.44-2.976.043-.518-.36-1.06-.725-1.69C6.285 8.87 5.512 2 11.5 2c5.988 0 5.15 7.072 3.246 10.378-.357.62-.795 1.217-.724 1.77.073.571.477.958 1.053 1.24zm5.402 1.672c.523.55.523.646.523 3.94a535.11 535.11 0 0 0-4.434-.028l3.911-3.912zm-7.88 2.699c.111-.37.312-.705.584-.978l4.76-4.76a.291.291 0 0 1 .412 0l1.626 1.626a.291.291 0 0 1 0 .411l-4.76 4.76c-.272.273-.608.474-.978.585l-1.96.588a.219.219 0 0 1-.272-.272l.589-1.96zm9.157-6.742a.839.839 0 0 1 0 1.187l-.94.94a.28.28 0 0 1-.395 0l-1.563-1.563a.28.28 0 0 1 0-.395l.94-.94a.839.839 0 0 1 1.187 0l.771.771z" fill-rule="evenodd"></path></svg></span>
                         <div class="CreatorSide-itemText">创作中心</div>
                     </div>
-                    <a href="#" class="CreatorSide-Lick">
+                    <a href="creator" class="CreatorSide-Lick">
                         主页
                     </a>
                     <a href="#" class="CreatorSide-Lick">
@@ -162,7 +162,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <span class="CreatorSide-Icon"><svg class="Zi Zi--Statistics" fill="currentColor" viewBox="0 0 24 24" width="18" height="18"><path d="M4.594 7.506l2.595-1.153a3.576 3.576 0 0 1 3.292.201l.652.391a2 2 0 0 0 1.923.074l5.828-2.913a1 1 0 0 1 .84-.025l.36.154a.744.744 0 0 1 .383.994l-.172.374a1 1 0 0 1-.461.477l-6.071 3.036a3.363 3.363 0 0 1-3.235-.125l-.691-.415a2 2 0 0 0-1.841-.112L4.703 9.927A.5.5 0 0 1 4 9.47V8.42a1 1 0 0 1 .594-.914zm6.301 3.528l.294.177a2.202 2.202 0 0 0 2.118.081l.357-.179a.5.5 0 0 1 .724.448V19a1 1 0 0 1-1 1h-2.25a1 1 0 0 1-1-1v-7.538a.5.5 0 0 1 .757-.429zm-2.645-.1V19a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-6.297a1 1 0 0 1 .594-.914l2.953-1.312a.5.5 0 0 1 .703.457zm12.276-2.35V19a1 1 0 0 1-1 1h-2.25a1 1 0 0 1-1-1v-8.48a1 1 0 0 1 .553-.895l2.973-1.487a.5.5 0 0 1 .724.447z" fill-rule="evenodd"></path></svg></span>
                         <div class="CreatorSide-itemText">创作数据</div>
                     </div>
-                    <a href="#" class="CreatorSide-Lick is-active">
+                    <a href="creator/analytics" class="CreatorSide-Lick is-active">
                         内容分析
                     </a>
                     <a href="#" class="CreatorSide-Lick">
@@ -239,17 +239,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="AnalyticsWork-TabsBox">
                             <ul class="Tabs">
                                 <li class="Tabs-item">
-                                    <a href="#" class="Tabs-link is-active">回答</a>
+                                    <a href="creator/analytics" class="Tabs-link is-active">回答</a>
                                 </li>
                                 <li class="Tabs-item">
-                                    <a href="#" class="Tabs-link">文章</a>
+                                    <a href="javaScript:void(0)" class="Tabs-link">文章</a>
                                 </li>
                                 <li class="Tabs-item">
-                                    <a href="#" class="Tabs-link">想法</a>
+                                    <a href="javaScript:void(0)" class="Tabs-link">想法</a>
                                 </li>
-                                <li class="Tabs-item">
-                                    <a href="#" class="Tabs-link">视频</a>
-                                </li>
+                                <%--<li class="Tabs-item">
+                                    <a href="javaScript:void(0)" class="Tabs-link">视频</a>
+                                </li>--%>
                             </ul>
                         </div>
                         <div class="AnalyticsWork-dataUpdateHint">

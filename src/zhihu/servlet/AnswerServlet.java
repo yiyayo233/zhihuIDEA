@@ -48,7 +48,7 @@ public class AnswerServlet extends HttpServlet {
         String publishTime = editTime;
 
         AnswerSercice AnswerSercice = new AnswerSercice();
-        int result = AnswerSercice.addAnswer(answerID, UserId, 0, editTime, commentId, content, "", publishTime);
+        int result = AnswerSercice.addAnswer(answerID, UserId, 0,0, editTime, commentId, content, "", publishTime);
         System.out.println(result+"-----AnswerSercice.addAnswer");
 
         String questionId = request.getParameter("questionId");

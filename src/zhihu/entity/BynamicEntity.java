@@ -6,6 +6,7 @@ public class BynamicEntity {
     private String byBynamicId;
     private String bynamicTime;
     private String bynamicType;
+    private String authorId;
 
     public String getId() {
         return id;
@@ -47,13 +48,20 @@ public class BynamicEntity {
         this.bynamicType = bynamicType;
     }
 
-    public BynamicEntity(String id, String userId, String byBynamicId, String bynamicTime, String bynamicType) {
+    public String getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(String authorId) {
+        this.authorId = authorId;
+    }
+
+    public BynamicEntity(String id, String userId, String byBynamicId, String bynamicTime, String bynamicType, String authorId) {
         this.id = id;
         this.userId = userId;
         this.byBynamicId = byBynamicId;
         this.bynamicTime = bynamicTime;
         this.bynamicType = bynamicType;
+        this.authorId = authorId;
     }
-
-
 }

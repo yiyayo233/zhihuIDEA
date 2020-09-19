@@ -14,7 +14,7 @@
 function ConstantItem_meta_html(uId,uName,uChatHead,industry) {
     var html = '<div class="ConstantItem-meta">\n' +
         '                                        <span class="userLink">\n' +
-        '                                            <a class="userLink-link" href="user/'+ uId +'">\n' +
+        '                                            <a class="userLink-link" href="people?uId='+ uId +'">\n' +
         '                                                <img src="images/user/'+ uChatHead +'" alt="">\n' +
         '                                            </a>\n' +
         '                                        </span>\n' +
@@ -22,7 +22,7 @@ function ConstantItem_meta_html(uId,uName,uChatHead,industry) {
         '                                        <div class="AuthorInfo-head">\n' +
         '                                                <span class="AuthorInfo-name">\n' +
         '                                                    <div class="Popover">\n' +
-        '                                                        <a href="#">'+ uName +'</a>\n' +
+        '                                                        <a href="people?uId='+ uId +'">'+ uName +'</a>\n' +
         '                                                    </div>\n' +
         '                                                </span>\n' +
         '                                        </div>\n' +
@@ -164,10 +164,11 @@ var ContentItem_actions;
  */
 function ContentItem_content_inner_link(){
     $(document).on("click",".ContentItem-content-inner,.ContentItem-content-cover",function () {
-
         var actions = $(this).siblings(".ContentItem-actions").html();
         ContentItem_content_inner = $(this).parent().html();
         ContentItem_actions = $(this).parent().find(".ContentItem-actions").html();
+        var uId = $("#user").attr("data-user-id");
+        var objectId = $(this).parent().attr("data-answer-id");
         if (RethtmlName().indexOf("qwer") != -1){
             if ($(this).attr("class").indexOf("ContentItem-content-inner") !== -1 || $(this).attr("class").indexOf("ContentItem-content-cover") !== -1) {
                 var parent = $(this).parent().parent().parent();
@@ -236,6 +237,7 @@ function ContentItem_content_inner_link(){
                 }
             });
         }
+        addBrowseAjax(uId,objectId,"hd");
     });
 }
 
@@ -445,3 +447,20 @@ $(function () {
         addComments(this);
     });
 });
+
+function addBrowseAjax(uId,objectId,objectType) {
+    $.ajax({
+        url:"browse",
+        type:"post",
+        data:{
+            "a":"addBrowse",
+            "uId":uId,
+            "objectId":objectId,
+            "objectType":objectType
+        },
+        dataType:"json",
+        success:function () {
+
+        }
+    });
+}
