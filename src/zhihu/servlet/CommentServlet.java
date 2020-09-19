@@ -107,4 +107,24 @@ public class CommentServlet extends HttpServlet {
             System.out.println(result+"----------CommentReplyService");
         }
     }
+
+    /**
+     * 获取对象评论总数
+     * @param affiliationId
+     * @return
+     */
+    public static int getCommentNum(String affiliationId){
+        int CommentNum = 0;
+        CommentService CommentService = new CommentService();
+        List<CommentEntity> commentEntityList = CommentService.selectComment(affiliationId);
+        if (commentEntityList.size() != 0) {
+            for (CommentEntity commentEntity:commentEntityList) {
+                CommentNum++;
+                CommentReplyService CommentReplyService = new CommentReplyService();
+                List<CommentReplyEntity> commentReplyEntityList = CommentReplyService.selectCommentReply(commentEntity.getId());
+                CommentNum = CommentNum + commentReplyEntityList.size();
+            }
+        }
+        return CommentNum;
+    }
 }

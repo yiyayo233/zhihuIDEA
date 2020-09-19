@@ -2,7 +2,10 @@ package zhihu.servlet;
 
 import zhihu.common.ProduceDatetime;
 import zhihu.common.ProduceRandomNumder;
+import zhihu.service.AnswerSercice;
 import zhihu.service.BynamicService;
+import zhihu.service.QuestionService;
+import zhihu.service.UserService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -38,8 +41,21 @@ public class BynamicServlet extends HttpServlet {
             String byBynamicId = request.getParameter("byBynamicId");
             String bynamicTime = ProduceDatetime.Datetime();
             String bynamicType = request.getParameter("BynamicType");
+            String authorId = "";
 
-            int result = BynamicService.addBynamic(id,uId,byBynamicId,bynamicTime,bynamicType);
+            String type = byBynamicId.substring(0,2);
+            if (type.equals("hd")){
+                AnswerSercice AnswerSercice = new AnswerSercice();
+                authorId = AnswerSercice.selectAnseerItem(byBynamicId).getAuthorId();
+            }else if (type.equals("wt")){
+                QuestionService QuestionService = new QuestionService();
+                authorId = QuestionService.selectQuestionItem(byBynamicId).getAuthorId();
+            }else if (type.equals("yh")){
+            }
+
+            /// TODO: 2020/9/18 判断对象类型 
+
+            int result = BynamicService.addBynamic(id,uId,byBynamicId,bynamicTime,bynamicType,authorId);
             System.out.println(result+"-----BynamicService.addBynamic");
         }else if ("del".equals(a)){
             String uId = request.getParameter("uId");

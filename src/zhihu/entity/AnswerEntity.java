@@ -4,6 +4,7 @@ public class AnswerEntity {
     private String id;
     private String authorId;
     private int approveNum;
+    private int browseNum;
     private String editTime;
     private String commentId;
     private String answerContent;
@@ -27,6 +28,12 @@ public class AnswerEntity {
     }
     public void setApproveNum(int approveNum) {
         this.approveNum = approveNum;
+    }
+    public int getBrowseNum() {
+        return browseNum;
+    }
+    public void setBrowseNum(int browseNum) {
+        this.browseNum = browseNum;
     }
     public String getEditTime() {
         return editTime;
@@ -59,10 +66,11 @@ public class AnswerEntity {
         this.publishTime = publishTime;
     }
 
-    public AnswerEntity(String id, String authorId, int approveNum, String editTime, String commentId, String answerContent, String cover, String publishTime) {
+    public AnswerEntity(String id, String authorId, int approveNum, int browseNum, String editTime, String commentId, String answerContent, String cover, String publishTime) {
         this.id = id;
         this.authorId = authorId;
         this.approveNum = approveNum;
+        this.browseNum = browseNum;
         this.editTime = editTime;
         this.commentId = commentId;
         this.answerContent = answerContent;

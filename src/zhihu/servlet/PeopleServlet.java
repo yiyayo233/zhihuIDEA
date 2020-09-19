@@ -67,6 +67,10 @@ public class PeopleServlet extends HttpServlet {
             System.out.println("jsp    uId:"+uId+"\tuName:"+uName+"\tuChatHead:"+uChatHead);
         }
 
+        if (request.getParameter("uId") != null) {
+            uId = request.getParameter("uId");
+        }
+
         UserService userService = new UserService();
         UserEntity userEntity = userService.selecUserAndPersonaldItem(uId);
 

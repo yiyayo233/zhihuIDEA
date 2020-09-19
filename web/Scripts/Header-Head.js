@@ -119,6 +119,10 @@ $(function() {
         AddQuestion(this);
     });
 
+    $(document).on("click",".AppHeader-profile .button",function () {
+        window.open("people");
+    });
+
 });
 
 /**

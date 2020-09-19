@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           }
       %>
     <meta charset="UTF-8">
-    <title><%=uName%> - 知乎</title>
+    <title>${userEntity.name} - 知乎</title>
     <link rel="icon" href="images/favicon.ico">
     <link href="css/Header-Head.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/SideBar.css">
@@ -197,6 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="userCover">
                             <c:choose>
                                 <c:when test="${userEntity.personalExperience == ''}">    <!--如果 -->
+                                    ${userEntity.personalExperience}
                                     <img class="userCover-img" src="images/user/v2-2a6b7437fa7fcfc7d917c85cad05e24b_r%20(1).jpg" alt="">
                                 </c:when>
                                 <c:otherwise>  <!--否则 -->
@@ -337,28 +338,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <c:forEach var="bynamicContainerEntity" items="${bynamicContainerEntityList}">
                                     <c:choose>
                                         <c:when test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'wt'}">
-                                            <div class="list-item">
-                                                <div class="list-itemMata">
-                                                    <div class="ActivityItem-meta">
-                                                        <c:choose>
-                                                            <c:when test="${bynamicContainerEntity.bynamicEntity.bynamicType == 'gz'}">
-                                                                <span class="ActivityItem-metaTitle">关注了问题</span>
-                                                            </c:when>
-                                                            <c:otherwise>
-                                                                <c:if test="${bynamicContainerEntity.bynamicEntity.bynamicType == 'fb'}">
-                                                                    <span class="ActivityItem-metaTitle">发布了问题</span>
-                                                                </c:if>
-                                                            </c:otherwise>
-                                                        </c:choose>
-                                                        <span>${fn:substring(bynamicContainerEntity.bynamicEntity.bynamicTime, 0, 10)}</span>
+                                            <c:if test="${bynamicContainerEntity.bynamicEntity.bynamicType != 'zt'}">
+                                                <div class="list-item">
+                                                    <div class="list-itemMata">
+                                                        <div class="ActivityItem-meta">
+                                                            <c:choose>
+                                                                <c:when test="${bynamicContainerEntity.bynamicEntity.bynamicType == 'gz'}">
+                                                                    <span class="ActivityItem-metaTitle">关注了问题</span>
+                                                                </c:when>
+                                                                <c:otherwise>
+                                                                    <c:if test="${bynamicContainerEntity.bynamicEntity.bynamicType == 'fb'}">
+                                                                        <span class="ActivityItem-metaTitle">发布了问题</span>
+                                                                    </c:if>
+                                                                </c:otherwise>
+                                                            </c:choose>
+                                                            <span>${fn:substring(bynamicContainerEntity.bynamicEntity.bynamicTime, 0, 10)}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="ConstantItem">
+                                                        <h2 class="ContentItem-title">
+                                                            <a target="_blank" href="question?questionId=${bynamicContainerEntity.questionEntity.id}">${bynamicContainerEntity.questionEntity.questionTitle}</a>
+                                                        </h2>
                                                     </div>
                                                 </div>
-                                                <div class="ConstantItem">
-                                                    <h2 class="ContentItem-title">
-                                                        <a target="_blank" href="question?questionId=${bynamicContainerEntity.questionEntity.id}">${bynamicContainerEntity.questionEntity.questionTitle}</a>
-                                                    </h2>
-                                                </div>
-                                            </div>
+                                            </c:if>
                                         </c:when>
                                         <c:otherwise>
                                             <c:if test="${fn:substring(bynamicContainerEntity.bynamicEntity.byBynamicId, 0, 2) == 'hd'}">

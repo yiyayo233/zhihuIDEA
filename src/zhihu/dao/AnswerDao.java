@@ -14,14 +14,15 @@ public class AnswerDao extends BaseDao{
      * @param id
      * @param authorId
      * @param approveNum
+     * @param browseNum
      * @param editTime
      * @param commentId
      * @param answerContent
      * @param publishTime
      * @return
      */
-    public int addAnswer(String id, String authorId, int approveNum, String editTime, String commentId, String answerContent, String cover, String publishTime){
-        return execUpdate("insert answer values( ? , ? , ? , ? , ? , ?, ?, ? )", id, authorId, approveNum, editTime, commentId, answerContent, cover, publishTime);
+    public int addAnswer(String id, String authorId, int approveNum, int browseNum, String editTime, String commentId, String answerContent, String cover, String publishTime){
+        return execUpdate("insert answer values( ?, ?, ?, ?, ?, ?, ?, ?, ? )", id, authorId, approveNum, browseNum, editTime, commentId, answerContent, cover, publishTime);
     }
 
     /**
@@ -44,7 +45,7 @@ public class AnswerDao extends BaseDao{
         resultSet = query(StringBuffer.toString());
         try {
             while (resultSet.next()){
-                AnswerEntity AnswerEntity = new AnswerEntity(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getString(8));
+                AnswerEntity AnswerEntity = new AnswerEntity(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getInt(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getString(8),resultSet.getString(9));
                 AnswerEntitys.add(AnswerEntity);
             }
             return AnswerEntitys;
@@ -70,7 +71,7 @@ public class AnswerDao extends BaseDao{
         resultSet = query(StringBuffer.toString());
         try {
             while (resultSet.next()){
-                return new AnswerEntity(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getString(8));
+                return new AnswerEntity(resultSet.getString(1),resultSet.getString(2),resultSet.getInt(3),resultSet.getInt(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getString(8),resultSet.getString(9));
             }
         }catch (SQLException e){
 
