@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%
 String path = request.getContextPath();
@@ -27,8 +28,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="css/echarts.css">
 
     <link rel="stylesheet" href="css/answers.css">
-	
+      <%
+          Cookie[] Cookies = request.getCookies();
+          String uId = "";
+          String uName = "";
+          String uChatHead ="";
+          boolean f = false;
+
+          for (Cookie cookie: Cookies) {
+              if (cookie.getName().equals("uId")){
+                  uId = cookie.getValue();
+                  f = true;
+              }else if (cookie.getName().equals("uName")){
+                  uName = cookie.getValue();
+                  f = true;
+              }else if(cookie.getName().equals("uChatHead")||cookie.getName().equals("user")){
+                  uChatHead = cookie.getValue();
+                  f = true;
+              }
+          }
+          if (!f) {
+              response.sendRedirect("html/signin.jsp");
+              return;
+          }else {
+              System.out.println("jsp    uId:"+uId+"\tuName:"+uName+"\tuChatHead:"+uChatHead);
+          }
+      %>
   </head>
+
+  <input id="user" type="hidden" data-user-id="<%=uId%>" data-user-name="<%=uName%>" data-user-ChatHead="<%=uChatHead%>">
   <header class="Header">
     <div class="AppHeader">
         <a href="Header.html">
@@ -89,7 +117,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             </div>
             <div class="AppHeader-profile">
                 <button class="button">
-                    <img src="images/touxiang/6d6f2275d27e12ddf9deac2fd47a511344c9125d.png" alt="" height="30" width="30"/>
+                    <img src="images/user/<%=uChatHead%>" alt="" height="30" width="30"/>
                 </button>
             </div>
         </div>
@@ -266,7 +294,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="AnalyticsCount AnalyticsWorkAnswers-Count">
                                         <div class="AnalyticsCount-title">回答总数</div>
                                         <div class="AnalyticsCount-content">
-                                            <div class="AnalyticsCount-number">6</div>
+                                            <div class="AnalyticsCount-number">${objNum}</div>
                                         </div>
                                     </div>
                                     <div class="AnalyticsCount AnalyticsWorkAnswers-Count">
@@ -276,46 +304,98 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             </div>
                                         </div>
                                         <div class="AnalyticsCount-content">
-                                            <div class="AnalyticsCount-number">276</div>
+                                            <div class="AnalyticsCount-number">${objLlNum}</div>
                                         </div>
                                     </div>
                                     <div class="AnalyticsCount AnalyticsWorkAnswers-Count">
                                         <div class="AnalyticsCount-title">赞同总数</div>
                                         <div class="AnalyticsCount-content">
-                                            <div class="AnalyticsCount-number">2</div>
+                                            <div class="AnalyticsCount-number">${objZtNum}</div>
                                         </div>
                                     </div>
                                     <div class="AnalyticsCount AnalyticsWorkAnswers-Count">
                                         <div class="AnalyticsCount-title">昨日阅读数</div>
                                         <div class="AnalyticsCount-content">
-                                            <div class="AnalyticsCount-number">12</div>
+                                            <div class="AnalyticsCount-number">${objLlNum1}</div>
                                             <div class="AnalyticsCount-number-origin">
                                                 <div class="AnalyticsCount-number-originTitle">
                                                     较前日
                                                 </div>
-                                                <div class="AnalyticsCount-number-originNumber AnalyticsCount-number-originNumber--up">
+                                                <c:choose>
+                                                    <c:when test="${objLlNumUp == 0}">
+                                                        <div class="AnalyticsCount-number-originNumber ">
+                                                            <span class="AnalyticsCount-number-origin-percent">
+                                                        --
+                                                    </span>
+                                                        </div>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:if test="${objLlNumUp > 0}">
+                                                            <div class="AnalyticsCount-number-originNumber AnalyticsCount-number-originNumber--up">
                                                     <span class="AnalyticsCount-number-origin-icon">
                                                         <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--BackToTop" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path
                                                                 d="M16.036 19.59a1 1 0 0 1-.997.995H9.032a.996.996 0 0 1-.997-.996v-7.005H5.03c-1.1 0-1.36-.633-.578-1.416L11.33 4.29a1.003 1.003 0 0 1 1.412 0l6.878 6.88c.782.78.523 1.415-.58 1.415h-3.004v7.005z"/></svg></span>
                                                     </span>
-                                                    <span class="AnalyticsCount-number-origin-percent">
-                                                        50%
+                                                                <span class="AnalyticsCount-number-origin-percent">
+                                                        ${objLlNumUp}%
                                                     </span>
-                                                </div>
+                                                            </div>
+                                                        </c:if>
+                                                        <c:if test="${objLlNumUp < 0}">
+                                                            <div class="AnalyticsCount-number-originNumber AnalyticsCount-number-originNumber--down">
+                                                    <span class="AnalyticsCount-number-origin-icon">
+                                                        <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--SolidArrowDown" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M16.036 4.994a1 1 0 0 0-.997-.995H9.032a.996.996 0 0 0-.997.996V12H5.03c-1.1 0-1.36.633-.578 1.416l6.878 6.878c.39.39 1.026.385 1.412 0l6.878-6.88c.782-.78.523-1.415-.58-1.415h-3.004V4.994z"></path></svg></span>
+                                                    </span>
+                                                                <span class="AnalyticsCount-number-origin-percent">
+                                                        ${objLlNumUp*-1}%
+                                                    </span>
+                                                            </div>
+                                                        </c:if>
+
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="AnalyticsCount AnalyticsWorkAnswers-Count">
                                         <div class="AnalyticsCount-title">昨日赞同数</div>
                                         <div class="AnalyticsCount-content">
-                                            <div class="AnalyticsCount-number">0</div>
+                                            <div class="AnalyticsCount-number">${objZtNum1}</div>
                                             <div class="AnalyticsCount-number-origin">
                                                 <div class="AnalyticsCount-number-originTitle">
                                                     较前日
                                                 </div>
-                                                <div class="AnalyticsCount-number-originNumber">
-                                                    --
-                                                </div>
+                                                <c:choose>
+                                                    <c:when test="${objZtNumUp == 0}">
+                                                        <div class="AnalyticsCount-number-originNumber">
+                                                            <span class="AnalyticsCount-number-origin-percent">
+                                                        --
+                                                    </span>
+                                                        </div>
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        <c:if test="${objZtNumUp > 0}">
+                                                            <div class="AnalyticsCount-number-originNumber AnalyticsCount-number-originNumber--up">
+                                                    <span class="AnalyticsCount-number-origin-icon">
+                                                        <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--BackToTop" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M16.036 19.59a1 1 0 0 1-.997.995H9.032a.996.996 0 0 1-.997-.996v-7.005H5.03c-1.1 0-1.36-.633-.578-1.416L11.33 4.29a1.003 1.003 0 0 1 1.412 0l6.878 6.88c.782.78.523 1.415-.58 1.415h-3.004v7.005z"/></svg></span>
+                                                    </span>
+                                                                <span class="AnalyticsCount-number-origin-percent">
+                                                        ${objZtNumUp}%
+                                                    </span>
+                                                            </div>
+                                                        </c:if>
+                                                        <c:if test="${objZtNumUp < 0}">
+                                                            <div class="AnalyticsCount-number-originNumber AnalyticsCount-number-originNumber--down">
+                                                    <span class="AnalyticsCount-number-origin-icon">
+                                                        <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--SolidArrowDown" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M16.036 4.994a1 1 0 0 0-.997-.995H9.032a.996.996 0 0 0-.997.996V12H5.03c-1.1 0-1.36.633-.578 1.416l6.878 6.878c.39.39 1.026.385 1.412 0l6.878-6.88c.782-.78.523-1.415-.58-1.415h-3.004V4.994z"></path></svg></span>
+                                                    </span>
+                                                                <span class="AnalyticsCount-number-origin-percent">
+                                                        ${objZtNumUp*-1}%
+                                                    </span>
+                                                            </div>
+                                                        </c:if>
+                                                    </c:otherwise>
+                                                </c:choose>
                                             </div>
                                         </div>
                                     </div>
@@ -348,10 +428,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                             </div>
                                             <div class="AnalyticsDetailRangPicker AnalyticsWork-detailRangPicker">
                                                 <div class="AnalyticsDetailRangPicker-dateLast">
-                                                    <button class="button AnalyticsDetailRangPicker-dateButton is-active" type="button">最近 7 天</button>
-                                                    <button class="button AnalyticsDetailRangPicker-dateButton" type="button">最近 14 天</button>
-                                                    <button class="button AnalyticsDetailRangPicker-dateButton" type="button">最近 30 天</button>
-                                                    <button class="button AnalyticsDetailRangPicker-dateButton" type="button">最近 90 天</button>
+                                                    <button class="button AnalyticsDetailRangPicker-dateButton is-active" data-dayNum="7" type="button">最近 7 天</button>
+                                                    <button class="button AnalyticsDetailRangPicker-dateButton" data-dayNum="14" type="button">最近 14 天</button>
+                                                    <button class="button AnalyticsDetailRangPicker-dateButton" data-dayNum="30" type="button">最近 30 天</button>
+                                                    <button class="button AnalyticsDetailRangPicker-dateButton" data-dayNum="90" type="button">最近 90 天</button>
                                                 </div>
 
                                             </div>

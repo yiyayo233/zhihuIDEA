@@ -346,6 +346,16 @@ function AnalyticsDetailRangPicker_dateButton_IsActive(button){
         $(button).siblings().removeClass("is-active");
         $(button).addClass("is-active");
     }
+    var index = $(".CreatorSectionItem.CreatorSectionItem--clickable.is-active").index();
+    if (index == 0){
+        var day = $(button).attr("data-dayNum");
+        getdata("getDataTime",day);
+    }else if (index == 1){
+        var day = $(button).attr("data-dayNum");
+        alert(day);
+    }
+
+
 }
 
 /**
@@ -361,17 +371,11 @@ function CreatorSectionItem__name_IsActive(button){
 
             $(".CreatorSection-body").html(CreatorSection_body_html(index));
             new CreatorSection_body_CompletionTableRow_html();
+            var day = $(".button.AnalyticsDetailRangPicker-dateButton.is-active").attr("data-daynum");
             if(index == 0){
-                var data = [
-                    ['2020-8-03', 10,0,0,0,0],
-                    ["2020-08-04",2,0,0,0,0],
-                    ["2020-08-05",8,0,0,0,0],
-                    ["2020-08-06",7,0,0,0,0],
-                    ["2020-08-07",8,0,0,0,0],
-                    ["2020-08-08",12,0,0,0,0],
-                    ["2020-08-09",15,0,0,0,0],
-                ];
-                myChartFction(data);
+                getdata("getDataTime",day);
+            }else if (index == 1){
+                getdata("getDataObject",day);
             }
         }
 
@@ -393,19 +397,10 @@ function AnalyticsWork_TabsBox_TabsLick_IsActive(button){
 
 
 $(function () {
-    new CreatorSectionItem__name_IsActive($(".CreatorSectionItem--name"));
+    // new CreatorSectionItem__name_IsActive($(".CreatorSectionItem--name"));
     $(".CreatorSection-body").html(CreatorSection_body_html(0));
     CreatorSection_body_CompletionTableRow_html();
-    var data = [
-        ['2020-8-03', 10,0,0,0,0],
-        ["2020-08-04",2,0,0,0,0],
-        ["2020-08-05",8,0,0,0,0],
-        ["2020-08-06",7,0,0,0,0],
-        ["2020-08-07",8,0,0,0,0],
-        ["2020-08-08",12,0,0,0,0],
-        ["2020-08-09",15,0,0,0,0],
-    ];
-    myChartFction(data);
+    getdata("getDataTime",7)
 
     $(document).on("click",".AnalyticsWork-detailExpand",function () {
         new AnalyticsWork_detailExpand_Lick(this);
@@ -422,9 +417,149 @@ $(function () {
     $(".AnalyticsWork-TabsBox .Tabs-link").click(function () {
         AnalyticsWork_TabsBox_TabsLick_IsActive(this);
     });
-
-
-
-
 });
+
+/**
+ * 获取数据
+ * @param day
+ */
+function getdata(a,day) {
+    $.ajax({
+        url:"creator/analytics",
+        type:"post",
+        data:{
+            "a":a,
+            "day":day,
+        },
+        dataType:"JSON",
+        success:function (result) {
+            console.log(result);
+            console.log(parseInt(day/4))
+            if (a.index("getDataTime") != -1){
+            myChartFction(result,parseInt(day/4));
+            $(".CreatorTable-table tbody").html("");
+            for (var i = 0; i < day; i++) {
+                var item;
+                if (i%2 == 0){
+                    item = $('<tr class="CreatorTable-tableRow CreatorTable-tableRow-odd">\n' +
+                        '                                                            <td class="CreatorTable-tableDate">\n' +
+                        '                                                                '+ result[i] [0] +'\n' +
+                        '                                                            </td>\n' +
+                        '                                                            <td class="CreatorTable-tableDate">\n' +
+                        '                                                                '+ result[i] [1] +'\n' +
+                        '                                                            </td>\n' +
+                        '                                                            <td class="CreatorTable-tableDate">\n' +
+                        '                                                                '+ result[i] [2] +'\n' +
+                        '                                                            </td>\n' +
+                        '                                                            <td class="CreatorTable-tableDate">\n' +
+                        '                                                                '+ result[i] [3] +'\n' +
+                        '                                                            </td>\n' +
+                        '                                                            <td class="CreatorTable-tableDate">\n' +
+                        '                                                                '+ result[i] [4] +'\n' +
+                        '                                                            </td>\n' +
+                        '                                                            <td class="CreatorTable-tableDate">\n' +
+                        '                                                                '+ result[i] [5] +'\n' +
+                        '                                                            </td>\n' +
+                        '                                                        </tr>');
+                }else {
+                    item = $('<tr class="CreatorTable-tableRow">\n' +
+                        '                                                            <td class="CreatorTable-tableDate">\n' +
+                        '                                                                '+ result[i] [0] +'\n' +
+                        '                                                            </td>\n' +
+                        '                                                            <td class="CreatorTable-tableDate">\n' +
+                        '                                                                '+ result[i] [1] +'\n' +
+                        '                                                            </td>\n' +
+                        '                                                            <td class="CreatorTable-tableDate">\n' +
+                        '                                                                '+ result[i] [2] +'\n' +
+                        '                                                            </td>\n' +
+                        '                                                            <td class="CreatorTable-tableDate">\n' +
+                        '                                                                '+ result[i] [3] +'\n' +
+                        '                                                            </td>\n' +
+                        '                                                            <td class="CreatorTable-tableDate">\n' +
+                        '                                                                '+ result[i] [4] +'\n' +
+                        '                                                            </td>\n' +
+                        '                                                            <td class="CreatorTable-tableDate">\n' +
+                        '                                                                '+ result[i] [5] +'\n' +
+                        '                                                            </td>\n' +
+                        '                                                        </tr>');
+                }
+
+
+                $(".CreatorTable-table tbody").append(item);
+            }
+            }else {
+
+                $(".CreatorTable-table tbody").html("");
+                for (var i = 0; i < day; i++) {
+                    var item;
+                    if (i%2 == 0){
+                        item = $('<tr class="CreatorTable-tableRow CreatorTable-tableRow-odd">\n' +
+                            '                                                                <td class="CreatorTable-tableDate AnalyticsWork-titleColumn">\n' +
+                            '                                                                    <a href="#" class="Creator-entityLink">当然是《樱花庄》啦，吹爆我真白！！ [图片]</a>\n' +
+                            '                                                                </td>\n' +
+                            '                                                                <td class="CreatorTable-tableDate">\n' +
+                            '                                                                    2020/01/03\n' +
+                            '                                                                </td>\n' +
+                            '                                                                <td class="CreatorTable-tableDate">\n' +
+                            '                                                                    5\n' +
+                            '                                                                </td>\n' +
+                            '                                                                <td class="CreatorTable-tableDate">\n' +
+                            '                                                                    0\n' +
+                            '                                                                </td>\n' +
+                            '                                                                <td class="CreatorTable-tableDate">\n' +
+                            '                                                                    0\n' +
+                            '                                                                </td>\n' +
+                            '                                                                <td class="CreatorTable-tableDate">\n' +
+                            '                                                                    0\n' +
+                            '                                                                </td>\n' +
+                            '                                                                <td class="CreatorTable-tableDate">\n' +
+                            '                                                                    0\n' +
+                            '                                                                </td>\n' +
+                            '                                                                <td class="CreatorTable-tableDate">\n' +
+                            '                                                                    <div class="AnalyticsWork-detailExpand Creator-internalLink">\n' +
+                            '                                                                        详细分析\n' +
+                            '                                                                        <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--TriangleDown" fill="currentColor" viewBox="0 0 24 24" width="6" height="6"><path d="M20.044 3H3.956C2.876 3 2 3.517 2 4.9c0 .326.087.533.236.896L10.216 19c.355.571.87 1.143 1.784 1.143s1.429-.572 1.784-1.143l7.98-13.204c.149-.363.236-.57.236-.896 0-1.386-.876-1.9-1.956-1.9z" fill-rule="evenodd"></path></svg></span>\n' +
+                            '                                                                    </div>\n' +
+                            '                                                                </td>\n' +
+                            '                                                            </tr>');
+                    }else {
+                        item = $('<tr class="CreatorTable-tableRow">\n' +
+                            '                                                                <td class="CreatorTable-tableDate AnalyticsWork-titleColumn">\n' +
+                            '                                                                    <a href="#" class="Creator-entityLink">当然是《樱花庄》啦，吹爆我真白！！ [图片]</a>\n' +
+                            '                                                                </td>\n' +
+                            '                                                                <td class="CreatorTable-tableDate">\n' +
+                            '                                                                    2020/01/03\n' +
+                            '                                                                </td>\n' +
+                            '                                                                <td class="CreatorTable-tableDate">\n' +
+                            '                                                                    5\n' +
+                            '                                                                </td>\n' +
+                            '                                                                <td class="CreatorTable-tableDate">\n' +
+                            '                                                                    0\n' +
+                            '                                                                </td>\n' +
+                            '                                                                <td class="CreatorTable-tableDate">\n' +
+                            '                                                                    0\n' +
+                            '                                                                </td>\n' +
+                            '                                                                <td class="CreatorTable-tableDate">\n' +
+                            '                                                                    0\n' +
+                            '                                                                </td>\n' +
+                            '                                                                <td class="CreatorTable-tableDate">\n' +
+                            '                                                                    0\n' +
+                            '                                                                </td>\n' +
+                            '                                                                <td class="CreatorTable-tableDate">\n' +
+                            '                                                                    <div class="AnalyticsWork-detailExpand Creator-internalLink">\n' +
+                            '                                                                        详细分析\n' +
+                            '                                                                        <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--TriangleDown" fill="currentColor" viewBox="0 0 24 24" width="6" height="6"><path d="M20.044 3H3.956C2.876 3 2 3.517 2 4.9c0 .326.087.533.236.896L10.216 19c.355.571.87 1.143 1.784 1.143s1.429-.572 1.784-1.143l7.98-13.204c.149-.363.236-.57.236-.896 0-1.386-.876-1.9-1.956-1.9z" fill-rule="evenodd"></path></svg></span>\n' +
+                            '                                                                    </div>\n' +
+                            '                                                                </td>\n' +
+                            '                                                            </tr>');
+                    }
+
+
+                    $(".CreatorTable-table tbody").append(item);
+                }
+            }
+
+        }
+    });
+}
 

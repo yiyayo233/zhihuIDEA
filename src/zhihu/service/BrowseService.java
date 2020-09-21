@@ -15,6 +15,10 @@ public class BrowseService {
         return BrowseDao.selectBrowse(uId, objectId, objectType);
     }
 
+    public List<BrowseEntity> selectBrowseByAll(String uId, String objectId, String browseTime, String objectType, String authorId){
+        return BrowseDao.selectBrowseByAll(uId, objectId, browseTime, objectType, authorId);
+    }
+
     public List<BrowseEntity> selectBrowseByTime(String uId, String objectId, String browseTime, String objectType, String authorId){
         return BrowseDao.selectBrowseByTime(uId, objectId, browseTime, objectType, authorId);
     }

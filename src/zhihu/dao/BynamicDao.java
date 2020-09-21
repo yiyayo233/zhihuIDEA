@@ -147,11 +147,92 @@ public class BynamicDao extends BaseDao{
                 StringBuffer.append(" TO_DAYS(NOW()) = TO_DAYS(bynamicTiem)");
             }else if (bynamicTiem.equals("7")){
                 StringBuffer.append(" DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= DATE(bynamicTiem)");
+            }else if (bynamicTiem.equals("14")){
+                StringBuffer.append(" WHERE DATE_SUB(CURDATE(), INTERVAL 14 DAY) <= DATE(bynamicTiem)");
             }else if (bynamicTiem.equals("30")){
                 StringBuffer.append(" WHERE DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= DATE(bynamicTiem)");
+            }else if (bynamicTiem.equals("90")){
+                StringBuffer.append(" WHERE DATE_SUB(CURDATE(), INTERVAL 90 DAY) <= DATE(bynamicTiem)");
             }else if (bynamicTiem.equals("-1")){
                 StringBuffer.append(" TO_DAYS( NOW( ) ) - TO_DAYS(bynamicTiem) = 1");
+            }else if (bynamicTiem.equals("-2")){
+                StringBuffer.append(" TO_DAYS( NOW( ) ) - TO_DAYS(bynamicTiem) = 2");
             }
+            i++;
+        }
+        if (!bynamicType.equals("")) {
+            if (i>0){
+                StringBuffer.append(" and");
+            }
+            StringBuffer.append(" bynamicType = '"+ bynamicType +"'");
+            i++;
+        }
+        if (!authorId.equals("")) {
+            if (i>0){
+                StringBuffer.append(" and");
+            }
+            StringBuffer.append(" authorId = '"+ authorId +"'");
+            i++;
+        }
+        StringBuffer.append(" ORDER BY bynamicTiem DESC");
+
+        List<BynamicEntity> bynamicEntityList = new ArrayList<>();
+
+        System.err.println(StringBuffer.toString());
+        resultSet = query(StringBuffer.toString());
+        try {
+            while (resultSet.next()) {
+                BynamicEntity bynamicEntity = new BynamicEntity(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
+                bynamicEntityList.add(bynamicEntity);
+            }
+        }catch (SQLException e){
+
+        }finally {
+            closeAll();
+        }
+        return bynamicEntityList;
+    }
+
+    /**
+     * 查询动态各种by
+     * @param id
+     * @param userId
+     * @param byBynamicId
+     * @param bynamicTiem 1(当天) : 7(一周) : 30(一月): ""(all) : -1(前一天)
+     * @param bynamicType
+     * @param authorId
+     * @return
+     */
+    public List<BynamicEntity> selectBynamicByTime(String id,String userId,String byBynamicId,String bynamicTiem,String bynamicType,String authorId){
+        StringBuffer StringBuffer = new StringBuffer("select * from Bynamic ");
+        int i = 0;
+
+        if (!id.equals("") || !userId.equals("") || !byBynamicId.equals("") || !bynamicTiem.equals("") || !bynamicType.equals("") || !authorId.equals("")){
+            StringBuffer.append(" where");
+        }
+        if (!id.equals("")) {
+            StringBuffer.append(" Bynamic = '"+ id+"'");
+            i++;
+        }
+        if (!userId.equals("")) {
+            if (i>0){
+                StringBuffer.append(" and");
+            }
+            StringBuffer.append(" userId = '"+ userId+"'");
+            i++;
+        }
+        if (!byBynamicId.equals("")) {
+            if (i>0){
+                StringBuffer.append(" and");
+            }
+            StringBuffer.append(" byBynamicId = '"+ byBynamicId+"'");
+            i++;
+        }
+        if (!bynamicTiem.equals("")) {
+            if (i>0){
+                StringBuffer.append(" and");
+            }
+            StringBuffer.append(" bynamicTiem LIKE '"+ bynamicTiem +"%'");
             i++;
         }
         if (!bynamicType.equals("")) {

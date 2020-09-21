@@ -72,7 +72,7 @@ public class BrowseDao extends BaseDao{
      * @param authorId
      * @return
 0     */
-    public List<BrowseEntity> selectBrowseByTime(String uId, String objectId, String browseTime, String objectType, String authorId){
+    public List<BrowseEntity> selectBrowseByAll(String uId, String objectId, String browseTime, String objectType, String authorId){
         StringBuffer StringBuffer = new StringBuffer("select * from browse ");
         int i = 0;
 
@@ -98,11 +98,85 @@ public class BrowseDao extends BaseDao{
                 StringBuffer.append(" TO_DAYS(NOW()) = TO_DAYS(browseTime)");
             }else if (browseTime.equals("7")){
                 StringBuffer.append(" DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= DATE(browseTime)");
+            }else if (browseTime.equals("14")){
+                StringBuffer.append(" WHERE DATE_SUB(CURDATE(), INTERVAL 14 DAY) <= DATE(browseTime)");
             }else if (browseTime.equals("30")){
                 StringBuffer.append(" WHERE DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= DATE(browseTime)");
+            }else if (browseTime.equals("90")){
+                StringBuffer.append(" WHERE DATE_SUB(CURDATE(), INTERVAL 90 DAY) <= DATE(browseTime)");
             }else if (browseTime.equals("-1")){
                 StringBuffer.append(" TO_DAYS( NOW( ) ) - TO_DAYS(browseTime) = 1");
+            }else if (browseTime.equals("-2")){
+                StringBuffer.append(" TO_DAYS( NOW( ) ) - TO_DAYS(browseTime) = 2");
             }
+            i++;
+        }
+        if (!objectType.equals("")) {
+            if (i>0){
+                StringBuffer.append(" and");
+            }
+            StringBuffer.append(" objectType = '"+ objectType +"'");
+            i++;
+        }
+        if (!authorId.equals("")) {
+            if (i>0){
+                StringBuffer.append(" and");
+            }
+            StringBuffer.append(" authorId = '"+ authorId +"'");
+            i++;
+        }
+        StringBuffer.append(" ORDER BY browseTime DESC");
+
+        List<BrowseEntity> browseEntityList = new ArrayList<>();
+
+        System.err.println(StringBuffer.toString());
+        resultSet = query(StringBuffer.toString());
+        try {
+            while (resultSet.next()) {
+                BrowseEntity browseEntity = new BrowseEntity(resultSet.getString(1), resultSet.getString(2), resultSet.getString(3), resultSet.getString(4), resultSet.getString(5), resultSet.getString(6));
+                browseEntityList.add(browseEntity);
+            }
+        }catch (SQLException e){
+
+        }finally {
+            closeAll();
+        }
+        return browseEntityList;
+    }
+
+
+    /**
+     * 根据时间查询该用户的浏览该对象的数据
+     * @param uId
+     * @param objectId
+     * @param browseTime 通过时间模糊查询
+     * @param objectType
+     * @param authorId
+     * @return
+    0     */
+    public List<BrowseEntity> selectBrowseByTime(String uId, String objectId, String browseTime, String objectType, String authorId){
+        StringBuffer StringBuffer = new StringBuffer("select * from browse ");
+        int i = 0;
+
+        if (!uId.equals("") || !objectId.equals("") || !browseTime.equals("") || !objectType.equals("") || !authorId.equals("")){
+            StringBuffer.append(" where");
+        }
+        if (!uId.equals("")) {
+            StringBuffer.append(" userId = '"+ uId+"'");
+            i++;
+        }
+        if (!objectId.equals("")) {
+            if (i>0){
+                StringBuffer.append(" and");
+            }
+            StringBuffer.append(" objectId = '"+ objectId+"'");
+            i++;
+        }
+        if (!browseTime.equals("")) {
+            if (i>0){
+                StringBuffer.append(" and");
+            }
+            StringBuffer.append(" browseTime LIKE '"+ browseTime +"%'");
             i++;
         }
         if (!objectType.equals("")) {

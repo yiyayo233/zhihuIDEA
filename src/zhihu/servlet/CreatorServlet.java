@@ -83,10 +83,10 @@ public class CreatorServlet extends HttpServlet {
     public void intoCreatorHomeGeneralCard(HttpServletRequest request, HttpServletResponse response, PrintWriter out, String uId){
         BrowseService BrowseService = new BrowseService();
         String objectId = request.getParameter("objectId");
-        List<BrowseEntity> browseEntityList = BrowseService.selectBrowseByTime("","","","",uId);
+        List<BrowseEntity> browseEntityList = BrowseService.selectBrowseByAll("","","","",uId);
         int BrowseAllNum = browseEntityList.size();
         request.setAttribute("BrowseAllNum", BrowseAllNum);
-        browseEntityList = BrowseService.selectBrowseByTime("","","-1","",uId);
+        browseEntityList = BrowseService.selectBrowseByAll("","","-1","",uId);
         int BrowseAllUpNum = browseEntityList.size();
         request.setAttribute("BrowseAllUpNum", BrowseAllUpNum);
 
@@ -148,7 +148,7 @@ public class CreatorServlet extends HttpServlet {
                 }else if (type.equals("yh")){
                 }
                 objectMap.put("type",type);
-                List<BrowseEntity> browseEntityList = BrowseService.selectBrowseByTime("",bynamicEntity.getByBynamicId(),"","","");
+                List<BrowseEntity> browseEntityList = BrowseService.selectBrowseByAll("",bynamicEntity.getByBynamicId(),"","","");
                 objectMap.put("llNum",browseEntityList.size());
 
                 objectMap.put("plNum",CommentServlet.getCommentNum(bynamicEntity.getByBynamicId()));

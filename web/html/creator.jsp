@@ -22,6 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
     <meta charset="UTF-8">
     <title>创作中心 - 知乎</title>
+      <link rel="icon" href="images/favicon.ico">
     <link rel="stylesheet" href="css/Header-Head.css">
     <link rel="stylesheet" href="css/Header-Topstory.css">
     <link rel="stylesheet" href="css/questionWaiting.css">
@@ -118,7 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
                 <div class="AppHeader-profile">
                     <button class="button">
-                        <img src="images/touxiang/6d6f2275d27e12ddf9deac2fd47a511344c9125d.png" alt="" height="30" width="30"/>
+                        <img src="images/user/<%=uChatHead%>" alt="" height="30" width="30"/>
                     </button>
                 </div>
             </div>

@@ -23,4 +23,8 @@ public class CommentService {
     public int addComment(String id, String answerId, String userId, String affiliationId, String content, int approveNum, String commentTime){
         return CommentDao.addComment(id, answerId, userId, affiliationId, content, approveNum, commentTime);
     }
+
+    public List<CommentEntity> selectCommentByAll(String id, String answerId, String userId, String affiliationId, String content, int approveNum, String commentTime){
+        return CommentDao.selectCommentByAll(id, answerId, userId, affiliationId, content, approveNum, commentTime);
+    }
 }

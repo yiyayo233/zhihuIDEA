@@ -19,4 +19,8 @@ public class CommentReplyService {
         return CommentReplyDao.UpdateApproveNum(Num, id);
     }
 
+    public List<CommentReplyEntity> selectCommentReplyByAll(String rId, String id, String userId, String replyuserId, String content, int approveNum, String commentTime){
+        return CommentReplyDao.selectCommentReplyByAll(rId, id, userId, replyuserId, content, approveNum, commentTime);
+    }
+
 }

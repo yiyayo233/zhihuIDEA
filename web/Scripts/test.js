@@ -1,5 +1,5 @@
 
-function myChartFction(data) {
+function myChartFction(data,interval) {
     // 基于准备好的dom，初始化echarts实例
     var myChart /*echarts.init(document.getElementById('main'))*/;
 
@@ -76,16 +76,19 @@ var option = {
             },
         },
         axisTick: {
+            interval: interval,
             alignWithLabel: true,
-            interval: 1,
             length: 10,
         },
         axisLabel:{
-            interval: 1,
+            interval: interval,
             color: '#333',
             margin: 12.5,
             fontSize: 13,
+            show: true,
         },
+        boundaryGap: false,
+        inverse: true,
     },
     yAxis: {
         splitNumber: 4,
@@ -139,22 +142,27 @@ var option = {
         name: '阅读量',
         type: 'line',
         color: '#4289E8',
+        symbolSize: 0
     },{
         name: '评论数',
         type: 'line',
         color: '#6AAD53',
+        symbolSize: 0
     },{
         name: '赞同数',
         type: 'line',
         color: '#F4C32C',
+        symbolSize: 0
     },{
         name: '喜欢数',
         type: 'line',
         color: '#5CBAD9',
+        symbolSize: 0
     },{
         name: '收藏数',
         type: 'line',
         color: '#D1DA3C',
+        symbolSize: 0
     }],
 };
 
@@ -171,7 +179,3 @@ function refreshData(data){
     option.series[0].data = data;
     myChart.setOption(option);
 }
-
-
-// 使用刚指定的配置项和数据显示图表。
-//myChart.setOption(option);

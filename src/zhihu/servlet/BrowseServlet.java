@@ -6,7 +6,6 @@ import zhihu.entity.AnswerEntity;
 import zhihu.entity.BrowseEntity;
 import zhihu.service.AnswerSercice;
 import zhihu.service.BrowseService;
-import zhihu.service.SuperService;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -43,7 +42,7 @@ public class BrowseServlet extends HttpServlet {
         BrowseService BrowseService = new BrowseService();
         String uId = request.getParameter("uId");
         String objectId = request.getParameter("objectId");
-        List<BrowseEntity> browseEntityList = BrowseService.selectBrowseByTime(uId,objectId,"1","","");
+        List<BrowseEntity> browseEntityList = BrowseService.selectBrowseByAll(uId,objectId,"1","","");
         System.out.println("browseEntityList.size()----"+browseEntityList.size());
 
         if (browseEntityList.size() < 5){
@@ -67,7 +66,7 @@ public class BrowseServlet extends HttpServlet {
         BrowseService BrowseService = new BrowseService();
         String uId = request.getParameter("uId");
         String objectId = request.getParameter("objectId");
-        List<BrowseEntity> browseEntityList = BrowseService.selectBrowseByTime(uId,objectId,"1","","");
+        List<BrowseEntity> browseEntityList = BrowseService.selectBrowseByAll(uId,objectId,"1","","");
 
     }
 }

@@ -181,6 +181,9 @@
     font-weight: 400;
     text-align: left;
 }
+.CreatorTable-tableHead .CreatorSorter{
+    display: none;
+}
 .CreatorTable-tableHead:first-child{
     padding-left: 24px;
 }
@@ -244,6 +247,8 @@
     padding: 10px 24px;
     display: flex;
     justify-content: flex-end;
+    display: none;
+
 }
 .button.CreatorPagination-Button{
     padding: 0 11px;

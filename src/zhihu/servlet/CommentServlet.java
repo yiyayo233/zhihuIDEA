@@ -127,4 +127,26 @@ public class CommentServlet extends HttpServlet {
         }
         return CommentNum;
     }
+
+    public static int getCommentNumByTime(String uId, String CommentTime){
+        int CommentNum = 0;
+        CommentService CommentService = new CommentService();
+        List<CommentEntity> commentEntityList = CommentService.selectCommentByAll("","","","","",0,CommentTime);
+        if (commentEntityList.size() != 0){
+            for (CommentEntity commentEntity:commentEntityList) {
+                String type = commentEntity.getAffiliationId().substring(0,2);
+                if (type.equals("hd")){
+                    AnswerSercice answerSercice = new AnswerSercice();
+                    AnswerEntity answerEntity = answerSercice.selectAnseerItem(commentEntity.getAffiliationId());
+                    if (answerEntity.getAuthorId().equals(uId)){
+                        CommentNum++;
+                        CommentReplyService CommentReplyService = new CommentReplyService();
+                        List<CommentReplyEntity> commentReplyEntityList = CommentReplyService.selectCommentReplyByAll("",commentEntity.getId(),"","","",0,CommentTime);
+                        CommentNum = CommentNum + commentReplyEntityList.size();
+                    }
+                }
+            }
+        }
+        return CommentNum;
+    }
 }

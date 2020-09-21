@@ -26,4 +26,8 @@ public class BynamicService {
     public List<BynamicEntity> selectBynamicByAll(String id,String userId,String byBynamicId,String bynamicTiem,String bynamicType,String authorId){
         return BynamicDao.selectBynamicByAll(id, userId, byBynamicId, bynamicTiem, bynamicType, authorId);
     }
+
+    public List<BynamicEntity> selectBynamicByTime(String id,String userId,String byBynamicId,String bynamicTiem,String bynamicType,String authorId) {
+        return BynamicDao.selectBynamicByTime(id, userId, byBynamicId, bynamicTiem, bynamicType, authorId);
+    }
 }
