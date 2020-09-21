@@ -2,8 +2,10 @@ package zhihu.servlet;
 
 import com.google.gson.Gson;
 import zhihu.common.ProduceDatetime;
+import zhihu.entity.AnswerEntity;
 import zhihu.entity.BrowseEntity;
 import zhihu.entity.BynamicEntity;
+import zhihu.service.AnswerSercice;
 import zhihu.service.BrowseService;
 import zhihu.service.BynamicService;
 
@@ -16,7 +18,9 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "analyticsServlet",urlPatterns = {"/creator/analytics"})
 public class analyticsServlet extends HttpServlet {
@@ -30,7 +34,7 @@ public class analyticsServlet extends HttpServlet {
         String a = request.getParameter("a");
         if (a==null || a.equals("info")) {
             Intoanalytics(request, response, out);
-        }else if (a.equals("getDataTime")||a.equals("getDataObject")){
+        }else if (a.equals("getDataTime") || a.equals("getDataObject")){
             getdata(request, response, out,a);
         }
     }
@@ -156,6 +160,7 @@ public class analyticsServlet extends HttpServlet {
     private void getdata(HttpServletRequest request, HttpServletResponse response, PrintWriter out, String a) throws IOException {
         String uId = Cookies(request, response, out);
         int day = Integer.parseInt(request.getParameter("day"));
+        String objectId = request.getParameter("objectId");
         BrowseService BrowseService = new BrowseService();
         BynamicService BynamicService = new BynamicService();
         //todo 通过循环获取时间
@@ -163,38 +168,65 @@ public class analyticsServlet extends HttpServlet {
         List<String> strings = ProduceDatetime.Dates(day);
         if (a.equals("getDataTime")){
             str =new Object[day][6];
-            for (int i=0;i<str.length;i++){
-                str[i] [0] = strings.get(i);
-                List<BrowseEntity> browseEntityList = BrowseService.selectBrowseByTime("","",strings.get(i),"",uId);
-                str[i] [1] = browseEntityList.size();
-                int CommentNum = CommentServlet.getCommentNumByTime(uId, strings.get(i));
-                str[i] [2] = CommentNum;
-                List<BynamicEntity> bynamicEntityList = BynamicService.selectBynamicByTime("","","",strings.get(i),"zt",uId);
-                str[i] [3] = bynamicEntityList.size();
-                str[i] [4] = "--";
-                str[i] [5] = "--";
+            if (objectId.equals("QQQ")){
+                for (int i=0;i<str.length;i++){
+                    str[i] [0] = strings.get(i);
+                    List<BrowseEntity> browseEntityList = BrowseService.selectBrowseByTime("","",strings.get(i),"",uId);
+                    str[i] [1] = browseEntityList.size();
+                    int CommentNum = CommentServlet.getCommentNumByTime(uId, strings.get(i),"");
+                    str[i] [2] = CommentNum;
+                    List<BynamicEntity> bynamicEntityList = BynamicService.selectBynamicByTime("","","",strings.get(i),"zt",uId);
+                    str[i] [3] = bynamicEntityList.size();
+                    str[i] [4] = "--";
+                    str[i] [5] = "--";
+                }
+            }else {
+                for (int i=0;i<str.length;i++){
+                    str[i] [0] = strings.get(i);
+                    List<BrowseEntity> browseEntityList = BrowseService.selectBrowseByTime("",objectId,strings.get(i),"",uId);
+                    str[i] [1] = browseEntityList.size();
+                    int CommentNum = CommentServlet.getCommentNumByTime(uId, strings.get(i),objectId);
+                    str[i] [2] = CommentNum;
+                    List<BynamicEntity> bynamicEntityList = BynamicService.selectBynamicByTime("","",objectId,strings.get(i),"zt",uId);
+                    str[i] [3] = bynamicEntityList.size();
+                    str[i] [4] = "--";
+                    str[i] [5] = "--";
+                }
             }
+
+            Gson gson = new Gson();
+            String result = gson.toJson(str);
+            out.println(result);
         }else {
-            str =new Object[day][7];
-            String objectId = request.getParameter("objectId");
-            for (int i=0;i<str.length;i++){
-                str[i] [0] = strings.get(i);
-                List<BrowseEntity> browseEntityList = BrowseService.selectBrowseByTime("",objectId,strings.get(i),"",uId);
-                str[i] [1] = browseEntityList.size();
-                int CommentNum = CommentServlet.getCommentNumByTime(uId, strings.get(i));
-                str[i] [2] = CommentNum;
-                List<BynamicEntity> bynamicEntityList = BynamicService.selectBynamicByTime("","",objectId,strings.get(i),"zt",uId);
-                str[i] [3] = bynamicEntityList.size();
-                str[i] [4] = "--";
-                str[i] [5] = "--";
+            List<Object> objectList = new ArrayList<>();
+            List<BynamicEntity> bynamicEntityList = BynamicService.selectBynamicByAll("","","", String.valueOf(day),"fb",uId);
+            if (bynamicEntityList.size() > 0){
+                for (BynamicEntity bynamicEntity : bynamicEntityList) {
+                    String type = bynamicEntity.getByBynamicId().substring(0,2);
+                    if (type.equals("hd")){
+                        Hashtable hashtable = new Hashtable();
+                        AnswerSercice answerSercice = new AnswerSercice();
+                        AnswerEntity answerEntity = answerSercice.selectAnseerItem(bynamicEntity.getByBynamicId());
+                        hashtable.put("object",answerEntity);
+                        List<BrowseEntity> browseEntityList = BrowseService.selectBrowseByAll("",answerEntity.getId(),String.valueOf(day),"",uId);
+                        hashtable.put("llNum",browseEntityList.size());
+                        hashtable.put("commentNum",CommentServlet.getCommentNum(answerEntity.getId()));
+                        bynamicEntityList = BynamicService.selectBynamicByAll("","",answerEntity.getId(),String.valueOf(day),"zt",uId);
+                        hashtable.put("ztNum",bynamicEntityList.size());
+                        hashtable.put("xhNum","--");
+                        hashtable.put("scNum","--");
+                        objectList.add(hashtable);
+                    }
+                }
             }
+
+            Gson gson = new Gson();
+            String result = gson.toJson(objectList);
+            out.println(result);
         }
 
 //        objectList.add();
 
-        Gson gson = new Gson();
-        String result = gson.toJson(str);
-        out.println(result);
     }
 
     private String Cookies(HttpServletRequest request, HttpServletResponse response, PrintWriter out) throws IOException {

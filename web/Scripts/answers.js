@@ -267,17 +267,17 @@ function CreatorTable_tableRowExpanded_html(is_odd){
         '                                                                <td class="CreatorTable-tableDate" colspan="8">\n' +
         '                                                                    <div class="AnalyticsWork-expandRowBox">\n' +
         '                                                                        <div class="DateLimitSelector AnalyticsWork-DateLimitSelector">\n' +
-        '                                                                            <button class="Creator-ButtonGroupButton ButtonGroupButton-select">\n' +
+        '                                                                            <button class="Creator-ButtonGroupButton ButtonGroupButton-select" data-daynum="14">\n' +
         '                                                                                最近\n' +
         '                                                                                14\n' +
         '                                                                                天\n' +
         '                                                                            </button>\n' +
-        '                                                                            <button class="Creator-ButtonGroupButton">\n' +
+        '                                                                            <button class="Creator-ButtonGroupButton" data-daynum="30">\n' +
         '                                                                                最近\n' +
         '                                                                                30\n' +
         '                                                                                天\n' +
         '                                                                            </button>\n' +
-        '                                                                            <button class="Creator-ButtonGroupButton">\n' +
+        '                                                                            <button class="Creator-ButtonGroupButton" data-daynum="90">\n' +
         '                                                                                最近\n' +
         '                                                                                90\n' +
         '                                                                                天\n' +
@@ -300,31 +300,28 @@ function CreatorTable_tableRowExpanded_html(is_odd){
  * @constructor
  */
 function AnalyticsWork_detailExpand_Lick(button){
-    if ($(button).parent().parent().next().attr("class").indexOf("CreatorTable-tableRowExpanded") !== -1){
-        // $(button).parent().parent().next().remove();
-        $(".CreatorTable-tableRowExpanded").remove();
-        console.log(1);
-    }else {
-        $(".CreatorTable-tableRowExpanded").remove();
-        var $parentName = $(button).parent().parent().attr("class");
-        if ($parentName.indexOf("CreatorTable-tableRow-odd") !== -1){
-            $(button).parent().parent().after(CreatorTable_tableRowExpanded_html(0));
+    //if ($(button).parent().parent().next().attr("class") != null){
+        // $(button).parent().parent().next().attr("class") != null
+        // $(button).parent().parent().next().attr("class").indexOf("CreatorTable-tableRowExpanded") !== -1
+        if ($(button).parent().parent().next().attr("class") != null){
+            // $(button).parent().parent().next().remove();
+            $(".CreatorTable-tableRowExpanded").remove();
+            console.log(1);
         }else {
-            $(button).parent().parent().after(CreatorTable_tableRowExpanded_html(1));
+            $(".CreatorTable-tableRowExpanded").remove();
+            var $parentName = $(button).parent().parent().attr("class");
+            if ($parentName.indexOf("CreatorTable-tableRow-odd") !== -1){
+                $(button).parent().parent().after(CreatorTable_tableRowExpanded_html(0));
+            }else {
+                $(button).parent().parent().after(CreatorTable_tableRowExpanded_html(1));
+            }
+            var day = $(".Creator-ButtonGroupButton.ButtonGroupButton-select").attr("data-daynum");
+            var objectId = $(button).attr("data-object-id");
+            getdata("getDataTime",day,objectId);
+            console.log(2);
         }
-        var data = [
-            ['2020-8-03', 10,0,0,0,0],
-            ["2020-08-04",2,0,0,0,0],
-            ["2020-08-05",8,0,0,0,0],
-            ["2020-08-06",7,0,0,0,0],
-            ["2020-08-07",8,0,0,0,0],
-            ["2020-08-08",12,0,0,0,0],
-            ["2020-08-09",15,0,0,0,0],
-        ];
-        myChartFction(data);
-        console.log(2);
+    //}
 
-    }
 }
 
 /**
@@ -335,7 +332,11 @@ function Creator_ButtonGroupButton_IsSelect(button) {
     if ($(button).attr("class").indexOf("ButtonGroupButton-select") === -1) {
         $(button).siblings().removeClass("ButtonGroupButton-select");
         $(button).addClass("ButtonGroupButton-select");
+        var day = $(".Creator-ButtonGroupButton.ButtonGroupButton-select").attr("data-daynum");
+        var objectId = $(button).parents(".CreatorTable-tableRowExpanded").prev().find(".AnalyticsWork-detailExpand.Creator-internalLink").attr("data-object-id");
+        getdata("getDataTime",day,objectId);
     }
+
 }
 /**
  * 最近天数选择
@@ -349,7 +350,7 @@ function AnalyticsDetailRangPicker_dateButton_IsActive(button){
     var index = $(".CreatorSectionItem.CreatorSectionItem--clickable.is-active").index();
     if (index == 0){
         var day = $(button).attr("data-dayNum");
-        getdata("getDataTime",day);
+        getdata("getDataTime",day,"QQQ");
     }else if (index == 1){
         var day = $(button).attr("data-dayNum");
         alert(day);
@@ -373,9 +374,9 @@ function CreatorSectionItem__name_IsActive(button){
             new CreatorSection_body_CompletionTableRow_html();
             var day = $(".button.AnalyticsDetailRangPicker-dateButton.is-active").attr("data-daynum");
             if(index == 0){
-                getdata("getDataTime",day);
+                getdata("getDataTime",day,"QQQ");
             }else if (index == 1){
-                getdata("getDataObject",day);
+                getdata("getDataObject",day,"QQQ");
             }
         }
 
@@ -400,7 +401,7 @@ $(function () {
     // new CreatorSectionItem__name_IsActive($(".CreatorSectionItem--name"));
     $(".CreatorSection-body").html(CreatorSection_body_html(0));
     CreatorSection_body_CompletionTableRow_html();
-    getdata("getDataTime",7)
+    getdata("getDataTime",7,"QQQ")
 
     $(document).on("click",".AnalyticsWork-detailExpand",function () {
         new AnalyticsWork_detailExpand_Lick(this);
@@ -423,100 +424,106 @@ $(function () {
  * 获取数据
  * @param day
  */
-function getdata(a,day) {
+function getdata(a,day,objectId) {
     $.ajax({
         url:"creator/analytics",
         type:"post",
         data:{
             "a":a,
             "day":day,
+            "objectId":objectId,
         },
         dataType:"JSON",
         success:function (result) {
             console.log(result);
             console.log(parseInt(day/4))
-            if (a.index("getDataTime") != -1){
-            myChartFction(result,parseInt(day/4));
-            $(".CreatorTable-table tbody").html("");
-            for (var i = 0; i < day; i++) {
-                var item;
-                if (i%2 == 0){
-                    item = $('<tr class="CreatorTable-tableRow CreatorTable-tableRow-odd">\n' +
-                        '                                                            <td class="CreatorTable-tableDate">\n' +
-                        '                                                                '+ result[i] [0] +'\n' +
-                        '                                                            </td>\n' +
-                        '                                                            <td class="CreatorTable-tableDate">\n' +
-                        '                                                                '+ result[i] [1] +'\n' +
-                        '                                                            </td>\n' +
-                        '                                                            <td class="CreatorTable-tableDate">\n' +
-                        '                                                                '+ result[i] [2] +'\n' +
-                        '                                                            </td>\n' +
-                        '                                                            <td class="CreatorTable-tableDate">\n' +
-                        '                                                                '+ result[i] [3] +'\n' +
-                        '                                                            </td>\n' +
-                        '                                                            <td class="CreatorTable-tableDate">\n' +
-                        '                                                                '+ result[i] [4] +'\n' +
-                        '                                                            </td>\n' +
-                        '                                                            <td class="CreatorTable-tableDate">\n' +
-                        '                                                                '+ result[i] [5] +'\n' +
-                        '                                                            </td>\n' +
-                        '                                                        </tr>');
-                }else {
-                    item = $('<tr class="CreatorTable-tableRow">\n' +
-                        '                                                            <td class="CreatorTable-tableDate">\n' +
-                        '                                                                '+ result[i] [0] +'\n' +
-                        '                                                            </td>\n' +
-                        '                                                            <td class="CreatorTable-tableDate">\n' +
-                        '                                                                '+ result[i] [1] +'\n' +
-                        '                                                            </td>\n' +
-                        '                                                            <td class="CreatorTable-tableDate">\n' +
-                        '                                                                '+ result[i] [2] +'\n' +
-                        '                                                            </td>\n' +
-                        '                                                            <td class="CreatorTable-tableDate">\n' +
-                        '                                                                '+ result[i] [3] +'\n' +
-                        '                                                            </td>\n' +
-                        '                                                            <td class="CreatorTable-tableDate">\n' +
-                        '                                                                '+ result[i] [4] +'\n' +
-                        '                                                            </td>\n' +
-                        '                                                            <td class="CreatorTable-tableDate">\n' +
-                        '                                                                '+ result[i] [5] +'\n' +
-                        '                                                            </td>\n' +
-                        '                                                        </tr>');
+            if (a.indexOf("getDataTime") != -1){
+                myChartFction(result,parseInt(day/4));
+                if (objectId.indexOf("QQQ") !== -1){
+                    $(".CreatorTable-table tbody").html("");
+                    for (var i = 0; i < day; i++) {
+                        var item;
+                        if (i%2 == 0){
+                            item = $('<tr class="CreatorTable-tableRow CreatorTable-tableRow-odd">\n' +
+                                '                                                            <td class="CreatorTable-tableDate">\n' +
+                                '                                                                '+ result[i] [0] +'\n' +
+                                '                                                            </td>\n' +
+                                '                                                            <td class="CreatorTable-tableDate">\n' +
+                                '                                                                '+ result[i] [1] +'\n' +
+                                '                                                            </td>\n' +
+                                '                                                            <td class="CreatorTable-tableDate">\n' +
+                                '                                                                '+ result[i] [2] +'\n' +
+                                '                                                            </td>\n' +
+                                '                                                            <td class="CreatorTable-tableDate">\n' +
+                                '                                                                '+ result[i] [3] +'\n' +
+                                '                                                            </td>\n' +
+                                '                                                            <td class="CreatorTable-tableDate">\n' +
+                                '                                                                '+ result[i] [4] +'\n' +
+                                '                                                            </td>\n' +
+                                '                                                            <td class="CreatorTable-tableDate">\n' +
+                                '                                                                '+ result[i] [5] +'\n' +
+                                '                                                            </td>\n' +
+                                '                                                        </tr>');
+                        }else {
+                            item = $('<tr class="CreatorTable-tableRow">\n' +
+                                '                                                            <td class="CreatorTable-tableDate">\n' +
+                                '                                                                '+ result[i] [0] +'\n' +
+                                '                                                            </td>\n' +
+                                '                                                            <td class="CreatorTable-tableDate">\n' +
+                                '                                                                '+ result[i] [1] +'\n' +
+                                '                                                            </td>\n' +
+                                '                                                            <td class="CreatorTable-tableDate">\n' +
+                                '                                                                '+ result[i] [2] +'\n' +
+                                '                                                            </td>\n' +
+                                '                                                            <td class="CreatorTable-tableDate">\n' +
+                                '                                                                '+ result[i] [3] +'\n' +
+                                '                                                            </td>\n' +
+                                '                                                            <td class="CreatorTable-tableDate">\n' +
+                                '                                                                '+ result[i] [4] +'\n' +
+                                '                                                            </td>\n' +
+                                '                                                            <td class="CreatorTable-tableDate">\n' +
+                                '                                                                '+ result[i] [5] +'\n' +
+                                '                                                            </td>\n' +
+                                '                                                        </tr>');
+                        }
+
+
+                        $(".CreatorTable-table tbody").append(item);
+                    }
                 }
-
-
-                $(".CreatorTable-table tbody").append(item);
-            }
             }else {
-
                 $(".CreatorTable-table tbody").html("");
-                for (var i = 0; i < day; i++) {
+                $.each(result,function (i,obj) {
+                    console.log(obj)
                     var item;
                     if (i%2 == 0){
+                        var content = obj.object.answerContent.replace(/<.*?>/ig,"").substring(0,100);
+                        var time = obj.object.publishTime;
+                        time = time.substring(0,10);
                         item = $('<tr class="CreatorTable-tableRow CreatorTable-tableRow-odd">\n' +
                             '                                                                <td class="CreatorTable-tableDate AnalyticsWork-titleColumn">\n' +
-                            '                                                                    <a href="#" class="Creator-entityLink">当然是《樱花庄》啦，吹爆我真白！！ [图片]</a>\n' +
+                            '                                                                    <a href="answer?answerId='+ obj.object.id +'" class="Creator-entityLink">'+ content +'</a>\n' +
                             '                                                                </td>\n' +
                             '                                                                <td class="CreatorTable-tableDate">\n' +
-                            '                                                                    2020/01/03\n' +
+                            '                                                                    '+ time +'\n' +
                             '                                                                </td>\n' +
                             '                                                                <td class="CreatorTable-tableDate">\n' +
-                            '                                                                    5\n' +
+                            '                                                                    '+ obj.llNum +'\n' +
                             '                                                                </td>\n' +
                             '                                                                <td class="CreatorTable-tableDate">\n' +
-                            '                                                                    0\n' +
+                            '                                                                    '+ obj.commentNum +'\n' +
                             '                                                                </td>\n' +
                             '                                                                <td class="CreatorTable-tableDate">\n' +
-                            '                                                                    0\n' +
+                            '                                                                    '+ obj.ztNum +'\n' +
                             '                                                                </td>\n' +
                             '                                                                <td class="CreatorTable-tableDate">\n' +
-                            '                                                                    0\n' +
+                            '                                                                    '+ obj.xhNum +'\n' +
                             '                                                                </td>\n' +
                             '                                                                <td class="CreatorTable-tableDate">\n' +
-                            '                                                                    0\n' +
+                            '                                                                    '+ obj.scNum +'\n' +
                             '                                                                </td>\n' +
                             '                                                                <td class="CreatorTable-tableDate">\n' +
-                            '                                                                    <div class="AnalyticsWork-detailExpand Creator-internalLink">\n' +
+                            '                                                                    <div class="AnalyticsWork-detailExpand Creator-internalLink" data-object-id="'+ obj.object.id +'">\n' +
                             '                                                                        详细分析\n' +
                             '                                                                        <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--TriangleDown" fill="currentColor" viewBox="0 0 24 24" width="6" height="6"><path d="M20.044 3H3.956C2.876 3 2 3.517 2 4.9c0 .326.087.533.236.896L10.216 19c.355.571.87 1.143 1.784 1.143s1.429-.572 1.784-1.143l7.98-13.204c.149-.363.236-.57.236-.896 0-1.386-.876-1.9-1.956-1.9z" fill-rule="evenodd"></path></svg></span>\n' +
                             '                                                                    </div>\n' +
@@ -525,38 +532,36 @@ function getdata(a,day) {
                     }else {
                         item = $('<tr class="CreatorTable-tableRow">\n' +
                             '                                                                <td class="CreatorTable-tableDate AnalyticsWork-titleColumn">\n' +
-                            '                                                                    <a href="#" class="Creator-entityLink">当然是《樱花庄》啦，吹爆我真白！！ [图片]</a>\n' +
+                            '                                                                    <a href="answer?answerId='+ obj.object.id +'" class="Creator-entityLink">'+ content +'</a>\n' +
                             '                                                                </td>\n' +
                             '                                                                <td class="CreatorTable-tableDate">\n' +
-                            '                                                                    2020/01/03\n' +
+                            '                                                                    '+ time +'\n' +
                             '                                                                </td>\n' +
                             '                                                                <td class="CreatorTable-tableDate">\n' +
-                            '                                                                    5\n' +
+                            '                                                                    '+ obj.llNum +'\n' +
                             '                                                                </td>\n' +
                             '                                                                <td class="CreatorTable-tableDate">\n' +
-                            '                                                                    0\n' +
+                            '                                                                    '+ obj.commentNum +'\n' +
                             '                                                                </td>\n' +
                             '                                                                <td class="CreatorTable-tableDate">\n' +
-                            '                                                                    0\n' +
+                            '                                                                    '+ obj.ztNum +'\n' +
                             '                                                                </td>\n' +
                             '                                                                <td class="CreatorTable-tableDate">\n' +
-                            '                                                                    0\n' +
+                            '                                                                    '+ obj.xhNum +'\n' +
                             '                                                                </td>\n' +
                             '                                                                <td class="CreatorTable-tableDate">\n' +
-                            '                                                                    0\n' +
+                            '                                                                    '+ obj.scNum +'\n' +
                             '                                                                </td>\n' +
                             '                                                                <td class="CreatorTable-tableDate">\n' +
-                            '                                                                    <div class="AnalyticsWork-detailExpand Creator-internalLink">\n' +
+                            '                                                                    <div class="AnalyticsWork-detailExpand Creator-internalLink" data-object-id="'+ obj.object.id +'">\n' +
                             '                                                                        详细分析\n' +
                             '                                                                        <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--TriangleDown" fill="currentColor" viewBox="0 0 24 24" width="6" height="6"><path d="M20.044 3H3.956C2.876 3 2 3.517 2 4.9c0 .326.087.533.236.896L10.216 19c.355.571.87 1.143 1.784 1.143s1.429-.572 1.784-1.143l7.98-13.204c.149-.363.236-.57.236-.896 0-1.386-.876-1.9-1.956-1.9z" fill-rule="evenodd"></path></svg></span>\n' +
                             '                                                                    </div>\n' +
                             '                                                                </td>\n' +
                             '                                                            </tr>');
                     }
-
-
                     $(".CreatorTable-table tbody").append(item);
-                }
+                })
             }
 
         }

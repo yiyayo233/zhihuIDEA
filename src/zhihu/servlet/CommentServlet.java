@@ -128,10 +128,10 @@ public class CommentServlet extends HttpServlet {
         return CommentNum;
     }
 
-    public static int getCommentNumByTime(String uId, String CommentTime){
+    public static int getCommentNumByTime(String uId, String CommentTime, String affiliationId){
         int CommentNum = 0;
         CommentService CommentService = new CommentService();
-        List<CommentEntity> commentEntityList = CommentService.selectCommentByAll("","","","","",0,CommentTime);
+        List<CommentEntity> commentEntityList = CommentService.selectCommentByAll("","","",affiliationId,"",0,CommentTime);
         if (commentEntityList.size() != 0){
             for (CommentEntity commentEntity:commentEntityList) {
                 String type = commentEntity.getAffiliationId().substring(0,2);

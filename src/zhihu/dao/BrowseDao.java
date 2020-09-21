@@ -99,11 +99,11 @@ public class BrowseDao extends BaseDao{
             }else if (browseTime.equals("7")){
                 StringBuffer.append(" DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= DATE(browseTime)");
             }else if (browseTime.equals("14")){
-                StringBuffer.append(" WHERE DATE_SUB(CURDATE(), INTERVAL 14 DAY) <= DATE(browseTime)");
+                StringBuffer.append(" DATE_SUB(CURDATE(), INTERVAL 14 DAY) <= DATE(browseTime)");
             }else if (browseTime.equals("30")){
-                StringBuffer.append(" WHERE DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= DATE(browseTime)");
+                StringBuffer.append(" DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= DATE(browseTime)");
             }else if (browseTime.equals("90")){
-                StringBuffer.append(" WHERE DATE_SUB(CURDATE(), INTERVAL 90 DAY) <= DATE(browseTime)");
+                StringBuffer.append(" DATE_SUB(CURDATE(), INTERVAL 90 DAY) <= DATE(browseTime)");
             }else if (browseTime.equals("-1")){
                 StringBuffer.append(" TO_DAYS( NOW( ) ) - TO_DAYS(browseTime) = 1");
             }else if (browseTime.equals("-2")){
