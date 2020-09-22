@@ -482,14 +482,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
                 <div class="user-side">
                     <div class="Card CreatorEntrance">
-                        <a href="#" class="CreatorEntrance-link">
+                        <a href="creator" class="CreatorEntrance-link">
                             <div class="CreatorEntrance-hint usermainCreator-CreatorEntrance">
                                 <img class="CreatorEntrance-img" src="images/user/creator_entrance.a883e0a5.png" alt="">
                                 <div class="CreatorEntrance-text">
                                     <div class="CreatorEntrance-title">
                                         创作中心
                                         <span class="css-605fnf">
-                                            Lv 1
+                                            Lv 2
                                         </span>
                                     </div>
                                     <div class="CreatorEntrance-Message">
@@ -503,7 +503,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="ProfileSideCreator-readCountTitle">
                                         昨日被阅读数
                                     </div>
-                                    <div class="ProfileSideCreator-readCountNum">7</div>
+                                    <div class="ProfileSideCreator-readCountNum">--</div>
                                     <div class="css-u2c28s">
                                         <div class="css-1086365">较前日</div>
                                         <div class="css-1gqb0v0">
@@ -511,7 +511,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--BackToTop" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M16.036 19.59a1 1 0 0 1-.997.995H9.032a.996.996 0 0 1-.997-.996v-7.005H5.03c-1.1 0-1.36-.633-.578-1.416L11.33 4.29a1.003 1.003 0 0 1 1.412 0l6.878 6.88c.782.78.523 1.415-.58 1.415h-3.004v7.005z"></path></svg></span>
                                             </span>
                                             <span class="css-qcbo30">
-                                                75%
+                                                --
                                             </span>
                                         </div>
                                     </div>
@@ -520,7 +520,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="ProfileSideCreator-readCountTitle">
                                         昨日被阅读数
                                     </div>
-                                    <div class="ProfileSideCreator-readCountNum">0</div>
+                                    <div class="ProfileSideCreator-readCountNum">--</div>
                                     <div class="css-u2c28s">
                                         <div class="css-1086365">较前日</div>
                                         <div class="css-1gqb0v0">--</div>
@@ -647,6 +647,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="Scripts/Header-Head.js"></script>
     <script src="Scripts/Header-TopstoryRecommend.js"></script>
     <script src="Scripts/User.js"></script>
+    <script src="Scripts/analytics.js"></script>
     <script src="Scripts/initComment.js"></script>
     <div>
       <div>

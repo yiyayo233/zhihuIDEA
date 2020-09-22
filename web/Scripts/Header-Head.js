@@ -232,9 +232,9 @@ function addQuestionajax(uId,title,text){
             "title": title,
             "text": text,
         },
-        dataType: "JSON",
-        success: function () {
-
+        success: function (result) {
+            console.log(result);
+            window.open("question?questionId="+ result + "","_blank");
         }
     })
 }

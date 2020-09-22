@@ -79,6 +79,8 @@ function hraderinit(){
         }
 
     });
+
+    infoanalyt()
 }
 
 $(function () {

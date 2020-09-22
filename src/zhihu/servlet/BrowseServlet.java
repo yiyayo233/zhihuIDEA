@@ -38,7 +38,7 @@ public class BrowseServlet extends HttpServlet {
 
     }
 
-    private void addBrowse(HttpServletRequest request, HttpServletResponse response, PrintWriter out) {
+    private static void addBrowse(HttpServletRequest request, HttpServletResponse response, PrintWriter out) {
         BrowseService BrowseService = new BrowseService();
         String uId = request.getParameter("uId");
         String objectId = request.getParameter("objectId");
@@ -58,6 +58,7 @@ public class BrowseServlet extends HttpServlet {
             int result = BrowseService.addBrowse(id, uId, objectId, browseTime, objectType, AnswerEntity.getAuthorId());
             System.out.println(result+"-----BrowseService.addAnswer");
         }
+
 
 
     }

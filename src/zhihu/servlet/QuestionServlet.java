@@ -168,5 +168,10 @@ public class QuestionServlet extends HttpServlet {
         int result = QuestionService.addQuestion(questionID,UserId,questionTitle,questionIntro,0,0,0,commentId,publishTime);
         System.out.println(result+"-----QuestionService.addQuestion");
 
+        BynamicServlet.addOrDelBynamic(request,response,out,"add",UserId,questionID,"fb");
+        BynamicServlet.addOrDelBynamic(request,response,out,"add",UserId,questionID,"gz");
+
+        out.println(questionID);
+        System.out.println("1234321");
     }
 }

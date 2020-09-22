@@ -267,14 +267,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="AnalyticsWork-TabsBox">
                             <ul class="Tabs">
                                 <li class="Tabs-item">
-                                    <a href="creator/analytics" class="Tabs-link is-active">回答</a>
+                                    <a href="javaScript:void(0)" class="Tabs-link is-active">回答</a>
                                 </li>
-                                <li class="Tabs-item">
+                                <%--<li class="Tabs-item">
                                     <a href="javaScript:void(0)" class="Tabs-link">文章</a>
                                 </li>
                                 <li class="Tabs-item">
                                     <a href="javaScript:void(0)" class="Tabs-link">想法</a>
-                                </li>
+                                </li>--%>
                                 <%--<li class="Tabs-item">
                                     <a href="javaScript:void(0)" class="Tabs-link">视频</a>
                                 </li>--%>

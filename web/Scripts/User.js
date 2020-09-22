@@ -47,5 +47,11 @@ $(function () {
 
     AuthorInfo_head_hi();
 
-    $(".text").html($(".text").html().replace(/<.*?>/ig,""));
+
+    $(".text").each(function (i,obj) {
+        $(this).html($(this).html().replace(/<.*?>/ig,""));
+    })
+
+    infoanalyt();
+
 });

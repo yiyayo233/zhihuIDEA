@@ -25,7 +25,7 @@ public class BynamicServlet extends HttpServlet {
 
         String a = request.getParameter("a");
         if ("del".equals(a)||"add".equals(a)) {
-            addOrDelBynamic(request, response, out, a);
+            addOrDelBynamic(request, response, out, a,"" , "","");
         }
     }
 
@@ -33,14 +33,16 @@ public class BynamicServlet extends HttpServlet {
         doPost(request, response);
     }
 
-    private void addOrDelBynamic(HttpServletRequest request, HttpServletResponse response, PrintWriter out, String a) {
+    public static void addOrDelBynamic(HttpServletRequest request, HttpServletResponse response, PrintWriter out, String a, String uId, String byBynamicId, String bynamicType) {
         BynamicService BynamicService = new BynamicService();
         if ("add".equals(a)){
             String id = ProduceRandomNumder.randomNumder("dt",8);
-            String uId = request.getParameter("uId");
-            String byBynamicId = request.getParameter("byBynamicId");
+            if (uId.equals("")){
+                uId = request.getParameter("uId");
+                byBynamicId = request.getParameter("byBynamicId");
+                bynamicType = request.getParameter("BynamicType");
+            }
             String bynamicTime = ProduceDatetime.Datetime();
-            String bynamicType = request.getParameter("BynamicType");
             String authorId = "";
 
             String type = byBynamicId.substring(0,2);
@@ -58,9 +60,9 @@ public class BynamicServlet extends HttpServlet {
             int result = BynamicService.addBynamic(id,uId,byBynamicId,bynamicTime,bynamicType,authorId);
             System.out.println(result+"-----BynamicService.addBynamic");
         }else if ("del".equals(a)){
-            String uId = request.getParameter("uId");
-            String byBynamicId = request.getParameter("byBynamicId");
-            String bynamicType = request.getParameter("BynamicType");
+            uId = request.getParameter("uId");
+            byBynamicId = request.getParameter("byBynamicId");
+            bynamicType = request.getParameter("BynamicType");
 
             int result = BynamicService.deleteBynamic(uId,byBynamicId,bynamicType);
             System.out.println(result+"-----BynamicService.deleteBynamic");

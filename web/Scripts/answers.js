@@ -353,7 +353,6 @@ function AnalyticsDetailRangPicker_dateButton_IsActive(button){
         getdata("getDataTime",day,"QQQ");
     }else if (index == 1){
         var day = $(button).attr("data-dayNum");
-        alert(day);
     }
 
 

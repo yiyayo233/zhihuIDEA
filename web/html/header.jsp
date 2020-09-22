@@ -132,8 +132,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                     </a>
                     <div class="TopstoryPageHeader-tabs">
                         <a href="javaScript:void(0)" class="TopstoryTabs-link is-active">推荐</a>
-                        <a href="javaScript:void(0)" class="TopstoryTabs-link">关注</a>
-                        <a href="javaScript:void(0)" class="TopstoryTabs-link">热榜</a>
+                        <%--<a href="javaScript:void(0)" class="TopstoryTabs-link">关注</a>
+                        <a href="javaScript:void(0)" class="TopstoryTabs-link">热榜</a>--%>
                     </div>
                 </div>
                 <div class="TopstoryPageHeader-aside">
@@ -160,8 +160,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <div class="Topstory-mainCard-head">
                     <ul>
                         <li><a href="javaScript:void(0)" class="TopstoryTabs-link is-active">推荐</a></li>
-                        <li><a href="javaScript:void(0)" class="TopstoryTabs-link">关注</a></li>
-                        <li><a href="javaScript:void(0)" class="TopstoryTabs-link">热榜</a></li>
+                        <%--<li><a href="javaScript:void(0)" class="TopstoryTabs-link">关注</a></li>
+                        <li><a href="javaScript:void(0)" class="TopstoryTabs-link">热榜</a></li>--%>
                     </ul>
                 </div>
                 <div class="Topstory-mainCard-body">
@@ -216,7 +216,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="CreatorEntrance-text">
                                     创建中心
                                     <span class="css-605fnf">
-                                            Lv 1
+                                            Lv 2
                                         </span>
                                 </div>
                             </div>
@@ -227,7 +227,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="ProfileSideCreator-readCountTitle">
                                     昨日被阅读数
                                 </div>
-                                <div class="ProfileSideCreator-readCountNum">0</div>
+                                <div class="ProfileSideCreator-readCountNum">--</div>
                                 <div class="css-u2c28s">
                                     <div class="css-1086365">较前日</div>
                                     <div class="css-1gqb0v0">--</div>
@@ -235,9 +235,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </div>
                             <div class="ProfileSideCreator-readCountItem">
                                 <div class="ProfileSideCreator-readCountTitle">
-                                    昨日被阅读数
+                                    昨日被赞同数
                                 </div>
-                                <div class="ProfileSideCreator-readCountNum">0</div>
+                                <div class="ProfileSideCreator-readCountNum">--</div>
                                 <div class="css-u2c28s">
                                     <div class="css-1086365">较前日</div>
                                     <div class="css-1gqb0v0">--</div>
@@ -316,7 +316,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </li>
                     </ul>
                 </div>
-                <div class="Card">
+                <%--<div class="Card">
                     <ul class="Topstory-sidebar-navList">
                         <li class="Topstory-sidebar-navItem ">
                             <a class="Topstory-sidebar-navLink button" href="#">
@@ -364,7 +364,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </a>
                         </li>
                     </ul>
-                </div>
+                </div>--%>
                 <footer class="Footer">
                     <a class="Footer-Item" href="#">刘看山</a>
                     <span class="Footer-dot"></span>
@@ -420,6 +420,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <script src="Scripts/Header-TopstoryRecommend.js"></script>
 <script src="Scripts/initHeader.js"></script>
 <script src="Scripts/initComment.js"></script>
+<script src="Scripts/analytics.js"></script>
 
 <div>
       <div>

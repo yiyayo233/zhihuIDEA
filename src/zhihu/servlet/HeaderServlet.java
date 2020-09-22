@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 @WebServlet(name = "headerServlet")
@@ -28,6 +29,8 @@ public class HeaderServlet extends HttpServlet {
             init(request, response, out);
         }else if ("userIndustry".equals(a)){
             userIndustry(request, response, out);
+        }else if ("getAyerData".equals(a)){
+            getAyerData(request, response, out);
         }
 
     }
@@ -94,9 +97,6 @@ public class HeaderServlet extends HttpServlet {
         String json = gson.toJson(headerPageList);
         System.out.println(json);
         out.println(json);
-
-
-
     }
 
     /**
@@ -114,6 +114,15 @@ public class HeaderServlet extends HttpServlet {
 
         Gson gson = new Gson();
         String json = gson.toJson(UserEntity);
+        System.out.println(json);
+        out.println(json);
+    }
+
+    private void getAyerData(HttpServletRequest request, HttpServletResponse response, PrintWriter out) {
+        String uId = request.getParameter("uId");
+        Hashtable hashtable = analyticsServlet.getAyerData(request,response,out,uId);
+        Gson gson = new Gson();
+        String json = gson.toJson(hashtable);
         System.out.println(json);
         out.println(json);
     }

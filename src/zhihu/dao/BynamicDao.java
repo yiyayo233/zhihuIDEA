@@ -148,11 +148,11 @@ public class BynamicDao extends BaseDao{
             }else if (bynamicTiem.equals("7")){
                 StringBuffer.append(" DATE_SUB(CURDATE(), INTERVAL 7 DAY) <= DATE(bynamicTiem)");
             }else if (bynamicTiem.equals("14")){
-                StringBuffer.append(" WHERE DATE_SUB(CURDATE(), INTERVAL 14 DAY) <= DATE(bynamicTiem)");
+                StringBuffer.append(" DATE_SUB(CURDATE(), INTERVAL 14 DAY) <= DATE(bynamicTiem)");
             }else if (bynamicTiem.equals("30")){
-                StringBuffer.append(" WHERE DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= DATE(bynamicTiem)");
+                StringBuffer.append(" DATE_SUB(CURDATE(), INTERVAL 30 DAY) <= DATE(bynamicTiem)");
             }else if (bynamicTiem.equals("90")){
-                StringBuffer.append(" WHERE DATE_SUB(CURDATE(), INTERVAL 90 DAY) <= DATE(bynamicTiem)");
+                StringBuffer.append(" DATE_SUB(CURDATE(), INTERVAL 90 DAY) <= DATE(bynamicTiem)");
             }else if (bynamicTiem.equals("-1")){
                 StringBuffer.append(" TO_DAYS( NOW( ) ) - TO_DAYS(bynamicTiem) = 1");
             }else if (bynamicTiem.equals("-2")){
