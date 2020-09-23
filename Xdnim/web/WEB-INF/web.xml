@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+         version="4.0">
+    <!-- 登录注册 -->
+    <servlet>
+        <description>This is the description of my J2EE component</description>
+        <display-name>This is the display name of my J2EE component</display-name>
+        <servlet-name>signinServlet</servlet-name>
+        <servlet-class>zhihu.servlet.SigninServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>signinServlet</servlet-name>
+        <url-pattern>/signin</url-pattern>
+    </servlet-mapping>
+
+    <!-- 首页 -->
+    <servlet>
+        <description>This is the description of my J2EE component</description>
+        <display-name>This is the display name of my J2EE component</display-name>
+        <servlet-name>headerServlet</servlet-name>
+        <servlet-class>zhihu.servlet.HeaderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>headerServlet</servlet-name>
+        <url-pattern>/header</url-pattern>
+    </servlet-mapping>
+    <!-- 评论 -->
+    <servlet>
+        <description>This is the description of my J2EE component</description>
+        <display-name>This is the display name of my J2EE component</display-name>
+        <servlet-name>commentServlet</servlet-name>
+        <servlet-class>zhihu.servlet.CommentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>commentServlet</servlet-name>
+        <url-pattern>/comment</url-pattern>
+    </servlet-mapping>
+    <!-- 修改回答 -->
+    <servlet>
+        <description>This is the description of my J2EE component</description>
+        <display-name>This is the display name of my J2EE component</display-name>
+        <servlet-name>approveNumServlet</servlet-name>
+        <servlet-class>zhihu.servlet.ApproveNumServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>approveNumServlet</servlet-name>
+        <url-pattern>/approveNum</url-pattern>
+    </servlet-mapping>
+    <!-- 问题 -->
+    <servlet>
+        <description>This is the description of my J2EE component</description>
+        <display-name>This is the display name of my J2EE component</display-name>
+        <servlet-name>QuestionServlet</servlet-name>
+        <servlet-class>zhihu.servlet.QuestionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+
+        <servlet-name>QuestionServlet</servlet-name>
+        <url-pattern>/question</url-pattern>
+    </servlet-mapping>
+    <!-- 回答 -->
+    <servlet>
+        <description>This is the description of my J2EE component</description>
+        <display-name>This is the display name of my J2EE component</display-name>
+        <servlet-name>AnswerServlet</servlet-name>
+        <servlet-class>zhihu.servlet.AnswerServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+
+        <servlet-name>AnswerServlet</servlet-name>
+        <url-pattern>/answer</url-pattern>
+    </servlet-mapping>
+    <!-- 用户(动态) -->
+    <servlet>
+        <description>This is the description of my J2EE component</description>
+        <display-name>This is the display name of my J2EE component</display-name>
+        <servlet-name>PeopleServlet</servlet-name>
+        <servlet-class>zhihu.servlet.PeopleServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+
+        <servlet-name>PeopleServlet</servlet-name>
+        <url-pattern>/people</url-pattern>
+    </servlet-mapping>
+    <!-- 动态 -->
+    <servlet>
+        <description>This is the description of my J2EE component</description>
+        <display-name>This is the display name of my J2EE component</display-name>
+        <servlet-name>BynamicServlet</servlet-name>
+        <servlet-class>zhihu.servlet.BynamicServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+
+        <servlet-name>BynamicServlet</servlet-name>
+        <url-pattern>/bynamic</url-pattern>
+    </servlet-mapping>
+    <!-- 关注 -->
+    <servlet>
+        <description>This is the description of my J2EE component</description>
+        <display-name>This is the display name of my J2EE component</display-name>
+        <servlet-name>FollowServlet</servlet-name>
+        <servlet-class>zhihu.servlet.FollowServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+
+        <servlet-name>FollowServlet</servlet-name>
+        <url-pattern>/follow</url-pattern>
+    </servlet-mapping>
+    <!-- 创作中心 -->
+    <servlet>
+        <description>This is the description of my J2EE component</description>
+        <display-name>This is the display name of my J2EE component</display-name>
+        <servlet-name>CreatorServlet</servlet-name>
+        <servlet-class>zhihu.servlet.CreatorServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+
+        <servlet-name>CreatorServlet</servlet-name>
+        <url-pattern>/creator</url-pattern>
+    </servlet-mapping>
+    <!-- 浏览 -->
+    <servlet>
+        <description>This is the description of my J2EE component</description>
+        <display-name>This is the display name of my J2EE component</display-name>
+        <servlet-name>BrowseServlet</servlet-name>
+        <servlet-class>zhihu.servlet.BrowseServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+
+        <servlet-name>BrowseServlet</servlet-name>
+        <url-pattern>/browse</url-pattern>
+    </servlet-mapping>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+    </welcome-file-list>
+</web-app>

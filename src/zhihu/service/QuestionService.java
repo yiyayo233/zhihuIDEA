@@ -29,4 +29,7 @@ public class QuestionService {
         return QuestionDao.updatebrowseNum(questionId);
     }
 
+    public int updateFold(String questionId,String is){
+        return QuestionDao.updateFold(questionId, is);
+    }
 }

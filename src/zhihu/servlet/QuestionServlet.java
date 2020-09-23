@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 @WebServlet(name = "QuestionServlet")
@@ -31,6 +32,10 @@ public class QuestionServlet extends HttpServlet {
             IntoQuestion(request,response,out);
         }else if(a.equals("addQuestion")){
             addQuestion(request,response,out);
+        }else if (a.equals("select")){
+            selectAll(request,response,out);
+        }else if (a.equals("updateIsFold")){
+            updateIsFold(request,response,out,a);
         }
     }
 
@@ -173,5 +178,34 @@ public class QuestionServlet extends HttpServlet {
 
         out.println(questionID);
         System.out.println("1234321");
+    }
+
+    private void selectAll(HttpServletRequest request, HttpServletResponse response, PrintWriter out) throws ServletException, IOException {
+        QuestionService questionService = new QuestionService();
+        List<QuestionEntity> questionEntityList = questionService.selectQuestion("","");
+        List list = new ArrayList();
+        if(questionEntityList.size() > 0){
+            for (QuestionEntity QuestionEntity : questionEntityList) {
+                Hashtable hashtable = new Hashtable();
+                hashtable.put("object",QuestionEntity);
+                BrowseService browseService = new BrowseService();
+                BynamicService bynamicService = new BynamicService();
+                hashtable.put("ztNum",bynamicService.selectBynamicByAll("","",QuestionEntity.getId(),"","zt","").size());
+                hashtable.put("llNum",browseService.selectBrowseByAll("",QuestionEntity.getId(),"","","").size());
+                hashtable.put("gzNum",bynamicService.selectBynamicByAll("","",QuestionEntity.getId(),"","gz","").size());
+                list.add(hashtable);
+            }
+        }
+        request.setAttribute("questionEntityList",list);
+
+        request.getRequestDispatcher("order-list.jsp").forward(request,response);
+    }
+
+    private void updateIsFold(HttpServletRequest request, HttpServletResponse response, PrintWriter out, String a) {
+        String id = request.getParameter("id");
+        String is = request.getParameter("is");
+        QuestionService QuestionService = new QuestionService();
+        int result = QuestionService.updateFold(id,is);
+        System.out.println(result+"----"+"QuestionService.updateFold("+id+","+is+")");
     }
 }

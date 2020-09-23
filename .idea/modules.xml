@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/Xdnim/Xdnim.iml" filepath="$PROJECT_DIR$/Xdnim/Xdnim.iml" />
       <module fileurl="file://$PROJECT_DIR$/zhihuIDEA.iml" filepath="$PROJECT_DIR$/zhihuIDEA.iml" />
     </modules>
   </component>
