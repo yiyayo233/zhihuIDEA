@@ -21,8 +21,8 @@ public class AnswerDao extends BaseDao{
      * @param publishTime
      * @return
      */
-    public int addAnswer(String id, String authorId, int approveNum, int browseNum, String editTime, String commentId, String answerContent, String cover, String publishTime){
-        return execUpdate("insert answer values( ?, ?, ?, ?, ?, ?, ?, ?, ? )", id, authorId, approveNum, browseNum, editTime, commentId, answerContent, cover, publishTime);
+    public int addAnswer(String id, String authorId, int approveNum, int browseNum, String editTime, String commentId, String answerContent, String cover, String publishTime, int isFond){
+        return execUpdate("insert answer values( ?, ?, ?, ?, ?, ?, ?, ?, ? , ?)", id, authorId, approveNum, browseNum, editTime, commentId, answerContent, cover, publishTime, isFond);
     }
 
     /**

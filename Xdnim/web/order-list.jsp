@@ -10,7 +10,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html class="x-admin-sm">
-
 <head>
     <meta charset="UTF-8">
     <title>欢迎页面-X-admin2.2</title>
@@ -41,20 +40,21 @@
         <div class="layui-col-md12">
             <div class="layui-card">
                 <div class="layui-card-body ">
-                    <form class="layui-form layui-col-space5">
+                    <form action="question" method="post" class="layui-form layui-col-space5">
+                        <input name="a" value="select" type="hidden">
                         <div class="layui-input-inline layui-show-xs-block">
-                            <input class="layui-input" placeholder="开始日" name="start" id="start"></div>
+                            <input class="layui-input" placeholder="开始日" name="minTime" id="start"></div>
                         <div class="layui-input-inline layui-show-xs-block">
-                            <input class="layui-input" placeholder="截止日" name="end" id="end"></div>
+                            <input class="layui-input" placeholder="截止日" name="maxTime" id="end"></div>
                         <div class="layui-input-inline layui-show-xs-block">
-                            <select name="contrller">
-                                <option>折叠状态</option>
-                                <option>折叠</option>
-                                <option>未折叠</option>
+                            <select name="isFond">
+                                <option value="-1">折叠状态</option>
+                                <option value="1">折叠</option>
+                                <option value="0">未折叠</option>
                             </select>
                         </div>
                         <div class="layui-input-inline layui-show-xs-block">
-                            <input type="text" name="username" placeholder="请输入问题编号" autocomplete="off" class="layui-input"></div>
+                            <input type="text" name="id" placeholder="请输入问题编号" autocomplete="off" class="layui-input"></div>
                         <div class="layui-input-inline layui-show-xs-block">
                             <button class="layui-btn" lay-submit="" lay-filter="sreach">
                                 <i class="layui-icon">&#xe615;</i></button>
@@ -62,10 +62,10 @@
                     </form>
                 </div>
                 <div class="layui-card-header">
-                    <button class="layui-btn layui-btn-danger" onclick="delAll()">
+                    <%--<button class="layui-btn layui-btn-danger" onclick="delAll()">
                         <i class="layui-icon"></i>批量删除</button>
                     <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
-                        <i class="layui-icon"></i>添加</button></div>
+                        <i class="layui-icon"></i>添加</button>--%></div>
                 <div class="layui-card-body ">
                     <table class="layui-table layui-form">
                         <thead>
@@ -133,19 +133,20 @@
                 <div class="layui-card-body ">
                     <div class="page">
                         <div>
-                            <a class="prev" href="">&lt;&lt;</a>
-                            <a class="num" href="">1</a>
-                            <span class="current">2</span>
-                            <a class="num" href="">3</a>
-                            <a class="num" href="">489</a>
-                            <a class="next" href="">&gt;&gt;</a></div>
+                            <a class="123" href="javascript:;" onclick="goPage(1);" >&lt;&lt;</a>
+                            <a class="prev" href="javascript:;" ></a>
+                            <span class="current"></span>
+                            <a class="next" href="javascript:;" ></a>
+                            <a class="last" href="javascript:;" >&gt;&gt;</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+</div>
 </body>
+
 <script>layui.use(['laydate', 'form'],
     function() {
         var laydate = layui.laydate;
@@ -221,7 +222,36 @@ function delAll(argument) {
 }
 
 
+$(document).on("click",".layui-unselect.layui-form-switch",function () {
+    isFold(this);
+});
+function isFold(button) {
+    var id = $(button).prev().attr("value");
+    var is = 0;
+    if($(button).attr("class").indexOf("layui-form-onswitch") != -1){
+        is = 1;
+    }else {
+        is = 0;
+    }
+    $.ajax({
+        url:"question",
+        type:"post",
+        data:{"a":"updateIsFold","is":is,"id":id},
+        dataType:"json",
+        success:function (result) {
+
+        }
+    });
+
+}
+
+$(function () {
+
+
+});
+
 </script>
+</html>
 <script>
     $(document).on("click",".layui-unselect.layui-form-switch",function () {
         isFold(this);
@@ -244,6 +274,63 @@ function delAll(argument) {
             }
         });
 
+    }
+    $(function () {
+        goPage(1);
+    });
+    function goPage(curr) {
+        var id = $("[name='id']").val();
+        var minTime = $("[name='minTime']").val();
+        var maxTime = $("[name='maxTime']").val();
+        var isFond = $("[name='isFond']").val();
+        $.ajax({
+            url: "question",
+            type: "post",
+            data: {"a": "select", "id": id, "minTime": minTime, "maxTime": maxTime, "isFond": isFond, "curr": curr},
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                $(".layui-table.layui-form tbody").html("");
+                $.each(result.questionEntityList, function (i, obj) {
+                    var item = '                                        <input type="checkbox" name="" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></td>\n' +
+                        '                                    <td>' + obj.object.id + '</td>\n' +
+                        '                                    <td>' + obj.object.authorId + '</td>\n' +
+                        '                                    <td>' + obj.object.questionTitle + '</td>\n' +
+                        '                                    <td>' + obj.object.questionIntro + '\n' +
+                        '                                    <td>' + obj.ztNum + '</td>\n' +
+                        '                                    <td>' + obj.llNum + '</td>\n' +
+                        '                                    <td>' + obj.gzNum + '</td>\n' +
+                        '                                    <td>' + obj.object.publishTime + '</td>\n' +
+                        '                                    <td>\n' +
+                        '                                        <div class="layui-table-cell laytable-cell-1-0-4">';
+                    console.log(obj.object.isFold);
+                    if (obj.object.isFold === 1) {
+                        item = item+'<input type="checkbox" name="isFold" value="' + obj.object.id + '" lay-skin="switch" lay-text="折叠|未折叠" lay-filter="sexDemo" checked="checked">\n';
+                    } else {
+                        item = item+'<input type="checkbox" name="isFold" value="' + obj.object.id + '" lay-skin="switch" lay-text="折叠|未折叠" lay-filter="sexDemo" >\n';
+                    }
+                    item = item+'' +
+                        '   <div class="layui-unselect layui-form-switch" lay-skin="_switch"><em>未折叠</em><i></i></div>' +
+                        '</div>\n' +
+                        '                                    </td>\n' +
+                        '                                    <td class="td-manage">\n' +
+                        '                                        <a title="查看" data-object-id="' + obj.object.id + '" onclick="xadmin.open(\'编辑\',\'order-view.html\')" href="javascript:;">\n' +
+                        '                                            <i class="layui-icon"></i></a>\n' +
+                        '                                    </td>\n' +
+                        '                                </tr>';
+                    $(".layui-table.layui-form tbody").append(item);
+                });
+                $(".prev").html(result.perv).attr("onclick", "goPage(" + result.perv + ")");
+                $(".current").html(result.curr);
+                var next = result.next;
+                $(".next").html(next).attr("onclick", "goPage(" + next + ")");
+                $(".next1").html(next + 1).attr("onclick", "goPage(" + (next + 1) + ")");
+                $(".last").attr("onclick", "goPage(" + result.last + ")");
+            },
+            error: function (result) {
+                console.log("error");
+            }
+        });
     }
 </script>
 

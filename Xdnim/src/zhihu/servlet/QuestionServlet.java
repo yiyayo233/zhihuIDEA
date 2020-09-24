@@ -1,7 +1,10 @@
 package zhihu.servlet;
 
+import com.google.gson.Gson;
 import zhihu.common.ProduceDatetime;
 import zhihu.common.ProduceRandomNumder;
+import zhihu.dao.BynamicDao;
+import zhihu.dao.SuperDao;
 import zhihu.entity.*;
 import zhihu.service.*;
 
@@ -168,19 +171,42 @@ public class QuestionServlet extends HttpServlet {
         String commentId = "pl" + randomNumder;
         String publishTime = ProduceDatetime.Datetime();
 
-        int result = QuestionService.addQuestion(questionID,UserId,questionTitle,questionIntro,0,0,0,commentId,publishTime);
+        int result = QuestionService.addQuestion(questionID,UserId,questionTitle,questionIntro,0,0,0,commentId,publishTime,0);
         System.out.println(result+"-----QuestionService.addQuestion");
 
         BynamicServlet.addOrDelBynamic(request,response,out,"add",UserId,questionID,"fb");
         BynamicServlet.addOrDelBynamic(request,response,out,"add",UserId,questionID,"gz");
 
         out.println(questionID);
-        System.out.println("1234321");
     }
 
     private void selectAll(HttpServletRequest request, HttpServletResponse response, PrintWriter out) throws ServletException, IOException {
         QuestionService questionService = new QuestionService();
-        List<QuestionEntity> questionEntityList = questionService.selectQuestion("","");
+        System.out.println("X");
+        String id = request.getParameter("id");
+        String minTime = request.getParameter("minTime");
+        String maxTime = request.getParameter("maxTime");
+        String isFond = request.getParameter("isFond");
+        String curr = request.getParameter("curr");
+        if (id== null){
+            id = "";
+        }
+        if (minTime == null){
+            minTime = "";
+        }
+        if (maxTime == null){
+            maxTime = "";
+        }
+        if (isFond == null){
+            isFond = "-1";
+        }
+        if (curr == null){
+            curr = "1";
+        }
+
+        List<QuestionEntity> questionEntityList = questionService.SelectQuestionByAdminAll(id,minTime,maxTime, Integer.parseInt(isFond), Integer.parseInt(curr),10);
+
+        Hashtable hashtable1 = new Hashtable();
         List list = new ArrayList();
         if(questionEntityList.size() > 0){
             for (QuestionEntity QuestionEntity : questionEntityList) {
@@ -195,8 +221,27 @@ public class QuestionServlet extends HttpServlet {
             }
         }
         request.setAttribute("questionEntityList",list);
+        hashtable1.put("questionEntityList",list);
+        request.setAttribute("curr",curr);
+        int perv = Integer.parseInt(curr)-1==0?1:Integer.parseInt(curr)-1;
+        int total = questionService.SelectQuestionByAdminAll(id,minTime,maxTime, Integer.parseInt(isFond), -1,10).size();
+        int last = total%10==0?total/10:total/10+1;
+        int next = Integer.parseInt(curr)+1>last?last:Integer.parseInt(curr)+1;
+        request.setAttribute("perv",perv);
+        request.setAttribute("total",total);
+        System.out.println(total);
+        request.setAttribute("last",last);
+        request.setAttribute("next",next);
+        hashtable1.put("curr",curr);
+        hashtable1.put("perv",perv);
+        hashtable1.put("total",total);
+        hashtable1.put("last",last);
+        hashtable1.put("next",next);
 
-        request.getRequestDispatcher("order-list.jsp").forward(request,response);
+        Gson gson = new Gson();
+        String srt = gson.toJson(hashtable1);
+        out.println(srt);
+//        request.getRequestDispatcher("order-list.jsp").forward(request,response);
     }
 
     private void updateIsFold(HttpServletRequest request, HttpServletResponse response, PrintWriter out, String a) {

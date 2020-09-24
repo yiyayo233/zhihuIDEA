@@ -87,8 +87,6 @@ $(function () {
     hraderinit()
 })
 
-
-
 /*var div = $('                        <div class="Card TopstoryItem">\n' +
     '                            <div class="ContentItem">\n' +
     '                                <h2 class="ContentItem-title">\n' +
