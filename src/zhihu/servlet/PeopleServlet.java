@@ -89,7 +89,9 @@ public class PeopleServlet extends HttpServlet {
                 System.err.println(byBynamicType.equals("wt"));
                 if (byBynamicType.equals("wt")){
                     QuestionEntity questionEntity = QuestionService.selectQuestionItem(bynamicEntity.getByBynamicId());
-                    bynamicContainerEntityList.add(new BynamicContainerEntity(bynamicEntity,questionEntity));
+                    if (questionEntity.getIsFold() == 0){
+                        bynamicContainerEntityList.add(new BynamicContainerEntity(bynamicEntity,questionEntity));
+                    }
                 }else if (byBynamicType.equals("hd")){
                     AnswerSercice AnswerSercice = new AnswerSercice();
                     AnswerEntity AnswerEntity = AnswerSercice.selectAnseerItem(bynamicEntity.getByBynamicId());

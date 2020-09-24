@@ -134,7 +134,99 @@
             <url-pattern>/browse</url-pattern>
         </servlet-mapping>
 
-        <welcome-file-list>
+
+
+
+
+        <!-- 显示圆桌部分信息 -->
+        <servlet>
+            <description>This is the description of my J2EE component</description>
+            <display-name>This is the display name of my J2EE component</display-name>
+            <servlet-name>AllRoundTableServlet</servlet-name>
+            <servlet-class>zhihu.servlet.AllRoundTableServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>AllRoundTableServlet</servlet-name>
+            <url-pattern>/AllRoundTable</url-pattern>
+        </servlet-mapping>
+
+        <!-- 根据id来查询圆桌 -->
+        <servlet>
+            <description>This is the description of my J2EE component</description>
+            <display-name>This is the display name of my J2EE component</display-name>
+            <servlet-name>RoundTableByIdServlet</servlet-name>
+            <servlet-class>zhihu.servlet.RoundTableByIdServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>RoundTableByIdServlet</servlet-name>
+            <url-pattern>/RoundTableById</url-pattern>
+        </servlet-mapping>
+
+        <!-- 等你来答 -->
+        <servlet>
+            <description>This is the description of my J2EE component</description>
+            <display-name>This is the display name of my J2EE component</display-name>
+            <servlet-name>QuestionServlet</servlet-name>
+            <servlet-class>zhihu.servlet.QuestionServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>QuestionServlet</servlet-name>
+            <url-pattern>/Question</url-pattern>
+        </servlet-mapping>
+
+
+        <!-- 专栏 -->
+        <servlet>
+            <description>This is the description of my J2EE component</description>
+            <display-name>This is the display name of my J2EE component</display-name>
+            <servlet-name>ColumnServlet</servlet-name>
+            <servlet-class>zhihu.servlet.ColumnServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>ColumnServlet</servlet-name>
+            <url-pattern>/Column</url-pattern>
+        </servlet-mapping>
+
+
+        <!-- 根据id查询专栏 -->
+        <servlet>
+            <description>This is the description of my J2EE component</description>
+            <display-name>This is the display name of my J2EE component</display-name>
+            <servlet-name>ColumnByServlet</servlet-name>
+            <servlet-class>zhihu.servlet.ColumnByServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>ColumnByServlet</servlet-name>
+            <url-pattern>/ColumnById</url-pattern>
+        </servlet-mapping>
+
+
+        <!-- 圆桌用户 -->
+        <servlet>
+            <description>This is the description of my J2EE component</description>
+            <display-name>This is the display name of my J2EE component</display-name>
+            <servlet-name>RoundCompereServlet</servlet-name>
+            <servlet-class>zhihu.servlet.RoundCompereServlet</servlet-class>
+        </servlet>
+        <servlet>
+            <description>This is the description of my J2EE component</description>
+            <display-name>This is the display name of my J2EE component</display-name>
+            <servlet-name>ColumnByIdServlet</servlet-name>
+            <servlet-class>zhihu.servlet.ColumnByIdServlet</servlet-class>
+        </servlet>
+
+        <servlet-mapping>
+            <servlet-name>RoundCompereServlet</servlet-name>
+            <url-pattern>/RoundCompere</url-pattern>
+        </servlet-mapping>
+        <servlet-mapping>
+            <servlet-name>ColumnByIdServlet</servlet-name>
+            <url-pattern>/ColumnBy</url-pattern>
+        </servlet-mapping>
+
+
+
+    <welcome-file-list>
             <welcome-file>html/header.jsp</welcome-file>
         </welcome-file-list>
 </web-app>

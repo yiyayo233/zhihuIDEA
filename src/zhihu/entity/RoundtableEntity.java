@@ -9,12 +9,15 @@ public class RoundtableEntity {
     private String deginTime;
     private String endTime;
     private String isQuestion;
+    private String roundtableImg;
+
+
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setRoundtableID(String id) {
         this.id = id;
     }
 
@@ -74,7 +77,14 @@ public class RoundtableEntity {
         this.isQuestion = isQuestion;
     }
 
-    public RoundtableEntity(String id, String roundtableTitle, String roundtableIntro, int browseNum, int followNum, String deginTime, String endTime, String isQuestion) {
+    public String getRoundtableImg() {
+        return roundtableImg;
+    }
+
+    public void setRoundtableImg(String roundtableImg) {
+        this.roundtableImg = roundtableImg;
+    }
+    public RoundtableEntity(String id, String roundtableTitle, String roundtableIntro, int browseNum, int followNum, String deginTime, String endTime, String isQuestion,String RoundtableImg) {
         this.id = id;
         this.roundtableTitle = roundtableTitle;
         this.roundtableIntro = roundtableIntro;
@@ -83,5 +93,6 @@ public class RoundtableEntity {
         this.deginTime = deginTime;
         this.endTime = endTime;
         this.isQuestion = isQuestion;
+        this.roundtableImg=RoundtableImg;
     }
 }

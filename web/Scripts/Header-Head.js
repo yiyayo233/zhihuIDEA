@@ -120,7 +120,27 @@ $(function() {
     });
 
     $(document).on("click",".AppHeader-profile .button",function () {
-        window.open("people");
+        if ($(this).next().length == 0){
+            $(this).after('<div class="AppHeaderProfileMenu-container AppHeaderProfileMenu-container-fixed" style="right: 405px;">\n' +
+                '                    <span class="Popover-arrow"></span>\n' +
+                '                    <div class="AppHeaderProfileMenu">\n' +
+                '                        <a href="people" class="button Manu-Item AppHeaderProfileMenu-item button--plain">\n' +
+                '                            <svg class="Zi Zi--Profile" fill="currentColor" viewBox="0 0 24 24" width="16" height="16"><path d="M15.417 12.923c-.376.653-.837 1.281-.763 1.863.292 2.273 5.562 1.77 6.78 3.048.566.595.566.664.566 4.164-6.611-.07-13.363 0-20 0 .027-3.5 0-3.478.62-4.164 1.303-1.44 6.581-.715 6.78-3.133.045-.545-.38-1.114-.763-1.778C6.511 9.233 5.697 2 12 2s5.422 7.443 3.417 10.923z" fill-rule="evenodd"></path></svg>\n' +
+                '                            我的主页\n' +
+                '                        </a>\n' +
+                '                        <a href="creator/analytics" class="button Manu-Item AppHeaderProfileMenu-item button--plain">\n' +
+                '                            <svg class="Zi Zi--Creator" fill="currentColor" viewBox="0 0 24 24" width="16" height="16"><path d="M15.075 15.388l-3.024 3.024a4.041 4.041 0 0 0-1.014 1.697l-.26.868C7.844 20.986 4.91 21 2 21c.026-3.325 0-3.304.59-3.956 1.237-1.368 6.251-.68 6.44-2.976.043-.518-.36-1.06-.725-1.69C6.285 8.87 5.512 2 11.5 2c5.988 0 5.15 7.072 3.246 10.378-.357.62-.795 1.217-.724 1.77.073.571.477.958 1.053 1.24zm5.402 1.672c.523.55.523.646.523 3.94a535.11 535.11 0 0 0-4.434-.028l3.911-3.912zm-7.88 2.699c.111-.37.312-.705.584-.978l4.76-4.76a.291.291 0 0 1 .412 0l1.626 1.626a.291.291 0 0 1 0 .411l-4.76 4.76c-.272.273-.608.474-.978.585l-1.96.588a.219.219 0 0 1-.272-.272l.589-1.96zm9.157-6.742a.839.839 0 0 1 0 1.187l-.94.94a.28.28 0 0 1-.395 0l-1.563-1.563a.28.28 0 0 1 0-.395l.94-.94a.839.839 0 0 1 1.187 0l.771.771z" fill-rule="evenodd"></path></svg>\n' +
+                '                            创作中心\n' +
+                '                        </a>\n' +
+                '                        <a href="signin?a=exit" class="button Manu-Item AppHeaderProfileMenu-item button--plain">\n' +
+                '                            <svg class="Zi Zi--Logout" fill="currentColor" viewBox="0 0 24 24" width="16" height="16"><path d="M2 11.999c0-2.756 1.154-5.417 3.167-7.3a1.266 1.266 0 0 1 1.73 1.847 7.396 7.396 0 0 0-2.367 5.453c0 4.119 3.35 7.47 7.47 7.47 4.119 0 7.47-3.351 7.47-7.47a7.41 7.41 0 0 0-2.279-5.37 1.266 1.266 0 0 1 1.76-1.819A9.923 9.923 0 0 1 22 12c0 5.513-4.486 10-10 10s-10-4.487-10-10zm8.699-.482V3.26a1.26 1.26 0 1 1 2.52 0v8.257a1.26 1.26 0 1 1-2.52 0z" fill-rule="evenodd"></path></svg>\n' +
+                '                            退出\n' +
+                '                        </a>\n' +
+                '                    </div>\n' +
+                '                </div>');
+        }else {
+            $(this).next().remove();
+        }
     });
 
 });

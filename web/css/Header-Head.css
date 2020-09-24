@@ -402,3 +402,50 @@ input{
     font-size: 18px;
     padding: 20px;
 }
+
+.AppHeader-profile{
+    position: relative;
+}
+.AppHeaderProfileMenu-container{
+    background: #fff;
+    border: 1px solid #EBEBEB;
+    border-radius: 4px;
+    box-shadow: 0 5px 20px rgba(18,18,18,.1);
+    z-index: 203;
+    margin-top: 16px;
+}
+.AppHeaderProfileMenu-container-fixed{
+    position: fixed;
+}
+.AppHeaderProfileMenu{
+    padding: 6px 0;
+    position: relative;
+    z-index: 300;
+    background: #fff;
+    border-radius: 6px;
+}
+.AppHeaderProfileMenu-item{
+    padding: 0 20px;
+    line-height: 36px;
+    display: flex;
+    align-items: center;
+}
+.AppHeaderProfileMenu-item:hover{
+    background: #f6f6f6;
+}
+.AppHeaderProfileMenu-item .Zi{
+    margin-right: 5px;
+}
+.Popover-arrow::after{
+    content: "";
+    width: 24px;
+    height: 24px;
+    border: 1px solid #ebebeb;
+    background: #fff;
+    transform: rotate(45deg);
+    display: flex;
+    position: absolute;
+    top: -5px;
+    right: 46px;
+    z-index: 100;
+}

@@ -3,6 +3,7 @@ package zhihu.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpCookie;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -66,6 +67,11 @@ public class SigninServlet extends HttpServlet {
 		String phoneOrEmail = request.getParameter("userName");
 		String pass = request.getParameter("userpass");
 		String passZ = request.getParameter("userpassZ");
+		String a = request.getParameter("a");
+		if ("exit".equals(a)){
+			exit(request, response, out);
+			return;
+		}
 
 		UserService userService = new UserService();
 		ProduceRandomNumder produceRandomNumder = new ProduceRandomNumder();
@@ -74,6 +80,37 @@ public class SigninServlet extends HttpServlet {
 			login(request, response, out, userService, pass, phoneOrEmail);
 		}else {
 			enroll(request, response, out, produceRandomNumder, userService, pass, phoneOrEmail);
+		}
+	}
+
+	/**
+	 * 退出
+	 * @param request
+	 * @param response
+	 * @param out
+	 * @throws IOException
+	 */
+	private void exit(HttpServletRequest request, HttpServletResponse response, PrintWriter out) throws IOException {
+		Cookie[] cookies = request.getCookies();
+		boolean f = false;
+		for (Cookie cookie:
+				cookies) {
+			if (cookie.getName().equals("uId")){
+				cookie.setMaxAge(0);
+				f = true;
+			}
+			if (cookie.getName().equals("uName")){
+				cookie.setMaxAge(0);
+				f = true;
+			}
+			if (cookie.getName().equals("uChatHead")){
+				cookie.setMaxAge(0);
+				f = true;
+			}
+		}
+		if (f){
+			response.sendRedirect("html/signin.jsp");
+			return;
 		}
 	}
 
@@ -88,7 +125,7 @@ public class SigninServlet extends HttpServlet {
 
 
 	/**
-	 * ��¼
+	 * 登录
 	 * @param request
 	 * @param response
 	 * @param userService
@@ -124,7 +161,7 @@ public class SigninServlet extends HttpServlet {
 	}
 
 	/**
-	 * ע��
+	 * 注册
 	 * @param request
 	 * @param response
 	 * @param produceRandomNumder
@@ -134,10 +171,11 @@ public class SigninServlet extends HttpServlet {
 	 */
 	public void enroll(HttpServletRequest request, HttpServletResponse response, PrintWriter out, ProduceRandomNumder produceRandomNumder, UserService userService, String pass, String phoneOrEmail) throws UnsupportedEncodingException {
 		String id = "yh" + produceRandomNumder.randomNumder(8);
-		String name = new String("֪���û�".getBytes("iso-8859-1"),"utf-8");
-		name = name + id.substring(6);
+		//todo 用户名乱码
+		String name = "知乎用户" + id.substring(6);
 		String chatHead = "da8e974dc_is.jpg";
 
+		System.out.println(name);
 		int result;
 		if (phoneOrEmail.indexOf("@") == -1){
 			result = userService.addUser(id, name, pass, chatHead, phoneOrEmail, "");
@@ -150,4 +188,6 @@ public class SigninServlet extends HttpServlet {
 			out.println("enrollFalse");
 		}
 	}
+
+
 }
