@@ -7,8 +7,8 @@ import java.util.List;
 
 public class AnswerSercice {
     AnswerDao AnswerDao = new AnswerDao();
-    public int addAnswer(String id, String authorId, int approveNum, int browseNum, String editTime, String commentId, String answerContent, String cover, String publishTime){
-        return AnswerDao.addAnswer(id, authorId, approveNum , browseNum,editTime, commentId, answerContent ,cover ,publishTime);
+    public int addAnswer(String id, String authorId, int approveNum, int browseNum, String editTime, String commentId, String answerContent, String cover, String publishTime, int isFond){
+        return AnswerDao.addAnswer(id, authorId, approveNum , browseNum,editTime, commentId, answerContent ,cover ,publishTime,isFond);
     }
 
     public List<AnswerEntity> selectAnswer(String id,String authorId){

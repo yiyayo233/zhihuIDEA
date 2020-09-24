@@ -2,6 +2,7 @@ package zhihu.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
@@ -59,7 +60,7 @@ public class SigninServlet extends HttpServlet {
 
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
-		response.setContentType("text/html;charter=utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 
 		String phoneOrEmail = request.getParameter("userName");
@@ -131,9 +132,10 @@ public class SigninServlet extends HttpServlet {
 	 * @param pass
 	 * @param phoneOrEmail
 	 */
-	public void enroll(HttpServletRequest request, HttpServletResponse response, PrintWriter out, ProduceRandomNumder produceRandomNumder, UserService userService, String pass, String phoneOrEmail){
+	public void enroll(HttpServletRequest request, HttpServletResponse response, PrintWriter out, ProduceRandomNumder produceRandomNumder, UserService userService, String pass, String phoneOrEmail) throws UnsupportedEncodingException {
 		String id = "yh" + produceRandomNumder.randomNumder(8);
-		String name = "知乎用户" + id.substring(6);
+		String name = new String("知乎用户".getBytes("iso-8859-1"),"utf-8");
+		name = name + id.substring(6);
 		String chatHead = "da8e974dc_is.jpg";
 
 		int result;

@@ -62,10 +62,22 @@ public class QuestionDao extends BaseDao{
      * @param id
      * @return
      */
-    public QuestionEntity selectQuestionItem(String id){
+    public QuestionEntity selectQuestionItem(String id, int isFond){
         StringBuffer StringBuffer = new StringBuffer("select * from question");
-        if (!id.equals("")) {
-            StringBuffer.append(" where questionID = '"+id+"'");
+        if (!"".equals(id) || !"".equals(isFond)){
+            StringBuffer.append( " where" );
+        }
+        int num = 0;
+        if (!"".equals(id)) {
+            StringBuffer.append(" questionID = '"+id+"'");
+            num++;
+        }
+        if (!"".equals(isFond)){
+            if (num > 0){
+                StringBuffer.append(" and ");
+            }
+            StringBuffer.append("  questionID = '"+id+"'");
+            num++;
         }
         System.err.println(StringBuffer.toString());
         resultSet = query(StringBuffer.toString());

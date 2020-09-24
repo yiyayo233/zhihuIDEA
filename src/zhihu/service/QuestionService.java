@@ -17,8 +17,11 @@ public class QuestionService {
         return QuestionDao.selectQuestion(id, authorId);
     }
 
+    public QuestionEntity selectQuestionItem(String id, int isFond){
+        return QuestionDao.selectQuestionItem(id,isFond);
+    }
     public QuestionEntity selectQuestionItem(String id){
-        return QuestionDao.selectQuestionItem(id);
+        return QuestionDao.selectQuestionItem(id,0);
     }
 
     public int UpdateApproveNum(String Num,String id){

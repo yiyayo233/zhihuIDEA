@@ -68,27 +68,26 @@ public class HeaderServlet extends HttpServlet {
 
                 QuestionService QuestionService = new QuestionService();
                 QuestionEntity questionEntity = QuestionService.selectQuestionItem(SuperEntity.getId1());
+                if (questionEntity.getIsFold() == 0){
+                    AnswerSercice AnswerSercice = new AnswerSercice();
+                    AnswerEntity AnswerEntity = AnswerSercice.selectAnseerItem(SuperEntity.getId2());
 
-                AnswerSercice AnswerSercice = new AnswerSercice();
-                AnswerEntity AnswerEntity = AnswerSercice.selectAnseerItem(SuperEntity.getId2());
+                    UserService UserService = new UserService();
+                    UserEntity UserEntity = UserService.selecUserItem(AnswerEntity.getAuthorId());
 
-                UserService UserService = new UserService();
-                UserEntity UserEntity = UserService.selecUserItem(AnswerEntity.getAuthorId());
-
-                int CommentNum = 0;
-                CommentService CommentService = new CommentService();
-                List<CommentEntity> commentEntityList = CommentService.selectComment(AnswerEntity.getId());
-                if (commentEntityList.size() != 0) {
-                    for (CommentEntity commentEntity:commentEntityList) {
-                        CommentNum++;
-                        CommentReplyService CommentReplyService = new CommentReplyService();
-                        List<CommentReplyEntity> commentReplyEntityList = CommentReplyService.selectCommentReply(commentEntity.getId());
-                        CommentNum = CommentNum + commentReplyEntityList.size();
+                    int CommentNum = 0;
+                    CommentService CommentService = new CommentService();
+                    List<CommentEntity> commentEntityList = CommentService.selectComment(AnswerEntity.getId());
+                    if (commentEntityList.size() != 0) {
+                        for (CommentEntity commentEntity:commentEntityList) {
+                            CommentNum++;
+                            CommentReplyService CommentReplyService = new CommentReplyService();
+                            List<CommentReplyEntity> commentReplyEntityList = CommentReplyService.selectCommentReply(commentEntity.getId());
+                            CommentNum = CommentNum + commentReplyEntityList.size();
+                        }
                     }
+                    headerPageList.add(new HeaderPage(questionEntity,AnswerEntity,UserEntity,CommentNum));
                 }
-
-
-                headerPageList.add(new HeaderPage(questionEntity,AnswerEntity,UserEntity,CommentNum));
             }
         }
 

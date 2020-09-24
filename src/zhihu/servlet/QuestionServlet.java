@@ -85,7 +85,7 @@ public class QuestionServlet extends HttpServlet {
         System.out.println("questionId"+questionId+"---answerId:"+answerId);
 
         QuestionService QuestionService = new QuestionService();
-        QuestionEntity QuestionEntity = QuestionService.selectQuestionItem(questionId);
+        QuestionEntity QuestionEntity = QuestionService.selectQuestionItem(questionId,0);
         int result = QuestionService.updatebrowseNum(questionId);
         System.out.println(result +"---updatebrowseNum");
         request.setAttribute("Question", QuestionEntity);

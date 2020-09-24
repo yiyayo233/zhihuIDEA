@@ -220,36 +220,6 @@ function delAll(argument) {
             $(".layui-form-checked").not('.header').parents('tr').remove();
         });
 }
-
-
-$(document).on("click",".layui-unselect.layui-form-switch",function () {
-    isFold(this);
-});
-function isFold(button) {
-    var id = $(button).prev().attr("value");
-    var is = 0;
-    if($(button).attr("class").indexOf("layui-form-onswitch") != -1){
-        is = 1;
-    }else {
-        is = 0;
-    }
-    $.ajax({
-        url:"question",
-        type:"post",
-        data:{"a":"updateIsFold","is":is,"id":id},
-        dataType:"json",
-        success:function (result) {
-
-        }
-    });
-
-}
-
-$(function () {
-
-
-});
-
 </script>
 </html>
 <script>
@@ -259,9 +229,12 @@ $(function () {
     function isFold(button) {
         var id = $(button).prev().attr("value");
         var is = 0;
-        if($(button).attr("class").indexOf("layui-form-onswitch") != -1){
+        if($(button).attr("class").indexOf("layui-form-onswitch") == -1){
+            $(button).addClass("layui-form-onswitch").find("em").html("折叠");
             is = 1;
         }else {
+            $(button).removeClass("layui-form-onswitch").find("em").html("未折叠");
+
             is = 0;
         }
         $.ajax({
@@ -292,7 +265,7 @@ $(function () {
                 console.log(result);
                 $(".layui-table.layui-form tbody").html("");
                 $.each(result.questionEntityList, function (i, obj) {
-                    var item = '                                        <input type="checkbox" name="" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></td>\n' +
+                    var item = '<tr><td>                                        <input type="checkbox" name="" lay-skin="primary"><div class="layui-unselect layui-form-checkbox" lay-skin="primary"><i class="layui-icon layui-icon-ok"></i></div></td>\n' +
                         '                                    <td>' + obj.object.id + '</td>\n' +
                         '                                    <td>' + obj.object.authorId + '</td>\n' +
                         '                                    <td>' + obj.object.questionTitle + '</td>\n' +
@@ -305,13 +278,14 @@ $(function () {
                         '                                        <div class="layui-table-cell laytable-cell-1-0-4">';
                     console.log(obj.object.isFold);
                     if (obj.object.isFold === 1) {
-                        item = item+'<input type="checkbox" name="isFold" value="' + obj.object.id + '" lay-skin="switch" lay-text="折叠|未折叠" lay-filter="sexDemo" checked="checked">\n';
+                        item = item+'                               <input type="checkbox" name="isFold" value="' + obj.object.id + '" lay-skin="switch" lay-text="折叠|未折叠" lay-filter="sexDemo" checked="checked">' +
+                            '                                       <div class="layui-unselect layui-form-switch layui-form-onswitch" lay-skin="_switch"><em>折叠</em><i></i></div>\n';
                     } else {
-                        item = item+'<input type="checkbox" name="isFold" value="' + obj.object.id + '" lay-skin="switch" lay-text="折叠|未折叠" lay-filter="sexDemo" >\n';
+                        item = item+'                               <input type="checkbox" name="isFold" value="' + obj.object.id + '" lay-skin="switch" lay-text="折叠|未折叠" lay-filter="sexDemo" >' +
+                            '                                       <div class="layui-unselect layui-form-switch" lay-skin="_switch"><em>未折叠</em><i></i></div>\n';
                     }
                     item = item+'' +
-                        '   <div class="layui-unselect layui-form-switch" lay-skin="_switch"><em>未折叠</em><i></i></div>' +
-                        '</div>\n' +
+                        '                                       </div>\n' +
                         '                                    </td>\n' +
                         '                                    <td class="td-manage">\n' +
                         '                                        <a title="查看" data-object-id="' + obj.object.id + '" onclick="xadmin.open(\'编辑\',\'order-view.html\')" href="javascript:;">\n' +
