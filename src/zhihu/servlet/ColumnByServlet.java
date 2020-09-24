@@ -2,6 +2,7 @@ package zhihu.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,18 +10,29 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import zhihu.entity.RoundtableEntity;
-import zhihu.service.RoundTableService;
-
-import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 
-public class AllRoundTableServlet extends HttpServlet {
+import zhihu.entity.ColumnAuthorContainerEntity;
+import zhihu.entity.ColumnEntity;
+import zhihu.entity.ColumnPContainerEntity;
+import zhihu.entity.PEntity;
+import zhihu.entity.QuestionEntity;
+import zhihu.entity.RoundtableContainerEntity;
+import zhihu.entity.RoundtableEntity;
+import zhihu.entity.SuperEntity;
+import zhihu.entity.UserEntity;
+import zhihu.service.ColumnService;
+import zhihu.service.QuestionService;
+import zhihu.service.RoundTableService;
+import zhihu.service.SuperService;
+import zhihu.service.UserService;
+
+public class ColumnByServlet extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public AllRoundTableServlet() {
+	public ColumnByServlet() {
 		super();
 	}
 
@@ -58,17 +70,23 @@ public class AllRoundTableServlet extends HttpServlet {
 	 * @throws ServletException if an error occurred
 	 * @throws IOException if an error occurred
 	 */
+	
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		String name = request.getParameter("name");
 		PrintWriter out = response.getWriter();
-		RoundTableService ser = new RoundTableService();
-		List<RoundtableEntity> list = ser.allselect();
-		request.setAttribute("rtList", list);
-		request.getRequestDispatcher("html/roundtable.jsp").forward(request, response);
+		String p = request.getParameter("p");
+		
+		String cnId = request.getParameter("cnId");
+		ColumnService columnService = new ColumnService();
+		ColumnEntity columnEntity = columnService.selectById(cnId);
+		
+		request.setAttribute("cnList", columnEntity);
+		request.getRequestDispatcher("html/zhuanlanCon.jsp").forward(request, response);
+		
 		
 		
 	}

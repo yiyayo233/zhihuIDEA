@@ -11,11 +11,11 @@ public class RoundTableService {
 	public List<RoundtableEntity> select(){
 		return dao.select();
 	}
-	
+
 	public List<RoundtableEntity> allselect(){
 		return dao.allselect();
 	}
-	
+
 	public RoundtableEntity select(String id){
 		return dao.selectById(id);
 	}

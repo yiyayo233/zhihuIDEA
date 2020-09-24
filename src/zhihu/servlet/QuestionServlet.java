@@ -37,7 +37,17 @@ public class QuestionServlet extends HttpServlet {
             selectAll(request,response,out);
         }else if (a.equals("updateIsFold")){
             updateIsFold(request,response,out,a);
+        }else if ("AllQuestion".equals(a)){
+            AllQuestion(request,response,out);
         }
+    }
+
+    private void AllQuestion(HttpServletRequest request, HttpServletResponse response, PrintWriter out) throws ServletException, IOException {
+        QuestionService ser = new QuestionService();
+        List<QuestionEntity> list = ser.selectQuestion("","");
+
+        request.setAttribute("qtwLt", list);
+        request.getRequestDispatcher("html/questionWaiting.jsp").forward(request, response);
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

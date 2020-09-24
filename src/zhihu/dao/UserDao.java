@@ -1,6 +1,7 @@
 package zhihu.dao;
 
 import zhihu.entity.AnswerEntity;
+import zhihu.entity.PersonalDataEntity;
 import zhihu.entity.UserEntity;
 
 import java.sql.SQLException;
@@ -155,4 +156,44 @@ public class UserDao extends BaseDao{
 		}
 		return null;
     }
+
+	//查询用户头像和姓名
+	public UserEntity findCompere(String id){
+		String sql = "select * from user WHERE userid = ?";
+		resultSet=super.query(sql, id);
+
+		try {
+			while(resultSet.next()){
+				return new UserEntity(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6));
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			super.closeAll();
+		}
+		return null;
+	}
+
+	//根据用户id查询个人介绍
+	public PersonalDataEntity findIntroduce(String id){
+		String sql = "select * from personaldata WHERE userid = ?";
+		resultSet=super.query(sql, id);
+
+		try {
+			while(resultSet.next()){
+				return new PersonalDataEntity(resultSet.getString(1),resultSet.getString(2),resultSet.getString(3),resultSet.getString(4),resultSet.getString(5),resultSet.getString(6),resultSet.getString(7),resultSet.getString(8),resultSet.getString(9),resultSet.getString(10));
+
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}finally{
+			super.closeAll();
+		}
+		return null;
+	}
 }

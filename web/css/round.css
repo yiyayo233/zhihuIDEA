@@ -154,17 +154,20 @@ body{
 
 }
 .rightOn{
-	display: flex;
+	
 
 	padding-bottom: 20px;
 }
-.rightOn>img{
+.rightOn img{
 	height:44px;
 	width:44px;
 	border-radius: 50%;
 	margin-right: 10px;
 	margin-top: 5px;
 	cursor: pointer;
+	vertical-align: top;
+	position: relative;
+    top: -3px;
 }
 .rightOnn span{
 	font-weight: 600;
@@ -186,10 +189,12 @@ body{
 }
 .rightOnn>div:last-of-type{
 	color: #999999;
-    margin-top: 8px;
+    margin-top: -17px;
     font-size: 14px;
     line-height: 16px;
     cursor: pointer;
+    margin-left: 60px;
+    
 }
 .lastDiv1{
     color: #8590A6;
@@ -213,4 +218,10 @@ body{
 .lr{
 	background-color: #f6f6f6;
 	height: 10px;
+}
+.yuanzhuo-addcolor{
+	 color: rgba(25, 5, 71, 0.5);
+}
+.rightIn>div>div{
+	margin-top:10px;
 }

@@ -197,4 +197,43 @@ public class SuperDao extends BaseDao{
         }
         return null;
     }
+
+    /**
+     * 查询 去重 查询部分数据LIMIT
+     * @param tableName
+     * @return
+     */
+    public List<SuperEntity> selectSpperDistinct2(String tableName){
+
+        String re = selectColumn(tableName);
+        String re1 = "";
+        String re2 = "";
+
+        if (re1.equals("")) {
+            re1 = re.split(" ")[1];
+        }
+
+        if (re2.equals("")) {
+            re2 = re.split(" ")[2];
+        }
+        System.out.println(re1+"=="+re2);
+
+        StringBuffer StringBuffer = new StringBuffer("SELECT DISTINCT `" + re1 + "` FROM `"+ tableName +"`");
+        StringBuffer.append(" LIMIT 5,4 ");
+        System.err.println(StringBuffer.toString());
+        resultSet= query(StringBuffer.toString());
+        List<SuperEntity> superEntityList = new ArrayList<SuperEntity>();
+        try{
+            while (resultSet.next()){
+                SuperEntity SuperEntity = new SuperEntity(resultSet.getString(1));
+                superEntityList.add(SuperEntity);
+            }
+            return superEntityList;
+        }catch (SQLException e){
+
+        }finally {
+            closeAll();
+        }
+        return null;
+    }
 }

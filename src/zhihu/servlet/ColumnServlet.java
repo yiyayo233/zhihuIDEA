@@ -9,18 +9,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import zhihu.entity.RoundtableEntity;
-import zhihu.service.RoundTableService;
-
-import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 
-public class AllRoundTableServlet extends HttpServlet {
+import zhihu.entity.ColumnEntity;
+import zhihu.entity.ColumnPage;
+import zhihu.service.ColumnService;
+
+public class ColumnServlet extends HttpServlet {
 
 	/**
 	 * Constructor of the object.
 	 */
-	public AllRoundTableServlet() {
+	public ColumnServlet() {
 		super();
 	}
 
@@ -60,17 +60,55 @@ public class AllRoundTableServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		
 		request.setCharacterEncoding("utf-8");
 		response.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
-		String name = request.getParameter("name");
 		PrintWriter out = response.getWriter();
-		RoundTableService ser = new RoundTableService();
-		List<RoundtableEntity> list = ser.allselect();
-		request.setAttribute("rtList", list);
-		request.getRequestDispatcher("html/roundtable.jsp").forward(request, response);
+		String name = request.getParameter("name");
+		ColumnService cnser = new ColumnService();
+		Gson gson = new Gson();
 		
 		
+		if("1".equals(name)){
+			List<ColumnEntity> cnList = cnser.select();
+			String cnstr = gson.toJson(cnList);
+			System.out.println(cnstr);
+			out.print(cnstr);
+		}else if("2".equals(name)){
+			int curr=1;
+			String currPage = request.getParameter("curr");
+			if(currPage!=null){
+				curr=Integer.parseInt(currPage);
+			}
+			int size=8;
+			String pagesize =request.getParameter("size");
+			if(pagesize!=null){
+				size=Integer.parseInt(pagesize);
+			}
+			List<ColumnEntity> allList = cnser.selectLimit(curr,size);
+			String allstr = gson.toJson(allList);
+			System.out.println(allstr);
+			out.print(allstr);
+		}else if("3".equals(name)){
+			int curr=1;
+			String currPage = request.getParameter("curr");
+			if(currPage!=null){
+				curr=Integer.parseInt(currPage);
+			}
+			int size=8;
+			String pagesize =request.getParameter("size");
+			if(pagesize!=null){
+				size=Integer.parseInt(pagesize);
+			}
+			List<ColumnEntity> allList = cnser.selectLimit(curr,size);
+			//获取总的记录数
+			int total = cnser.getCount();
+			ColumnPage cp = new ColumnPage(curr, size, allList, total);
+			String allstrcp = gson.toJson(cp);
+			System.out.println(allstrcp);
+			out.print(allstrcp);
+		}
 	}
 
 	/**

@@ -29,4 +29,7 @@ public class SuperService {
         return SuperDao.selectSpperItem(tableName, id1, id2);
 
     }
+    public List<SuperEntity> selectSpperDistinct2(String tableName){
+        return SuperDao.selectSpperDistinct2(tableName);
+    }
 }

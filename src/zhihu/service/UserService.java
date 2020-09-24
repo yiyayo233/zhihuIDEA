@@ -1,6 +1,7 @@
 package zhihu.service;
 
 import zhihu.dao.UserDao;
+import zhihu.entity.PersonalDataEntity;
 import zhihu.entity.UserEntity;
 
 public class UserService {
@@ -24,4 +25,11 @@ public class UserService {
     public UserEntity selecUserAndPersonaldItem(String id) {
 		return userDao.selecUserAndPersonaldItem(id);
     }
+
+	public UserEntity findCompere(String id){
+		return userDao.findCompere(id);
+	}
+	public PersonalDataEntity findIntroduce(String id){
+		return userDao.findIntroduce(id);
+	}
 }

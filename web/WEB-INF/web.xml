@@ -136,8 +136,17 @@
 
 
 
-
-
+        <!-- 显示部分圆桌信息 -->
+        <servlet>
+            <description>This is the description of my J2EE component</description>
+            <display-name>This is the display name of my J2EE component</display-name>
+            <servlet-name>RoundTableServlet</servlet-name>
+            <servlet-class>zhihu.servlet.RoundTableServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+            <servlet-name>RoundTableServlet</servlet-name>
+            <url-pattern>/Roundtable</url-pattern>
+        </servlet-mapping>
         <!-- 显示圆桌部分信息 -->
         <servlet>
             <description>This is the description of my J2EE component</description>
