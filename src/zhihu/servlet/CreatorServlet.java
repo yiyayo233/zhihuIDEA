@@ -99,7 +99,6 @@ public class CreatorServlet extends HttpServlet {
         int ztAllUpNum = bynamicEntityList.size();
         request.setAttribute("ztAllUpNum", ztAllUpNum);
 
-
         bynamicEntityList = BynamicService.selectBynamicByAll("","",uId,"","gz","");
         int gzAllNum = bynamicEntityList.size();
         request.setAttribute("ztAllNum", ztAllNum);
@@ -132,7 +131,6 @@ public class CreatorServlet extends HttpServlet {
         if (bynamicEntityList.size()>0){
             // TODO: supHashtable
             for (BynamicEntity bynamicEntity: bynamicEntityList) {
-
                 Hashtable<String, Object> objectMap = new Hashtable<String, Object>();
                 String type = bynamicEntity.getByBynamicId().substring(0,2);
                 if (type.equals("hd")){
@@ -154,7 +152,9 @@ public class CreatorServlet extends HttpServlet {
                 objectMap.put("plNum",CommentServlet.getCommentNum(bynamicEntity.getByBynamicId()));
                 List<BynamicEntity> bynamicEntityList1 = BynamicService.selectBynamicByAll("","",bynamicEntity.getByBynamicId(),"","zt","");
                 objectMap.put("ztNum",bynamicEntityList1.size());
-                CreatorHomeAnalyticsDataItems.add(objectMap);
+                if (!type.equals("wt")){
+                    CreatorHomeAnalyticsDataItems.add(objectMap);
+                }
             }
         }
 

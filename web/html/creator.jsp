@@ -447,7 +447,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </div>
                             </c:forEach>
                         </div>
-                        <a class="CreatorHomeAnalyticsData-analyticsButton" href="#">
+                        <a class="CreatorHomeAnalyticsData-analyticsButton" href="creator/analytics">
                             更多创作数据
                             <svg class="Zi Zi--ArrowRight" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M9.218 16.78a.737.737 0 0 0 1.052 0l4.512-4.249a.758.758 0 0 0 0-1.063L10.27 7.22a.737.737 0 0 0-1.052 0 .759.759 0 0 0-.001 1.063L13 12l-3.782 3.716a.758.758 0 0 0 0 1.063z" fill-rule="evenodd"></path></svg>
                         </a>

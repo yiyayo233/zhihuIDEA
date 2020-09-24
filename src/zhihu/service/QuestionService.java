@@ -13,8 +13,8 @@ public class QuestionService {
         return QuestionDao.addQuestion(id, authorId, questionTitle, questionIntro, approveNum, browseNum, followNum, commentId, publishTime,isFold);
     }
 
-    public List<QuestionEntity> selectQuestion(String id,String authorId){
-        return QuestionDao.selectQuestion(id, authorId);
+    public List<QuestionEntity> selectQuestion(String id,String authorId, int isFond){
+        return QuestionDao.selectQuestion(id, authorId, isFond);
     }
 
     public QuestionEntity selectQuestionItem(String id, int isFond){

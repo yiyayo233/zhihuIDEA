@@ -88,9 +88,11 @@ public class PeopleServlet extends HttpServlet {
                 String bynamicType = bynamicEntity.getBynamicType().substring(0,2);
                 System.err.println(byBynamicType.equals("wt"));
                 if (byBynamicType.equals("wt")){
-                    QuestionEntity questionEntity = QuestionService.selectQuestionItem(bynamicEntity.getByBynamicId());
-                    if (questionEntity.getIsFold() == 0){
-                        bynamicContainerEntityList.add(new BynamicContainerEntity(bynamicEntity,questionEntity));
+                    if (!bynamicEntity.getBynamicType().equals("gz")){
+                        QuestionEntity questionEntity = QuestionService.selectQuestionItem(bynamicEntity.getByBynamicId());
+                        if (questionEntity.getIsFold() == 0){
+                            bynamicContainerEntityList.add(new BynamicContainerEntity(bynamicEntity,questionEntity));
+                        }
                     }
                 }else if (byBynamicType.equals("hd")){
                     AnswerSercice AnswerSercice = new AnswerSercice();
@@ -99,24 +101,25 @@ public class PeopleServlet extends HttpServlet {
                     SuperService SuperService = new SuperService();
                     SuperEntity SuperEntity = SuperService.selectSpperItem("questionanswer","",bynamicEntity.getByBynamicId());
                     QuestionEntity questionEntity = QuestionService.selectQuestionItem(SuperEntity.getId1());
+                    if (questionEntity.getIsFold() == 0){
+                        UserService UserService = new UserService();
+                        UserEntity UserEntity = UserService.selecUserItem(AnswerEntity.getAuthorId());
 
-                    UserService UserService = new UserService();
-                    UserEntity UserEntity = UserService.selecUserItem(AnswerEntity.getAuthorId());
-
-                    int CommentNum = 0;
-                    CommentService CommentService = new CommentService();
-                    List<CommentEntity> commentEntityList = CommentService.selectComment(AnswerEntity.getId());
-                    if (commentEntityList.size() != 0) {
-                        for (CommentEntity commentEntity:commentEntityList) {
-                            CommentNum++;
-                            CommentReplyService CommentReplyService = new CommentReplyService();
-                            List<CommentReplyEntity> commentReplyEntityList = CommentReplyService.selectCommentReply(commentEntity.getId());
-                            CommentNum = CommentNum + commentReplyEntityList.size();
+                        int CommentNum = 0;
+                        CommentService CommentService = new CommentService();
+                        List<CommentEntity> commentEntityList = CommentService.selectComment(AnswerEntity.getId());
+                        if (commentEntityList.size() != 0) {
+                            for (CommentEntity commentEntity:commentEntityList) {
+                                CommentNum++;
+                                CommentReplyService CommentReplyService = new CommentReplyService();
+                                List<CommentReplyEntity> commentReplyEntityList = CommentReplyService.selectCommentReply(commentEntity.getId());
+                                CommentNum = CommentNum + commentReplyEntityList.size();
+                            }
                         }
-                    }
-                    HeaderPage headerPage = new HeaderPage(questionEntity,AnswerEntity,UserEntity,CommentNum);
+                        HeaderPage headerPage = new HeaderPage(questionEntity,AnswerEntity,UserEntity,CommentNum);
 
-                    bynamicContainerEntityList.add(new BynamicContainerEntity(bynamicEntity,headerPage));
+                        bynamicContainerEntityList.add(new BynamicContainerEntity(bynamicEntity,headerPage));
+                    }
                 }
 
             }

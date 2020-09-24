@@ -44,8 +44,18 @@ public class QuestionServlet extends HttpServlet {
 
     private void AllQuestion(HttpServletRequest request, HttpServletResponse response, PrintWriter out) throws ServletException, IOException {
         QuestionService ser = new QuestionService();
-        List<QuestionEntity> list = ser.selectQuestion("","");
+        List<QuestionEntity> list = ser.selectQuestion("","",0);
+        for (QuestionEntity QuestionEntity:list) {
+            Hashtable hashtable = new Hashtable();
+            hashtable.put("object",QuestionEntity);
+            SuperService superService = new SuperService();
+            hashtable.put("answerNum",superService.selectSpperby("questionanswer",QuestionEntity.getId(),"").size());
+            BynamicService bynamicService = new BynamicService();
+            hashtable.put("gzNum",bynamicService.selectBynamicByAll("","",QuestionEntity.getId(),"","gz","").size());
+            BrowseService browseService = new BrowseService();
+            hashtable.put("llNum",browseService.selectBrowseByAll("",QuestionEntity.getId(),"","","").size());
 
+        }
         request.setAttribute("qtwLt", list);
         request.getRequestDispatcher("html/questionWaiting.jsp").forward(request, response);
     }

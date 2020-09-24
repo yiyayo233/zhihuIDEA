@@ -31,14 +31,15 @@ public class QuestionDao extends BaseDao{
      * @return
      * @throws SQLException
      */
-    public List<QuestionEntity> selectQuestion(String id, String authorId) {
+    public List<QuestionEntity> selectQuestion(String id, String authorId, int isFond) {
         StringBuffer StringBuffer = new StringBuffer("select * from question");
         if (!id.equals("")) {
             StringBuffer.append(" where questionID = "+id);
         }else if (!authorId.equals("")) {
             StringBuffer.append(" where authorID = "+authorId);
+        }else if (-1 != isFond){
+            StringBuffer.append(" where isFold = "+isFond);
         }
-
         List<QuestionEntity> QuestionEntitys = new ArrayList<>();
 
         System.err.println(StringBuffer.toString());
