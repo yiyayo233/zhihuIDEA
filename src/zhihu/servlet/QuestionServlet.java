@@ -45,6 +45,7 @@ public class QuestionServlet extends HttpServlet {
     private void AllQuestion(HttpServletRequest request, HttpServletResponse response, PrintWriter out) throws ServletException, IOException {
         QuestionService ser = new QuestionService();
         List<QuestionEntity> list = ser.selectQuestion("","",0);
+        List list1 = new ArrayList();
         for (QuestionEntity QuestionEntity:list) {
             Hashtable hashtable = new Hashtable();
             hashtable.put("object",QuestionEntity);
@@ -54,9 +55,9 @@ public class QuestionServlet extends HttpServlet {
             hashtable.put("gzNum",bynamicService.selectBynamicByAll("","",QuestionEntity.getId(),"","gz","").size());
             BrowseService browseService = new BrowseService();
             hashtable.put("llNum",browseService.selectBrowseByAll("",QuestionEntity.getId(),"","","").size());
-
+            list1.add(hashtable);
         }
-        request.setAttribute("qtwLt", list);
+        request.setAttribute("qtwLt", list1);
         request.getRequestDispatcher("html/questionWaiting.jsp").forward(request, response);
     }
 
@@ -108,8 +109,22 @@ public class QuestionServlet extends HttpServlet {
         QuestionEntity QuestionEntity = QuestionService.selectQuestionItem(questionId,0);
         int result = QuestionService.updatebrowseNum(questionId);
         System.out.println(result +"---updatebrowseNum");
-        request.setAttribute("Question", QuestionEntity);
 
+        BrowseService browseService = new BrowseService();
+        String id = ProduceRandomNumder.randomNumder("ll",8);
+        if (browseService.selectBrowseByAll("",questionId,"1","","").size() < 5){
+            String browseTime = ProduceDatetime.Datetime();
+            String objectType = questionId.substring(0,2);
+            result = browseService.addBrowse(id,uId,questionId,browseTime,objectType,QuestionEntity.getAuthorId());
+            System.out.println(result +"---bynamicService.addBynamic");
+        }
+
+
+        request.setAttribute("llNum",browseService.selectBrowseByAll("",questionId,"","","").size());
+
+        request.setAttribute("gzNum",new BynamicService().selectBynamicByAll("","",questionId,"","","").size());
+
+        request.setAttribute("Question", QuestionEntity);
         SuperService SuperService = new SuperService();
         List<SuperEntity> superEntityList = SuperService.selectSpperby("questionanswer",QuestionEntity.getId(),"");
 
@@ -119,6 +134,15 @@ public class QuestionServlet extends HttpServlet {
                     superEntityList) {
                 AnswerSercice AnswerSercice = new AnswerSercice();
                 AnswerEntity answerEntity = AnswerSercice.selectAnseerItem(SuperEntity.getId2());
+                String getDeAnswerId = answerEntity.getId();
+                if (browseService.selectBrowseByAll("",getDeAnswerId,"1","","").size() < 5){
+                    String browseTime = ProduceDatetime.Datetime();
+                    String objectType = getDeAnswerId.substring(0,2);
+                    id = ProduceRandomNumder.randomNumder("ll",8);
+                    result = browseService.addBrowse(id,uId,getDeAnswerId,browseTime,objectType,answerEntity.getAuthorId());
+                    System.out.println(result +"--answerEntity--bynamicService.addBynamic");
+                }
+
                 UserService UserService = new UserService();
                 UserEntity userEntity = UserService.selecUserPersonalItem(answerEntity.getAuthorId());
 

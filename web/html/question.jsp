@@ -161,7 +161,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="QuestionHerder">
                 <div class="QuestionHerder-content">
                     <div class="QuestionHerder-main">
-                        <div class="QuestionHerder-tags">
+                        <%--<div class="QuestionHerder-tags">
                             <div class="QuestionHeader-topics">
                                 <div class="Tag QuestionTopic">
                                     <a class="TopicLink" href="#" target="_blank">
@@ -189,7 +189,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     </a>
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
                         <h1 class="QuestionHeader-title">${Question.questionTitle}</h1>
                         <%--<a href="#">
                             <div class="Card QuestionHeaderTopicMeta">
@@ -245,13 +245,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <button type="button" class="button">
                                     <div class="Numboard-itemInner">
                                         <div class="Numboard-itemName">关注者</div>
-                                        <div class="Numboard-itemValue">${Question.followNum}</div>
+                                        <div class="Numboard-itemValue">${gzNum}</div>
                                     </div>
                                 </button>
                                 <div class="Numboard-item">
                                     <div class="Numboard-itemInner">
                                         <div class="Numboard-itemName">被浏览</div>
-                                        <div class="Numboard-itemValue">${Question.browseNum+1}</div>
+                                        <div class="Numboard-itemValue">${llNum}</div>
                                     </div>
                                 </div>
                             </div>

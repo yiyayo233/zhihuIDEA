@@ -3,6 +3,7 @@ package zhihu.servlet;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -10,21 +11,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.alibaba.fastjson.JSON;
 import com.google.gson.Gson;
 
-import zhihu.entity.ColumnEntity;
 import zhihu.entity.QuestionEntity;
-import zhihu.entity.RoundTableCompereContainerEntity;
 import zhihu.entity.RoundtableContainerEntity;
 import zhihu.entity.RoundtableEntity;
 import zhihu.entity.SuperEntity;
-import zhihu.entity.UserEntity;
-import zhihu.service.ColumnService;
-import zhihu.service.QuestionService;
-import zhihu.service.RoundTableService;
-import zhihu.service.SuperService;
-import zhihu.service.UserService;
+import zhihu.service.*;
 
 public class RoundTableServlet extends HttpServlet {
 
@@ -93,15 +86,22 @@ public class RoundTableServlet extends HttpServlet {
 					RoundtableEntity roundtableEntity;
 					if(superEntityList.size() != 0){ 
 						roundtableEntity= roundTableService.select(superEntityList.get(0).getId1());
-						
+						BynamicService bynamicService = new BynamicService();
+						roundtableEntity.setFollowNum(bynamicService.selectBynamicByAll("","",roundtableEntity.getId(),"","gz","").size());
 						List<QuestionEntity> questionEntityList = new ArrayList<QuestionEntity>();
+						List list1 = new ArrayList();
 						for (SuperEntity superEntity1 : superEntityList) {
+							Hashtable hashtable = new Hashtable();
 							QuestionService questionService = new QuestionService();
 							QuestionEntity questionEntity1 = questionService.selectQuestionItem(superEntity1.getId2());
 							questionEntityList.add(questionEntity1);
+							hashtable.put("questionEntity",questionEntity1);
+							hashtable.put("questionEntity1FollowNum",bynamicService.selectBynamicByAll("","",questionEntity1.getId(),"","gz","").size());
+							list1.add(hashtable);
 						}
-						roundtableContainerEntities.add(new RoundtableContainerEntity(roundtableEntity,questionEntityList));
-						
+						String uId = analyticsServlet.Cookies(request, response, out);
+						int isfollok = bynamicService.selectBynamicByAll("",uId,roundtableEntity.getId(),"","gz","").size();
+						roundtableContainerEntities.add(new RoundtableContainerEntity(roundtableEntity,list1, isfollok));
 					}
 				}
 			}
@@ -125,14 +125,22 @@ public class RoundTableServlet extends HttpServlet {
 					RoundtableEntity roundtableEntity;
 					if(superEntityList.size() != 0){ 
 						roundtableEntity= roundTableService.select(superEntityList.get(0).getId1());
-						
 						List<QuestionEntity> questionEntityList = new ArrayList<QuestionEntity>();
+						List list1 = new ArrayList();
 						for (SuperEntity superEntity1 : superEntityList) {
+							Hashtable hashtable = new Hashtable();
 							QuestionService questionService = new QuestionService();
 							QuestionEntity questionEntity1 = questionService.selectQuestionItem(superEntity1.getId2());
 							questionEntityList.add(questionEntity1);
+							hashtable.put("questionEntity",questionEntity1);
+							BynamicService bynamicService = new BynamicService();
+							hashtable.put("questionEntity1FollowNum",bynamicService.selectBynamicByAll("","",questionEntity1.getId(),"","gz","").size());
+							list1.add(hashtable);
 						}
-						roundtableContainerEntities.add(new RoundtableContainerEntity(roundtableEntity,questionEntityList));
+						String uId = analyticsServlet.Cookies(request, response, out);
+						BynamicService bynamicService = new BynamicService();
+						int isfollok = bynamicService.selectBynamicByAll("",uId,roundtableEntity.getId(),"","gz","").size();
+						roundtableContainerEntities.add(new RoundtableContainerEntity(roundtableEntity,questionEntityList, isfollok));
 						
 					}
 				}

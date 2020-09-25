@@ -176,8 +176,7 @@ function updateApproveNum(a,tableName,id) {
  * @returns {string}
  * @constructor
  */
-function CurentTime()
-{
+function CurentTime() {
     var now = new Date();
 
     var year = now.getFullYear();       //年

@@ -170,7 +170,7 @@ public class analyticsServlet extends HttpServlet {
 
     }
 
-    private String Cookies(HttpServletRequest request, HttpServletResponse response, PrintWriter out) throws IOException {
+    public static String Cookies(HttpServletRequest request, HttpServletResponse response, PrintWriter out) throws IOException {
         Cookie[] Cookies = request.getCookies();
         String uId = "";
         String uName = "";
@@ -229,16 +229,20 @@ public class analyticsServlet extends HttpServlet {
                 }
             }
         }
-        System.out.println(objLlNum1+"-"+objLlNum2+":  ");
-        if (objLlNum2 != 0){
-            System.out.println((objLlNum1-objLlNum2)/objLlNum2*100);
-            request.setAttribute("objLlNumUp",(objLlNum1-objLlNum2)/objLlNum2*100);
-        }else {
-
-            request.setAttribute("objLlNumUp",0);
+        int objLlNumUp = 0;
+        System.out.println(objLlNum1+"-"+objLlNum2+":  objLlNum");
+        if (objLlNum1 != 0 && objLlNum2 != 0){
+            objLlNumUp = (objLlNum1-objLlNum2)/objLlNum2*100;
+        }else if (objLlNum1 == 0 && objLlNum2 == 0){
+        }else if ((objLlNum1-objLlNum2) == 0){
+        }else if ((objLlNum1-objLlNum2) < 0){
+            objLlNumUp = (objLlNum1-objLlNum2)/objLlNum2*100;
+        }else if ((objLlNum1-objLlNum2) > 0 && objLlNum2 == 0){
+            objLlNumUp = objLlNum1*100;
         }
-        System.out.println((objLlNum1-objLlNum2)/objLlNum2*100);
-        request.setAttribute("objLlNumUp",(objLlNum1-objLlNum2)/objLlNum2*100);
+        System.out.println(objLlNumUp);
+        request.setAttribute("objLlNumUp",objLlNumUp);
+
 
         int objZtNum1 = 0;
         BynamicService BynamicService = new BynamicService();
@@ -262,20 +266,25 @@ public class analyticsServlet extends HttpServlet {
                 }
             }
         }
-        System.out.println(objZtNum1+"-"+objZtNum2+":  ");
-        if (objZtNum2 != 0){
-            System.out.println((objZtNum1-objZtNum2)/objZtNum2*100);
-            request.setAttribute("objZtNumUp",(objZtNum1-objZtNum2)/objZtNum2*100);
-        }else {
-
-            request.setAttribute("objZtNumUp",0);
+        int objZtNumUp = 0;
+        System.out.println(objZtNum1+"-"+objZtNum2+":  objZtNum");
+        if (objZtNum1 != 0 && objZtNum2 != 0){
+            objZtNumUp = (objZtNum1-objZtNum2)/objZtNum2*100;
+        }else if (objZtNum1 == 0 && objZtNum2 == 0){
+        }else if ((objZtNum1-objZtNum2) == 0){
+        }else if ((objZtNum1-objZtNum2) < 0){
+            objZtNumUp = (objZtNum1-objZtNum2)/objZtNum2*100;
+        }else if ((objZtNum1-objZtNum2) > 0 && objZtNum2 == 0){
+            objZtNumUp = objZtNum1*100;
         }
+        System.out.println(objZtNumUp);
+        request.setAttribute("objZtNumUp",objZtNumUp);
 
         Hashtable hashtable = new Hashtable();
         hashtable.put("objLlNum1",objLlNum1);
-        hashtable.put("objLlNumUp",(objLlNum1-objLlNum2)/objLlNum2*100);
+        hashtable.put("objLlNumUp",objLlNumUp);
         hashtable.put("objZtNum1",objZtNum1);
-        hashtable.put("objZtNumUp",(objZtNum1-objZtNum2)/objZtNum2*100);
+        hashtable.put("objZtNumUp",objZtNumUp);
         return hashtable;
 
     }

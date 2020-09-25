@@ -77,7 +77,7 @@ $(function () {
                 },
                 success: function (result) {
                     if (result.indexOf("enrollTrue") != -1) {
-                        alert(result);
+                        alert("注册成功，请前往登录");
                     } else {
                         alert(result);
                     }

@@ -26,7 +26,34 @@
 
 	<link rel="stylesheet" href="css/explore.css">
 </head>
+<%
+	Cookie[] Cookies = request.getCookies();
+	String uId = "";
+	String uName = "";
+	String uChatHead ="";
+	boolean f = false;
+
+	for (Cookie cookie: Cookies) {
+		if (cookie.getName().equals("uId")){
+			uId = cookie.getValue();
+			f = true;
+		}else if (cookie.getName().equals("uName")){
+			uName = cookie.getValue();
+			f = true;
+		}else if(cookie.getName().equals("uChatHead")||cookie.getName().equals("user")){
+			uChatHead = cookie.getValue();
+			f = true;
+		}
+	}
+	if (!f) {
+		response.sendRedirect("html/signin.jsp");
+		return;
+	}else {
+		System.out.println("jsp    uId:"+uId+"\tuName:"+uName+"\tuChatHead:"+uChatHead);
+	}
+%>
 <body>
+<input id="user" type="hidden" data-user-id="<%=uId%>" data-user-name="<%=uName%>" data-user-ChatHead="<%=uChatHead%>">
 <header class="Header">
 	<div class="AppHeader">
 		<a href="Header.html">
@@ -43,7 +70,7 @@
 				<a href="html/explore.jsp" class="Tabs-link is-active">发现</a>
 			</li>
 			<li class="Tabs-item">
-				<a href="<%=path %>/Question" class="Tabs-link">等你来答</a>
+				<a href="question?a=AllQuestion" class="Tabs-link">等你来答</a>
 			</li>
 		</ul>
 		<div class="SearchBar">
@@ -87,7 +114,7 @@
 			</div>
 			<div class="AppHeader-profile">
 				<button class="button">
-					<img src="images/touxiang/6d6f2275d27e12ddf9deac2fd47a511344c9125d.png" alt="" height="30" width="30"/>
+					<img src="images/user/<%=uChatHead%>" alt="" height="30" width="30"/>
 				</button>
 			</div>
 		</div>
@@ -607,7 +634,6 @@
 
 <script src="Scripts/jquery-3.5.1.min.js"></script>
 <script type="text/javascript" src="Scripts/Header-Head.js"></script>
-
 <script src="Scripts/explore.js"></script>
 <script type="text/javascript">
 	$(function(){
@@ -623,48 +649,48 @@
 
 				$.each(result,function(i,obj){
 					var $rt = $('<div class="yuanzhuo-roundtables-neirong"></div>');
-					var itemr = $('<div class="yuanzhuo-roundtables-neirong-tou" style="background-color: rgb(66, 18, 101); ">\n'+
-							'		<div class="yuanzhuo-background \">\n'+
-							'		<div class="yuanzhuo-p2" style="background-image: url(images/roundtable/'+obj.roundtableEntity.roundtableImg+'); background-position: center center;"></div>\n'+
-							'		<div class="yuanzhuo-color " style="background: linear-gradient(to right, rgb(66, 18, 101) 0%, rgba(66, 18, 101, 0) 100%); "></div>\n'+
-							'		<div class="yuanzhuo-jing " style="background: linear-gradient(to right, rgba(66, 18, 101, 0.5) 0%, rgba(66, 18, 101, 0) 100%); "></div>\n'+
-							'	</div>\n'+
-							'	<div class="yuanzhuo-header ">\n'+
-							'		<a class="yuanzhuo-header-title " target="_blank " rel="noreferrer noopener " href="RoundTableById?rtId='+obj.roundtableEntity.id+'">'+obj.roundtableEntity.roundtableTitle+'</a>\n'+
-							'		<a class="yuanzhuo-header-info " target="_blank " rel="noreferrer noopener " href="RoundTableById?rtId='+obj.roundtableEntity.id+'">'+obj.roundtableEntity.roundtableIntro+'</a>\n'+
-							'		<div class="yuanzhuo-header-infoes ">\n'+
-							'			<div class="yuanzhuo-header-guests ">\n'+
-							'				<span>'+ obj.roundtableEntity.followNum +' 位嘉宾参与</span>\n'+
-							'			</div>\n'+
-							'			<div class="yuanzhuo-header-count ">\n'+
-							'				<span>'+ obj.roundtableEntity.followNum +' 人关注</span>\n'+
-							'			</div>\n'+
-							'		</div>\n'+
-							'	</div>\n'+
-							'	<div class="yuanzhuo-button ">\n'+
-							'		<button data-roundtable-id="'+ obj.roundtableEntity.id +'" class="yuanzhuo-button-color yuanzhuo-button-color-two " >关注圆桌</button>\n'+
-							'	</div>\n'+
-							'</div>');
+					var i = $('<div class="yuanzhuo-roundtables-neirong-tou" style="background-color: rgb(66, 18, 101); "></div>');
+					var yuanzhuo_background = $('<div class="yuanzhuo-background ">' +
+							'						<div class="yuanzhuo-p2" style="background-image: url(images/roundtable/'+obj.roundtableEntity.roundtableImg+'); background-position: center center;"></div>\n' +
+							'						<div class="yuanzhuo-color " style="background: linear-gradient(to right, rgb(66, 18, 101) 0%, rgba(66, 18, 101, 0) 100%); "></div>\n' +
+							'						<div class="yuanzhuo-jing " style="background: linear-gradient(to right, rgba(66, 18, 101, 0.5) 0%, rgba(66, 18, 101, 0) 100%); "></div>\n' +
+							'					</div>');
+					var yuanzhuo_header = $('<div class="yuanzhuo-header ">\n'+
+					'		<a class="yuanzhuo-header-title " target="_blank " rel="noreferrer noopener " href="RoundTableById?rtId='+obj.roundtableEntity.id+'">'+obj.roundtableEntity.roundtableTitle+'</a>\n'+
+					'		<a class="yuanzhuo-header-info " target="_blank " rel="noreferrer noopener " href="RoundTableById?rtId='+obj.roundtableEntity.id+'">'+obj.roundtableEntity.roundtableIntro+'</a>\n'+
+					'		<div class="yuanzhuo-header-infoes ">\n'+
+					'			<div class="yuanzhuo-header-guests ">\n'+
+					'				<span>'+ obj.roundtableEntity.followNum +' 位嘉宾参与</span>\n'+
+					'			</div>\n'+
+					'			<div class="yuanzhuo-header-count ">\n'+
+					'				<span>'+ obj.roundtableEntity.followNum +' 人关注</span>\n'+
+					'			</div>\n'+
+					'		</div>\n');
+					var yuanzhuo_button = $('<div class="yuanzhuo-button "><div/>');
+					var isfollok = obj.isFollow;
+					//console.log(isfollok);
+					if (isfollok == 0){
+						yuanzhuo_button.append($('<button data-roundtable-id="'+ obj.roundtableEntity.id +'" class="yuanzhuo-button-color yuanzhuo-button-color-two " >关注圆桌</button>'));
+					}else {
+						yuanzhuo_button.append($('<button data-roundtable-id="'+ obj.roundtableEntity.id +'" class="yuanzhuo-button-color yuanzhuo-button-color-two ExploreFollowButton--isFollowing" >已关注</button>'));
+					}
+					i.append(yuanzhuo_background,yuanzhuo_header,yuanzhuo_button);
 
 					var items = $('<div class="yuanzhuo-roundtables-neirong-wei"></div>');
+					//console.log(obj.list1);
 					$.each(obj.questionEntitiyList,function(iq,objq){
 						if(objq!=null){
 							var item = $('<div class="yuanzhuo-roundtables-neirong-Item ">\n'+
-									'		<a href="question?questionId='+ objq.id +'" class="yuanzhuo-roundtables-Title ">'+ objq.questionTitle +'</a>\n'+
+									'		<a href="question?questionId='+ objq.questionEntity.id +'" class="yuanzhuo-roundtables-Title ">'+ objq.questionEntity.questionTitle +'</a>\n'+
 									'		<div class="yuanzhuo-roundtables-Counts ">\n'+
-									'			<span>'+ objq.followNum +' 人关注</span>\n'+
+									'			<span>'+ objq.questionEntity1FollowNum +' 人关注</span>\n'+
 									'		</div>\n'+
 									'	</div>');
 
 							items.append(item);
 						}
-
-
-
 					});
-
-
-					$rt.append(itemr,items);
+					$rt.append(i,items);
 					$(".yuanzhuo-roundtables").append($rt);
 
 				})
@@ -677,9 +703,6 @@
 				alert("服务器异常！");
 			}
 		})
-
-
-
 		//专栏
 		$.ajax({
 			url:"<%=path%>/Column?name=1",
@@ -698,10 +721,10 @@
 							'<a href="<%=path%>/ColumnById?cnId='+obj.id+'" class="zhuanlan-title" target="_blank">\n'+
 							''+obj.columnTItle+'\n'+
 							'</a>\n'+
-							'<div class="zhuanlan-count">\n'+
+							/*'<div class="zhuanlan-count">\n'+
 							'<span>'+obj.followNum+' 关注</span>\n'+
 							'<span>948 文章</span>\n'+
-							'</div>\n'+
+							'</div>\n'+*/
 							'<div class="zhuanlan-intro">'+obj.columnSlogan+'</div>\n'+
 							'<button href="<%=path%>/ColumnById?cnId='+obj.id+'" class="zhuanlan-Buttom">进入专栏</button>');
 					$cn.append(item);

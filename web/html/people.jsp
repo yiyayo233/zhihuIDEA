@@ -283,7 +283,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         动态
                                     </a>
                                 </li>
-                                <li class="Tabs-item">
+                                <%--<li class="Tabs-item">
                                     <a class="Tabs-link" href="people/answers">
                                         回答<span class="Tabs-meta">6</span>
                                     </a>
@@ -323,8 +323,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <button type="button" class="button userMain-menuButton">更多
                                             <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--ArrowDown" fill="currentColor" viewBox="0 0 24 24" width="24" height="24"><path d="M12 13L8.285 9.218a.758.758 0 0 0-1.064 0 .738.738 0 0 0 0 1.052l4.249 4.512a.758.758 0 0 0 1.064 0l4.246-4.512a.738.738 0 0 0 0-1.052.757.757 0 0 0-1.063 0L12.002 13z" fill-rule="evenodd"></path></svg></span>
                                         </button>
-                                    </div>
-                                </li>
+                                    </div>e
+                                </li>--%>
                             </ul>
                         </div>
                         <div class="userMain-body">
@@ -507,9 +507,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="css-u2c28s">
                                         <div class="css-1086365">较前日</div>
                                         <div class="css-1gqb0v0">
-                                            <span class="css-1ntg9ig">
-                                                <span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--BackToTop" fill="currentColor" viewBox="0 0 24 24" width="1.2em" height="1.2em"><path d="M16.036 19.59a1 1 0 0 1-.997.995H9.032a.996.996 0 0 1-.997-.996v-7.005H5.03c-1.1 0-1.36-.633-.578-1.416L11.33 4.29a1.003 1.003 0 0 1 1.412 0l6.878 6.88c.782.78.523 1.415-.58 1.415h-3.004v7.005z"></path></svg></span>
-                                            </span>
                                             <span class="css-qcbo30">
                                                 --
                                             </span>
@@ -523,7 +520,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="ProfileSideCreator-readCountNum">--</div>
                                     <div class="css-u2c28s">
                                         <div class="css-1086365">较前日</div>
-                                        <div class="css-1gqb0v0">--</div>
+                                        <div class="css-1gqb0v0">
+                                            <span class="css-qcbo30">
+                                                --
+                                            </span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
