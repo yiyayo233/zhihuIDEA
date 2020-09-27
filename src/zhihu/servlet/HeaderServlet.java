@@ -71,6 +71,7 @@ public class HeaderServlet extends HttpServlet {
                 if (questionEntity.getIsFold() == 0){
                     AnswerSercice AnswerSercice = new AnswerSercice();
                     AnswerEntity AnswerEntity = AnswerSercice.selectAnseerItem(SuperEntity.getId2());
+                    AnswerEntity.setApproveNum(new BynamicService().selectBynamicByAll("","",AnswerEntity.getId(),"","zt","").size());
 
                     UserService UserService = new UserService();
                     UserEntity UserEntity = UserService.selecUserItem(AnswerEntity.getAuthorId());
@@ -86,7 +87,9 @@ public class HeaderServlet extends HttpServlet {
                             CommentNum = CommentNum + commentReplyEntityList.size();
                         }
                     }
-                    headerPageList.add(new HeaderPage(questionEntity,AnswerEntity,UserEntity,CommentNum));
+                    String uId = analyticsServlet.Cookies(request, response, out);
+                    int isFollow = new BynamicService().selectBynamicByAll("",uId,AnswerEntity.getId(),"","zt","").size();
+                    headerPageList.add(new HeaderPage(questionEntity,AnswerEntity,UserEntity,CommentNum,isFollow));
                 }
             }
         }

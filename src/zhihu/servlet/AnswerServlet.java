@@ -5,6 +5,7 @@ import zhihu.common.ProduceDatetime;
 import zhihu.common.ProduceRandomNumder;
 import zhihu.entity.AnswerEntity;
 import zhihu.service.AnswerSercice;
+import zhihu.service.BynamicService;
 import zhihu.service.SuperService;
 
 import javax.servlet.ServletException;
@@ -55,8 +56,7 @@ public class AnswerServlet extends HttpServlet {
         SuperService superService = new SuperService();
         result = superService.addSuper("questionanswer",questionId,answerID);
         System.out.println(result+"-----superService.addSuper");
-
-
+        BynamicServlet.addOrDelBynamic(request,response,out,"add",UserId,answerID,"fb");
     }
 
     private void selectAnswerItem(HttpServletRequest request, HttpServletResponse response, PrintWriter out) {

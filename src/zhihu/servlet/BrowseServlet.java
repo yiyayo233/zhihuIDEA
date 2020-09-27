@@ -58,9 +58,6 @@ public class BrowseServlet extends HttpServlet {
             int result = BrowseService.addBrowse(id, uId, objectId, browseTime, objectType, AnswerEntity.getAuthorId());
             System.out.println(result+"-----BrowseService.addAnswer");
         }
-
-
-
     }
 
     private void selectBrowseItem(HttpServletRequest request, HttpServletResponse response, PrintWriter out) {

@@ -4,11 +4,13 @@ public class QuestionPage {
     private AnswerEntity answerEntity;
     private UserEntity userEntity;
     private int commentNum;
+    private int isFollow;
 
-    public QuestionPage(AnswerEntity answerEntity, UserEntity userEntity, int commentNum) {
+    public QuestionPage(AnswerEntity answerEntity, UserEntity userEntity, int commentNum, int isFollow) {
         this.answerEntity = answerEntity;
         this.userEntity = userEntity;
         this.commentNum = commentNum;
+        this.isFollow = isFollow;
     }
 
     public AnswerEntity getAnswerEntity() {
@@ -33,5 +35,13 @@ public class QuestionPage {
 
     public void setCommentNum(int commentNum) {
         this.commentNum = commentNum;
+    }
+
+    public int getIsFollow() {
+        return isFollow;
+    }
+
+    public void setIsFollow(int isFollow) {
+        this.isFollow = isFollow;
     }
 }

@@ -8,6 +8,7 @@ import java.net.HttpCookie;
 import javax.servlet.ServletException;
 import javax.servlet.http.*;
 
+import zhihu.common.ProduceDatetime;
 import zhihu.common.ProduceRandomNumder;
 import zhihu.entity.UserEntity;
 import zhihu.service.UserService;
@@ -182,6 +183,7 @@ public class SigninServlet extends HttpServlet {
 		}else {
 			result = userService.addUser(id, name, pass, chatHead, "", phoneOrEmail);
 		}
+		new PersonalDataServlet().addPersonalData(request,response,id,"","男","不详","","","","","", ProduceDatetime.Datetime());
 		if (result > 0){
 			out.println("enrollTrue");
 		}else {

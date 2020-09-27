@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -24,8 +25,34 @@
 	<link rel="stylesheet" href="css/Header-Head.css" type="text/css" />
 
 	<link type="text/css" rel="stylesheet" href="css/round.css"></head>
+<%
+	Cookie[] Cookies = request.getCookies();
+	String uId = "";
+	String uName = "";
+	String uChatHead ="";
+	boolean f = false;
 
+	for (Cookie cookie: Cookies) {
+		if (cookie.getName().equals("uId")){
+			uId = cookie.getValue();
+			f = true;
+		}else if (cookie.getName().equals("uName")){
+			uName = cookie.getValue();
+			f = true;
+		}else if(cookie.getName().equals("uChatHead")||cookie.getName().equals("user")){
+			uChatHead = cookie.getValue();
+			f = true;
+		}
+	}
+	if (!f) {
+		response.sendRedirect("html/signin.jsp");
+		return;
+	}else {
+		System.out.println("jsp    uId:"+uId+"\tuName:"+uName+"\tuChatHead:"+uChatHead);
+	}
+%>
 <body>
+<input id="user" type="hidden" data-user-id="<%=uId%>" data-user-name="<%=uName%>" data-user-ChatHead="<%=uChatHead%>">
 <header class="Header">
 	<div class="AppHeader">
 		<a href="html/Header.html">
@@ -142,8 +169,15 @@
 				</div>
 				<p>${Allrt.roundtableIntro}</p>
 				<div>
-					<span>${Allrt.browseNum} 万浏览 · ${Allrt.followNum} 关注</span>
-					<div data-roundtable-id=${Allrt.id }" class="gzTable">关注圆桌</div>
+					<span>${Allrt.browseNum} 浏览 · ${Allrt.followNum} 关注</span>
+					<c:choose>
+						<c:when test="${isFollow > 0}">    <!--如果 -->
+							<div data-roundtable-id="${Allrt.id}" class="gzTable is-active">已关注</div>
+						</c:when>
+						<c:otherwise>  <!--否则 -->
+							<div data-roundtable-id="${Allrt.id}" class="gzTable">关注圆桌</div>
+						</c:otherwise>
+					</c:choose>
 			</div>
 		</div>
 	</div>
@@ -323,13 +357,13 @@
 				$.each(obj.questionEntitiyList,function(i,objq){
 					if(objq!=null){
 						var item = $('<p style="line-height:20px"><a href="question?questionId='+ objq.id +'">'+objq.questionTitle+'</a></p>\n'+
-								'<span>'+objq.browseNum+' 万浏览 · '+objq.followNum+' 人关注</span>\n'+
-								'<div data-roundtable-id='+objq.id+'>\n'+
+								'<span>'+objq.browseNum+' 浏览 · '+objq.followNum+' 人关注</span>\n'+
+								'<div class="gzyz" data-roundtable-id='+objq.id+'>\n'+
 								'<svg class="Zi Zi--PlusOneBubble css-15ro776" fill="currentColor" viewBox="0 0 24 24" width="20" height="20">\n'+
 								'<path d="M11.158 18a.341.341 0 0 1-.067.08L8.68 20.22l-.014.012a.595.595 0 0 1-.84-.077l-.748-2.11A.348.348 0 0 1 7.046 18H6.5a3 3 0 0 1-3-3V8a3 3 0 0 1 3-3h11a3 3 0 0 1 3 3v7a3 3 0 0 1-3 3h-6.342zm-.533-5.782h2.031v-1.084h-2.031V9H9.526v2.134H7.5v1.084h2.026v2.168h1.099v-2.168zM14.799 15H16V8h-1.21L13.5 9.001v1.18l1.3-.988V15z" fill-rule="evenodd">\n'+
 
 								'</path>\n'+
-								'</svg>关注\n'+
+								'</svg>想知道\n'+
 								'</div>');
 						$qt.append(item);
 						$(".erDiv").append($qt);

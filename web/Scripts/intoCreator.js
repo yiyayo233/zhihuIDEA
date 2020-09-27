@@ -14,3 +14,7 @@ $(function () {
         }
     });
 });*/
+
+$(".CreatorHomeAnalyticsDataItem-content.CreatorHomeAnalyticsDataItem-content--withTielt").each(function (i,obj) {
+    $(this).html($(this).html().replace(/<.*?>/ig,"").substring(0,200));
+})

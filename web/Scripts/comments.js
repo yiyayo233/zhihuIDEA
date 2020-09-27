@@ -39,10 +39,12 @@ function CommentItem_footer_buttonChild2(button){
     if ($(button).attr("class").indexOf("button--hoverBtn") === -1){
         $(button).addClass("button--hoverBtn").html('<span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Reply" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z" fill-rule="evenodd"></path></svg></span>\n回复').next().addClass("button--hoverBtn");
         $(button).parent().next().remove();
+
     }else {
         $(button).removeClass("button--hoverBtn").html('<span style="display: inline-flex; align-items: center;">​<svg class="Zi Zi--Reply" fill="currentColor" viewBox="0 0 24 24" width="16" height="16" style="margin-right: 5px;"><path d="M22.959 17.22c-1.686-3.552-5.128-8.062-11.636-8.65-.539-.053-1.376-.436-1.376-1.561V4.678c0-.521-.635-.915-1.116-.521L1.469 10.67a1.506 1.506 0 0 0-.1 2.08s6.99 6.818 7.443 7.114c.453.295 1.136.124 1.135-.501V17a1.525 1.525 0 0 1 1.532-1.466c1.186-.139 7.597-.077 10.33 2.396 0 0 .396.257.536.257.892 0 .614-.967.614-.967z" fill-rule="evenodd"></path></svg></span>\n取消回复').next().removeClass("button--hoverBtn");
         var name = $(button).parent().parent().prev().find(".UserLink:nth-child(2)>.UserLink-link").text();
         $(button).parent().after(CommentItem_editor(name));
+
     }
 }
 
@@ -221,41 +223,47 @@ function RenderComment(commentreplyRId,commentId,uid,uname,uChatHead,ruId,ruName
  */
 function AddComment(button){
     var text = $(button).prev().find("input").val();
-    var num = parseInt(Math.random() * (10000000 - 99999999 + 10000000));
-    var commentreplyRId = "pr"+(num>0?num*1:num*-1);
-    num = parseInt(Math.random() * (10000000 - 99999999 + 10000000));
-    var commentId = "pl"+(num>0?num*1:num*-1);
+    if (text.length > 0){
+        var num = parseInt(Math.random() * (10000000 - 99999999 + 10000000));
+        var commentreplyRId = "pr"+(num>0?num*1:num*-1);
+        num = parseInt(Math.random() * (10000000 - 99999999 + 10000000));
+        var commentId = "pl"+(num>0?num*1:num*-1);
 
-    var uid = $("#user").attr("data-user-id");
-    var uname = $("#user").attr("data-user-name");
-    var uChatHead = $("#user").attr("data-user-chathead");
+        var uid = $("#user").attr("data-user-id");
+        var uname = $("#user").attr("data-user-name");
+        var uChatHead = $("#user").attr("data-user-chathead");
 
 
-    var dataTiem = CurentTime();
-    var data = dataTiem.substring(0,dataTiem.indexOf(" "));
-    var time = dataTiem.substring(dataTiem.indexOf(" ",dataTiem.lastIndexOf(".")));
+        var dataTiem = CurentTime();
+        var data = dataTiem.substring(0,dataTiem.indexOf(" "));
+        var time = dataTiem.substring(dataTiem.indexOf(" ",dataTiem.lastIndexOf(".")));
 
-    if ($(button).parent().attr("class").indexOf("Commens-footer") === -1){
-        var ruName = $(button).parents(".CommentTiem-metaSibling").prev().find(".UserLink:nth-child(2)>.UserLink-link").text();
-        var ruId = $(button).parents(".CommentTiem-metaSibling").prev().find(".UserLink:nth-child(2)>.UserLink-link").attr("href").substring($(button).parents(".CommentTiem-metaSibling").prev().find(".UserLink:nth-child(2)>.UserLink-link").attr("href").lastIndexOf("/")+1);
-        commentId = $(button).parents(".CommentItem-editor").prev().find(".button:nth-child(1)").attr("data-commentreply-id");
-        if (commentId == undefined){
-            commentId = $(button).parents(".CommentItem-editor").prev().find(".button:nth-child(1)").attr("data-comment-id");
+        if ($(button).parent().attr("class").indexOf("Commens-footer") === -1){
+            var ruName = $(button).parents(".CommentTiem-metaSibling").prev().find(".UserLink:nth-child(2)>.UserLink-link").text();
+            var ruId = $(button).parents(".CommentTiem-metaSibling").prev().find(".UserLink:nth-child(2)>.UserLink-link").attr("href").substring($(button).parents(".CommentTiem-metaSibling").prev().find(".UserLink:nth-child(2)>.UserLink-link").attr("href").lastIndexOf("/")+1);
+            commentId = $(button).parents(".CommentItem-editor").prev().find(".button:nth-child(1)").attr("data-commentreply-id");
+            if (commentId == undefined){
+                commentId = $(button).parents(".CommentItem-editor").prev().find(".button:nth-child(1)").attr("data-comment-id");
+            }
+
+            $(button).parents(".NestComment-child,.NestComment-rootComment").after(
+                RenderComment(commentreplyRId,commentId,uid,uname,uChatHead,ruId,ruName,text,time)
+            );
+            AddCommentAjax(commentreplyRId,commentId,uid,ruId,text,dataTiem,"answerId","affiliationId");
+            $(button).prev().find("[type='text']").val("");
+        }else {
+            var answerId = $(".CommentTopbar").attr("data-answer-id");
+            var affiliationId = answerId;
+            $(button).parents(".Commens-footer.CommentItem-normal").parent().prev().append(
+                RenderComment("commentreplyRId",commentId,uid,uname,uChatHead,"ruId","ruName",text,time)
+            );
+            AddCommentAjax(-1,commentId,uid,"",text,dataTiem,answerId,affiliationId);
+            $(button).prev().find("[type='text']").val("");
         }
-
-        $(button).parents(".NestComment-child,.NestComment-rootComment").after(
-            RenderComment(commentreplyRId,commentId,uid,uname,uChatHead,ruId,ruName,text,time)
-        );
-        AddCommentAjax(commentreplyRId,commentId,uid,ruId,text,dataTiem,"answerId","affiliationId");
-
     }else {
-        var answerId = $(".CommentTopbar").attr("data-answer-id");
-        var affiliationId = answerId;
-        $(button).parents(".Commens-footer.CommentItem-normal").parent().prev().append(
-            RenderComment("commentreplyRId",commentId,uid,uname,uChatHead,"ruId","ruName",text,time)
-        );
-        AddCommentAjax(-1,commentId,uid,"",text,dataTiem,answerId,affiliationId);
+        alert("请先输入内容");
     }
+
 }
 
 /**

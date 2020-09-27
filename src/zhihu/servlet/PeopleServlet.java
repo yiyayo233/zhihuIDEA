@@ -66,7 +66,6 @@ public class PeopleServlet extends HttpServlet {
         }else {
             System.out.println("jsp    uId:"+uId+"\tuName:"+uName+"\tuChatHead:"+uChatHead);
         }
-
         if (request.getParameter("uId") != null) {
             uId = request.getParameter("uId");
         }
@@ -97,12 +96,14 @@ public class PeopleServlet extends HttpServlet {
                 }else if (byBynamicType.equals("hd")){
                     AnswerSercice AnswerSercice = new AnswerSercice();
                     AnswerEntity AnswerEntity = AnswerSercice.selectAnseerItem(bynamicEntity.getByBynamicId());
+                    AnswerEntity.setApproveNum(new BynamicService().selectBynamicByAll("","",AnswerEntity.getId(),"","zt","").size());
 
                     SuperService SuperService = new SuperService();
                     SuperEntity SuperEntity = SuperService.selectSpperItem("questionanswer","",bynamicEntity.getByBynamicId());
                     QuestionEntity questionEntity = QuestionService.selectQuestionItem(SuperEntity.getId1());
                     if (questionEntity.getIsFold() == 0){
                         UserService UserService = new UserService();
+                        System.out.println(AnswerEntity.getAuthorId());
                         UserEntity UserEntity = UserService.selecUserItem(AnswerEntity.getAuthorId());
 
                         int CommentNum = 0;
@@ -116,7 +117,7 @@ public class PeopleServlet extends HttpServlet {
                                 CommentNum = CommentNum + commentReplyEntityList.size();
                             }
                         }
-                        HeaderPage headerPage = new HeaderPage(questionEntity,AnswerEntity,UserEntity,CommentNum);
+                        HeaderPage headerPage = new HeaderPage(questionEntity,AnswerEntity,UserEntity,CommentNum,1);
 
                         bynamicContainerEntityList.add(new BynamicContainerEntity(bynamicEntity,headerPage));
                     }

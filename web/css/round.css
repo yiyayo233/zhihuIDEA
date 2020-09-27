@@ -225,3 +225,9 @@ body{
 .rightIn>div>div{
 	margin-top:10px;
 }
+.gzTable.is-active{
+	opacity: .3;
+}
+.gzyz.is-active{
+	opacity: .3;
+}

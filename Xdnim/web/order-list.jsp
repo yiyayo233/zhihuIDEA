@@ -56,7 +56,7 @@
                         <div class="layui-input-inline layui-show-xs-block">
                             <input type="text" name="id" placeholder="请输入问题编号" autocomplete="off" class="layui-input"></div>
                         <div class="layui-input-inline layui-show-xs-block">
-                            <button class="layui-btn" lay-submit="" lay-filter="sreach">
+                            <button onclick="goPage(1);" class="layui-btn" lay-submit="" lay-filter="sreach">
                                 <i class="layui-icon">&#xe615;</i></button>
                         </div>
                     </form>

@@ -75,6 +75,11 @@ function hraderinit(){
                  div.append(item);
              });
             $(".Topstory-recommend").html(div);
+            $(".VoteButton--up").each(function (i,obj) {
+                if (questionItems[i].isFollow > 0){
+                    $(obj).addClass("is-active");
+                }
+            });
 
         }
 

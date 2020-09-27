@@ -13,18 +13,10 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
-import zhihu.entity.PEntity;
-import zhihu.entity.QuestionEntity;
-import zhihu.entity.RoundTableCompereContainerEntity;
-import zhihu.entity.RoundtableContainerEntity;
-import zhihu.entity.RoundtableEntity;
-import zhihu.entity.SuperEntity;
-import zhihu.entity.UserEntity;
-import zhihu.service.PService;
-import zhihu.service.QuestionService;
-import zhihu.service.RoundTableService;
-import zhihu.service.SuperService;
-import zhihu.service.UserService;
+import zhihu.common.ProduceDatetime;
+import zhihu.common.ProduceRandomNumder;
+import zhihu.entity.*;
+import zhihu.service.*;
 
 public class RoundTableByIdServlet extends HttpServlet {
 
@@ -78,31 +70,26 @@ public class RoundTableByIdServlet extends HttpServlet {
 		String id = request.getParameter("rtId");
 		RoundTableService ser = new RoundTableService();
 		RoundtableEntity roundtable = ser.select(id);
-		request.setAttribute("Allrt", roundtable);
-		
-		
-		/*PService pser = new PService();
-		List<PEntity> pList = pser.selectById(id);
-		request.setAttribute("pList", pList);
-		SuperService superService = new SuperService();
-		List<RoundTableCompereContainerEntity> roundTableCompereContainerEntities = new ArrayList<RoundTableCompereContainerEntity>();
-		List<SuperEntity> superEntities2 = superService.selectSpper("roundtablecompere");
-		for (SuperEntity superEntity : superEntities2) {
-			RoundTableService roundTableService = new RoundTableService();
-			RoundtableEntity roundtableEntity = roundTableService.select(superEntity.getId1());
-			
-			UserService userService = new UserService();
-			List<UserEntity> userEntityList = userService.findCompere(superEntity.getId2());
-			roundTableCompereContainerEntities.add(new RoundTableCompereContainerEntity(roundtableEntity,userEntityList));
+		BrowseService BrowseService = new BrowseService();
+		BynamicService BynamicService = new BynamicService();
+
+		String uId = analyticsServlet.Cookies(request,response,out);
+		List<BrowseEntity> browseEntityList = BrowseService.selectBrowseByAll(uId,roundtable.getId(),"1","","");
+		System.out.println("browseEntityList.size()----"+browseEntityList.size());
+
+		if (browseEntityList.size() < 5){
+			ProduceRandomNumder ProduceRandomNumder = new ProduceRandomNumder();
+			String id1 = ProduceRandomNumder.randomNumder("ll",8);
+			String browseTime = ProduceDatetime.Datetime();
+			int result = BrowseService.addBrowse(id1, uId, roundtable.getId(), browseTime, "yz", "");
+			System.out.println(result+"-----BrowseService.addAnswer");
 		}
-		HttpSession se = request.getSession();
-		se.setAttribute("CompereList", roundTableCompereContainerEntities);
-		//设置10秒有效 秒为单位
-		se.setMaxInactiveInterval(999999);
-		Gson gson = new Gson();
-		String str = gson.toJson(roundTableCompereContainerEntities);
-		System.out.println(str);
-		out.print(str);*/
+
+		roundtable.setBrowseNum(BrowseService.selectBrowseByAll("",roundtable.getId(),"","","").size());
+		roundtable.setFollowNum(BynamicService.selectBynamicByAll("","",roundtable.getId(),"","gz","").size());
+
+		request.setAttribute("Allrt", roundtable);
+		request.setAttribute("isFollow", BynamicService.selectBynamicByAll("",uId,roundtable.getId(),"","gz","").size());
 
 		request.getRequestDispatcher("html/round.jsp").forward(request, response);
 

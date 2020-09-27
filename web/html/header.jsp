@@ -216,7 +216,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <div class="CreatorEntrance-text">
                                     创建中心
                                     <span class="css-605fnf">
-                                            Lv 2
+                                            Lv 1
                                         </span>
                                 </div>
                             </div>

@@ -94,9 +94,12 @@ public class RoundTableServlet extends HttpServlet {
 							Hashtable hashtable = new Hashtable();
 							QuestionService questionService = new QuestionService();
 							QuestionEntity questionEntity1 = questionService.selectQuestionItem(superEntity1.getId2());
+							int questionEntity1FollowNum = bynamicService.selectBynamicByAll("","",questionEntity1.getId(),"","gz","").size();
+							questionEntity1.setFollowNum(questionEntity1FollowNum);
+							questionEntity1.setBrowseNum(new BrowseService().selectBrowseByAll("",questionEntity1.getId(),"","","").size());
 							questionEntityList.add(questionEntity1);
 							hashtable.put("questionEntity",questionEntity1);
-							hashtable.put("questionEntity1FollowNum",bynamicService.selectBynamicByAll("","",questionEntity1.getId(),"","gz","").size());
+							hashtable.put("questionEntity1FollowNum",questionEntity1FollowNum);
 							list1.add(hashtable);
 						}
 						String uId = analyticsServlet.Cookies(request, response, out);
@@ -131,10 +134,13 @@ public class RoundTableServlet extends HttpServlet {
 							Hashtable hashtable = new Hashtable();
 							QuestionService questionService = new QuestionService();
 							QuestionEntity questionEntity1 = questionService.selectQuestionItem(superEntity1.getId2());
+							BynamicService bynamicService = new BynamicService();
+							int questionEntity1FollowNum = bynamicService.selectBynamicByAll("","",questionEntity1.getId(),"","gz","").size();
+							questionEntity1.setFollowNum(questionEntity1FollowNum);
+							questionEntity1.setBrowseNum(new BrowseService().selectBrowseByAll("",questionEntity1.getId(),"","","").size());
 							questionEntityList.add(questionEntity1);
 							hashtable.put("questionEntity",questionEntity1);
-							BynamicService bynamicService = new BynamicService();
-							hashtable.put("questionEntity1FollowNum",bynamicService.selectBynamicByAll("","",questionEntity1.getId(),"","gz","").size());
+							hashtable.put("questionEntity1FollowNum",questionEntity1FollowNum);
 							list1.add(hashtable);
 						}
 						String uId = analyticsServlet.Cookies(request, response, out);

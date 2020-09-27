@@ -348,11 +348,11 @@ function AnalyticsDetailRangPicker_dateButton_IsActive(button){
         $(button).addClass("is-active");
     }
     var index = $(".CreatorSectionItem.CreatorSectionItem--clickable.is-active").index();
+    var day = $(button).attr("data-dayNum");
     if (index == 0){
-        var day = $(button).attr("data-dayNum");
         getdata("getDataTime",day,"QQQ");
     }else if (index == 1){
-        var day = $(button).attr("data-dayNum");
+        getdata("getDataObject",day,"QQQ");
     }
 
 
@@ -495,10 +495,10 @@ function getdata(a,day,objectId) {
                 $.each(result,function (i,obj) {
                     console.log(obj)
                     var item;
+                    var content = obj.object.answerContent.replace(/<.*?>/ig,"").substring(0,100);
+                    var time = obj.object.publishTime;
+                    time = time.substring(0,10);
                     if (i%2 == 0){
-                        var content = obj.object.answerContent.replace(/<.*?>/ig,"").substring(0,100);
-                        var time = obj.object.publishTime;
-                        time = time.substring(0,10);
                         item = $('<tr class="CreatorTable-tableRow CreatorTable-tableRow-odd">\n' +
                             '                                                                <td class="CreatorTable-tableDate AnalyticsWork-titleColumn">\n' +
                             '                                                                    <a href="answer?answerId='+ obj.object.id +'" class="Creator-entityLink">'+ content +'</a>\n' +

@@ -13,6 +13,7 @@ public class HeaderPage {
     private CommentEntity commentEntity;
     private UserEntity userEntity;
     private int CommentNum;
+    private int isFollow;
 
     public HeaderPage(QuestionEntity questionEntity, AnswerEntity answerEntity, CommentEntity commentEntity, UserEntity userEntity) {
         this.questionEntity = questionEntity;
@@ -21,11 +22,12 @@ public class HeaderPage {
         this.userEntity = userEntity;
     }
 
-    public HeaderPage(QuestionEntity questionEntity, AnswerEntity answerEntity, UserEntity userEntity, int commentNum) {
+    public HeaderPage(QuestionEntity questionEntity, AnswerEntity answerEntity, UserEntity userEntity, int commentNum, int isFollow) {
         this.questionEntity = questionEntity;
         this.answerEntity = answerEntity;
         this.userEntity = userEntity;
         CommentNum = commentNum;
+        this.isFollow = isFollow;
     }
 
     public List<UserEntity> getUserEntityList() {
@@ -98,5 +100,13 @@ public class HeaderPage {
 
     public void setCommentEntityList(List<CommentEntity> commentEntityList) {
         this.commentEntityList = commentEntityList;
+    }
+
+    public int getIsFollow() {
+        return isFollow;
+    }
+
+    public void setIsFollow(int isFollow) {
+        this.isFollow = isFollow;
     }
 }

@@ -171,7 +171,7 @@ function ContentItem_content_inner_link(){
         var objectId = $(this).parent().attr("data-answer-id");
         if (RethtmlName().indexOf("qwer") != -1){
             if ($(this).attr("class").indexOf("ContentItem-content-inner") !== -1 || $(this).attr("class").indexOf("ContentItem-content-cover") !== -1) {
-                var parent = $(this).parent().parent().parent();
+                var parent = $(this).parents(".TopstoryItem,.list-item");
                 ContentItemScroll(parent);
                 // $(this).parent().removeClass("is-collapsed").html(ContentItem_content_Html(actions)).before(ConstantItem_meta_html);
                 var index;
@@ -205,7 +205,7 @@ function ContentItem_content_inner_link(){
                 ).before(ConstantItem_meta_html(questionItems[index].userEntity.id, questionItems[index].userEntity.name, questionItems[index].userEntity.chatHead, industry));
             }
         }else if (RethtmlName().indexOf("people") !== -1){
-            var parent = $(this).parent().parent().parent();
+            var parent = $(this).parents(".TopstoryItem,.list-item");
             ContentItemScroll(parent);
             var button = $(this);
             var id = $(button).parent().attr("data-answer-id");

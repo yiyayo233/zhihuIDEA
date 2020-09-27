@@ -419,7 +419,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <div class="CreatorHomeAnalyticsDataItem-title">${item.questionTitle}</div>
                                                 <div class="CreatorHomeAnalyticsDataItem-content CreatorHomeAnalyticsDataItem-content--withTielt">${item.object.answerContent}</div>
                                             </a>
-
                                         </c:when>
                                         <c:otherwise>
                                             <div class="CreatorHomeAnalyticsDataItem-type">文章</div>
@@ -427,7 +426,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 <div class="CreatorHomeAnalyticsDataItem-title">${item.object.id}</div>
                                                 <div class="CreatorHomeAnalyticsDataItem-content CreatorHomeAnalyticsDataItem-content--withTielt">${item.object.id}</div>
                                             </a>
-
                                         </c:otherwise>
                                     </c:choose>
                                     <div class="CreatorHomeAnalyticsDataItem-column" style="width: 80px;">
@@ -442,7 +440,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                         <div class="CreatorHomeAnalyticsDataItem-columnTitle">赞同</div>
                                         <div class="CreatorHomeAnalyticsDataItem-columnNumder">${item.ztNum}</div>
                                     </div>
-                                    <a class="CreatorHomeAnalyticsDataItem-hint" href="#">详细分析</a>
+                                    <a class="CreatorHomeAnalyticsDataItem-hint" href="creator/analytics">详细分析</a>
 
                                 </div>
                             </c:forEach>

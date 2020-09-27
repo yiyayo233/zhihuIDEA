@@ -20,10 +20,11 @@
 	-->
 	<meta charset="UTF-8">
 	<title>知乎 - 知乎专栏 - 随心写作，自由表达</title>
+	<link rel="icon" href="images/favicon.ico">
+	<link href="css/Header-Head.css" rel="stylesheet" type="text/css">
 	<link rel="stylesheet" href="css/zhuanlanl.css">
 	<link rel="stylesheet" href="css/special.css">
 </head>
-
 <body class="LightGreyBg-body">
 <div id="root">
 	<div class="App">

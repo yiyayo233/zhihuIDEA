@@ -120,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 </div>
                 <div class="AppHeader-profile">
                     <button class="button">
-                        <img src="images/user/${userEntity.chatHead}" alt="" height="30" width="30"/>
+                        <img src="images/user/<%=uChatHead%>" alt="" height="30" width="30"/>
                     </button>
                 </div>
             </div>
@@ -129,7 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <div class="PageHeader">
                 <div class="userMain-header">
                     <div class="userMain-avatar">
-                        <img class="Avatar" width="38" height="38" src="images/user/${userEntity.chatHead}" alt="">
+                        <img class="Avatar" width="38" height="38" src="images/user/<%=uChatHead%>" alt="">
                     </div>
                     <ul class="Tabs-items userMain-tabs">
                         <li class="Tabs-item">
@@ -137,7 +137,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 动态
                             </a>
                         </li>
-                        <li class="Tabs-item">
+                        <%--<li class="Tabs-item">
                             <a class="Tabs-link" href="#">
                                 回答<span class="Tabs-meta">6</span>
                             </a>
@@ -174,7 +174,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 </button>
                             </div>
                         </li>
-                    </ul>
+                    </ul>--%>
                     <div class="userMain-button">
                         <button type="button" class="button">编辑个人资料</button>
                     </div>
@@ -210,7 +210,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         <div class="userHeader-main">
                             <div class="userHeader-avatar">
                                 <div class="userAvatar">
-                                    <img width="160" height="160" src="images/user/${userEntity.chatHead}" alt="">
+                                    <img width="160" height="160" src="images/user/<%=uChatHead%>" alt="">
                                 </div>
                                 <label class="userPicture" for="">
                                     <input class="userCover-input" type="file" accept="image/png,image/jpeg"/>
@@ -255,8 +255,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                                 </div>
                                             </c:otherwise>
                                         </c:choose>
-
-
                                     </div>
                                 </div>
                                 <div class="userHeader-contentFooter">
@@ -489,7 +487,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                     <div class="CreatorEntrance-title">
                                         创作中心
                                         <span class="css-605fnf">
-                                            Lv 2
+                                            Lv 1
                                         </span>
                                     </div>
                                     <div class="CreatorEntrance-Message">

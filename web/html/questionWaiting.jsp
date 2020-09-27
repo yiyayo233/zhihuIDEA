@@ -44,7 +44,7 @@
 				<a href="html/explore.jsp" class="Tabs-link">发现</a>
 			</li>
 			<li class="Tabs-item">
-				<a href="<%=path %>/Question" class="Tabs-link is-active">等你来答</a>
+				<a href="<%=path %>/Question?a=AllQuestion" class="Tabs-link is-active">等你来答</a>
 			</li>
 		</ul>
 		<div class="SearchBar">

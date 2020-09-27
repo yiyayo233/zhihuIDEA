@@ -75,30 +75,7 @@ public class QuestionServlet extends HttpServlet {
      */
     public void IntoQuestion(HttpServletRequest request, HttpServletResponse response, PrintWriter out) throws ServletException, IOException {
 
-        Cookie[] Cookies = request.getCookies();
-        String uId = "";
-        String uName = "";
-        String uChatHead ="";
-        boolean f = false;
-
-        for (Cookie cookie: Cookies) {
-            if (cookie.getName().equals("uId")){
-                uId = cookie.getValue();
-                f = true;
-            }else if (cookie.getName().equals("uName")){
-                uName = cookie.getValue();
-                f = true;
-            }else if(cookie.getName().equals("uChatHead")||cookie.getName().equals("user")){
-                uChatHead = cookie.getValue();
-                f = true;
-            }
-        }
-        if (!f) {
-            response.sendRedirect("html/signin.jsp");
-            return;
-        }else {
-            System.out.println("jsp    uId:"+uId+"\tuName:"+uName+"\tuChatHead:"+uChatHead);
-        }
+        String uId = analyticsServlet.Cookies(request, response, out);
 
         System.out.println("question");
         String questionId = request.getParameter("questionId");
@@ -119,11 +96,9 @@ public class QuestionServlet extends HttpServlet {
             System.out.println(result +"---bynamicService.addBynamic");
         }
 
-
         request.setAttribute("llNum",browseService.selectBrowseByAll("",questionId,"","","").size());
-
-        request.setAttribute("gzNum",new BynamicService().selectBynamicByAll("","",questionId,"","","").size());
-
+        request.setAttribute("gzNum",new BynamicService().selectBynamicByAll("","",questionId,"","gz","").size());
+        QuestionEntity.setApproveNum(new BynamicService().selectBynamicByAll("","",questionId,"","zt","").size());
         request.setAttribute("Question", QuestionEntity);
         SuperService SuperService = new SuperService();
         List<SuperEntity> superEntityList = SuperService.selectSpperby("questionanswer",QuestionEntity.getId(),"");
@@ -134,31 +109,36 @@ public class QuestionServlet extends HttpServlet {
                     superEntityList) {
                 AnswerSercice AnswerSercice = new AnswerSercice();
                 AnswerEntity answerEntity = AnswerSercice.selectAnseerItem(SuperEntity.getId2());
-                String getDeAnswerId = answerEntity.getId();
-                if (browseService.selectBrowseByAll("",getDeAnswerId,"1","","").size() < 5){
-                    String browseTime = ProduceDatetime.Datetime();
-                    String objectType = getDeAnswerId.substring(0,2);
-                    id = ProduceRandomNumder.randomNumder("ll",8);
-                    result = browseService.addBrowse(id,uId,getDeAnswerId,browseTime,objectType,answerEntity.getAuthorId());
-                    System.out.println(result +"--answerEntity--bynamicService.addBynamic");
-                }
-
-                UserService UserService = new UserService();
-                UserEntity userEntity = UserService.selecUserPersonalItem(answerEntity.getAuthorId());
-
-                int CommentNum = 0;
-                CommentService CommentService = new CommentService();
-                List<CommentEntity> commentEntityList = CommentService.selectComment(answerEntity.getId());
-                if (commentEntityList != null) {
-                    for (CommentEntity commentEntity:commentEntityList) {
-                        CommentNum++;
-                        CommentReplyService CommentReplyService = new CommentReplyService();
-                        List<CommentReplyEntity> commentReplyEntityList = CommentReplyService.selectCommentReply(commentEntity.getId());
-                        CommentNum = CommentNum + commentReplyEntityList.size();
+                answerEntity.setApproveNum(new BynamicService().selectBynamicByAll("","",answerEntity.getId(),"","zt","").size());
+                if (answerEntity != null){
+                    String getDeAnswerId = answerEntity.getId();
+                    if (browseService.selectBrowseByAll("",getDeAnswerId,"1","","").size() < 5){
+                        String browseTime = ProduceDatetime.Datetime();
+                        String objectType = getDeAnswerId.substring(0,2);
+                        id = ProduceRandomNumder.randomNumder("ll",8);
+                        result = browseService.addBrowse(id,uId,getDeAnswerId,browseTime,objectType,answerEntity.getAuthorId());
+                        System.out.println(result +"--answerEntity--bynamicService.addBynamic");
                     }
+                    UserService UserService = new UserService();
+                    UserEntity userEntity = UserService.selecUserPersonalItem(answerEntity.getAuthorId());
+
+                    int CommentNum = 0;
+                    CommentService CommentService = new CommentService();
+                    List<CommentEntity> commentEntityList = CommentService.selectComment(answerEntity.getId());
+                    if (commentEntityList != null) {
+                        for (CommentEntity commentEntity:commentEntityList) {
+                            CommentNum++;
+                            CommentReplyService CommentReplyService = new CommentReplyService();
+                            List<CommentReplyEntity> commentReplyEntityList = CommentReplyService.selectCommentReply(commentEntity.getId());
+                            CommentNum = CommentNum + commentReplyEntityList.size();
+                        }
+                    }
+                    int isFollow = new BynamicService().selectBynamicByAll("",uId,answerEntity.getId(),"","zt","").size();
+                    questionPageList.add(new QuestionPage(answerEntity,userEntity,CommentNum,isFollow));
                 }
 
-                questionPageList.add(new QuestionPage(answerEntity,userEntity,CommentNum));
+
+
             }
         }
         request.setAttribute("questionPageList", questionPageList);
