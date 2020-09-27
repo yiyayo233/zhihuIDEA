@@ -56,8 +56,8 @@
                         <div class="layui-input-inline layui-show-xs-block">
                             <input type="text" name="id" placeholder="请输入问题编号" autocomplete="off" class="layui-input"></div>
                         <div class="layui-input-inline layui-show-xs-block">
-                            <button onclick="goPage(1);" class="layui-btn" lay-submit="" lay-filter="sreach">
-                                <i class="layui-icon">&#xe615;</i></button>
+                            <a href="javascript:;" onclick="goPage(1);" class="layui-btn">
+                                <i class="layui-icon">&#xe615;</i></a>
                         </div>
                     </form>
                 </div>
@@ -300,6 +300,7 @@ function delAll(argument) {
                 $(".next").html(next).attr("onclick", "goPage(" + next + ")");
                 $(".next1").html(next + 1).attr("onclick", "goPage(" + (next + 1) + ")");
                 $(".last").attr("onclick", "goPage(" + result.last + ")");
+                $(".layui-btn").attr("onclick", "goPage(1)");
             },
             error: function (result) {
                 console.log("error");

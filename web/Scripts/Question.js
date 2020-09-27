@@ -71,7 +71,7 @@ function addAnswer(button) {
         '                                                                </span>\n' +
         '                                                            </div>\n' +
         '                                                            <div class="AuthorInfo-badge">\n' +
-        '                                                                <div class="AuthorInfo-badgeText">'+ uintroduce +'</div>\n' +
+        '                                                                <div class="AuthorInfo-badgeText"></div>\n' +
         '                                                            </div>\n' +
         '                                                        </div>\n' +
         '                                                    </div>\n' +

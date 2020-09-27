@@ -29,7 +29,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link href="css/Footer.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="css/Modal.css">
     <link rel="stylesheet" href="css/comments.css">
-    
   <%
     Cookie[] Cookies = request.getCookies();
     String uId = "";

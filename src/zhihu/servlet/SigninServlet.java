@@ -98,14 +98,30 @@ public class SigninServlet extends HttpServlet {
 				cookies) {
 			if (cookie.getName().equals("uId")){
 				cookie.setMaxAge(0);
+				cookie.setValue(" ");
+				Cookie newCookie=new Cookie("uId",null); //假如要删除名称为username的Cookie
+				newCookie.setMaxAge(0); //立即删除型
+				newCookie.setPath("/"); //项目所有目录均有效，这句很关键，否则不敢保证删除
+				response.addCookie(newCookie); //重新写入，将覆盖之前的
 				f = true;
+				System.err.println("------------------------------------------------------------------------");
 			}
 			if (cookie.getName().equals("uName")){
 				cookie.setMaxAge(0);
+				cookie.setValue(" ");
+				Cookie newCookie=new Cookie("uName",null); //假如要删除名称为username的Cookie
+				newCookie.setMaxAge(0); //立即删除型
+				newCookie.setPath("/"); //项目所有目录均有效，这句很关键，否则不敢保证删除
+				response.addCookie(newCookie); //重新写入，将覆盖之前的
 				f = true;
 			}
 			if (cookie.getName().equals("uChatHead")){
 				cookie.setMaxAge(0);
+				cookie.setValue(" ");
+				Cookie newCookie=new Cookie("uChatHead",null); //假如要删除名称为username的Cookie
+				newCookie.setMaxAge(0); //立即删除型
+				newCookie.setPath("/"); //项目所有目录均有效，这句很关键，否则不敢保证删除
+				response.addCookie(newCookie); //重新写入，将覆盖之前的
 				f = true;
 			}
 		}

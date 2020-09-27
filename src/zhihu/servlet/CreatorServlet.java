@@ -1,5 +1,6 @@
 package zhihu.servlet;
 
+import zhihu.common.htmlTest;
 import zhihu.entity.*;
 import zhihu.service.*;
 
@@ -74,7 +75,7 @@ public class CreatorServlet extends HttpServlet {
     }
 
     /**
-     * ³õÊ¼»¯ ×ÜÊıÍ³¼Æ
+     * åˆå§‹åŒ– æ€»æ•°ç»Ÿè®¡
      * @param request
      * @param response
      * @param out
@@ -112,7 +113,7 @@ public class CreatorServlet extends HttpServlet {
     }
 
     /**
-     * ³õÊ¼»¯ ½üÆÚ´´×÷Êı¾İ
+     * åˆå§‹åŒ– è¿‘æœŸåˆ›ä½œæ•°æ®
      * @param request
      * @param response
      * @param out
@@ -125,7 +126,6 @@ public class CreatorServlet extends HttpServlet {
         SuperService SuperService = new SuperService();
         QuestionService QuestionService = new QuestionService();
 
-
         List<Object> CreatorHomeAnalyticsDataItems = new ArrayList<>();
         List<BynamicEntity> bynamicEntityList = BynamicService.selectBynamicByAll("",uId,"","","fb","");
         if (bynamicEntityList.size()>0){
@@ -135,6 +135,9 @@ public class CreatorServlet extends HttpServlet {
                 String type = bynamicEntity.getByBynamicId().substring(0,2);
                 if (type.equals("hd")){
                     AnswerEntity answerEntity = AnswerSercice.selectAnseerItem(bynamicEntity.getByBynamicId());
+
+
+                    answerEntity.setAnswerContent(new htmlTest().getTextFromHtml(answerEntity.getAnswerContent()));
                     objectMap.put("object",answerEntity);
 
                     SuperEntity SuperEntity = SuperService.selectSpperItem("questionanswer","",answerEntity.getId());

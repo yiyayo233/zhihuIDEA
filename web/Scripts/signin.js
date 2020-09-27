@@ -39,7 +39,7 @@ $(function () {
                 success:function(result){
                     console.log(result);
                     if (result.indexOf("loginTrue") != -1){
-                        location.href="html/header.jsp";
+                        location.href="/zhihuIDEA_war_exploded/";
                     }else {
                         alert("result");
                     }
@@ -77,9 +77,9 @@ $(function () {
                 },
                 success: function (result) {
                     if (result.indexOf("enrollTrue") != -1) {
-                        alert("注册成功，请前往登录");
+                        alert("注册成功，请前往登录。");
                     } else {
-                        alert(result);
+                        alert("你的账号或密码有误。");
                     }
                 },
                 error: function () {
